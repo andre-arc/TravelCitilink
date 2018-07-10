@@ -1,0 +1,40 @@
+a:4:{s:5:"child";a:1:{s:0:"";a:1:{s:3:"rss";a:1:{i:0;a:6:{s:4:"data";s:2:" 
+";s:7:"attribs";a:1:{s:0:"";a:1:{s:7:"version";s:3:"2.0";}}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";s:5:"child";a:1:{s:0:"";a:1:{s:7:"channel";a:1:{i:0;a:6:{s:4:"data";s:8:" 
+ 
+ 
+ 
+";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";s:5:"child";a:1:{s:0:"";a:5:{s:5:"title";a:1:{i:0;a:5:{s:4:"data";s:31:".:: Pemerintah Provinsi NTB ::.";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:4:"link";a:1:{i:0;a:5:{s:4:"data";s:24:"http://www.ntbprov.go.id";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:11:"description";a:1:{i:0;a:5:{s:4:"data";s:16:"Feed Description";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:8:"language";a:1:{i:0;a:5:{s:4:"data";s:5:"en-us";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:4:"item";a:5:{i:0;a:6:{s:4:"data";s:72:"
+                 
+                 
+                 
+                 ";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";s:5:"child";a:1:{s:0:"";a:3:{s:5:"title";a:1:{i:0;a:5:{s:4:"data";s:40:"GUBERNUR MINTA ORGANDA GALANG SINERGITAS";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:4:"link";a:1:{i:0;a:5:{s:4:"data";s:77:"http://www.ntbprov.go.id/berita-gubernur-minta-organda-galang-sinergitas.html";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:11:"description";a:1:{i:0;a:5:{s:4:"data";s:496:"Gubernur NTB Dr. TGH M Zainul Majdi ditemui Sekretaris Jenderal DPP Organda , Ateng Aryono, MBA didampingi wakilnya, Muarid Siburian dan rombongan DPP Organda, diruang kerjanya, Rabu (5/7/2017). Ateng menemui Gubernur yang akrab disapa TGB itu, untuk melaporkan sekaligus memohon dukungan terkait dengan rencana digelarnya Musyawarah Kerja Nasional Organisasi Angkutan Darat (Organda) tanggal 2-4 Agustus 2017 mendatang di Mataram, Nusa Tenggara Barat.
+
+Pada saat itu Gubernur TGB, didampingi ...";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}}}}i:1;a:6:{s:4:"data";s:72:"
+                 
+                 
+                 
+                 ";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";s:5:"child";a:1:{s:0:"";a:3:{s:5:"title";a:1:{i:0;a:5:{s:4:"data";s:59:"ALHAMDULILAH, DI NTB ANGKUTAN MUDIK TAHUN INI ZERO ACCIDENT";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:4:"link";a:1:{i:0;a:5:{s:4:"data";s:95:"http://www.ntbprov.go.id/berita-alhamdulilah-di-ntb-angkutan-mudik-tahun-ini-zero-accident.html";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:11:"description";a:1:{i:0;a:5:{s:4:"data";s:494:"
+Angkutan mudik lebaran melalui pelabuhan penyeberangan dari dan menuju NTB, tahun 2017 ini, alhamdulilah telah berjalan lancar dan aman. Meski terjadi peningkatan jumlah penumpang dan arus kendaraan, namun tidak terjadi penumpukan/antrean dan kemacetan berlebihan. Bahkan tidak adanya angka kecelakaan atau zero accident mulai awal puasa hingga pasca lebaran.
+
+
+Catatan keberhasilan itu diungkapkan Sekretaris Daerah Provinsi NTB, Ir. H. Rosiady Sayuti, Ph.D saat Silaturrahmi dan Halal Bi ...";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}}}}i:2;a:6:{s:4:"data";s:72:"
+                 
+                 
+                 
+                 ";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";s:5:"child";a:1:{s:0:"";a:3:{s:5:"title";a:1:{i:0;a:5:{s:4:"data";s:57:"GUBERNUR AJAK ASN IMPLEMENTASIKAN HAKEKAT “AL-FAIZIN”";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:4:"link";a:1:{i:0;a:5:{s:4:"data";s:93:"http://www.ntbprov.go.id/berita-gubernur-ajak-asn-implementasikan-hakekat-“alfaizin”.html";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:11:"description";a:1:{i:0;a:5:{s:4:"data";s:499:"Hari pertama masuk kerja setelah libur panjang pasca hari Raya Idul Fitri 1438 Hijriyah, Gubernur NTB, Dr. TGH. M. Zainul Majdi mengajak seluruh Aparatur Sipil Negara (ASN) Lingkup Pemerintah Provinsi NTB untuk menerapkan makna Al-Faizin, baik di tempat kerja maupun dalam kehidupan sehari-hari. Kata Al-Fa&#39;idzin menurut Gubernur yang akrab disapa TGB tersebut, bermakna sebagai keberhasilan. Maka, untuk mencapai keberhasilan tersebut, ada beberapa syarat dan prasyarat yang harus dipenuhi. ...";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}}}}i:3;a:6:{s:4:"data";s:72:"
+                 
+                 
+                 
+                 ";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";s:5:"child";a:1:{s:0:"";a:3:{s:5:"title";a:1:{i:0;a:5:{s:4:"data";s:59:"GUBERNUR AJAK PEMKAB LOTENG TERUS SEMANGAT MEMBANGUN DAERAH";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:4:"link";a:1:{i:0;a:5:{s:4:"data";s:96:"http://www.ntbprov.go.id/berita-gubernur-ajak-pemkab-loteng-terus-semangat-membangun-daerah.html";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:11:"description";a:1:{i:0;a:5:{s:4:"data";s:491:"
+Gubernur NTB Dr. TGH. M. Zainul Majdi yang akrab disapa TGB menerima kunjungan silaturahmi dari jajaran Pemerintah Daerah Kabupaten Lombok Tengah dalam rangka Hari Raya Idul Fitri 1438 Hijriyah dan penguatan hubungan kerjasama dengan Pemerintah Provinsi NTB, di rumah dinas Gubernur NTB di Mataram, Jum&#39;at, 30/6-2017.
+
+
+Kunjungan Silaturahmi tersebut dipimpin langsung Bupati Lombok Tengah, HM. Suhaili FT, SH dan Wakil Bupati Lombok Tengah Lalu Pathul Bahri bersama seluruh jajaran ...";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}}}}i:4;a:6:{s:4:"data";s:72:"
+                 
+                 
+                 
+                 ";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";s:5:"child";a:1:{s:0:"";a:3:{s:5:"title";a:1:{i:0;a:5:{s:4:"data";s:31:"TGB : JAGALAH NAMA BAIK LELUHUR";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:4:"link";a:1:{i:0;a:5:{s:4:"data";s:67:"http://www.ntbprov.go.id/berita-tgb--jagalah-nama-baik-leluhur.html";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}s:11:"description";a:1:{i:0;a:5:{s:4:"data";s:491:"
+Gubernur Nusa Tenggara Barat, Dr. TGH. M. Zainul Majdi, didampingi istri, Hj. Erica Zainul Majdi melaksanakan silaturahim dan halal bihalal dengan masyarakat kampung Jawa di pusat Kota Selong Kabupaten Lombok Timur, Kamis, (29/6/2017).
+
+
+Pada acara yang dihadiri pula dua kakak Kandung Gubernur TGB, yakni H. Syamsul Lutfi dan Dr.Hj. Siti Rohmi Jalillah tersebut, dalam tausiyahnya TGB mengajak masyarakat untuk tetap Istiqomah menjaga kehormatan serta nama baik para leluhur yang sudah ...";s:7:"attribs";a:0:{}s:8:"xml_base";s:0:"";s:17:"xml_base_explicit";b:0;s:8:"xml_lang";s:0:"";}}}}}}}}}}}}}}}}s:4:"type";i:128;s:7:"headers";a:8:{s:4:"date";s:29:"Fri, 07 Jul 2017 02:23:08 GMT";s:6:"server";s:6:"Apache";s:13:"last-modified";s:29:"Fri, 07 Jul 2017 02:20:55 GMT";s:13:"accept-ranges";s:5:"bytes";s:4:"vary";s:15:"Accept-Encoding";s:16:"content-encoding";s:4:"gzip";s:14:"content-length";s:4:"1779";s:12:"content-type";s:15:"application/xml";}s:5:"build";s:14:"20170403092708";}
