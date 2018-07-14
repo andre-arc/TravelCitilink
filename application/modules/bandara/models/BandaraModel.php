@@ -12,7 +12,7 @@ class BandaraModel extends CI_Model {
 
 
   public function get(){
-  	return $this->db->get('tbl_pelanggan');
+  	return $this->db->get('bandara');
   }
 
 

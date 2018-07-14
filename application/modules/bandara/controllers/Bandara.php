@@ -57,8 +57,7 @@ class Bandara extends MY_Admin {
 		$order  = (isset($_GET['order'])) ? $_GET['order'] : 'asc';
 
 		$SQL_BASE='
-			select *
-			from bandara,negara,provinsi,kota WHERE negara.id=provinsi.id_negara AND provinsi.id=kota.id_prov
+			select * from bandara,negara,provinsi,kota WHERE bandara.id_negara=negara.id AND bandara.id_provinsi=provinsi.id AND bandara.id_kota=kota.id
 		';
 		
 		if($search<>''){
@@ -117,38 +116,16 @@ class Bandara extends MY_Admin {
 			'msg'=>'Gagal Menambah Data'
 		);
 		
-		$this->load->library('ciqrcode');
-		$data['nm_pelanggan']=$_POST['nm_pelanggan'];
-		$data['no_kk']=$_POST['no_kk'];
-		$data['nik']=$_POST['nik'];
-		$data['hp']=$_POST['hp'];
-		$data['kategori']=$_POST['kategori'];
+		
+		$data['nm_bandara']=$_POST['nm_bandara'];
+		$data['kode']=$_POST['kode'];
+		$data['jenis']=$_POST['jenis'];
 		$data['keterangan']=$_POST['keterangan'];
-		$data['alamat_pelanggan']=$_POST['alamat_pelanggan'];
+		$data['id_negara']=$_POST['id_negara'];
+		$data['id_provinsi']=$_POST['id_provinsi'];
+		$data['id_kota']=$_POST['id_kota'];
 
-		$config['imagedir']='assets/qrcode/';
-		$config['cacheable']    = true; //boolean, the default is true
-        $config['cachedir']     = './assets/'; //string, the default is application/cache/
-        $config['errorlog']     = './assets/'; //string, the default is application/logs/
- 
-        $config['quality']      = true; //boolean, the default is true
-        $config['size']         = '1024'; //interger, the default is 1024
-        $config['black']        = array(224,255,255); // array, default is array(255,255,255)
-        $config['white']        = array(70,130,180); // array, default is array(0,0,0)
-
-		
-
-		
-		$no_kk=$_POST['no_kk'];	
-		$params['data']= $no_kk;
-		$params['level']='H';
-		$params['size']=10;
-		$params['savename']= $config['imagedir'].$no_kk.'.png';
-		
-		$data['qrcode']=$this->ciqrcode->generate($params,$config);
-	
-
-		$this->db->insert('tbl_pelanggan', $data);
+		$this->db->insert('bandara', $data);
 
 		$last_insert_id = $this->db->insert_id();
 

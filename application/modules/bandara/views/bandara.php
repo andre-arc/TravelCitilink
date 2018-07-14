@@ -60,7 +60,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Jenis</label>
-								<select name="kategori" class="form-control select" style="width:100%;" id="jenis_unit" required>
+								<select name="jenis" class="form-control select" style="width:100%;" id="jenis" required>
 									<option value="">-- Pilih Kategori --</option>
 									<option value="Domestik">Domestik</option>
 									<option value="Internasional">Internasional</option>
@@ -74,7 +74,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Negara</label>
-								<select name="negara" class="form-control select" style="width:100%;" id="negara" required>
+								<select name="id_negara" class="form-control select" style="width:100%;" id="negara" required>
 								<option value="0">-- Pilih Negara --</option>
 	                    	<?php foreach($negara->result() as $row):?>
 	                    		<option value="<?php echo $row->id;?>"><?php echo $row->name;?></option>
@@ -88,8 +88,9 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label">Provinsi</label>
-								 <select name="provinsi" class="provinsi form-control select" style="width:100%;">
+								 <select name="id_provinsi" class="provinsi form-control select" style="width:100%;">
 	                    	<option value="0">-- Pilih Provinsi--</option>
+
 	                    </select>
 							</div>
 						</div>
@@ -98,7 +99,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label">Kabupaten/Kota</label>
-								 <select name="kota" class="kota form-control select" style="width:100%;">
+								 <select name="id_kota" class="kota form-control select" style="width:100%;">
 	                    	<option value="0">-- Pilih Kota/Kab --</option>
 	                    </select>
 							</div>
@@ -262,7 +263,7 @@
 		<?php if(($auth_meta['add'])||($auth_meta['edit'])):?>
 			$('#frm-wil-gp').submit(function(e){
 				var form_data=$("#frm-wil-gp").serialize();
-				var url_form = ($('#act').val()=='edit') ? SITE_URL+"/pembeli/act_edit/" : SITE_URL+"/pembeli/act_add/";
+				var url_form = ($('#act').val()=='edit') ? SITE_URL+"/bandara/act_edit/" : SITE_URL+"/bandara/act_add/";
 				$.ajax({
 					type: "POST",
 					url: url_form,
