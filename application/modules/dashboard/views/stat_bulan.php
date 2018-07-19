@@ -13,60 +13,37 @@
         <div class="panel-body">
             <div class="row">
                         <div class="col-md-12">
-                            <form role="form" id="form-export" method="POST" action="<?php echo base_url();?>/lookbook/report/proses_export">
+                            <form role="form" id="form-search"  method="POST" action="#">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                  <label>Keberangkatan</label>
-                                  <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
+                                  <label>Dari:</label>
+                                  <?= form_dropdown('asal', $bandara, '0', 'id="asal" class="form-control"')?>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                  <label>Jenis Penerbangan</label>
-                                  <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
+                                  <label>Ke:</label>
+                                  <?= form_dropdown('tujuan', $bandara, '0', 'id="tujuan" class="form-control"')?>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                  <label>Rute Berangkat</label>
-                                  <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
+                                  <label>Tanggal Berangkat</label>
+                                 <input id="tgl_berangkat" class="form-control" type="text" name="tgl_berangkat">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                  <label>Rute Kembali</label>
-                                  <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                  </select>
+                                  <label>Tanggal Kembali</label>
+                                <input id="tgl_kembali" class="form-control" type="text" name="tgl_kembali">
+                                <input type="checkbox" type="text" name="pp"> Kembali
                                 </div>
                             </div>
                            
                            
                             <div class="col-md-12">
                                 <div class="form-group">
-                                   <button type="submit" class="btn btn-primary pull-right">Search</button>
+                                   <button type="submit" class="btn btn-primary pull-right">SEARCH</button>
                                 </div>
                             </div>
                             </form>
@@ -75,4 +52,29 @@
         </div>
       </div>
     </div>
+
+    <div class="col-md-12" id="list-tiket">
+
+    </div>
   </div>
+  <script>
+$('#form-search').submit(function(e){
+var form_data=$("#form-search").serialize();
+
+$.ajax({
+  type: "POST",
+  url: "<?php echo base_url()."dashboard/search"; ?>",
+  dataType: "json",
+  data: form_data,
+  success: function(data){
+    if(data.status){
+      $('#list-tiket').html(data.html);
+    }
+  }
+});
+
+e.preventDefault();
+});
+  </script>
+    
+      

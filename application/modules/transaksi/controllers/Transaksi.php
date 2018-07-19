@@ -9,10 +9,11 @@ class Transaksi extends MY_Admin {
 	
 	function index() {
 
-		$this->data['content']=$this->load->view('dashboard',$this->data,true);
+		$this->data['content']=$this->load->view('transaksi',$this->data,true);
 		$this->display($this->data);
 	}
 		
-		
+	
+	
 	
 }

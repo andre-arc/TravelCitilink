@@ -5,4 +5,5 @@
     <strong>
 			&copy;2017 <a href="<?php echo $MYCFG['OFFICE']['URL'];?>" target="_blank"><?php echo $MYCFG['OFFICE']['NAME'].' '.$MYCFG['OFFICE']['CITY'];?></a>.
 			</strong>
-  </footer>
+	</footer>
+	<?php echo (isset($js)) ? $js : '';?>
