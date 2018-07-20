@@ -1,11 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Bandara extends MY_Admin {
+class Tiket extends MY_Admin {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('bandaraModel');
+		$this->load->model('tiketModel');
 	}
 
 	public function index()
@@ -18,31 +18,20 @@ class Bandara extends MY_Admin {
 		$this->data['js']  .= js_asset('sweetalert2.min.js','limonte-sweetalert2');
 		$this->data['js']  .= js_asset('select2.full.min.js','select2');
 
-		$meta = $this->meta('bandara/',true);
+		$meta = $this->meta('tiket/',true);
 		$this->data['auth_meta'] = $meta['act'];
 		$this->data['icon']      = $meta['icon'];
 		$this->data['title']     = $meta['title'];
 
 		//chain select country
-		$this->data['negara'] =$this->bandaraModel->get_negara();
+		$this->data['bandara'] =$this->tiketModel->get_bandara();
 
-		$this->data['content']   = $this->load->view('bandara', $this->data,true);
+		$this->data['content']   = $this->load->view('tiket', $this->data,true);
 		$this->display($this->data);
 	}
 
-	function get_provinsi(){
-		$id= $this->input->post('id');
-		$data= $this->bandaraModel->get_provinsi($id);
-		echo json_encode($data);
-	}
-
-	function get_kota(){
-		$id=$this->input->post('id');
-		$data=$this->bandaraModel->get_kota($id);
-		echo json_encode($data);
-	}
-
-	public function get_json($jenis=null)
+	
+	public function get_json($maskapai=null)
 	{
 		$ret = array(
 			'total'=>0,
@@ -53,20 +42,20 @@ class Bandara extends MY_Admin {
 		$limit  = isset($_GET['limit']) ? $_GET['limit'] : 10;
 		$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
 		$search = (isset($_GET['search'])) ? $_GET['search'] : '';
-		$sort   = (isset($_GET['sort'])) ? $_GET['sort'] : 'kode';
+		$sort   = (isset($_GET['sort'])) ? $_GET['sort'] : 'id_tiket';
 		$order  = (isset($_GET['order'])) ? $_GET['order'] : 'asc';
 
 		$SQL_BASE='
-			select * from bandara,negara,provinsi,kota WHERE bandara.id_negara=negara.id AND bandara.id_provinsi=provinsi.id AND bandara.id_kota=kota.id
+			select * from tiket
 		';
 		
 		if($search<>''){
 			//get where
 			$SQL_BASE.='WHERE ';
-			$SQL_BASE.='kode like "%'.$search.'%" OR ';
-			$SQL_BASE.='nm_bandara like "%'.$search.'%" OR ';
-			$SQL_BASE.='keterangan like "%'.$search.'%" OR ';
-			$SQL_BASE.='jenis like "%'.$search.'%" OR ';
+			$SQL_BASE.='kode_pnr like "%'.$search.'%" OR ';
+			$SQL_BASE.='maskapai like "%'.$search.'%" OR ';
+			$SQL_BASE.='kode_maskapai like "%'.$search.'%" OR ';
+			$SQL_BASE.='harga like "%'.$search.'%" OR ';
 			
 			$ls_data=$this->db->query($SQL_BASE)->result_array();
 			$ret['total'] = count($ls_data);
@@ -78,8 +67,8 @@ class Bandara extends MY_Admin {
 			$ret['rows'] = $ls_data_limit;
 
 		}else{
-            if($jenis != null){
-                $SQL_BASE.='WHERE jenis="'.$jenis.'"';
+            if($maskapai != null){
+                $SQL_BASE.='WHERE maskapai="'.$maskapai.'"';
             }
 			//get all
 			$ls_data=$this->db->query($SQL_BASE)->result_array();
@@ -90,7 +79,7 @@ class Bandara extends MY_Admin {
 			$ls_data_limit=$this->db->query($SQL)->result_array();
 			$ret['rows'] = $ls_data_limit;
 		}
-
+		
 		echo json_encode($ret);
 	}
     
@@ -100,8 +89,8 @@ class Bandara extends MY_Admin {
         
         $SQL_BASE='
 			select *
-			from tbl_pelanggan
-            where id_pelanggan="'.$id.'";
+			from tiket
+            where id_tiket="'.$id.'";
 		';
         
         $ls_data=$this->db->query($SQL_BASE)->result_object();
@@ -117,14 +106,17 @@ class Bandara extends MY_Admin {
 		);
 		
 		
-		$data['nm_bandara']=$_POST['nm_bandara'];
-		$data['kode']=$_POST['kode'];
-		$data['keterangan']=$_POST['keterangan'];
-		$data['id_negara']=$_POST['id_negara'];
-		$data['id_provinsi']=$_POST['id_provinsi'];
-		$data['id_kota']=$_POST['id_kota'];
 
-		$this->db->insert('bandara', $data);
+		$data['kode_pnr']		=$_POST['kode_pnr'];
+		$data['tgl_berangkat']	=$_POST['tgl_berangkat'];
+		$data['waktu']			=$_POST['waktu'];
+		$data['dari']			=$_POST['dari'];
+		$data['tujuan']			=$_POST['tujuan'];
+		$data['maskapai']		=$_POST['maskapai'];
+		$data['jml_seat']		=$_POST['jml_seat'];
+		$data['harga']			=$_POST['harga'];	
+
+		$this->db->insert('tiket', $data);
 
 		$last_insert_id = $this->db->insert_id();
 
@@ -143,15 +135,17 @@ class Bandara extends MY_Admin {
 			'msg'=>'Gagal Mengubah Data'
 		);
 		
-		$data['nm_bandara']=$_POST['nm_bandara'];
-		$data['kode']=$_POST['kode'];
-		$data['keterangan']=$_POST['keterangan'];
-		$data['id_negara']=$_POST['id_negara'];
-		$data['id_provinsi']=$_POST['id_provinsi'];
-		$data['id_kota']=$_POST['id_kota'];
+		$data['kode_pnr']		=$_POST['kode_pnr'];
+		$data['tgl_berangkat']	=$_POST['tgl_berangkat'];
+		$data['waktu']			=$_POST['waktu'];
+		$data['dari']			=$_POST['dari'];
+		$data['tujuan']			=$_POST['tujuan'];
+		$data['maskapai']		=$_POST['maskapai'];
+		$data['jml_seat']		=$_POST['jml_seat'];
+		$data['harga']			=$_POST['harga'];	
 		
 
-		$this->db->update('bandara', $data,array('id'=>$_POST['id']));
+		$this->db->update('tiket', $data,array('id_tiket'=>$_POST['id']));
 
 		if ($this->db->affected_rows()) {
 			$ret=array(
@@ -168,9 +162,9 @@ class Bandara extends MY_Admin {
 			'msg'=>'Gagal Menghapus Data'
 		);
 
-		$id=$_POST['id'];
+		$id=$_POST['id_tiket'];
 		//delete records
-		$this->db->delete('bandara', array('id' => $id));
+		$this->db->delete('tiket', array('id_tiket' => $id));
 
 		if ($this->db->affected_rows()) {
 			$ret=array(

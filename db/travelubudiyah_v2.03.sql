@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
-<<<<<<< HEAD
--- Generation Time: Jul 14, 2018 at 12:37 PM
-=======
--- Generation Time: Jul 14, 2018 at 12:29 PM
->>>>>>> Rz
+-- Generation Time: Jul 20, 2018 at 07:54 AM
 -- Server version: 10.2.3-MariaDB-log
 -- PHP Version: 7.1.1
 
@@ -36,7 +32,6 @@ CREATE TABLE `bandara` (
   `id` int(30) NOT NULL,
   `nm_bandara` varchar(100) NOT NULL,
   `kode` varchar(200) NOT NULL,
-  `jenis` varchar(100) NOT NULL,
   `keterangan` varchar(100) NOT NULL,
   `id_negara` int(50) NOT NULL,
   `id_provinsi` int(50) NOT NULL,
@@ -47,9 +42,9 @@ CREATE TABLE `bandara` (
 -- Dumping data for table `bandara`
 --
 
-INSERT INTO `bandara` (`id`, `nm_bandara`, `kode`, `jenis`, `keterangan`, `id_negara`, `id_provinsi`, `id_kota`) VALUES
-(1, 'Sultan iskandar muda', 'BTJ', 'Domestik', '', 1, 1, 1),
-(2, 'Bandar Udara Internasional Kuala Lumpur', 'KUL', 'Internasional', 'Bandar Udara Internasional Kuala Lumpur', 2, 2, 2);
+INSERT INTO `bandara` (`id`, `nm_bandara`, `kode`, `keterangan`, `id_negara`, `id_provinsi`, `id_kota`) VALUES
+(1, 'Sultan iskandar muda', 'BTJ', '11', 1, 1, 1),
+(3, 'Bandar Udara Internasional Kuala Lumpur', 'KUL', 'ok', 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -85,6 +80,18 @@ INSERT INTO `customer` (`id_customer`, `mitra`, `no_identitas`, `nama_customer`,
 (19, 9, '002', 'ALAMTARI UJI COBA 2', 'Perempuan', 'JLN T ISKANDAR NO 20', '085207614024', 'ALAMTARI70@GMAIL.COM'),
 (22, 1, '1254555', 'Fahri', 'Laki-laki', 'Lingke', '08522222226', '0'),
 (23, 7, '001', 'YALMALAM UJI COBA', 'Perempuan', 'LAMSEUPENG', '08116809077', 'deasy_deasy2002@yahoo.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_transaksi`
+--
+
+CREATE TABLE `detail_transaksi` (
+  `id` int(11) NOT NULL,
+  `id_tiket` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -245,48 +252,12 @@ INSERT INTO `menus` (`id`, `parent_id`, `path`, `name`, `icon`, `list_order`, `r
 (25, 0, 'dashboard/', 'DASHBOARD', 'fa fa-dashboard', 8, 'Panel Dashboard', 'publish'),
 (39, 0, '#', 'PEMBELI', 'fa fa-group', 9, '', 'publish'),
 (42, 39, 'pembeli/', 'DATA PEMBELI', 'fa fa-database', 13, '', 'publish'),
-(50, 48, 'data/rute', 'RUTE/SEKTOR', 'fa fa-exchange', 10, '', 'publish'),
 (51, 0, 'tiket/', 'TIKET PESAWAT', 'fa fa-fighter-jet', 10, '', 'publish'),
 (49, 48, 'bandara/', 'BANDARA', 'fa fa-arrows-alt', 9, '', 'publish'),
 (43, 42, 'laporan/', 'Laporan Pangkalan', 'fa fa-file-pdf-o', 15, 'Laporan', 'publish'),
-(52, 0, 'mitra/', 'MITRA', 'fa fa-cubes', 9, '', 'publish'),
 (53, 0, 'transaksi/', 'TRANSAKSI', 'fa fa-cart-plus', 11, '', 'publish'),
 (48, 0, '#', 'DATA MASTER', 'fa fa-align-justify', 16, '', 'publish'),
 (54, 53, 'transaksi/', 'DATA TRANSAKSI', 'fa fa-angle-right', 0, '', 'publish');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `mitra`
---
-
-CREATE TABLE `mitra` (
-  `id_mitra` int(12) NOT NULL,
-  `no_izin` int(25) NOT NULL,
-  `nama_mitra` varchar(100) NOT NULL,
-  `alamat_mitra` varchar(100) NOT NULL,
-  `telp_mitra` varchar(20) NOT NULL,
-  `email_mitra` varchar(30) NOT NULL,
-  `miname` varchar(50) NOT NULL,
-  `mipass` varchar(100) NOT NULL,
-  `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `mitra`
---
-
-INSERT INTO `mitra` (`id_mitra`, `no_izin`, `nama_mitra`, `alamat_mitra`, `telp_mitra`, `email_mitra`, `miname`, `mipass`, `created`) VALUES
-(1, 0, 'Ubudiyah Travel', 'Jln. Alue Naga, Desa Tibang, Kec. Syiahkuala-Banda Acceh', '(0651) - 7555750', '', 'ubtravel', '$2y$10$HiQWseKPjJZ0TIsOB.pb8OvO.dz1KQid3ymYr75P8p3M9BrAJTF4S', '2018-05-02 10:00:00'),
-(2, 1, 'Asra Prima', 'Sri Ratu Syafiatuddin No. 7 Peunayong, Banda Aceh', '(0651) 35226', 'alfisyahril64@gmail.com', 'asraprima', '$2y$10$C7VbCBxMXwB/6jMXo4uJ9uuJFpnpNg6.NJlw1n03VCzwTnieEMl0y', '2018-05-09 14:48:10'),
-(3, 2, 'PT Cendana Tour & Travel', 'Jl. T. Hasan Dek No. 31 Kec. Kuta Alam, Banda Aceh', '0811681031', 'cendanatour@yahoo.co.id', 'cendanatravel', '$2y$10$RBulSMosYoV/QMvozGoqjO/FKTcMKFUUKo77eiQPuJKhvBAd9KMKK', '2018-05-09 14:52:52'),
-(4, 3, 'Tara Travel', 'Jl. Sri Ratu Syafiatuddin No. 38 Peunayong, Banda Aceh', '082365516551', 'taratravel07@yahoo.com', 'idtara05', '$2y$10$zfhokxPvWU7llos5WStm0uy4fyueBuCL//DGSTKNlcADpJ9WSbiyS', '2018-05-09 14:55:26'),
-(5, 4, 'PT Kana Tour & Travel', 'Jl. Sri Ratu Safiatuddin No.5 Peunayong, Banda Aceh', '(0651) 635700', 'kanatour_nad@yahoo.com', 'kanatour', '$2y$10$UBWicxKKLzyOoED55XyHheNtEJ5DLb4cFwxGsGOYGc7X.62IcOfda', '2018-05-09 14:58:08'),
-(6, 5, 'Dzaki Tour & Travel', 'Jl. T. Hasan Dek No. 232 Jambo Tape, Banda Aceh', '085260085299', '-', 'dzakitravel', '$2y$10$Rg0nqZ8e09NSHZa/sW/CE.4NPUuuhdop5SgfrDFl4aKPYDtSAIwja', '2018-05-09 15:00:25'),
-(7, 6, 'PT Yalamlam Wisata', 'Jl. Tgk. Imuem Lueng Bata No. 01 Lamseupeung, Banda Aceh', '08116809033', 'deasy_deasy2002@yahoo.com', 'yalamlam', '$2y$10$rAr5dUUHiedj.mytCxAyAO8tzgud2xWHyfUJDuowHFvXizvXvLao2', '2018-05-09 15:02:58'),
-(8, 7, 'PT Nuansa Tour & Travel', 'Jl. Tgk. Chik Ditiro No. 99 Simpang Surabaya, Banda Aceh', '(0651) 23480', 'nuansawisatanusa@yahoo.co.id', 'nuansatravel', '$2y$10$e8qFxchf6KOCfsF64rOYSezaAbMByJbZwhAubNY.Tlo4AerzT/FJS', '2018-05-09 15:06:17'),
-(9, 8, 'PT Alam Tari Tour & Travel', 'Jl. T. Iskandar No. 20 Beurawe, Banda Aceh', '08126957000', 'alamtari70@gmail.com', 'alamtari', '$2y$10$x1tZW9zENUu4/Nwnh40/ZO4LgXlSHTHTz9dgo5a.esrcCF03.cOAK', '2018-05-09 15:11:50'),
-(10, 9, 'PT Mangat Usaha Wisata', 'Jl. Cut Nyak Dhien No. 511 Lamteumen Timur, Banda Aceh', '(0651) 47259', 'muholiday2013@gmail.com', 'muwisata', '$2y$10$uxzi42avRQzPRoh.Xcqr8.k3zJ5xtiBbOqE/HW3q/VgezseLxtC4G', '2018-05-09 15:14:07');
 
 -- --------------------------------------------------------
 
@@ -441,31 +412,40 @@ INSERT INTO `provinsi` (`id`, `nm_provinsi`, `id_negara`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rute`
---
-
-CREATE TABLE `rute` (
-  `id_rute` int(30) NOT NULL,
-  `dari` varchar(50) NOT NULL,
-  `tujuan` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tiket`
 --
 
 CREATE TABLE `tiket` (
   `id_tiket` int(50) NOT NULL,
   `kode_pnr` varchar(100) NOT NULL,
-  `jenis_penerbangan` varchar(100) NOT NULL,
-  `tgl_berangkat` datetime NOT NULL,
-  `id_rute` int(100) NOT NULL,
+  `tgl_berangkat` date NOT NULL,
+  `waktu` time NOT NULL,
+  `dari` varchar(10) NOT NULL,
+  `tujuan` varchar(10) NOT NULL,
   `maskapai` varchar(100) NOT NULL,
-  `kode_maskapai` varchar(100) NOT NULL,
   `jml_seat` varchar(100) NOT NULL,
   `harga` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tiket`
+--
+
+INSERT INTO `tiket` (`id_tiket`, `kode_pnr`, `tgl_berangkat`, `waktu`, `dari`, `tujuan`, `maskapai`, `jml_seat`, `harga`) VALUES
+(2, 'UB123', '2018-07-19', '10:10:00', 'BTJ', 'KUL', 'Citilink[QGK]', '178', '1900000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi`
+--
+
+CREATE TABLE `transaksi` (
+  `id_transaksi` int(255) NOT NULL,
+  `id_mitra` int(255) NOT NULL,
+  `id_penumpang` int(255) NOT NULL,
+  `tgl_transaksi` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `total_hrg` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -499,7 +479,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1531563176, 1, 'Admin', 'istrator', '', ''),
+(1, '127.0.0.1', 'admin', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1532072144, 1, 'Admin', 'istrator', '', ''),
 (2, '125.161.107.194', 'swadaya', '$2y$08$veXXS7c33RkaX7tmBxux3OREcBnbOP5AEHZ98JhZw8G2240z0twya', NULL, 'swadaya@gmail.com', NULL, NULL, NULL, NULL, 1523085329, 1524536188, 1, 'swadaya', '', '', '');
 
 -- --------------------------------------------------------
@@ -569,6 +549,14 @@ ALTER TABLE `customer`
   ADD PRIMARY KEY (`id_customer`);
 
 --
+-- Indexes for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_tiket` (`id_tiket`),
+  ADD KEY `id_transaksi` (`id_transaksi`);
+
+--
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
@@ -607,12 +595,6 @@ ALTER TABLE `menus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `mitra`
---
-ALTER TABLE `mitra`
-  ADD PRIMARY KEY (`id_mitra`);
-
---
 -- Indexes for table `m_config`
 --
 ALTER TABLE `m_config`
@@ -643,16 +625,18 @@ ALTER TABLE `provinsi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rute`
---
-ALTER TABLE `rute`
-  ADD PRIMARY KEY (`id_rute`);
-
---
 -- Indexes for table `tiket`
 --
 ALTER TABLE `tiket`
   ADD PRIMARY KEY (`id_tiket`);
+
+--
+-- Indexes for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id_transaksi`),
+  ADD KEY `id_mitra` (`id_mitra`),
+  ADD KEY `id_penumpang` (`id_penumpang`);
 
 --
 -- Indexes for table `users`
@@ -695,6 +679,12 @@ ALTER TABLE `customer`
   MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
+-- AUTO_INCREMENT for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
@@ -731,12 +721,6 @@ ALTER TABLE `menus`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'this is ID for menus', AUTO_INCREMENT=55;
 
 --
--- AUTO_INCREMENT for table `mitra`
---
-ALTER TABLE `mitra`
-  MODIFY `id_mitra` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT for table `m_config`
 --
 ALTER TABLE `m_config`
@@ -767,16 +751,16 @@ ALTER TABLE `provinsi`
   MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `rute`
---
-ALTER TABLE `rute`
-  MODIFY `id_rute` int(30) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `tiket`
 --
 ALTER TABLE `tiket`
-  MODIFY `id_tiket` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tiket` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id_transaksi` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
