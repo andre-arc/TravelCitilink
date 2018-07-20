@@ -3,13 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
-<<<<<<< HEAD
--- Generation Time: Jul 14, 2018 at 12:37 PM
-=======
--- Generation Time: Jul 14, 2018 at 12:29 PM
->>>>>>> Rz
--- Server version: 10.2.3-MariaDB-log
--- PHP Version: 7.1.1
+-- Generation Time: Jul 15, 2018 at 09:27 AM
+-- Server version: 5.7.19
+-- PHP Version: 7.1.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -89,6 +85,18 @@ INSERT INTO `customer` (`id_customer`, `mitra`, `no_identitas`, `nama_customer`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `detail_transaksi`
+--
+
+CREATE TABLE `detail_transaksi` (
+  `id` int(11) NOT NULL,
+  `id_tiket` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `groups`
 --
 
@@ -116,10 +124,10 @@ CREATE TABLE `groups_menus` (
   `id` int(10) UNSIGNED NOT NULL,
   `group_id` mediumint(8) UNSIGNED NOT NULL,
   `menu_id` int(10) UNSIGNED NOT NULL,
-  `akses` tinyint(1) UNSIGNED DEFAULT 1,
-  `tambah` tinyint(1) UNSIGNED DEFAULT 0,
-  `ubah` tinyint(1) UNSIGNED DEFAULT 0,
-  `hapus` tinyint(1) UNSIGNED DEFAULT 0
+  `akses` tinyint(1) UNSIGNED DEFAULT '1',
+  `tambah` tinyint(1) UNSIGNED DEFAULT '0',
+  `ubah` tinyint(1) UNSIGNED DEFAULT '0',
+  `hapus` tinyint(1) UNSIGNED DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -156,7 +164,7 @@ CREATE TABLE `keys` (
   `id` int(11) NOT NULL,
   `key` varchar(40) NOT NULL,
   `level` int(2) NOT NULL,
-  `ignore_limits` tinyint(1) NOT NULL DEFAULT 0,
+  `ignore_limits` tinyint(1) NOT NULL DEFAULT '0',
   `date_created` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -203,13 +211,13 @@ CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
   `uri` varchar(255) NOT NULL,
   `method` varchar(6) NOT NULL,
-  `params` text DEFAULT NULL,
+  `params` text,
   `api_key` varchar(40) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
   `time` int(11) NOT NULL,
   `rtime` float DEFAULT NULL,
   `authorized` varchar(1) NOT NULL,
-  `response_code` smallint(3) DEFAULT 0
+  `response_code` smallint(3) DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -220,12 +228,12 @@ CREATE TABLE `logs` (
 
 CREATE TABLE `menus` (
   `id` int(10) UNSIGNED NOT NULL COMMENT 'this is ID for menus',
-  `parent_id` int(10) UNSIGNED DEFAULT 0,
+  `parent_id` int(10) UNSIGNED DEFAULT '0',
   `path` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `icon` varchar(255) DEFAULT 'glyphicon glyphicon-tasks',
-  `list_order` int(3) DEFAULT 0,
-  `remark` text DEFAULT NULL,
+  `list_order` int(3) DEFAULT '0',
+  `remark` text,
   `flag` enum('draft','publish') DEFAULT 'draft'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -357,7 +365,7 @@ CREATE TABLE `orgs` (
   `no_reg` varchar(50) NOT NULL,
   `alamat_pkl` varchar(50) NOT NULL,
   `stock_tbg` varchar(50) NOT NULL,
-  `description` text DEFAULT NULL COMMENT 'Desc. Org'
+  `description` text COMMENT 'Desc. Org'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -471,6 +479,20 @@ CREATE TABLE `tiket` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transaksi`
+--
+
+CREATE TABLE `transaksi` (
+  `id_transaksi` int(255) NOT NULL,
+  `id_mitra` int(255) NOT NULL,
+  `id_penumpang` int(255) NOT NULL,
+  `tgl_transaksi` timestamp NOT NULL,
+  `total_hrg` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -569,6 +591,14 @@ ALTER TABLE `customer`
   ADD PRIMARY KEY (`id_customer`);
 
 --
+-- Indexes for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_tiket` (`id_tiket`),
+  ADD KEY `id_transaksi` (`id_transaksi`);
+
+--
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
@@ -655,6 +685,14 @@ ALTER TABLE `tiket`
   ADD PRIMARY KEY (`id_tiket`);
 
 --
+-- Indexes for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id_transaksi`),
+  ADD KEY `id_mitra` (`id_mitra`),
+  ADD KEY `id_penumpang` (`id_penumpang`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -686,13 +724,19 @@ ALTER TABLE `users_orgs`
 -- AUTO_INCREMENT for table `bandara`
 --
 ALTER TABLE `bandara`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -777,6 +821,12 @@ ALTER TABLE `rute`
 --
 ALTER TABLE `tiket`
   MODIFY `id_tiket` int(50) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id_transaksi` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -4,13 +4,44 @@ class Dashboard extends MY_Admin {
 	
 	function __construct(){
 		parent::__construct();
-		$this->data['tpl']='single';
+		$this->load->model('M_dashboard');
 	}
 	
 	function index() {
 
+		$this->data['css'] = css_asset('style.css', '');
+		$this->data['css'] .=  css_asset('bootstrap-table.min.css','bootstrap-table');
+		$this->data['css'] .= css_asset('sweetalert2.min.css','limonte-sweetalert2');
+		$this->data['css'] .= css_asset('select2.min.css','select2');
+		$this->data['css'] .= css_asset('bootstrap-datepicker.min.css', 'bootstrap-datepicker');
+
+		$this->data['js']  =  js_asset('bootstrap-table.min.js','bootstrap-table');
+		$this->data['js']  .= js_asset('sweetalert2.min.js','limonte-sweetalert2');
+		$this->data['js']  .= js_asset('select2.full.min.js','select2');
+		$this->data['js'] .= js_asset('bootstrap-datepicker.min.js', 'bootstrap-datepicker');
+		$this->data['js'] .= js_asset('bootstrap-datepicker.id.min.js', 'bootstrap-datepicker');
+		$this->data['js'] .= "<script> var options={format: 'dd-mm-yyyy',todayHighlight: true,autoclose: true, daysOfWeekDisabled: '0',daysOfWeekHighlighted: '0',language: 'id',locale: 'id',};$('#asal').select2();$('#tujuan').select2();$('#tgl_berangkat').datepicker(options);$('#tgl_kembali').datepicker(options);</script>";
+
+
+		$this->data['bandara'] = $this->M_dashboard->getBandara();
+
 		$this->data['content']=$this->load->view('dashboard',$this->data,true);
 		$this->display($this->data);
+	}
+
+	function search(){
+		$data['asal'] = $this->input->post('asal');
+		$data['tujuan'] = $this->input->post('tujuan');
+		$data['tgl_berangkat'] = $this->input->post('tgl_berangkat');
+		$data['tgl_kembali'] = $this->input->post('pp') ? $this->input->post('tgl_kembali') : 'null';
+
+		$this->data['result'] = $this->M_dashboard->getTicket($data);
+		$result['status'] = true;
+		$result['html'] = $this->load->view('list_tiket', $this->data, true);
+		
+
+
+		echo json_encode($result);
 	}
 		
 	

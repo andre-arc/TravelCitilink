@@ -21,6 +21,12 @@ function terbilang($x) {
 			
 }
 
+function convertToRupiah($angka)
+		{
+			$rupiah = "Rp.". number_format($angka ,0, ',' , '.' );
+			return $rupiah;
+		}
+
 
 function sortBy($field, &$array, $direction = 'asc')
 {
