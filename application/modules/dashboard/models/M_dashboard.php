@@ -16,7 +16,7 @@ class M_dashboard extends CI_Model {
 
         $data[0] = " Pilih Bandara ";
         foreach($result as $r){
-            $data[$r->id] = $r->nm_kota." (".$r->kode.")";
+            $data[$r->kode] = $r->nm_kota." (".$r->kode.")";
         }
 
         return $data;
@@ -24,17 +24,16 @@ class M_dashboard extends CI_Model {
 
     public function getTicket($data)
     {
-        $this->db->select('t.*, r.*')
+        $this->db->select('t.*')
                  ->from('tiket as t')
-                 ->join('rute as r', 't.id_rute=r.id_rute', 'TRUE')
                  ->where('t.tgl_berangkat', $data['tgl_berangkat'])
-                 ->where('r.bandara_asal', $data['asal'])
-                 ->where('r.bandara_tujuan', $data['tujuan']);
+                 ->where('t.dari', $data['asal'])
+                 ->where('t.tujuan', $data['tujuan']);
         
         if($data['tgl_kembali'] != null){
             $this->db->or_where('t.tgl_berangkat', $data['tgl_kembali'])
-                     ->where('r.bandara_asal', $data['tujuan'])
-                     ->where('r.bandara_tujuan', $data['asal']);
+                     ->where('t.dari', $data['tujuan'])
+                     ->where('t.tujuan', $data['asal']);
         }
 
         $result = $this->db->get()->result();
