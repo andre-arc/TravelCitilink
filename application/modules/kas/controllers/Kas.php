@@ -47,7 +47,7 @@ class Kas extends MY_Admin {
 		$order  = (isset($_GET['order'])) ? $_GET['order'] : 'desc';
 
 		$SQL_BASE='
-			select * from data_kas, orgs
+			select data_kas.id as id_kas, no_faktur,tgl_transaksi,jumlah, org_id, orgs.name from data_kas, orgs
             where data_kas.org_id=orgs.id ';
         
         $org_id= $this->session->userdata('user_org');
@@ -82,7 +82,7 @@ class Kas extends MY_Admin {
 			$ls_data_limit=$this->db->query($SQL)->result_array();
 			$ret['rows'] = $ls_data_limit;
 		}
-
+		//echo $this->db->last_query();
 		echo json_encode($ret);
 	}
     
@@ -96,7 +96,7 @@ class Kas extends MY_Admin {
         
         $kas = array(
                         'no_faktur' => isset($_POST['no_faktur']) ? $_POST['no_faktur'] : '-',
-                         'org_id' => $_POST['id_cabang'],
+                         'org_id' => $_POST['org_id'],
                         
                         'tgl_transaksi' => date('Y-m-d', strtotime(str_replace('/', '-', $_POST['tgl_transaksi']))),
                         'jumlah' => $_POST['jumlah']
@@ -122,23 +122,21 @@ class Kas extends MY_Admin {
 			'msg'=>'Gagal Mengubah Data'
 		);
 		
-		$data['kategori']         = $_POST['kategori'];
-		$data['no_plat']          = $_POST['no_plat'];
-		$data['tahun_mobil']      = $_POST['tahun_mobil'];
-		$data['merk']             = $_POST['merk'];
-		$data['kapasitas']        = $_POST['kapasitas'];
-		$data['produk']           = $_POST['produk'];
-		$data['nm_supir']         = $_POST['nm_supir'];
-		$data['keterangan_mobil'] = $_POST['keterangan_mobil'];
+		$data['no_faktur']        	 = $_POST['no_faktur'];
+		$data['org_id']         	 = $_POST['org_id'];
+		$data['tgl_transaksi']     	 = $_POST['tgl_transaksi'];
+		$data['jumlah']            	 = $_POST['jumlah'];
+		//$id_kas=$_POST['id'];
 
-		$this->db->update('mobil', $data,array('no_plat'=>$_POST['plat'])); 
+		$this->db->update('data_kas', $data,array('id'=> $_POST['id'])); 
 		if($this->db->affected_rows()){
 			$ret=array(
 				'success'=>true,
 				'msg'=>'Berhasil Mengubah Data'
 			);
 		}
-		echo json_encode($ret);		
+		echo $this->db->last_query();
+		//echo json_encode($ret);		
 	}
 
 	function act_del(){
