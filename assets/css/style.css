@@ -37,16 +37,42 @@
  .bottom_ul li a { color:#FFF;  font-size:12px;}
 
  .harga{
-     font-size: 56px;
+     font-size: 48px;
      color: rgb(45, 251, 45);
      text-align: center;
  }
 
+ .satuan{
+     font-size: 20px;
+ }
+
  .detail-tiket{
      font-size: 26px;
-     text-align: center;
-     
+     text-align: center; 
  }
+
+ .waktu{
+    font-size: 14px;
+ }
+
+ /* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+
+
+
 
 
 

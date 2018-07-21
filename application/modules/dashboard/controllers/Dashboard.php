@@ -32,8 +32,8 @@ class Dashboard extends MY_Admin {
 	function search(){
 		$data['asal'] = $this->input->post('asal');
 		$data['tujuan'] = $this->input->post('tujuan');
-		$data['tgl_berangkat'] = $this->input->post('tgl_berangkat');
-		$data['tgl_kembali'] = $this->input->post('pp') ? $this->input->post('tgl_kembali') : 'null';
+		$data['tgl_berangkat'] = date('Y-m-d', strtotime($this->input->post('tgl_berangkat')));
+		$data['tgl_kembali'] = $this->input->post('pp') ? date('Y-m-d', strtotime($this->input->post('tgl_kembali')))  : 'null';
 
 		$this->data['result'] = $this->M_dashboard->getTicket($data);
 		$result['status'] = true;
@@ -42,6 +42,7 @@ class Dashboard extends MY_Admin {
 
 
 		echo json_encode($result);
+		// echo $this->db->last_query();
 	}
 		
 	

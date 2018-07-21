@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Transaksi extends MY_Admin {
+class Checkout extends MY_Admin {
 	
 	function __construct(){
 		parent::__construct();
@@ -9,8 +9,12 @@ class Transaksi extends MY_Admin {
 	
 	function index() {
 
-		$this->data['content']=$this->load->view('transaksi',$this->data,true);
+        $tiket = $this->input->post('id_tiket');
+		$this->data['content']=$this->load->view('checkout',$this->data,true);
 		$this->display($this->data);
 	}
+		
+	
+	
 	
 }

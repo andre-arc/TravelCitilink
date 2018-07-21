@@ -43,7 +43,8 @@
                            
                             <div class="col-md-12">
                                 <div class="form-group">
-                                   <button type="submit" class="btn btn-primary pull-right">SEARCH</button>
+                                 <button id="checkout" type="button" onclick="check()" class="btn btn-primary pull-right margin">CHECKOUT</button>
+                                   <button type="submit" class="btn btn-primary pull-right margin">SEARCH</button> 
                                 </div>
                             </div>
                             </form>
@@ -56,8 +57,10 @@
     <div class="col-md-12" id="list-tiket">
 
     </div>
-  </div>
   <script>
+
+$('#checkout').hide();
+
 $('#form-search').submit(function(e){
 var form_data=$("#form-search").serialize();
 
@@ -75,6 +78,7 @@ $.ajax({
 
 e.preventDefault();
 });
+
   </script>
     
       
