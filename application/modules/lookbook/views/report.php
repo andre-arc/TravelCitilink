@@ -1,7 +1,7 @@
 <section class="content">
 <?php
     $filter['0'] = '-- Pilih Filter';
-    $filter['all'] = 'Semua';
+    //$filter['all'] = 'Semua';
     foreach ($cabangs as $cabang) {
         $filter[$cabang->id] = "$cabang->name";
     }
@@ -35,19 +35,24 @@
                                     <?= form_dropdown('filter', $filter, null, 'id="filter" style="width:100%;" class="form-control"'); ?>
                                 </div>
                             </div>
-                            <div id="tglSection">
-                                <div class="col-md-12">
+                           <div id="tglSection">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Periode</label>
-                                        <input type="text" name="periode" id="periode" class='form-control'>
+                                        <label class="control-label">Tanggal Mulai</label>
+                                        <input type="text" name="tgl_mulai" id="tgl_mulai" class='form-control'>
                                     </div>
                                 </div>
-                               
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Tanggal Akhir</label>
+                                        <input type="text" name="tgl_akhir" id="tgl_akhir" class='form-control'>
+                                    </div>
+                                </div>
                             </div>
                            
                             <div class="col-md-12">
                                 <div class="form-group">
-                                   <button type="submit" class="btn btn-primary pull-right">Export Data</button>
+                                   <button type="submit" class="btn btn-primary pull-right">Generate</button>
                                 </div>
                             </div>
                             </form>
@@ -68,20 +73,20 @@ $(document).ready(function(){
         resetAll();
         $('#filter').select2();
     
-			$('#periode').datepicker({
-			format: "MM yyyy",
-		    viewMode: "months", 
-		    minViewMode: "months",
-			language: 'id'
-		});
+			$('#tgl_mulai').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'id'
+        });
+        $('#tgl_akhir').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'id'
+        });
+    
 		// $('#periode').change(function(){
 		// 	alert($('#periode').data("datepicker").getDate());
 		// });
 
-        $('#tgl_akhir').datepicker({
-			format: 'dd/mm/yyyy',
-			language: 'id'
-		});
+        
     
         $('#filter').change(function(){
             resetAll();

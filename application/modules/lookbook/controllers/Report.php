@@ -7,6 +7,7 @@ class Report extends MY_Admin{
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->model('lookbookModel');
+		 $this->load->library('pdf');
 	}
 
 
@@ -40,47 +41,81 @@ public function index(){
 
 	public function proses_export(){
 
-		$periode = $this->input->post('periode');
-		$filter = $this->input->post('filter');
+			
+       		$filter = $this->input->post('filter');
+            $tgl_mulai = $this->input->post('tgl_mulai');
+            $tgl_akhir = $this->input->post('tgl_akhir');
 
-		$extract = explode(" ", $periode);
-		$listBulan = array(
-					"januari" => 1,
-					"februari" => 2,
-					"maret" => 3,
-					"april" => 4,
-					"mei" => 5,
-					"juni" => 6,
-					"juli" => 7,
-					"agustus" => 8,
-					"september" => 9,
-					"oktober" => 10,
-					"november" => 11,
-					"desember" => 12,
-					);
-		$namaBulan = strtolower($extract[0]);
-		$bulan = $listBulan[$namaBulan];
-		$tahun = $extract[1];
-		$date = $tahun."-".$bulan."-1";
+			$tgl_mulai = date('Y-m-d', strtotime(str_replace('/', '-', $tgl_mulai)));
+            $tgl_akhir = date('Y-m-d', strtotime(str_replace('/', '-', $tgl_akhir)));
+            
+       
 
-		$this->data['lastDate'] = date('t', strtotime($date));
-		$this->data['filter'] = $filter;
-		$this->data['bulan'] = $bulan;
-		$this->data['nm_bulan'] = $namaBulan;
-		$this->data['tahun'] = $tahun;
-		
+		$pdf = new FPDF('l','mm','A5');
+        // membuat halaman baru
+        $pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial','B',16);
+        // mencetak string 
+        $pdf->Cell(190,7,'PT. Ubudiyah Aviation Indonesia Banda Aceh',0,1,'C');
+        $pdf->SetFont('Arial','B',12);
+        $pdf->Cell(190,7,'DAFTAR TRANSAKSI PENJUALAN TIKET',0,1,'C');
+
+        // Memberikan space kebawah agar tidak terlalu rapat
+        $pdf->Cell(10,7,'',0,1);
+
+        $pdf->SetFont('Arial','B',10);
+        $pdf->Cell(10,6,'NO',1,0);
+        $pdf->Cell(43,6,'TANGGAL TRANSAKSI',1,0);
+        $pdf->Cell(27,6,'KODE PNR',1,0);
+        $pdf->Cell(15,6,'DARI',1,0);
+        $pdf->Cell(18,6,'TUJUAN',1,0);
+        $pdf->Cell(22,6,'MASKAPAI',1,0);
+        $pdf->Cell(18,6,'TOTAL',1,0);
+        $pdf->Cell(35,6,'TGL BERANGKAT',1,1);
+       
+
+        $pdf->SetFont('Arial','',10);
+
+        $query = $this->db->query("SELECT transaksi.tgl_transaksi,transaksi.id_transaksi as id_tran,kode_pnr,tgl_berangkat,waktu,dari,tujuan,maskapai,harga FROM transaksi,detail_transaksi,orgs,tiket where transaksi.id_mitra=orgs.id AND tiket.id_tiket=detail_transaksi.id_tiket AND transaksi.id_transaksi=detail_transaksi.id_transaksi AND orgs.id='$filter' AND tgl_transaksi between '$tgl_mulai' and '$tgl_akhir' ORDER BY id_tran DESC")->result();
 
 
-		
 
-		$this->load->library('m_pdf');
-		$this->load->view('lookbook/cetak_lookbook', $this->data);
 
-		// $pdfFilePath='laporan.pdf';
-		// $pdf =$this->m_pdf->load();
-		// $pdf->WriteHTML($html);
-		// $pdf->Output($pdfFilePath,"D");
+        foreach ($query as $row){
+            $pdf->Cell(10,6,$row->id_tran,1,0);
+            $pdf->Cell(43,6,$row->tgl_transaksi,1,0);
+            $pdf->Cell(27,6,$row->kode_pnr,1,0);
+            $pdf->Cell(15,6,$row->dari,1,0);
+            $pdf->Cell(18,6,$row->tujuan,1,0);
+            $pdf->Cell(22,6,$row->maskapai,1,0);
+            $pdf->Cell(18,6,$row->harga,1,0);
+            $pdf->Cell(35,6,$row->tgl_berangkat,1,0);   
+        }
+
+        $pdf->Output();
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public function tes(){
 		$query = $this->db->query("call get_laporan('2018-3-1', 1);");
