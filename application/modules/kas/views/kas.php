@@ -56,7 +56,7 @@
 				<div class="modal-body">
 					<input type="hidden" name="act" id="act" value="" />
 					<input type="hidden" id="id" name="id" value="" />
-					<input type="hidden" id="kode" name="kode" value="" />
+					
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
@@ -75,8 +75,8 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">Cabang</label>
-								<?= form_dropdown('id_cabang', $cabang, null, 'id="cabang" style="width:100%;"'); ?>
+								<label class="control-label">Mitra</label>
+								<?= form_dropdown('org_id', $cabang, null, 'id="org_id" style="width:100%;"'); ?>
 							</div>
 						</div>
 					</div>
@@ -130,7 +130,7 @@
 				valign: 'middle'
 			},
 			{
-				field: 'id',
+				field: 'id_kas',
 				title: 'ID',
 				halign:'center',
 				sortable:true
@@ -199,13 +199,14 @@
 				$('#title_act').html('<i class="fa fa-pencil"></i>&nbsp;Form Edit');
 				$('#act').val('edit');
 
-				document.getElementById('cabang').value = rowSel[0].org_id;
+				//document.getElementById('org_id').value = rowSel[0].org_id;
 				
 				//load row
-				$('#id').val(rowSel[0].id_kas);
+				$('#id').val(rowSel[0].id);
 				$('#no_faktur').val(rowSel[0].no_faktur);
 				$('#tgl_transaksi').val(rowSel[0].tgl_transaksi);
 				$('#jumlah').val(rowSel[0].jumlah);
+				$('#org_id').val(rowSel[0].org_id).trigger("change");
 				
 				$('#myModal').modal('show');
 			}else{
@@ -260,7 +261,7 @@
 						type: "POST",
 						url: SITE_URL+"/kas/act_del/",
 						dataType: "json",
-						data: {id:rowSel[0].id_kas},
+						data: {id:rowSel[0].id},
 						success: function(data){
 							if(data.success){
 								swal('Selamat', data.msg, 'success');

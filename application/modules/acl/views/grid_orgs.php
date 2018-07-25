@@ -121,6 +121,12 @@
 						title: 'DESC',
 						halign:'center',
 						sortable:true
+				},
+				{
+						field: 'jml_kas',
+						title: 'SALDO',
+						halign:'center',
+						sortable:true
 				}
 				],
 				onLoadSuccess:function(e){
