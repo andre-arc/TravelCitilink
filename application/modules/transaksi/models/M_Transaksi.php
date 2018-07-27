@@ -19,11 +19,35 @@ class M_transaksi extends CI_Model {
                              (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.dari) as kota_asal, 
                               (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.tujuan) as kota_tujuan 
                           from tiket as t where t.id_tiket in ("'.implode(',', $data).'")');
+       }else{
+        $query = $this->db->query('select t.*,
+        (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.dari) as kota_asal, 
+         (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.tujuan) as kota_tujuan 
+            from transaksi as tr 
+            join detail_transaksi as dt on dt.id_transaksi=tr.id_transaksi
+            join tiket as t on dt.id_tiket=t.id_tiket
+            where tr.id_transaksi="'.$data.'"');
        }
 
        $result = $query->result();
        return $result;
     }
+
+    public function getDetailPenumpang($id_transaksi){
+        $this->db->select('p.*')
+                 ->from('penumpang as p')
+                 ->join('transaksi as t', 'p.id_transaksi=t.id_transaksi', 'left')
+                 ->where('t.id_transaksi', $id_transaksi);
+        
+        $result = $this->db->get()->result();
+        return $result;
+    }
+
+    // public function getCustomer(){
+    //     $this->db->select('c.*')
+    //              ->from('customer as c')
+    //              ->join
+    // }
 
 
     public function getCountry(){
