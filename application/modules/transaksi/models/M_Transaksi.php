@@ -43,6 +43,17 @@ class M_transaksi extends CI_Model {
         return $result;
     }
 
+    public function getBuyer($id_tiket){
+        $this->db->select('count(p.id_penumpang) as jml_penumpang')
+                 ->from('penumpang as p')
+                 ->join('transaksi as t', 'p.id_transaksi=t.id_transaksi', 'left')
+                 ->join('detail_transaksi as dt', 'dt.id_transaksi=t.id_transaksi', 'left')
+                 ->where('dt.id_tiket', $id_tiket);
+        
+        $result = $this->db->get()->row();
+        return $result->jml_penumpang;
+    }
+
     // public function getCustomer(){
     //     $this->db->select('c.*')
     //              ->from('customer as c')

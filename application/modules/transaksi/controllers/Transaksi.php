@@ -84,6 +84,11 @@ class Transaksi extends MY_Admin {
 
 		$total_hrg=0;
 		foreach($detail_tiket as $t){
+			$jml_penumpang = count($data_penumpang);
+			if($t->jml_seat < $jml_penumpang){
+				$status &= false;
+			}
+
 			$total_hrg += $t->harga;
 		}
 		$total_hrg *= count($data_penumpang);
@@ -113,8 +118,27 @@ class Transaksi extends MY_Admin {
 						'id_transaksi' => $id_transaksi,
 						'hrg_tiket' => $t->harga
 					);
+		
 				}
 				$status &= $this->db->insert_batch('detail_transaksi', $detail_transaksi);
+
+				if($status){
+					foreach ($detail_tiket as $t) {
+						$buyer = $this->M_transaksi->getBuyer($tiket->id_tiket);
+						$tiket = array('jml_seat' => $t->jml_seat-$jml_penumpang);
+
+						switch ($buyer) {
+							case 10: $tiket['harga'] = $t->harga+150000;  break;
+							case 30: $tiket['harga'] = $t->harga+150000; break;
+							case 50: $tiket['harga'] = $t->harga+150000; break;
+							case 90: $tiket['harga'] = $t->harga+150000; break;
+							case 120: $tiket['harga'] = $t->harga+150000; break;
+							}
+					
+					$status &= $this->db->update('tiket', $tiket, array('id_tiket' => $t->id_tiket));	
+							
+					}	
+				}
 
 				foreach ($data_penumpang as $p) {
 					$penumpang[] = array(
@@ -157,6 +181,39 @@ class Transaksi extends MY_Admin {
 
 		$this->data['content']=$this->load->view('detail',$this->data,true);
 		$this->display($this->data);
+	}
+
+	public function bayar($id_transaksi){
+		$status = true;
+		$status &= $this->db->update('transaksi', array('konfirmasi_bayar' => 1), array('id_transaksi' => $id_transaksi));
+
+		if($status){
+			redirect('transaksi');
+		}
+	}
+
+	public function print($id_transaksi){
+		$this->data['detail_transaksi'] = $this->db->where('id_transaksi', $id_transaksi)->get('transaksi')->row();
+		$this->data['detail_tiket'] = $this->M_transaksi->getDetailTiket($id_transaksi);
+		$this->data['data_penumpang'] = $this->M_transaksi->getDetailPenumpang($id_transaksi);
+
+		//load mPDF library
+		$this->load->library('m_pdf');
+		 
+
+		// $html=$this->load->view('print', $this->data,true);
+		$this->load->view('print', $this->data);
+
+		//this the the PDF filename that user will get to download
+		// $pdfFilePath ='Tiket.pdf';
+ 
+		
+		// //actually, you can pass mPDF parameter on this load() function
+		// $pdf = $this->m_pdf->load();
+		// //generate the PDF!
+		// $pdf->WriteHTML($html);
+		// //offer it to user via browser download! (The PDF won't be saved on your server HDD)
+		// $pdf->Output($pdfFilePath, "D");
 	}
 	
 }
