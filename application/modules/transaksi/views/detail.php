@@ -16,7 +16,7 @@
             <div class="panel">
                 <div class="panel-heading bg-blue clearfix">
                     <span class="pull-left">
-                        <i class="fa fa-plus-square"></i>&nbsp;FINALISASI TRANSAKSI 
+                        <i class="fa fa-plus-square"></i>&nbsp;DETAIL TRANSAKSI 
                     </span>
                     <span class="pull-right">
                         <?php echo modules::run('acl/widget/group_org_user');?>
@@ -25,7 +25,7 @@
                 <div class="panel-body">
                 
 					
-                    Nama : <?= $pemesan->nama_pemesan ?>
+                    <!-- Nama : <?= $pemesan->nama_pemesan ?> -->
 
                     <hr>
                     <?php
@@ -57,7 +57,7 @@
                         ?>
                             <tr>
                                 <td><?= $no ?></td>
-                                <td><?= $p->nm_penumpang ?></td>
+                                <td><?= $p->nama_penumpang ?></td>
                             </tr>
                             <?php
                             $no++;
@@ -72,9 +72,10 @@
                     </div>
                     
                 </div>
-                <div class="modal-footer"> 
-                <button type="submit" class="btn btn-primary margin pull-right">Booking</button>
-                <a href="<?= base_url('dashboard')?>" class="btn btn-primary margin pull-right">Batal</a>
+                <div class="modal-footer">
+                <a href="<?= base_url('transaksi/bayar/'.$detail_transaksi->id_transaksi)?>" class="btn btn-primary margin pull-right" 
+                        <?= $detail_transaksi->konfirmasi_bayar ? 'disabled' : '' ?>>Bayar</a>
+                <a href="<?= base_url('transaksi/print/'.$detail_transaksi->id_transaksi)?>" class="btn btn-primary margin pull-right">Print</a>
                
                 </div>
                 	
