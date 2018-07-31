@@ -258,9 +258,10 @@ class Transaksi extends MY_Admin {
 	}
 
 	public function print($id_transaksi){
-		$this->data['detail_transaksi'] = $this->db->where('id_transaksi', $id_transaksi)->get('transaksi')->row();
-		$this->data['detail_tiket'] = $this->M_transaksi->getDetailTiket($id_transaksi);
-		$this->data['data_penumpang'] = $this->M_transaksi->getDetailPenumpang($id_transaksi);
+		$detail_transaksi = $this->db->where('id_transaksi', $id_transaksi)->get('transaksi')->row();
+		$detail_tiket = $this->M_transaksi->getDetailTiket($id_transaksi);
+		// $pemesan = $this->M_transaksi->getCustomer($id_transaksi);
+		$data_penumpang = $this->M_transaksi->getDetailPenumpang($id_transaksi);
 
 		//load mPDF library
 		$this->load->library('pdf');
@@ -279,27 +280,80 @@ class Transaksi extends MY_Admin {
 		// $pdf->WriteHTML($html);
 		// //offer it to user via browser download! (The PDF won't be saved on your server HDD)
 		// $pdf->Output($pdfFilePath, "D");
-		$pdf = new FPDF('l','mm','A5');
-		$pdf->AddPage();
-        // setting jenis font yang akan digunakan
-        $pdf->SetFont('Arial','B',16);
-        // mencetak string 
-        $pdf->Cell(190,7,'PT. Ubudiyah Aviation Indonesia Banda Aceh',0,1,'C');
-        $pdf->SetFont('Arial','B',12);
-        $pdf->Cell(190,7,' TIKET',0,1,'C');
+		$pdf = new FPDF('p','mm','A5');
 
-        // Memberikan space kebawah agar tidak terlalu rapat
-        $pdf->Cell(10,7,'',0,1);
+			$pdf->AddPage();
+			// setting jenis font yang akan digunakan
+			$pdf->SetFont('Arial','B',16);
+			// mencetak string 
+			$pdf->Cell(150,7,'PT. CitiLink Indonesia',0,1,'C');
+			$pdf->SetFont('Arial','B',12);
+			$pdf->Cell(150,7,' TIKET',0,1,'C');
 
-        $pdf->SetFont('Arial','B',10);
-        $pdf->Cell(10,6,'NO',1,0);
-        $pdf->Cell(43,6,'TANGGAL TRANSAKSI',1,0);
-        $pdf->Cell(27,6,'KODE PNR',1,0);
-        $pdf->Cell(15,6,'DARI',1,0);
-        $pdf->Cell(18,6,'TUJUAN',1,0);
-        $pdf->Cell(22,6,'MASKAPAI',1,0);
-        $pdf->Cell(18,6,'TOTAL',1,0);
-        $pdf->Cell(35,6,'TGL BERANGKAT',1,1);
+			$pdf->Cell(10,5,'',0,1); // space
+
+			$pdf->SetFont('Arial','B',10);
+			$pdf->Cell(10,6,'Detail Pemesanan ',0,1);
+			$pdf->SetFont('Arial','',10);
+			$pdf->Cell(10,6,'Tanggal Pemesanan: '.$detail_transaksi->tgl_transaksi,0,1);
+			$pdf->Cell(10,6,'Status: Konfirm',0,1);
+
+			$pdf->Cell(10,5,'',0,1); // space
+
+			$pdf->SetFont('Arial','B',10);
+			$pdf->Cell(10,6,'Detail Penumpang ',0,1);
+
+			$pdf->SetFont('Arial','B',10);
+			$pdf->Cell(12,6,'Nama',1,0);
+			$pdf->Cell(30,6,'Jenis Kelamin',1,0);
+			$pdf->Cell(20,6,'Kategori',1,1);
+
+			$pdf->SetFont('Arial','',10);
+			foreach($data_penumpang as $p){
+				$pdf->Cell(12,6,$p->nama_penumpang,1,0);
+				$pdf->Cell(30,6,'Jenis Kelamin',1,0);
+				$pdf->Cell(20,6,'Dewasa',1,1);
+			}
+
+			$pdf->Cell(10,7,'',0,1);
+
+			
+			$pdf->SetFont('Arial','B',10);
+			$pdf->Cell(10,6,'Keberangkatan ',0,1);
+
+			$pdf->SetFont('Arial','B',10);
+			$pdf->Cell(42,6,'Tanggal Keberangkatan',1,0);
+			$pdf->Cell(60,6,'Rute',1,0);
+			$pdf->Cell(20,6,'Maskapai',1,0);
+			$pdf->Cell(15,6,'Harga',1,1);
+
+			$pdf->SetFont('Arial','',10);
+			foreach ($detail_tiket as $t) {
+				$pdf->Cell(42,6,$t->tgl_berangkat." ".$t->waktu,1,0);
+				$pdf->Cell(60,6,$t->kota_asal."(".$t->dari.") ke ".$t->kota_tujuan."(".$t->tujuan.")",1,0);
+				$pdf->Cell(20,6,'Citilink',1,0);
+				$pdf->Cell(15,6,$t->harga,1,1);
+			}
+
+			$pdf->Cell(10,7,'',0,1);
+			$pdf->Line(10, $pdf->GetY(), 140, $pdf->GetY());
+
+			// Memberikan space kebawah agar tidak terlalu rapat
+			$pdf->Cell(10,7,'',0,1);
+
+			$pdf->SetFont('Arial','B',10);
+			$pdf->Cell(15,6,"Total Harga : ".$detail_transaksi->total_hrg,0,1);
+
+			// $pdf->SetFont('Arial','B',10);
+			// $pdf->Cell(10,6,'NO',1,0);
+			// $pdf->Cell(43,6,'TANGGAL TRANSAKSI',1,0);
+			// $pdf->Cell(27,6,'KODE PNR',1,0);
+			// $pdf->Cell(15,6,'DARI',1,0);
+			// $pdf->Cell(18,6,'TUJUAN',1,0);
+			// $pdf->Cell(22,6,'MASKAPAI',1,0);
+			// $pdf->Cell(18,6,'TOTAL',1,0);
+			// $pdf->Cell(35,6,'TGL BERANGKAT',1,1);
+		
        
 
         // $pdf->SetFont('Arial','',10);
