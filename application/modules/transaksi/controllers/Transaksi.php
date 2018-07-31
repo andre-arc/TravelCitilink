@@ -4,15 +4,80 @@ class Transaksi extends MY_Admin {
 	
 	function __construct(){
 		parent::__construct();
-		$this->data['tpl']='single';
 		$this->load->model("M_transaksi");
 	}
 	
 	function index() {
+		$this->data['css'] =  css_asset('bootstrap-table.min.css','bootstrap-table');
+		$this->data['css'] .= css_asset('sweetalert2.min.css','limonte-sweetalert2');
+		$this->data['css'] .= css_asset('select2.min.css','select2');
+
+		$this->data['js']  =  js_asset('bootstrap-table.min.js','bootstrap-table');
+		$this->data['js']  .= js_asset('sweetalert2.min.js','limonte-sweetalert2');
+		$this->data['js']  .= js_asset('select2.full.min.js','select2');
+
+		$meta = $this->meta('transaksi/',true);
+		$this->data['auth_meta'] = $meta['act'];
+		$this->data['icon']      = $meta['icon'];
+		$this->data['title']     = $meta['title'];
+
 
 		$this->data['content']=$this->load->view('transaksi',$this->data,true);
 		$this->display($this->data);
 	}
+
+	public function get_json($id_transaksi=null)
+	{
+		$ret = array(
+			'total'=>0,
+			'rows'=>array()
+		);
+		header('Content-Type: application/json');
+		
+		$limit  = isset($_GET['limit']) ? $_GET['limit'] : 10;
+		$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
+		$search = (isset($_GET['search'])) ? $_GET['search'] : '';
+		$sort   = (isset($_GET['sort'])) ? $_GET['sort'] : 't.tgl_transaksi';
+		$order  = (isset($_GET['order'])) ? $_GET['order'] : 'desc';
+
+		$SQL_BASE='
+			select * from transaksi as t join orgs as o on o.id=t.id_mitra 
+		';
+		
+		if($search<>''){
+			//get where
+			$SQL_BASE.='WHERE ';
+			$SQL_BASE.='t.id_transaksi like "%'.$search.'%" OR ';
+			$SQL_BASE.='t.id_tiket like "%'.$search.'%" OR ';
+			$SQL_BASE.='t.tgl_transaksi like "%'.$search.'%" OR ';
+			$SQL_BASE.='t.total_hrg like "%'.$search.'%" OR ';
+			
+			$ls_data=$this->db->query($SQL_BASE)->result_array();
+			$ret['total'] = count($ls_data);
+						
+			//get where with limit
+			$SQL=($sort) ? $SQL_BASE.' ORDER BY '.$sort.' '.$order : $SQL_BASE;
+			$SQL.=' LIMIT '.$offset.','.$limit;
+			$ls_data_limit=$this->db->query($SQL)->result_array();
+			$ret['rows'] = $ls_data_limit;
+
+		}else{
+            if($id_transaksi != null){
+                $SQL_BASE.='WHERE id_transaksi="'.$id_transaksi.'"';
+            }
+			//get all
+			$ls_data=$this->db->query($SQL_BASE)->result_array();
+			$ret['total'] = count($ls_data);
+			//get limit
+			$SQL=($sort) ? $SQL_BASE.' ORDER BY '.$sort.' '.$order : $SQL_BASE;
+			$SQL.=' LIMIT '.$offset.','.$limit;
+			$ls_data_limit=$this->db->query($SQL)->result_array();
+			$ret['rows'] = $ls_data_limit;
+		}
+		
+		echo json_encode($ret);
+	}
+    
 
 	function checkout(){
 			$this->data['css'] = css_asset('style.css', '');
@@ -198,11 +263,11 @@ class Transaksi extends MY_Admin {
 		$this->data['data_penumpang'] = $this->M_transaksi->getDetailPenumpang($id_transaksi);
 
 		//load mPDF library
-		$this->load->library('m_pdf');
+		$this->load->library('pdf');
 		 
 
 		// $html=$this->load->view('print', $this->data,true);
-		$this->load->view('print', $this->data);
+		// $this->load->view('print', $this->data);
 
 		//this the the PDF filename that user will get to download
 		// $pdfFilePath ='Tiket.pdf';
@@ -214,6 +279,50 @@ class Transaksi extends MY_Admin {
 		// $pdf->WriteHTML($html);
 		// //offer it to user via browser download! (The PDF won't be saved on your server HDD)
 		// $pdf->Output($pdfFilePath, "D");
+		$pdf = new FPDF('l','mm','A5');
+		$pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial','B',16);
+        // mencetak string 
+        $pdf->Cell(190,7,'PT. Ubudiyah Aviation Indonesia Banda Aceh',0,1,'C');
+        $pdf->SetFont('Arial','B',12);
+        $pdf->Cell(190,7,' TIKET',0,1,'C');
+
+        // Memberikan space kebawah agar tidak terlalu rapat
+        $pdf->Cell(10,7,'',0,1);
+
+        $pdf->SetFont('Arial','B',10);
+        $pdf->Cell(10,6,'NO',1,0);
+        $pdf->Cell(43,6,'TANGGAL TRANSAKSI',1,0);
+        $pdf->Cell(27,6,'KODE PNR',1,0);
+        $pdf->Cell(15,6,'DARI',1,0);
+        $pdf->Cell(18,6,'TUJUAN',1,0);
+        $pdf->Cell(22,6,'MASKAPAI',1,0);
+        $pdf->Cell(18,6,'TOTAL',1,0);
+        $pdf->Cell(35,6,'TGL BERANGKAT',1,1);
+       
+
+        // $pdf->SetFont('Arial','',10);
+
+        // $query = $this->db->query("SELECT transaksi.tgl_transaksi,transaksi.id_transaksi as id_tran,kode_pnr,tgl_berangkat,waktu,dari,tujuan,maskapai,harga FROM transaksi,detail_transaksi,orgs,tiket where transaksi.id_mitra=orgs.id AND tiket.id_tiket=detail_transaksi.id_tiket AND transaksi.id_transaksi=detail_transaksi.id_transaksi AND orgs.id='$filter' AND tgl_transaksi between '$tgl_mulai' and '$tgl_akhir' ORDER BY id_tran DESC")->result();
+
+
+
+
+        // foreach ($query as $row){
+        //     $pdf->Cell(10,6,$row->id_tran,1,0);
+        //     $pdf->Cell(43,6,$row->tgl_transaksi,1,0);
+        //     $pdf->Cell(27,6,$row->kode_pnr,1,0);
+        //     $pdf->Cell(15,6,$row->dari,1,0);
+        //     $pdf->Cell(18,6,$row->tujuan,1,0);
+        //     $pdf->Cell(22,6,$row->maskapai,1,0);
+        //     $pdf->Cell(18,6,$row->harga,1,0);
+        //     $pdf->Cell(35,6,$row->tgl_berangkat,1,0);   
+        // }
+
+        $pdf->Output();
+
+
 	}
 	
 }
