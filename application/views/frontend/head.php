@@ -10,9 +10,9 @@
   <meta name="description" content="">
   <meta name="author" content="">  
   <title>
-		<?php echo $MYCFG['GENERAL']['APP_NAME'].'-'.$MYCFG['GENERAL']['APP_NAME_LONG'].' Ver. '.$MYCFG['GENERAL']['VERSION'];?>
+		Selamat Datang di Aplikasi Travel Ubudiyah
 	</title>
-	<link rel="icon" href="<?php echo image_asset_url($MYCFG['GENERAL']['APP_NAME_LOGO']);?>" />		
+		
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -23,9 +23,7 @@
 	.content-wrapper {
     min-height: 70% !important;	
 	}
-	.bg-batik{
-		background:url(<?php echo base_url('assets/image/body-bg8.png');?>)
-	}
+	
 	</style>
 	
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>

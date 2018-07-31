@@ -15,11 +15,13 @@
       </div>
       <div class="row">
         <div class="col-xs-8">
-					<!-- <a href="<?php //echo site_url('acl/forgot/');?>" class="btn btn-info btn-flat" tabindex="4">
-						<i class="fa fa-question-circle"></i>&nbsp;Lupa Password
-					</a> -->
+
+					<a href="<?php echo site_url('acl/register/');?>" class="btn btn-success btn-flat" tabindex="4">
+						<i class="fa fa-question-circle"></i>&nbsp;Register
+					</a>
         </div>
         <div class="col-xs-4">
+        	
           <button type="submit" class="btn btn-success btn-block btn-flat" tabindex="3">
 						<i class="fa fa-power-off"></i>&nbsp;Login
 					</button>
