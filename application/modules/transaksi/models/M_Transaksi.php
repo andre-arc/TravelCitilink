@@ -54,11 +54,14 @@ class M_transaksi extends CI_Model {
         return $result->jml_penumpang;
     }
 
-    // public function getCustomer(){
-    //     $this->db->select('c.*')
-    //              ->from('customer as c')
-    //              ->join
-    // }
+    public function getCustomer($id_transaksi){
+        $this->db->select('c.*')
+                 ->from('transaksi as t')
+                 ->join('customer as c', 't.id_customer=c.id_customer', 'left')
+                 ->where('t.id_transaksi', $id_transaksi);
+        
+         return $this->db->get()->row();
+    }
 
 
     public function getCountry(){
