@@ -284,16 +284,20 @@ class Transaksi extends MY_Admin {
 
 			$pdf->AddPage();
 			// setting jenis font yang akan digunakan
-			$pdf->SetFont('Arial','B',16);
+			$pdf->Image('https://cdn.pixabay.com/photo/2015/07/09/13/05/citilink-837863_960_720.png',10,6,30,0,'PNG');
+			$pdf->SetFont('Arial','B',14);
 			// mencetak string 
-			$pdf->Cell(150,7,'PT. CitiLink Indonesia',0,1,'C');
-			$pdf->SetFont('Arial','B',12);
-			$pdf->Cell(150,7,' TIKET',0,1,'C');
+			$pdf->Cell(150,7,'PT.Ubudiyah Aviation Indonesia',0,1,'C');
+			$pdf->SetFont('Arial','B',10);
+			$pdf->Cell(150,5,'E-Tiket',0,1,'C');
 
 			$pdf->Cell(10,5,'',0,1); // space
 
 			$pdf->SetFont('Arial','B',10);
+
 			$pdf->Cell(10,6,'Detail Pemesanan ',0,1);
+			$pdf->SetFont('Arial','',10);
+			$pdf->Cell(10,6,'Kode : UB-BTJ00 '.$detail_transaksi->id_transaksi,0,1);
 			$pdf->SetFont('Arial','',10);
 			$pdf->Cell(10,6,'Tanggal Pemesanan: '.$detail_transaksi->tgl_transaksi,0,1);
 			$pdf->Cell(10,6,'Status: Konfirm',0,1);
@@ -323,14 +327,14 @@ class Transaksi extends MY_Admin {
 
 			$pdf->SetFont('Arial','B',10);
 			$pdf->Cell(42,6,'Tanggal Keberangkatan',1,0);
-			$pdf->Cell(60,6,'Rute',1,0);
+			$pdf->Cell(55,6,'Rute',1,0);
 			$pdf->Cell(20,6,'Maskapai',1,0);
 			$pdf->Cell(15,6,'Harga',1,1);
 
 			$pdf->SetFont('Arial','',10);
 			foreach ($detail_tiket as $t) {
 				$pdf->Cell(42,6,$t->tgl_berangkat." ".$t->waktu,1,0);
-				$pdf->Cell(60,6,$t->kota_asal."(".$t->dari.") ke ".$t->kota_tujuan."(".$t->tujuan.")",1,0);
+				$pdf->Cell(55,6,$t->kota_asal."(".$t->dari.") - ".$t->kota_tujuan."(".$t->tujuan.")",1,0);
 				$pdf->Cell(20,6,'Citilink',1,0);
 				$pdf->Cell(15,6,$t->harga,1,1);
 			}
@@ -342,7 +346,7 @@ class Transaksi extends MY_Admin {
 			$pdf->Cell(10,7,'',0,1);
 
 			$pdf->SetFont('Arial','B',10);
-			$pdf->Cell(15,6,"Total Harga : ".$detail_transaksi->total_hrg,0,1);
+			$pdf->Cell(15,6,"Total Harga : Rp.".$detail_transaksi->total_hrg,0,1);
 
 			// $pdf->SetFont('Arial','B',10);
 			// $pdf->Cell(10,6,'NO',1,0);
@@ -354,8 +358,12 @@ class Transaksi extends MY_Admin {
 			// $pdf->Cell(18,6,'TOTAL',1,0);
 			// $pdf->Cell(35,6,'TGL BERANGKAT',1,1);
 		
-       
+       	// Memberikan space kebawah agar tidak terlalu rapat
+			$pdf->Cell(10,7,'',0,1);
 
+		//	$pdf->SetFont('Arial','B',10);
+
+			//$pdf->Cell(15,6,"BARANG BERBAHAYA ");
         // $pdf->SetFont('Arial','',10);
 
         // $query = $this->db->query("SELECT transaksi.tgl_transaksi,transaksi.id_transaksi as id_tran,kode_pnr,tgl_berangkat,waktu,dari,tujuan,maskapai,harga FROM transaksi,detail_transaksi,orgs,tiket where transaksi.id_mitra=orgs.id AND tiket.id_tiket=detail_transaksi.id_tiket AND transaksi.id_transaksi=detail_transaksi.id_transaksi AND orgs.id='$filter' AND tgl_transaksi between '$tgl_mulai' and '$tgl_akhir' ORDER BY id_tran DESC")->result();
