@@ -153,14 +153,14 @@
 				valign: 'middle'
 			},
 			{
-				field: 'no_kk',
-				title: 'No Kartu Keluarga',
+				field: 'nama_customer',
+				title: 'Nama Customer',
 				halign:'center',
 				sortable:true
 			},
 			{
-				field: 'nm_pelanggan',
-				title: 'Nama pelanggan',
+				field: 'jenis_kelamin',
+				title: 'Jenis Kelamin',
 				halign:'center',
 				sortable:true
 			},
@@ -171,29 +171,18 @@
 				sortable:true
 			},
 			{
-				field: 'nik',
-				title: 'Nik',
+				field: 'alamat',
+				title: 'Alamat',
 				halign:'center',
 				sortable:true
 			},
 			{
-				field: 'kategori',
-				title: 'Kategori',
-				halign:'center',
-				sortable:true
-			},
-			{
-				field: 'keterangan',
-				title: 'Keterangan',
-				halign:'center',
-				sortable:true
-			},
-			{
-				field: 'alamat_pelanggan',
-				title: 'Alamat pelanggan',
+				field: 'email',
+				title: 'email',
 				halign:'center',
 				sortable:true
 			}
+		
 			],
 			onLoadSuccess:function(e){
 				$('#total_record').html(e.total);

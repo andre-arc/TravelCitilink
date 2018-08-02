@@ -27,7 +27,7 @@ class Pembeli extends MY_Admin {
 		$this->display($this->data);
 	}
 
-	public function get_json($kategori=null)
+	public function get_json($id_customer=null)
 	{
 		$ret = array(
 			'total'=>0,
@@ -38,21 +38,21 @@ class Pembeli extends MY_Admin {
 		$limit  = isset($_GET['limit']) ? $_GET['limit'] : 10;
 		$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
 		$search = (isset($_GET['search'])) ? $_GET['search'] : '';
-		$sort   = (isset($_GET['sort'])) ? $_GET['sort'] : 'kategori';
+		$sort   = (isset($_GET['sort'])) ? $_GET['sort'] : 'id_customer';
 		$order  = (isset($_GET['order'])) ? $_GET['order'] : 'asc';
 
 		$SQL_BASE='
 			select *
-			from tbl_pelanggan
+			from customer
 		';
 		
 		if($search<>''){
 			//get where
 			$SQL_BASE.='WHERE ';
-			$SQL_BASE.='nm_pelanggan like "%'.$search.'%" OR ';
-			$SQL_BASE.='no_kk like "%'.$search.'%" OR ';
-			$SQL_BASE.='keterangan like "%'.$search.'%" OR ';
-			$SQL_BASE.='kategori like "%'.$search.'%" OR ';
+			$SQL_BASE.='nama_customer like "%'.$search.'%" OR ';
+			$SQL_BASE.='hp like "%'.$search.'%" OR ';
+			$SQL_BASE.='alamat like "%'.$search.'%" OR ';
+			$SQL_BASE.='email like "%'.$search.'%" OR ';
 			
 			$ls_data=$this->db->query($SQL_BASE)->result_array();
 			$ret['total'] = count($ls_data);
@@ -64,8 +64,8 @@ class Pembeli extends MY_Admin {
 			$ret['rows'] = $ls_data_limit;
 
 		}else{
-            if($kategori != null){
-                $SQL_BASE.='WHERE kategori="'.$kategori.'"';
+            if($id_customer != null){
+                $SQL_BASE.='WHERE id_customer="'.$id_customer.'"';
             }
 			//get all
 			$ls_data=$this->db->query($SQL_BASE)->result_array();
