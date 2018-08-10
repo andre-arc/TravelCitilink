@@ -82,6 +82,14 @@ class Tiket extends MY_Admin {
 		
 		echo json_encode($ret);
 	}
+
+	public function cek_bandara($id){
+		$this->db->select('nm_bandara')
+				 ->from('bandara')
+				 ->where('kode', $id);
+
+		echo json_encode($this->db->get()->row());
+	}
     
     public function getpembeli($id){
        $ret = array();

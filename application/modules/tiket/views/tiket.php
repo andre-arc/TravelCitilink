@@ -60,10 +60,10 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Dari</label>
-								<select name="dari" class="form-control select" style="width:100%;" id="dari" required>
+								<select name="dari" class="form-control select" style="width:100%;" id="dari"  required>
 								<option value="0">-- Pilih Bandara --</option>
 	                    	<?php foreach($bandara->result() as $row):?>
-	                    		<option value="<?php echo $row->kode;?>"><?php echo $row->nm_bandara;?>[<?php echo $row->kode;?>]</option>
+	                    		<option value="<?php echo $row->kode;?>"><?php echo $row->nm_bandara;?> (<?php echo $row->kode;?>)</option>
 	                    	<?php endforeach;?>
 	                    </select>
 							</div>
@@ -74,12 +74,27 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Tujuan</label>
-								<select name="tujuan" class="form-control select" style="width:100%;" id="tujuan" required>
+								<select name="tujuan" class="form-control select" style="width:100%;" id="tujuan"  required>
 								<option value="0">-- Pilih Bandara --</option>
 	                    	<?php foreach($bandara->result() as $row):?>
-	                    		<option value="<?php echo $row->kode;?>"><?php echo $row->nm_bandara;?>[<?php echo $row->kode;?>]</option>
+	                    		<option value="<?php echo $row->kode;?>"><?php echo $row->nm_bandara;?> (<?php echo $row->kode;?>)</option>
 	                    	<?php endforeach;?>
 	                    </select>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">bandara asal</label>
+								<input type="text" id="nm_asal" name="nm_asal"  class="form-control input-sm" value="" readonly/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+							<label class="control-label">bandara tujuan</label>
+								<input type="text" id="nm_tujuan" name="nm_tujuan"  class="form-control input-sm" value="" readonly/>
 							</div>
 						</div>
 					</div>
@@ -318,6 +333,38 @@
 					$("#cek-nama").html("");
 				}
 			});
+
+			$('#dari').change(function () {
+				var kd_bandara   = $('#dari').val() || null;
+				var url  = SITE_URL+"/tiket/cek_bandara/"+ kd_bandara;
+
+				$.ajax({
+						type: "GET",
+						url: url,
+						dataType: "json",
+						success: function(data){
+							$("#nm_asal").val(data.nm_bandara);
+						}
+					});
+			});
+
+			
+			$('#tujuan').change(function () {
+				var kd_bandara   = $('#tujuan').val() || null;
+				var url  = SITE_URL+"/tiket/cek_bandara/"+ kd_bandara;
+
+				$.ajax({
+						type: "GET",
+						url: url,
+						dataType: "json",
+						success: function(data){
+							$("#nm_tujuan").val(data.nm_bandara);
+						}
+					});
+			});
+
+			
+
 		<?php endif;?>
 
 		<?php if($auth_meta['del']):?>
