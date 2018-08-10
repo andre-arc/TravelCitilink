@@ -58,30 +58,10 @@ class Konfirmasi extends MY_Admin {
 		$limit=isset($_GET['limit']) ? $_GET['limit'] : 10;
 		$offset=isset($_GET['offset']) ? $_GET['offset'] : 0;
 		$search=(isset($_GET['search'])) ? $_GET['search'] : '';
-		$sort = (isset($_GET['sort'])) ? $_GET['sort'] : 'email,username';
+		$sort = (isset($_GET['sort'])) ? $_GET['sort'] : 'atas_nama,nominal';
 		$order = (isset($_GET['order'])) ? $_GET['order'] : 'asc';
 
-		$SQL_BASE="SELECT * FROM (
-		SELECT 
-			a2.*,  
-			GROUP_CONCAT(orgs.name SEPARATOR ', ') AS orgs, 
-			GROUP_CONCAT(orgs.id SEPARATOR ', ') as orgs_id 
-		FROM (
-			SELECT 
-			users.id,
-			users.username,
-			users.email, 
-			users.first_name,
-			users.last_name,  
-			GROUP_CONCAT(groups.name SEPARATOR ', ') AS groups,
-			GROUP_CONCAT(groups.id SEPARATOR ', ') as groups_id 
-			FROM users
-			LEFT JOIN users_groups ON users_groups.user_id = users.id
-			LEFT JOIN groups ON users_groups.group_id = groups.id
-			GROUP BY users.id) AS a2
-			LEFT JOIN users_orgs ON users_orgs.user_id = a2.id
-			LEFT JOIN orgs ON orgs.id = users_orgs.org_id
-			GROUP BY a2.id) AS a1 ";
+		$SQL_BASE="SELECT * from konfirmasi_pembayaran";
 		
 		if($search<>''){
 			//get where
@@ -112,72 +92,34 @@ class Konfirmasi extends MY_Admin {
 	}
 	
 	function add(){
+		$ret = array(
+			'success' => false,
+			'msg' 	=>	'Gagal Menambah Data');
+	
+	
+	$data['bank_tujuan'] =$_POST['bank_tujuan'];
+	$data['bank_anda']	= $_POST['bank_anda'];
+	$data['atas_nama']	= $_POST['atas_nama'];
+	$data['metode']		= $_POST['metode'];
+	$data['nominal']	= $_POST['nominal'];
+	$data['tgl_tranfers']= $_POST['tgl_tranfers'];
+	$data['id_transaksi'] = $_POST['id_transaksi'];
+	//$data['status']		= $_POST['status'];
+	//$data['id_users']	= $_POST['id_users'];
 
-		$this->load->library('form_validation');
+	$this->db->insert('konfirmasi_pembayaran', $data);
 
+	$last_insert_id = $this->db->insert_id();
+
+	if($last_insert_id){
 		$ret=array(
-			'resp'=>false,
-			'message'=>'Gagal Menambah Data'
-		);
+			'success'=>true,
+			'msg' =>'Berhasil Menambah data');
 
-		$this->form_validation->set_rules('first_name','First name','trim');
-  		$this->form_validation->set_rules('last_name','Last name','trim');
-  		$this->form_validation->set_rules('company','Company','trim');
-  		$this->form_validation->set_rules('phone','Phone','trim');
-  		$this->form_validation->set_rules('username','Username','trim|required|is_unique[users.username]');
-  		$this->form_validation->set_rules('email','Email','trim|required|valid_email|is_unique[users.email]');
-  		$this->form_validation->set_rules('password','Password','required');
-  		$this->form_validation->set_rules('groups[]','Groups','required|integer');
-  		$this->form_validation->set_rules('orgs[]','Orgs','required|integer');
-		
-		if($this->form_validation->run()===FALSE){
-			$ret=array(
-				'resp'=>false,
-				'message'=> validation_errors()
-			);
-		}else{
-			$username=$_POST['username'];
-			$password=$_POST['password'];
-			$email   =$_POST['email'];
-			$group_ids = $this->input->post('groups');
-			$orgs = $this->input->post('orgs');
-
-			$additional_data = array(
-      			'first_name' => $this->input->post('first_name'),
-      			'last_name' => $this->input->post('last_name'),
-      			'company' => $this->input->post('company'),
-     			'phone' => $this->input->post('phone')
-    		);
-
-
-			if ($this->ion_auth->register($username, $password, $email, $additional_data,$group_ids)) {
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				
-				$user_id=$this->getLastInserted('users','id');
-				if (!empty($orgs)){
-					foreach ($orgs as $org_id){
-						$data['user_id']=$user_id;
-						$data['org_id']=$org_id;
-
-						$this->db->insert('users_orgs', $data); 
-					}
-				}
-
-				$ret=array(
-					'resp'=>true,
-					'message'=>'Berhasil Menambah Data'
-				);
-			}else{
-				$ret=array(
-					'resp'=>true,
-					'message'=> $this->ion_auth->errors()
-				);
-			}
-		}
-		echo json_encode($ret);	
-
-		
 	}
+
+	echo json_encode($ret);
+}
 
 	function getLastInserted($table, $id) {
 		$this->db->select_max($id);

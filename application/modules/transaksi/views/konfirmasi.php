@@ -58,14 +58,14 @@
 						<div class="form-group">
 							<label>Bank Anda</label>
 							<select name="bank_anda" class="form-control input-sm">
-								<option value="bca">BCA</option>
-								<option value="">MANDIRI</option>
+								<option value="BCA">BCA</option>
+								<option value="MANDIRI">MANDIRI</option>
 								
 							</select>
 						</div>
 						<div class="form-group">
 							<label>Rekening Atas Nama</label>
-							<input type="password" name="atas_nama" id="atas_nama" class="form-control" />
+							<input type="text" name="atas_nama" id="atas_nama" class="form-control" />
 						</div>
 					</div>
 					<div class="col-md-6" >
@@ -78,8 +78,8 @@
 						<div class="form-group">
 							<label>Metode</label>
 							<select name="metode" class="form-control input-sm">
-								<option value="">ATM</option>
-								<option value="">SMS BANKING</option>
+								<option value="ATM">ATM</option>
+								<option value="SMS BANKING">SMS BANKING</option>
 
 								
 							</select>
@@ -98,10 +98,10 @@
 					<div class="col-md-12">
 					<div class="form-group" id="cgroups">
 							<label>Pilih Transaksi</label>
-							<select name="metode" class="form-control input-sm">
+							<select name="id_transaksi" class="form-control input-sm">
 							<option value="0">-- Pilih Bandara --</option>
 	                    	<?php foreach($cabang->result() as $row):?>
-	                    		<option value="<?php echo $row->id_transaksi;?>">[<?php echo $row->kode_pnr;?>]</option>
+	                    		<option value="<?php echo $row->id_transaksi;?>">[<?php echo $row->kode_pnr;?>] <?php echo $row->dari; ?> -<?php echo $row->tujuan; ?> (a/n <?php echo $row->nama_customer; ?>) </option>
 	                    	<?php endforeach;?>
 	                    </select>
       					</div>
@@ -154,7 +154,7 @@
 		$('#grid_org').bootstrapTable({
 				toolbar:'#toolbar',
 				search:true,
-				url: SITE_URL+'/acl/users/get_json/',
+				url: SITE_URL+'/transaksi/konfirmasi/get_json/',
 				singleSelect:false,
 				pageSize: 10,
 				pageList:"[5, 10, 20, 50, 100, 200]" ,
@@ -169,53 +169,28 @@
 						valign:'center',
 						title: 'ID'
 				}, {
-						field: 'username',
-						title: 'USERNAME',
+						field: 'tgl_tranfers',
+						title: 'Tanggal Tranfers',
 						valign:'center',
 						sortable:true
 
 				}, {
-						field: 'email',
-						valign:'center',
+						field: 'bank_tujuan',
+						valign:'Bank Tujuan',
 						title: 'EMAIL',
 						sortable:true
 				}, {
-						field: 'first_name',
-						title: 'FIRST NAME',
+						field: 'bank_anda',
+						title: 'Bank Anda',
 						valign:'center'
 				}, {
-						field: 'last_name',
-						title: 'LAST NAME',
+						field: 'metode',
+						title: 'Metode',
 						valign:'center'
 				}, {
-						field: 'groups',
-						title: 'GROUPS',
+						field: 'nominal',
+						title: 'Nominal',
 						valign:'center'
-				}, {
-						field: 'orgs',
-						title: 'ORGS',
-						valign:'center'
-				}
-				, {
-						field: 'orgs_id',
-						title: 'ORGS_ID',
-						valign:'center',
-						visible: false
-				}, {
-						field: 'groups_id',
-						title: 'GROUPS_id',
-						valign:'center',
-						visible: false
-				}, {
-						field: 'company',
-						title: 'company',
-						valign:'center',
-						visible: false
-				}, {
-						field: 'phone',
-						title: 'phone',
-						valign:'center',
-						visible: false
 				}
 
 				],
@@ -299,11 +274,13 @@
 					
 					$.ajax({
 						type: "POST",
-						url: SITE_URL+'/acl/users/del/',
+						url: SITE_URL+'/transaksi/konfirmasi/del/',
 						dataType: "json",
 						data: mydata,
 						success: function(data){
-							if(data.resp){
+
+							
+							if(data.success){
 								alert("Selamat,\n\r"+data.message);
 								//location.reload();						
 								$('#grid_org').bootstrapTable('refresh');
@@ -319,7 +296,7 @@
 	
 		$('#frm-org-mdl').submit(function(e){
 			var form_data=$("#frm-org-mdl").serialize();
-			var url_form = ($('#act').val()=='edit') ? SITE_URL+"/acl/users/edit/" : SITE_URL+"/acl/users/add/";
+			var url_form = ($('#act').val()=='edit') ? SITE_URL+"/transaksi/konfirmasi/edit/" : SITE_URL+"/transaksi/konfirmasi/add/";
 			
 			$.ajax({
 					type: "POST",
@@ -328,7 +305,7 @@
 					data: form_data,
 					success: function(data){
 						// alert(data);
-						if(data.resp){
+						if(data.success){
 							alert("Selamat,\n\r"+data.message);
 							$('#mdl_org').modal('hide');
 							//location.reload();
