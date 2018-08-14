@@ -153,14 +153,14 @@
 				valign: 'middle'
 			},
 			{
-				field: 'no_kk',
-				title: 'No Kartu Keluarga',
+				field: 'id_customer',
+				title: 'No Customer',
 				halign:'center',
 				sortable:true
 			},
 			{
-				field: 'nm_pelanggan',
-				title: 'Nama pelanggan',
+				field: 'nama_customer',
+				title: 'Nama Customer',
 				halign:'center',
 				sortable:true
 			},
@@ -171,26 +171,8 @@
 				sortable:true
 			},
 			{
-				field: 'nik',
-				title: 'Nik',
-				halign:'center',
-				sortable:true
-			},
-			{
-				field: 'kategori',
-				title: 'Kategori',
-				halign:'center',
-				sortable:true
-			},
-			{
-				field: 'keterangan',
-				title: 'Keterangan',
-				halign:'center',
-				sortable:true
-			},
-			{
-				field: 'alamat_pelanggan',
-				title: 'Alamat pelanggan',
+				field: 'email',
+				title: 'Email',
 				halign:'center',
 				sortable:true
 			}
@@ -204,7 +186,7 @@
 		<?php if($auth_meta['add']):?>
 		$('#btn-add').click(function(e){
 			$('#frm-wil-gp').trigger("reset");
-            $('#no_kk').val('').trigger("change");
+            $('#id_customer').val('').trigger("change");
 			$('.modal-header').removeClass().addClass("modal-header").addClass("mybg-primary");
 			$('#title_act').html('<i class="fa fa-plus-circle"></i>&nbsp;Form Add');
 			$('#act').val('add');

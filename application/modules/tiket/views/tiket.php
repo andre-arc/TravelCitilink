@@ -349,6 +349,7 @@
 			});
 
 			
+			
 			$('#tujuan').change(function () {
 				var kd_bandara   = $('#tujuan').val() || null;
 				var url  = SITE_URL+"/tiket/cek_bandara/"+ kd_bandara;
@@ -363,7 +364,6 @@
 					});
 			});
 
-			
 
 		<?php endif;?>
 
