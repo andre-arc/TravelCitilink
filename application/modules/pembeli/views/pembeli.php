@@ -176,6 +176,7 @@
 				halign:'center',
 				sortable:true
 			}
+		
 			],
 			onLoadSuccess:function(e){
 				$('#total_record').html(e.total);

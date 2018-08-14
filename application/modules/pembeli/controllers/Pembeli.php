@@ -27,7 +27,7 @@ class Pembeli extends MY_Admin {
 		$this->display($this->data);
 	}
 
-	public function get_json($kategori=null)
+	public function get_json($id_customer=null)
 	{
 		$ret = array(
 			'total'=>0,
@@ -64,8 +64,8 @@ class Pembeli extends MY_Admin {
 			$ret['rows'] = $ls_data_limit;
 
 		}else{
-            if($kategori != null){
-                $SQL_BASE.='WHERE kategori="'.$kategori.'"';
+            if($id_customer != null){
+                $SQL_BASE.='WHERE id_customer="'.$id_customer.'"';
             }
 			//get all
 			$ls_data=$this->db->query($SQL_BASE)->result_array();
