@@ -227,7 +227,7 @@
 			},
 			{
 				field: 'jml_seat',
-				title: 'Sisa Seat',
+				title: 'Sisa dari 178 Seat',
 				halign:'center',
 				sortable:true
 			},
