@@ -153,14 +153,14 @@
 				valign: 'middle'
 			},
 			{
-				field: 'nama_customer',
-				title: 'Nama Customer',
+				field: 'id_customer',
+				title: 'No Customer',
 				halign:'center',
 				sortable:true
 			},
 			{
-				field: 'jenis_kelamin',
-				title: 'Jenis Kelamin',
+				field: 'nama_customer',
+				title: 'Nama Customer',
 				halign:'center',
 				sortable:true
 			},
@@ -171,14 +171,8 @@
 				sortable:true
 			},
 			{
-				field: 'alamat',
-				title: 'Alamat',
-				halign:'center',
-				sortable:true
-			},
-			{
 				field: 'email',
-				title: 'email',
+				title: 'Email',
 				halign:'center',
 				sortable:true
 			}
@@ -193,7 +187,7 @@
 		<?php if($auth_meta['add']):?>
 		$('#btn-add').click(function(e){
 			$('#frm-wil-gp').trigger("reset");
-            $('#no_kk').val('').trigger("change");
+            $('#id_customer').val('').trigger("change");
 			$('.modal-header').removeClass().addClass("modal-header").addClass("mybg-primary");
 			$('#title_act').html('<i class="fa fa-plus-circle"></i>&nbsp;Form Add');
 			$('#act').val('add');
@@ -298,7 +292,7 @@
 						type: "POST",
 						url: SITE_URL+"/pembeli/act_del/",
 						dataType: "json",
-						data: {id_pelanggan:rowSel[0].id_pelanggan},
+						data: {id_customer:rowSel[0].id_customer},
 						success: function(data){
 							if(data.success){
 								swal('Selamat', data.msg, 'success');

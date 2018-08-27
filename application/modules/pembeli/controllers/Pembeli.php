@@ -38,7 +38,7 @@ class Pembeli extends MY_Admin {
 		$limit  = isset($_GET['limit']) ? $_GET['limit'] : 10;
 		$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
 		$search = (isset($_GET['search'])) ? $_GET['search'] : '';
-		$sort   = (isset($_GET['sort'])) ? $_GET['sort'] : 'id_customer';
+		$sort   = (isset($_GET['sort'])) ? $_GET['sort'] : 'email';
 		$order  = (isset($_GET['order'])) ? $_GET['order'] : 'asc';
 
 		$SQL_BASE='
@@ -51,8 +51,8 @@ class Pembeli extends MY_Admin {
 			$SQL_BASE.='WHERE ';
 			$SQL_BASE.='nama_customer like "%'.$search.'%" OR ';
 			$SQL_BASE.='hp like "%'.$search.'%" OR ';
-			$SQL_BASE.='alamat like "%'.$search.'%" OR ';
-			$SQL_BASE.='email like "%'.$search.'%" OR ';
+			$SQL_BASE.='email like "%'.$search.'%"';
+			
 			
 			$ls_data=$this->db->query($SQL_BASE)->result_array();
 			$ret['total'] = count($ls_data);
@@ -86,8 +86,8 @@ class Pembeli extends MY_Admin {
         
         $SQL_BASE='
 			select *
-			from tbl_pelanggan
-            where id_pelanggan="'.$id.'";
+			from customer
+            where id_customer="'.$id.'";
 		';
         
         $ls_data=$this->db->query($SQL_BASE)->result_object();
@@ -102,7 +102,7 @@ class Pembeli extends MY_Admin {
 			'msg'=>'Gagal Menambah Data'
 		);
 		
-		$this->load->library('ciqrcode');
+		
 		$data['nm_pelanggan']=$_POST['nm_pelanggan'];
 		$data['no_kk']=$_POST['no_kk'];
 		$data['nik']=$_POST['nik'];
@@ -178,9 +178,9 @@ class Pembeli extends MY_Admin {
 			'msg'=>'Gagal Menghapus Data'
 		);
 
-		$id=$_POST['id_pelanggan'];
+		$id=$_POST['id_customer'];
 		//delete records
-		$this->db->delete('tbl_pelanggan', array('id_pelanggan' => $id));
+		$this->db->delete('customer', array('id_customer' => $id));
 
 		if ($this->db->affected_rows()) {
 			$ret=array(
