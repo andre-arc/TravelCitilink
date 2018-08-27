@@ -194,6 +194,7 @@
 			}
 			],
 			onLoadSuccess:function(e){
+				// alert(JSON.stringify($('#grid_kec').bootstrapTable('getData')));
 				$('#total_record').html(e.total);
 				$('.fixed-table-pagination').addClass('panel-footer clearfix bg-gray-active');
 			}

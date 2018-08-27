@@ -95,7 +95,17 @@ class Transaksi extends MY_Admin {
 			$this->data['detail_tiket'] = $this->M_transaksi->getDetailTiket($tiket);
 			$this->data['kewarganegaraan'] = $this->M_transaksi->getCountry();
 			$this->data['content']=$this->load->view('checkout',$this->data,true);
-			$this->display($this->data);
+
+			$this->db->where('id', $this->session->userdata('user_org'));
+			$org = $this->db->get('orgs')->row();
+
+			if($this->data['detail_tiket'][0]->harga > $org->jml_kas){
+				echo "<script>alert('Kas Tidak Mencukupi')</script>";
+				redirect('transaksi/konfirmasi');
+			}else{
+				$this->display($this->data);
+			}
+			// 
 	}
 
 	function final(){
@@ -188,7 +198,7 @@ class Transaksi extends MY_Admin {
 				$status &= $this->db->insert_batch('detail_transaksi', $detail_transaksi);
 
 				if($status){
-					foreach ($detail_tiket as $tiket) {
+					foreach ($detail_tiket as $t) {
 						$buyer = $this->M_transaksi->getBuyer($t->id_tiket);
 						$tiket = array('jml_seat' => $t->jml_seat-$jml_penumpang);
 
@@ -199,9 +209,8 @@ class Transaksi extends MY_Admin {
 							case 90: $tiket['harga'] = $t->harga+150000; break;
 							case 120: $tiket['harga'] = $t->harga+150000; break;
 							}
-					
-					$status &= $this->db->update('tiket', $tiket, array('id_tiket' => $t->id_tiket));	
-							
+
+					$status &= $this->db->update('tiket', $tiket, array('id_tiket' => $t->id_tiket));
 					}	
 				}
 
@@ -216,13 +225,12 @@ class Transaksi extends MY_Admin {
 					);
 				}	
 
-
-				$status &= $this->db->insert_batch('penumpang', $penumpang);
-
+				
+				$status = $this->db->insert_batch('penumpang', $penumpang);
+				
 				//echo $this->db->last_query();
 			}
 		}
-		
 		if($status){
 			redirect('transaksi/detail/'.$id_transaksi);
 		}
@@ -339,7 +347,7 @@ class Transaksi extends MY_Admin {
 				$pdf->Cell(42,6,$t->tgl_berangkat." ".$t->waktu,1,0);
 				$pdf->Cell(55,6,$t->kota_asal."(".$t->dari.") - ".$t->kota_tujuan."(".$t->tujuan.")",1,0);
 				$pdf->Cell(20,6,'Citilink',1,0);
-				$pdf->Cell(15,6,$detail_transaksi->total_hrg,1,1);
+				$pdf->Cell(15,6,$t->hrg_tiket,1,1);
 			}
 
 			$pdf->Cell(10,7,'',0,1);

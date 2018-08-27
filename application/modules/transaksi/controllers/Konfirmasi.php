@@ -126,7 +126,21 @@ class Konfirmasi extends MY_Admin {
 		$Q = $this->db->get($table);
 		$row = $Q->row_array();
 		return $row[$id];
- 	}
+	 }
+	 
+	 public function proses(){
+
+		$id=$_POST['id'];
+		//delete records
+		$this->db->update('transaksi', array('konfirmasi_bayar' => 1), array('id_transaksi' => $id ));
+		$ret=array(
+			'resp'=>true,
+			'message'=>'Berhasil Konfirmasi.'
+		);
+		
+		echo json_encode($ret);
+
+	}
 	
 	function edit(){
 

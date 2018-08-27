@@ -17,6 +17,9 @@
 			<?php if($auth_meta['act']['del']):?>
 			<button id="btn-remove" name="btn-remove" class="btn btn-danger btn-sm" disabled><i class="fa fa-remove"></i> Delete</button>
 			<?php endif;?>
+			<?php if($this->session->userdata('user_group_name') == 'admin'):?>
+			<button id="btn-confirm" name="btn-confirm" class="btn btn-warning btn-sm"><i class="fa fa-check"></i> Tandai Selesai</button>
+			<?php endif;?>
 			
 		</div>
 		<table id="grid_org"
@@ -216,6 +219,35 @@
 
 			$('#mdl_org').modal('show');
 		});
+
+
+		$('#btn-confirm').click(function(e){
+
+		selections = getRowSelections();
+			var mydata='id='+selections[0].id;
+			
+			$.ajax({
+				type: "POST",
+				url: SITE_URL+'/transaksi/konfirmasi/proses/',
+				dataType: "json",
+				data: mydata,
+				success: function(data){
+
+					
+					if(data.success){
+						alert("Selamat,\n\r"+data.message);
+						//location.reload();						
+						$('#grid_org').bootstrapTable('refresh');
+					}else{
+						alert("Ada kesalahan.\n\r"+data.message);
+					}
+				}
+			});
+			
+			e.preventDefault();
+		});
+
+
 	
 		$('#btn-edit').click(function(e){
 			$('.modal-header').removeClass('bg-blue');
