@@ -147,7 +147,7 @@
 
 
 
-$(document).on('click', '.add-row', function () {
+$(document).on('click', '.add-row', function (e) {
 
      ++no;           
 
@@ -161,7 +161,8 @@ $(document).on('click', '.add-row', function () {
 
     var $clone = $lastTr.clone(true);
 
-    // $clone.find('input').not("input:disabled,input[type=hidden]").val("");
+
+     $clone.find('input').not("input:disabled,input[type=hidden]").val("");
 
     
 
@@ -170,6 +171,7 @@ $(document).on('click', '.add-row', function () {
     $table.find("select").select2();
 
     
+    e.preventDefault();
 
 });
 

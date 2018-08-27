@@ -90,9 +90,11 @@ public function index(){
             $pdf->Cell(18,6,$row->tujuan,1,0);
             $pdf->Cell(22,6,$row->maskapai,1,0);
             $pdf->Cell(18,6,$row->harga,1,0);
-            $pdf->Cell(35,6,$row->tgl_berangkat,1,0);   
+            $pdf->Cell(35,6,$row->tgl_berangkat,1,1);  
+
         }
 
+        
         $pdf->Output();
 	}
 

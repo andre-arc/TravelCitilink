@@ -178,9 +178,9 @@ class Pembeli extends MY_Admin {
 			'msg'=>'Gagal Menghapus Data'
 		);
 
-		$id=$_POST['id_pelanggan'];
+		$id=$_POST['id_customer'];
 		//delete records
-		$this->db->delete('tbl_pelanggan', array('id_pelanggan' => $id));
+		$this->db->delete('customer', array('id_customer' => $id));
 
 		if ($this->db->affected_rows()) {
 			$ret=array(

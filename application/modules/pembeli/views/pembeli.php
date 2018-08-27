@@ -292,7 +292,7 @@
 						type: "POST",
 						url: SITE_URL+"/pembeli/act_del/",
 						dataType: "json",
-						data: {id_pelanggan:rowSel[0].id_pelanggan},
+						data: {id_customer:rowSel[0].id_customer},
 						success: function(data){
 							if(data.success){
 								swal('Selamat', data.msg, 'success');

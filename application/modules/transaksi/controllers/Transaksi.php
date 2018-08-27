@@ -188,8 +188,8 @@ class Transaksi extends MY_Admin {
 				$status &= $this->db->insert_batch('detail_transaksi', $detail_transaksi);
 
 				if($status){
-					foreach ($detail_tiket as $t) {
-						$buyer = $this->M_transaksi->getBuyer($tiket->id_tiket);
+					foreach ($detail_tiket as $tiket) {
+						$buyer = $this->M_transaksi->getBuyer($t->id_tiket);
 						$tiket = array('jml_seat' => $t->jml_seat-$jml_penumpang);
 
 						switch ($buyer) {
@@ -214,9 +214,12 @@ class Transaksi extends MY_Admin {
 						'nik' => $p->no_ktp,
 						'no_passport' => $p->no_pass
 					);
-				}
+				}	
+
 
 				$status &= $this->db->insert_batch('penumpang', $penumpang);
+
+				//echo $this->db->last_query();
 			}
 		}
 		
@@ -308,13 +311,13 @@ class Transaksi extends MY_Admin {
 			$pdf->Cell(10,6,'Detail Penumpang ',0,1);
 
 			$pdf->SetFont('Arial','B',10);
-			$pdf->Cell(12,6,'Nama',1,0);
+			$pdf->Cell(30,6,'Nama',1,0);
 			$pdf->Cell(30,6,'Jenis Kelamin',1,0);
 			$pdf->Cell(20,6,'Kategori',1,1);
 
 			$pdf->SetFont('Arial','',10);
 			foreach($data_penumpang as $p){
-				$pdf->Cell(12,6,$p->nama_penumpang,1,0);
+				$pdf->Cell(30,6,$p->nama_penumpang,1,0);
 				$pdf->Cell(30,6,'Jenis Kelamin',1,0);
 				$pdf->Cell(20,6,'Dewasa',1,1);
 			}
@@ -336,7 +339,7 @@ class Transaksi extends MY_Admin {
 				$pdf->Cell(42,6,$t->tgl_berangkat." ".$t->waktu,1,0);
 				$pdf->Cell(55,6,$t->kota_asal."(".$t->dari.") - ".$t->kota_tujuan."(".$t->tujuan.")",1,0);
 				$pdf->Cell(20,6,'Citilink',1,0);
-				$pdf->Cell(15,6,$t->harga,1,1);
+				$pdf->Cell(15,6,$detail_transaksi->total_hrg,1,1);
 			}
 
 			$pdf->Cell(10,7,'',0,1);

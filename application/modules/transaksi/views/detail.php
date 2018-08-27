@@ -46,7 +46,10 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>NIK</th>
                                 <th>Nama Penumpang</th>
+                                <th>No Paspor</th>
+                                <th>Tanggal Lahir</th>
                             </tr>
                         </thead>
 
@@ -57,7 +60,10 @@
                         ?>
                             <tr>
                                 <td><?= $no ?></td>
+                                 <td><?= $p->nik ?></td>
                                 <td><?= $p->nama_penumpang ?></td>
+                                <td><?= $p->no_passport ?></td>
+                                 <td><?= $p->tgl_lahir ?></td>
                             </tr>
                             <?php
                             $no++;
@@ -68,7 +74,7 @@
                     </div>
                     <div class="col-md-12">
                     <hr>
-                    <span class="harga pull-right">IDR <?= convertToRupiah($total_hrg*count($data_penumpang)) ?></span>
+                    <span class="harga pull-right">IDR <?= convertToRupiah($detail_transaksi->total_hrg*count($data_penumpang)) ?></span>
                     </div>
                     
                 </div>

@@ -20,7 +20,7 @@ class M_transaksi extends CI_Model {
                               (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.tujuan) as kota_tujuan 
                           from tiket as t where t.id_tiket in ("'.implode(',', $data).'")');
        }else{
-        $query = $this->db->query('select t.*,
+        $query = $this->db->query('select t.*, dt.*,
         (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.dari) as kota_asal, 
          (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.tujuan) as kota_tujuan 
             from transaksi as tr 
