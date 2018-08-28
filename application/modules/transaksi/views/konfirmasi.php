@@ -102,7 +102,7 @@
 					<div class="form-group" id="cgroups">
 							<label>Pilih Transaksi</label>
 							<select name="id_transaksi" class="form-control input-sm">
-							<option value="0">-- Pilih Bandara --</option>
+							<option value="0">-- Pilih Transaksi --</option>
 	                    	<?php foreach($cabang->result() as $row):?>
 	                    		<option value="<?php echo $row->id_transaksi;?>">[<?php echo $row->kode_pnr;?>] <?php echo $row->dari; ?> -<?php echo $row->tujuan; ?> (a/n <?php echo $row->nama_customer; ?>) </option>
 	                    	<?php endforeach;?>

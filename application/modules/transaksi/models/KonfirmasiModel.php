@@ -29,7 +29,7 @@ WHERE
 transaksi.id_transaksi = detail_transaksi.id_transaksi AND
 detail_transaksi.id_tiket = tiket.id_tiket AND
 transaksi.id_customer = customer.id_customer AND
-transaksi.id_mitra = '3'");
+transaksi.id_mitra = '777'");
         return $hasil;
     }
 
