@@ -104,7 +104,7 @@
 							<select name="id_transaksi" class="form-control input-sm">
 							<option value="0">-- Pilih Transaksi --</option>
 	                    	<?php foreach($cabang->result() as $row):?>
-	                    		<option value="<?php echo $row->id_transaksi;?>">[<?php echo $row->kode_pnr;?>] <?php echo $row->dari; ?> -<?php echo $row->tujuan; ?> (a/n <?php echo $row->nama_customer; ?>) </option>
+	                    		<option value="<?php echo $row->id_tiket;?>">[<?php echo $row->kode_pnr;?>] <?php echo $row->dari; ?> -<?php echo $row->tujuan; ?> </option>
 	                    	<?php endforeach;?>
 	                    </select>
       					</div>
