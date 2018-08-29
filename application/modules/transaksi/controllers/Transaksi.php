@@ -99,9 +99,8 @@ class Transaksi extends MY_Admin {
 			$this->db->where('id', $this->session->userdata('user_org'));
 			$org = $this->db->get('orgs')->row();
 
-			if($this->data['detail_tiket'][0]->harga > $org->jml_kas){
-				echo "<script>alert('Kas Tidak Mencukupi')</script>";
-				redirect('transaksi/konfirmasi');
+			if($this->data['detail_tiket'][0]->harga > $org->jml_kas && $org->jml_kas != '777'){
+				echo "<script>alert('Kas Tidak Mencukupi');window.location = '".base_url('dashboard')."';</script>";
 			}else{
 				$this->display($this->data);
 			}
