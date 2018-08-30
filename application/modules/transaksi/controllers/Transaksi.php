@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Transaksi extends MY_Admin {
+class Transaksi extends MY_Controller {
 	
 	function __construct(){
 		parent::__construct();
@@ -62,6 +62,7 @@ class Transaksi extends MY_Admin {
 			$ret['rows'] = $ls_data_limit;
 
 		}else{
+			
             if($id_transaksi != null){
                 $SQL_BASE.='WHERE id_transaksi="'.$id_transaksi.'"';
             }
@@ -80,8 +81,8 @@ class Transaksi extends MY_Admin {
     
 
 	function checkout(){
-			$this->data['css'] = css_asset('style.css', '');
-			$this->data['css'] .= css_asset('select2.min.css','select2');
+			// $this->data['css'] = css_asset('style.css', '');
+			$this->data['css'] = css_asset('select2.min.css','select2');
 			$this->data['css'] .= css_asset('bootstrap-datepicker.min.css', 'bootstrap-datepicker');
 	
 			$this->data['js']  =  js_asset('bootstrap-table.min.js','bootstrap-table');
@@ -99,7 +100,7 @@ class Transaksi extends MY_Admin {
 			$this->db->where('id', $this->session->userdata('user_org'));
 			$org = $this->db->get('orgs')->row();
 
-			if($this->data['detail_tiket'][0]->harga > $org->jml_kas && $org->jml_kas != '777'){
+			if($this->data['detail_tiket'][0]->harga > $org->jml_kas && $this->ion_auth->logged_in()){
 				echo "<script>alert('Kas Tidak Mencukupi');window.location = '".base_url('dashboard')."';</script>";
 			}else{
 				$this->display($this->data);
@@ -153,7 +154,11 @@ class Transaksi extends MY_Admin {
 		$detail_tiket = json_decode($this->input->post('detail_tiket'));
 		$data_penumpang = json_decode($this->input->post('data_penumpang'));
 		$pemesan = json_decode($this->input->post('pemesan'));
+		if($this->ion_auth->logged_in()){
 		$org_id= $this->session->userdata('user_org');
+	}else{
+		$org_id='777';
+	}
 		$status = true;
 
 		$total_hrg=0;
@@ -174,13 +179,15 @@ class Transaksi extends MY_Admin {
 			'mitra' => $org_id
 		);
 
+
 		if($status &= $this->db->insert('customer', $customer)){
 			$id_customer =$this->db->insert_id();
-
+			$token=getToken();
 			$transaksi = array(
 				'id_mitra' => $org_id,
 				'id_customer' => $id_customer,
-				'total_hrg' => $total_hrg
+				'total_hrg' => $total_hrg,
+				'kode'=> $token
 			);
 
 			if($status &= $this->db->insert('transaksi', $transaksi)){
@@ -194,6 +201,7 @@ class Transaksi extends MY_Admin {
 					);
 		
 				}
+
 				$status &= $this->db->insert_batch('detail_transaksi', $detail_transaksi);
 
 				if($status){
@@ -230,10 +238,48 @@ class Transaksi extends MY_Admin {
 				//echo $this->db->last_query();
 			}
 		}
+
+		//echo $status;
 		if($status){
-			redirect('transaksi/detail/'.$id_transaksi);
+			$detail_email=array('total_hrg' => $total_hrg)
+			//redirect('transaksi/detail/'.$id_transaksi);
+			$this->kirimemail('rizwansaputra@gmail.com');
+			//redirect('transaksi/detail/'.$id_transaksi);
 		}
 
+		
+
+	}
+
+	function kirimemail($email,){
+
+		 $this->load->library('email');
+	
+	
+		$result = $this->email
+    ->from('rizwansaputra77@gmail.com')   
+    ->to('rizwansaputra@gmail.com')
+    ->subject('Konfirmasi Pembayaran Ubudiyah Travel')
+    ->message('
+				<table>
+					<caption>Segera Pembayaran Tagihan Anda</caption>
+					<thead>
+						<tr>
+							<th>header</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>data</td>
+						</tr>
+					</tbody>
+				</table>')
+    ->send();
+
+var_dump($result);
+echo '<br />';
+echo $this->email->print_debugger();
+		   
 		
 
 	}
