@@ -97,7 +97,13 @@ class Transaksi extends MY_Controller {
 			$this->data['kewarganegaraan'] = $this->M_transaksi->getCountry();
 			$this->data['content']=$this->load->view('checkout',$this->data,true);
 
-			$this->db->where('id', $this->session->userdata('user_org'));
+			if($this->ion_auth->logged_in()){
+				$org_id= $this->session->userdata('user_org');
+			}else{
+				$org_id='777';
+			}
+
+			$this->db->where('id', $org_id);
 			$org = $this->db->get('orgs')->row();
 
 			if($this->data['detail_tiket'][0]->harga > $org->jml_kas && $this->ion_auth->logged_in()){
@@ -155,10 +161,10 @@ class Transaksi extends MY_Controller {
 		$data_penumpang = json_decode($this->input->post('data_penumpang'));
 		$pemesan = json_decode($this->input->post('pemesan'));
 		if($this->ion_auth->logged_in()){
-		$org_id= $this->session->userdata('user_org');
-	}else{
-		$org_id='777';
-	}
+			$org_id= $this->session->userdata('user_org');
+		}else{
+			$org_id='777';
+		}
 		$status = true;
 
 		$total_hrg=0;
@@ -241,9 +247,12 @@ class Transaksi extends MY_Controller {
 
 		//echo $status;
 		if($status){
-			$detail_email=array('total_hrg' => $total_hrg)
+			$detail_email=array(
+							'id_transaksi' => $id_transaksi,
+							'token' => $token,
+							'total_hrg' => $total_hrg);
 			//redirect('transaksi/detail/'.$id_transaksi);
-			$this->kirimemail('rizwansaputra@gmail.com');
+			$this->kirimemail('rizwansaputra@gmail.com', $detail_email);
 			//redirect('transaksi/detail/'.$id_transaksi);
 		}
 
@@ -251,7 +260,7 @@ class Transaksi extends MY_Controller {
 
 	}
 
-	function kirimemail($email,){
+	function kirimemail($email, $detail_email){
 
 		 $this->load->library('email');
 	
