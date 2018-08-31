@@ -188,7 +188,7 @@ class Transaksi extends MY_Controller {
 
 		if($status &= $this->db->insert('customer', $customer)){
 			$id_customer =$this->db->insert_id();
-			$token=getToken();
+			$token=getToken(6);
 			$transaksi = array(
 				'id_mitra' => $org_id,
 				'id_customer' => $id_customer,
@@ -247,47 +247,62 @@ class Transaksi extends MY_Controller {
 
 		//echo $status;
 		if($status){
-			$detail_email=array(
-							'id_transaksi' => $id_transaksi,
-							'token' => $token,
-							'total_hrg' => $total_hrg);
-			//redirect('transaksi/detail/'.$id_transaksi);
-			$this->kirimemail('rizwansaputra@gmail.com', $detail_email);
-			//redirect('transaksi/detail/'.$id_transaksi);
+
+			if($org_id != '777'){
+				redirect('transaksi/detail/'.$id_transaksi);
+			}else{
+				$detail_email=array(
+					'id_transaksi' => $id_transaksi,
+					'token' => $token,
+					'total_hrg' => $total_hrg);
+
+				if($this->__kirimDetailTransaksi($pemesan->email, $detail_email)){
+					redirect('home/konfirmasi');
+				}
+			}
 		}
 
 		
 
 	}
 
-	function kirimemail($email, $detail_email){
+	function __kirimDetailTransaksi($email, $detail_email){
 
 		 $this->load->library('email');
 	
 	
 		$result = $this->email
     ->from('rizwansaputra77@gmail.com')   
-    ->to('rizwansaputra@gmail.com')
+    ->to($email)
     ->subject('Konfirmasi Pembayaran Ubudiyah Travel')
     ->message('
-				<table>
+				<table border="1">
 					<caption>Segera Pembayaran Tagihan Anda</caption>
 					<thead>
 						<tr>
-							<th>header</th>
+							<th>Kode Transaksi</th>
+							<th>Tanggal Transaksi</th>
+							<th>Total Harga</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>data</td>
+							<td>'.$detail_email['token'].'</td>
+							<td>'.date('d-M-Y').'</td>
+							<td>'.$detail_email['total_hrg'].'</td>
 						</tr>
 					</tbody>
-				</table>')
+				</table>
+				<br>
+				Silakan Konfirmasi Pembayaran <a href="'.base_url('home/konfirmasi').'">disini</a>')
     ->send();
 
-var_dump($result);
-echo '<br />';
-echo $this->email->print_debugger();
+		if($result){
+			return true;
+		}else{
+			echo $this->email->print_debugger();
+		}
+
 		   
 		
 

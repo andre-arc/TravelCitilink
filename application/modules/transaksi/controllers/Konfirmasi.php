@@ -132,15 +132,53 @@ class Konfirmasi extends MY_Admin {
 
 		$id=$_POST['id'];
 		//delete records
-		$this->db->update('transaksi', array('konfirmasi_bayar' => 1), array('id_transaksi' => $id ));
-		$ret=array(
-			'resp'=>true,
-			'message'=>'Berhasil Konfirmasi.'
-		);
+		
+		$this->db->select('c.*', $id)
+				->from('customer as c')
+				->join('transaksi as t', 't.id_customer=c.id_customer')
+				->where('t.id_transaksi', $id);
+
+		$customer = $this->db->get()->row();
+
+		$query = $this->db->update('transaksi', array('konfirmasi_bayar' => 1), array('id_transaksi' => $id ));
+		if($query){
+			if($this->__kirimTiket($customer->email, $id)){
+				$ret=array(
+					'resp'=>true,
+					'message'=>'Berhasil Konfirmasi.'
+				);
+			}
+		}
 		
 		echo json_encode($ret);
 
 	}
+
+	function __kirimTiket($email, $id){
+
+		$this->load->library('email');
+   
+   
+	   $result = $this->email
+   ->from('rizwansaputra77@gmail.com')   
+   ->to($email)
+   ->subject('Tiket Ubudiyah Travel')
+   ->message('
+			  <h1>disini detail tiket<h1>
+			   <br>')
+   ->send();
+
+	   if($result){
+		   return true;
+	   }else{
+		   echo $this->email->print_debugger();
+	   }
+
+		  
+	   
+
+   }
+
 	
 	function edit(){
 
