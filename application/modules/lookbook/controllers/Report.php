@@ -69,7 +69,7 @@ public function index(){
 
         $pdf->SetFont('Arial','B',10);
         $pdf->Cell(10,6,'NO',1,0);
-        $pdf->Cell(43,6,'TANGGAL TRANSAKSI',1,0);
+        $pdf->Cell(43,6,'KODE BOOKING',1,0);
         $pdf->Cell(27,6,'KODE PNR',1,0);
         $pdf->Cell(15,6,'DARI',1,0);
         $pdf->Cell(18,6,'TUJUAN',1,0);
@@ -80,14 +80,14 @@ public function index(){
 
         $pdf->SetFont('Arial','',10);
 
-        $query = $this->db->query("SELECT transaksi.tgl_transaksi,transaksi.id_transaksi as id_tran,kode_pnr,tgl_berangkat,waktu,dari,tujuan,maskapai,harga,total_hrg FROM transaksi,detail_transaksi,orgs,tiket where transaksi.id_mitra=orgs.id AND tiket.id_tiket=detail_transaksi.id_tiket AND transaksi.id_transaksi=detail_transaksi.id_transaksi AND orgs.id='$filter' AND tgl_transaksi between '$tgl_mulai' and '$tgl_akhir' ORDER BY tgl_transaksi ASC")->result();
+        $query = $this->db->query("SELECT transaksi.id_transaksi,transaksi.id_transaksi as id_tran,kode_pnr,tgl_berangkat,waktu,dari,tujuan,maskapai,harga,total_hrg FROM transaksi,detail_transaksi,orgs,tiket where transaksi.id_mitra=orgs.id AND tiket.id_tiket=detail_transaksi.id_tiket AND transaksi.id_transaksi=detail_transaksi.id_transaksi AND orgs.id='$filter' AND tgl_transaksi between '$tgl_mulai' and '$tgl_akhir' ORDER BY tgl_transaksi ASC")->result();
 
 
         	$total_semua=0;
         	$no=1;
         foreach ($query as $row){
             $pdf->Cell(10,6,$no,1,0);
-            $pdf->Cell(43,6,$row->tgl_transaksi,1,0);
+            $pdf->Cell(43,6,'#UB'.$row->id_transaksi,1,0);
             $pdf->Cell(27,6,$row->kode_pnr,1,0);
             $pdf->Cell(15,6,$row->dari,1,0);
             $pdf->Cell(18,6,$row->tujuan,1,0);

@@ -19,6 +19,8 @@ if(!empty($result)){
                          <span class="waktu">
                          Keberangkatan : <?= $r->dari."-".$r->tujuan ?>
                          <br>
+                         Waktu : <?= $r->waktu ?>
+                         <br>
                          Tanggal Berangkat : <?= $r->tgl_berangkat ?>
                          </span>
                        </div>
