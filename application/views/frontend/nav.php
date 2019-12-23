@@ -39,9 +39,7 @@
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
 					<li>
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							Cek Order
-						</a>
+						<a href="<?php echo site_url('home/konfirmasi/'); ?>">&nbsp;Cek Order</a>
 					</li>
 					<li>
 						<?php if ($this->ion_auth->logged_in()) : ?>

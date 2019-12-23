@@ -37,6 +37,19 @@
   color: #ff670f;
 }
 
+/* FOOTER */
+
+.py-3 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+footer {
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  border-top: 1px solid #dee2e6 !important;
+}
+
 .social:hover {
   -webkit-transform: scale(1.1);
   -moz-transform: scale(1.1);
