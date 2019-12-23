@@ -78,9 +78,36 @@
 
       </div>
 
-      <div class="more-button">
-            <button type="button" class="btn btn-block btn-warning btn-flat">Masih Banyak lagi</button>
+
+
+      <div class="col-md-6 col-md-offset-3">
+            <div class="more-button">
+                  <button class="btn btn-default btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Lihat Lainnya </button>
+
+
+            </div>
       </div>
       <br>
+      <br><br>
+
 </div>
+<div class="row">
+      <div class="footer-subscribe">
+            <div class="container flex">
+                  <div class="col-md-6">
+                        <div class="subscribe">
+                              <div class="subscribe-title">Berlangganan newsletter spesial promo dan penawaran terbaik</div>
+                        </div>
+                  </div>
+                  <div class="col-md-6">
+                        <div class="input-button">
+                              <div class="subscribe"><input type="text" name="email" placeholder="Masukkan email Anda" value=""><button type="submit" name="subscribe_btn" value="1">Berlangganan</button></div>
+                        </div>
+                  </div>
+
+            </div>
+      </div>
+
+</div>
+
 <!-- Page Features -->
