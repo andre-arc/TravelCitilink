@@ -78,8 +78,9 @@
 
       </div>
 
-      <!-- correct -->
-
+      <div class="more-button">
+            <button type="button" class="btn btn-block btn-warning btn-flat">Masih Banyak lagi</button>
+      </div>
+      <br>
 </div>
-
 <!-- Page Features -->
