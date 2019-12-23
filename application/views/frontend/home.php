@@ -7,29 +7,10 @@
 		?>
 		<?php include_once('nav.php'); ?>
 		<div class="content-wrapper bg-batik">
-			<div class="container" style="padding:15px 15px; background-color:#FFF !important;">
-				<div class="row">
-					<div class="col-md-4">
-						<?php echo modules::run('home/widget/slider'); ?>
-					</div>
-					<div class="col-md-4">
-						<?php echo modules::run('home/widget/tengah_skpk_tweet');/*include_once('widget_stat.php');*/ ?>
-					</div>
-					<div class="col-md-4">
-						<div class="box box-success box-solid">
-							<div class="box-header bg-green-active">
-								<i class="fa fa-info-circle"></i>&nbsp;Info
-								<a class="btn btn-xs btn-danger pull-right" href="<?php echo site_url('home/rss/'); ?>" target="_blank">
-									<i class="fa fa-rss-square"></i>&nbsp;RSS INONG
-								</a>
-							</div>
-							<div class="box-body">
-								<?php echo $MYCFG['GENERAL']['DISCLAIMER']; ?>
-							</div>
-						</div>
+			<div class="container-fluid" style="padding:15px 15px; background-color:#FFF !important;">
+				<?php echo modules::run('home/widget/slider'); ?>
 
-					</div>
-				</div>
+
 				<div class="row" style="margin-bottom:15px;">
 					<?php include_once('btn-group-example.php'); ?>
 				</div>

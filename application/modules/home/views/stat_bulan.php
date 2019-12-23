@@ -26,19 +26,32 @@
                   <?= form_dropdown('tujuan', $bandara, '0', 'id="tujuan" class="form-control"') ?>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <div class="form-group">
                   <label>Tanggal Berangkat</label>
                   <input id="tgl_berangkat" class="form-control" type="text" name="tgl_berangkat">
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <div class="form-group">
                   <label>Tanggal Kembali</label>
                   <input id="tgl_kembali" class="form-control" type="text" name="tgl_kembali">
                   <input type="checkbox" type="text" name="pp"> Kembali
                 </div>
               </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Penumpang</label>
+                  <select class="form-control">
+                    <option>option 1</option>
+                    <option>option 2</option>
+                    <option>option 3</option>
+                    <option>option 4</option>
+                    <option>option 5</option>
+                  </select>
+                </div>
+              </div>
+
 
 
               <div class="col-md-12">
