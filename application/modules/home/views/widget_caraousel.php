@@ -1,63 +1,58 @@
-<?php if(count($ls_img)):?>
+<?php if (count($ls_img)) : ?>
 
-<style>
 
- .carousel .item { height: 320px !important; }
+  <div id="crs-widget" class="carousel slide" data-ride="carousel" style="width: 100%;">
 
-</style>
+    <ol class="carousel-indicators">
 
-<div id="crs-widget" class="carousel slide" data-ride="carousel" style="width: 100%;">
+      <?php foreach ($ls_img as $k => $v) : ?>
 
-  <ol class="carousel-indicators">
+        <li data-target="#crs-widget" data-slide-to="<?php echo $k; ?>" class="<?php echo ($k == 0) ? 'active' : ''; ?>"></li>
 
-    <?php foreach($ls_img as $k=>$v):?>
+      <?php endforeach; ?>
 
-    <li data-target="#crs-widget" data-slide-to="<?php echo $k;?>" class="<?php echo ($k==0) ? 'active':'';?>"></li>
+    </ol>
 
-    <?php endforeach;?>
 
-  </ol>
 
-  
+    <div class="carousel-inner" role="listbox">
 
-  <div class="carousel-inner" role="listbox">
+      <?php foreach ($ls_img as $k => $v) : ?>
 
-    <?php foreach($ls_img as $k=>$v):?>
+        <div class="item <?php echo ($k == 0) ? 'active' : ''; ?>">
 
-    <div class="item <?php echo ($k==0) ? 'active':'';?>">
+          <img class="img-fluid" src="<?php echo base_url(); ?>/assets/image/slider/<?php echo $v; ?>" style="width: 100%;" />
 
-      <img src="<?php echo base_url();?>/assets/image/slider/<?php echo $v;?>" style="width: 100%;"/>
+        </div>
+
+      <?php endforeach; ?>
 
     </div>
 
-    <?php endforeach;?>
+
+
+    <a class="left carousel-control" href="#crs-widget" role="button" data-slide="prev">
+
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+
+      <span class="sr-only">Previous</span>
+
+    </a>
+
+    <a class="right carousel-control" href="#crs-widget" role="button" data-slide="next">
+
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+
+      <span class="sr-only">Next</span>
+
+    </a>
+
+
 
   </div>
 
-  
-
-  <a class="left carousel-control" href="#crs-widget" role="button" data-slide="prev">
-
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-
-    <span class="sr-only">Previous</span>
-
-  </a>
-
-  <a class="right carousel-control" href="#crs-widget" role="button" data-slide="next">
-
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-
-    <span class="sr-only">Next</span>
-
-  </a>
-
-  
-
-</div>
-
-<?php else:?>
+<?php else : ?>
 
 
 
-<?php endif;?>
+<?php endif; ?>

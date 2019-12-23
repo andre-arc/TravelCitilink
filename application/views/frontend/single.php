@@ -5,10 +5,12 @@
 	<div class="wrapper">
 		<?php include_once('nav.php'); ?>
 		<div class="content-wrapper bg-batik">
-			<div class="container" style="padding:15px 15px; background-color:#FFF !important;">
-				<?php echo (isset($content)) ? $content : ""; ?>
-			</div>
+			<?php echo (isset($content)) ? $content : ""; ?>
+
+
 		</div>
+
+
 		<?php include_once('foot.php'); ?>
 
 	</div>
