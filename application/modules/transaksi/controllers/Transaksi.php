@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Transaksi extends MY_Admin
+class Transaksi extends MY_Controller
 {
 
 	function __construct()
@@ -111,11 +111,7 @@ class Transaksi extends MY_Admin
 		$this->db->where('id', $org_id);
 		$org = $this->db->get('orgs')->row();
 
-		if ($this->data['detail_tiket'][0]->harga > $org->jml_kas && $this->ion_auth->logged_in()) {
-			echo "<script>alert('Kas Tidak Mencukupi');window.location = '" . base_url('dashboard') . "';</script>";
-		} else {
-			$this->display($this->data);
-		}
+		$this->display($this->data);
 		// 
 	}
 

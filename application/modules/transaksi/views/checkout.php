@@ -84,17 +84,21 @@
                                 </td>
                                 <td>
                                 <div class="form-group">
-                                    <?= form_dropdown('kewarganegaraan', $kewarganegaraan, '0', 'class="form-control kewarganegaraan" required');?>
-                                </div>
-                                </td>
-                                <td>
-                                <div class="form-group">
                                     <input placeholder="Nomor Passport" name="no_pass[]" class="form-control" type="text" >
                                 </div>
                                 </td>
                                 <td>
                                 <div class="form-group">
                                     <input placeholder="Nomor KTP" name="no_ktp[]" class="form-control" type="text" >
+                                </div>
+                                </td>
+                                <td>
+                                <div class="form-group">
+                                    <select placeholder="Penumpang" name="penumpang[]" class="form-control kewarganegaraan" type="text" require>
+                                        <option value="0">-- Pilih Jenis Penumpang</option>
+                                        <option value="dewasa">Dewasa</option>
+                                        <option value="bayi">Bayi</option>
+                                    </select>
                                 </div>
                                 </td>
                                 <td><button type='button' class='btn btn-primary delete-row'><i class='fa fa-times'></i></button></td>
