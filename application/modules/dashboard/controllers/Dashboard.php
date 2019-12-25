@@ -23,7 +23,7 @@ class Dashboard extends MY_Admin {
 		$this->data['js'] .= "<script> var options={format: 'dd-mm-yyyy',todayHighlight: true,autoclose: true, daysOfWeekDisabled: '0',daysOfWeekHighlighted: '0',language: 'id',locale: 'id',};$('#asal').select2();$('#tujuan').select2();$('#tgl_berangkat').datepicker(options);$('#tgl_kembali').datepicker(options);</script>";
 
 
-		$this->data['bandara'] = $this->M_dashboard->getBandara();
+		$this->data['pelabuhan'] = $this->M_dashboard->getPelabuhan();
 
 		$this->data['content']=$this->load->view('dashboard',$this->data,true);
 		$this->display($this->data);

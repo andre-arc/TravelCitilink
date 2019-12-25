@@ -22,7 +22,7 @@ class Home extends MY_Controller {
 		$this->data['js'] .= js_asset('bootstrap-datepicker.id.min.js', 'bootstrap-datepicker');
 
 
-		$this->data['bandara'] = $this->M_dashboard->getBandara();
+		$this->data['pelabuhan'] = $this->M_dashboard->getPelabuhan();
 
 		$this->data['content']=$this->load->view('dashboard',$this->data,true);
 		$this->display($this->data);

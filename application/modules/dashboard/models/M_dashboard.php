@@ -7,14 +7,14 @@ class M_dashboard extends CI_Model {
 		
     }
 
-    public function getBandara(){
+    public function getPelabuhan(){
         $this->db->select('b.id, b.kode, k.nm_kota')
-                 ->from('bandara as b')
+                 ->from('pelabuhan as b')
                  ->join('kota as k', 'b.id_kota=k.id', 'TRUE')
                  ->order_by('k.nm_kota', 'asc');
         $result = $this->db->get()->result();
 
-        $data[0] = " Pilih Bandara ";
+        $data[0] = " Pilih Pelabuhan ";
         foreach($result as $r){
             $data[$r->kode] = $r->nm_kota." (".$r->kode.")";
         }
