@@ -13,7 +13,7 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
-            <form role="form" id="form-search" method="GET" action="<?php echo base_url() . "home/search"; ?>">
+            <form role="form" id="form-search" method="POST" action="<?php echo base_url() . "home/search"; ?>">
               <div class="col-md-3">
                 <div class="form-group">
                   <label>Dari:</label>

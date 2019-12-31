@@ -28,8 +28,7 @@ class M_dashboard extends CI_Model {
                  ->from('tiket as t')
                  ->where('t.tgl_berangkat', $data['tgl_berangkat'])
                  ->where('t.dari', $data['asal'])
-                 ->where('t.tujuan', $data['tujuan'])
-                 ->where('t.jml_seat >', 0);
+                 ->where('t.tujuan', $data['tujuan']);
         
         if($data['tgl_kembali'] != null){
             $this->db->or_where('t.tgl_berangkat', $data['tgl_kembali'])
