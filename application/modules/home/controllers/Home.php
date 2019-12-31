@@ -31,10 +31,10 @@ class Home extends MY_Controller {
 	function search(){
 		$this->data['css'] = css_asset('style.css', '');
 		
-		$data['asal'] = $this->input->get('asal');
-		$data['tujuan'] = $this->input->get('tujuan');
-		$data['tgl_berangkat'] = date('Y-m-d', strtotime($this->input->get('tgl_berangkat')));
-		$data['tgl_kembali'] = $this->input->get('pp') ? date('Y-m-d', strtotime($this->input->get('tgl_kembali')))  : 'null';
+		$data['asal'] = $this->input->post('asal');
+		$data['tujuan'] = $this->input->post('tujuan');
+		$data['tgl_berangkat'] = date('Y-m-d', strtotime($this->input->post('tgl_berangkat')));
+		$data['tgl_kembali'] = $this->input->get('pp') ? date('Y-m-d', strtotime($this->input->post('tgl_kembali')))  : 'null';
 
 		$this->data['result'] = $this->M_dashboard->getTicket($data);
 		$this->data['content'] = $this->load->view('list_tiket', $this->data, true);
