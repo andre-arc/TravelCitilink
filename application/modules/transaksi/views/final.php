@@ -47,6 +47,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Penumpang</th>
+                                <th>Jenis</th>
                             </tr>
                         </thead>
 
@@ -58,6 +59,7 @@
                             <tr>
                                 <td><?= $no ?></td>
                                 <td><?= $p->nm_penumpang ?></td>
+                                <td><?= $p->deskripsi_penumpang ?></td>
                             </tr>
                             <?php
                             $no++;

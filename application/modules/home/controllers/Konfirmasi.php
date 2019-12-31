@@ -24,16 +24,10 @@ class Konfirmasi extends MY_Controller {
 		$this->load->library('form_validation');
 
 		//print_r($mydata);die;
-		$mydata['tbl_icon']=$this->data['subicon'];
-		$mydata['tbl_title']=$this->data['title'];
-		$mydata['tbl']='mytabel';
 
-		$mydata['groups'] = $this->db->get('groups')->result();
-		
-		 $mydata['cabang'] = $this->KonfirmasiModel->get_transaksi();
 
 	
-		$this->data['content']=$this->load->view('konfirmasi',$mydata,true);
+		$this->data['content']=$this->load->view('konfirmasi',null,true);
 		$this->display();
 	
 

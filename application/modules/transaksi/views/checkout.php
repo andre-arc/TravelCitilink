@@ -74,27 +74,22 @@
                             <tr>
                                 <td>
                                 <div class="form-group">
-                                    <input placeholder="Nama Penumpang" name="nm_penumpang[]" class="form-control" type="text" >
+                                    <input placeholder="Nama Penumpang" name="nm_penumpang[]" class="form-control" type="text" require>
                                 </div>
                                 </td>
                                 <td>
                                 <div class="form-group">
-                                    <input placeholder="Tanggal Lahir" name="tgl_lahir[]" class="form-control tgl-lahir" type="text" >
-                                </div>
-                                </td>
-                                <td>
-                                <div class="form-group">
-                                    <?= form_dropdown('kewarganegaraan', $kewarganegaraan, '0', 'class="form-control kewarganegaraan" required');?>
-                                </div>
-                                </td>
-                                <td>
-                                <div class="form-group">
-                                    <input placeholder="Nomor Passport" name="no_pass[]" class="form-control" type="text" >
+                                    <input placeholder="Tanggal Lahir" name="tgl_lahir[]" class="form-control tgl-lahir" type="text" require>
                                 </div>
                                 </td>
                                 <td>
                                 <div class="form-group">
                                     <input placeholder="Nomor KTP" name="no_ktp[]" class="form-control" type="text" >
+                                </div>
+                                </td>
+                                <td>
+                                <div class="form-group">
+                                    <?= form_dropdown('penumpang[]', $jenis_penumpang, '0', 'class="form-control kewarganegaraan" require')?>
                                 </div>
                                 </td>
                                 <td><button type='button' class='btn btn-primary delete-row'><i class='fa fa-times'></i></button></td>

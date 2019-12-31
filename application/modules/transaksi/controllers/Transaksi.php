@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Transaksi extends MY_Admin
+class Transaksi extends MY_Controller
 {
 
 	function __construct()
@@ -99,7 +99,8 @@ class Transaksi extends MY_Admin
 
 		$tiket = $this->input->post('id_tiket');
 		$this->data['detail_tiket'] = $this->M_transaksi->getDetailTiket($tiket);
-		$this->data['kewarganegaraan'] = $this->M_transaksi->getCountry();
+		$this->data['jenis_penumpang'] = $this->M_transaksi->getJenisPenumpang();
+
 		$this->data['content'] = $this->load->view('checkout', $this->data, true);
 
 		if ($this->ion_auth->logged_in()) {
@@ -111,11 +112,7 @@ class Transaksi extends MY_Admin
 		$this->db->where('id', $org_id);
 		$org = $this->db->get('orgs')->row();
 
-		if ($this->data['detail_tiket'][0]->harga > $org->jml_kas && $this->ion_auth->logged_in()) {
-			echo "<script>alert('Kas Tidak Mencukupi');window.location = '" . base_url('dashboard') . "';</script>";
-		} else {
-			$this->display($this->data);
-		}
+		$this->display($this->data);
 		// 
 	}
 
@@ -139,11 +136,13 @@ class Transaksi extends MY_Admin
 
 			$i = 0;
 			foreach ($this->input->post('nm_penumpang') as $p) {
+				$select_jenis = $this->db->where('id', $this->input->post('penumpang')[$i])->get('jenis_penumpang')->row();
+
 				$data_penumpang[] = (object) array(
 					'nm_penumpang' => $p,
 					'tgl_lahir' => $this->input->post('tgl_lahir')[$i],
-					'kewarganegaraan' => $this->input->post('kewarganegaraan')[$i],
-					'no_pass' => $this->input->post('no_pass')[$i],
+					'jenis_penumpang' => $this->input->post('penumpang')[$i],
+					'deskripsi_penumpang' => $select_jenis->nama,
 					'no_ktp' => $this->input->post('no_ktp')[$i]
 				);
 			}
@@ -247,9 +246,8 @@ class Transaksi extends MY_Admin
 						'id_transaksi' => $id_transaksi,
 						'nama_penumpang' => $p->nm_penumpang,
 						'tgl_lahir' => $p->tgl_lahir,
-						'kewarganegaraan' => $p->kewarganegaraan,
+						'jenis_penumpang' => $p->jenis_penumpang,
 						'nik' => $p->no_ktp,
-						'no_passport' => $p->no_pass
 					);
 				}
 
