@@ -4,8 +4,8 @@
                   <div class="col-md-12">
                   <?php
                         if(!empty($result)){
-                            echo form_open('transaksi/checkout', 'id="form-checkout"');
-                            echo form_hidden('id_tiket', '');
+                            echo "<form action='".base_url('transaksi/checkout')."' method='GET' id='form-checkout'>";
+                            echo form_hidden('choose', '');
 
                             foreach ($result as $r) {
                                 ?>
@@ -26,7 +26,7 @@
                                                 </span>
                                             </div>
                                             <div class="col-md-2">
-                                                <span class="harga">IDR <?= convertToRupiah($r->harga) ?></span> <span class="satuan">/pax</span>
+                                                <span class="harga">IDR <?= convertToRupiah($r->hrg_tiket) ?></span>
                                             </div>
 
                                             <div class="col-md-2">
@@ -86,7 +86,7 @@
         
         $('.tiket_btn').click(function(e){
             e.preventDefault();
-            $('input[name="id_tiket"]').val($(this).attr('btn-id'));
+            $('input[name="choose"]').val($(this).attr('btn-id'));
             $('#form-checkout').submit();
         });
 

@@ -72,6 +72,7 @@
                     <table class="table table-hover" id="tabel-penumpang">
                         <tbody>
                             <tr>
+                                <input type="hidden" class="harga-tiket" name="hrg_tiket[]" value="">
                                 <td>
                                 <div class="form-group">
                                     <input placeholder="Nama Penumpang" name="nm_penumpang[]" class="form-control" type="text" require>
@@ -79,17 +80,7 @@
                                 </td>
                                 <td>
                                 <div class="form-group">
-                                    <input placeholder="Tanggal Lahir" name="tgl_lahir[]" class="form-control tgl-lahir" type="text" require>
-                                </div>
-                                </td>
-                                <td>
-                                <div class="form-group">
-                                    <input placeholder="Nomor KTP" name="no_ktp[]" class="form-control" type="text" >
-                                </div>
-                                </td>
-                                <td>
-                                <div class="form-group">
-                                    <?= form_dropdown('penumpang[]', $jenis_penumpang, '0', 'class="form-control kewarganegaraan" require')?>
+                                    <?= form_dropdown('penumpang[]', $jenis_penumpang, '0', 'class="form-control kewarganegaraan penumpang" require')?>
                                 </div>
                                 </td>
                                 <td><button type='button' class='btn btn-primary delete-row'><i class='fa fa-times'></i></button></td>
@@ -116,7 +107,7 @@
                 <?php
                 $total_hrg = 0;
                 foreach ($detail_tiket as $t) {
-                $total_hrg += $t->harga;
+                $total_hrg += $t->hrg_tiket;
                 ?>
                     Keberangkatan : <?= $t->kota_asal."(".$t->dari.")"." -> ".$t->kota_tujuan."(".$t->tujuan.")" ?> <br>
                     Waktu         : <?= $t->tgl_berangkat.' '.$t->waktu  ?> <br>
@@ -139,9 +130,6 @@
 // $("select").select2();
 
     var no=0;
-
-
-
 $(document).on('click', '.add-row', function (e) {
 
      ++no;           
@@ -181,4 +169,22 @@ if (no>0){
 } 
 
 });
+
+$(document).ready(function(){
+    var $table = $('#tabel-penumpang');
+
+    $table.find("select").on('change', function (e) {
+        var id_tiket = <?= $detail_tiket[0]->id_tiket ?>;
+        var jenis_penumpang = e.target.value;
+        $.ajax({
+            type: "POST",
+            url: '<?= base_url('transaksi/getHarga') ?>',
+            dataType: "json",
+            data: {id:id_tiket, jenis:jenis_penumpang},
+            success: function(data){
+               console.log($(e).closest('tr'));
+            }
+        });
+    });
+})
 </script>
