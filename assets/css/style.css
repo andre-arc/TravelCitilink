@@ -121,9 +121,12 @@ footer {
 }
 
 .harga {
-  font-size: 48px;
-  color: rgb(45, 251, 45);
-  text-align: center;
+  font-size: 25px;
+  font-family: OpenSans-SemiBold, Arial, Helvetica, Sans-serif;
+  color: #0064d2;
+  margin-bottom: 29px;
+  position: relative;
+  text-align: right;
 }
 
 .satuan {
