@@ -17,13 +17,13 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                   <label>Dari:</label>
-                                  <?= form_dropdown('asal', $bandara, '0', 'id="asal" class="form-control"')?>
+                                  <?= form_dropdown('asal', $pelabuhan, '0', 'id="asal" class="form-control"')?>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                   <label>Ke:</label>
-                                  <?= form_dropdown('tujuan', $bandara, '0', 'id="tujuan" class="form-control"')?>
+                                  <?= form_dropdown('tujuan', $pelabuhan, '0', 'id="tujuan" class="form-control"')?>
                                 </div>
                             </div>
                             <div class="col-md-3">

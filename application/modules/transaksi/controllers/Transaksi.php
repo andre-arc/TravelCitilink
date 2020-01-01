@@ -86,8 +86,8 @@ class Transaksi extends MY_Controller
 
 	function checkout()
 	{
-		// $this->data['css'] = css_asset('style.css', '');
-		$this->data['css'] = css_asset('select2.min.css', 'select2');
+		$this->data['css'] = css_asset('style.css', '');
+		$this->data['css'] .= css_asset('select2.min.css', 'select2');
 		$this->data['css'] .= css_asset('bootstrap-datepicker.min.css', 'bootstrap-datepicker');
 
 		$this->data['js']  =  js_asset('bootstrap-table.min.js', 'bootstrap-table');
@@ -97,7 +97,7 @@ class Transaksi extends MY_Controller
 		$this->data['js'] .= "<script> var options={format: 'dd-mm-yyyy',todayHighlight: true,autoclose: true, daysOfWeekDisabled: '0',daysOfWeekHighlighted: '0',language: 'id',locale: 'id',};$('.kewarganegaraan').select2();$('.tgl-lahir').datepicker(options);</script>";
 
 
-		$tiket = $this->input->post('id_tiket');
+		$tiket = $this->input->get('choose');
 		$this->data['detail_tiket'] = $this->M_transaksi->getDetailTiket($tiket);
 		$this->data['jenis_penumpang'] = $this->M_transaksi->getJenisPenumpang();
 
@@ -114,6 +114,18 @@ class Transaksi extends MY_Controller
 
 		$this->display($this->data);
 		// 
+	}
+
+	function getHarga(){
+		$id_tiket = $this->input->post('id');
+		$jenis_penumpang = $this->input->post('jenis');
+
+		$select = $this->db->select('hrg_tiket')
+				 ->where('id_tiket', $id_tiket)
+				 ->where('jenis_penumpang', $jenis_penumpang)
+				 ->get('detail_tiket')->row();
+		
+		echo $select->hrg_tiket;
 	}
 
 	function final()
