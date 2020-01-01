@@ -80,7 +80,7 @@
 
 
 
-      <div class="col-md-6 col-md-offset-3">
+      <!-- <div class="col-md-6 col-md-offset-3">
             <div class="more-button">
                   <button class="btn btn-default btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Lihat Lainnya </button>
 
@@ -88,7 +88,7 @@
             </div>
       </div>
       <br>
-      <br><br>
+      <br><br> -->
 
 </div>
 <div class="row">

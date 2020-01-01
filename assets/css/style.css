@@ -150,9 +150,26 @@ footer {
   -ms-user-select: none;
   user-select: none;
 }
+/* NAVBAR */
 
-.navbar {
+ul li .menu-label {
+  position: relative;
+  opacity: 1;
+  color: #767676;
+}
+
+.skin-green .main-header .navbar .nav > li > a:hover {
+  color: #000;
   background-color: #fff;
+}
+
+.skin-green .main-header .navbar .nav > li > a {
+  position: relative;
+  opacity: 1;
+  color: #767676;
+}
+.navbar-toggle {
+  color: #000;
 }
 
 /* HOMEPAGE */
