@@ -152,11 +152,11 @@ class Transaksi extends MY_Controller
 
 				$data_penumpang[] = (object) array(
 					'nm_penumpang' => $p,
-					'tgl_lahir' => $this->input->post('tgl_lahir')[$i],
 					'jenis_penumpang' => $this->input->post('penumpang')[$i],
 					'deskripsi_penumpang' => $select_jenis->nama,
-					'no_ktp' => $this->input->post('no_ktp')[$i]
+					'harga' => $this->input->post('hrg_tiket')[$i]
 				);
+				$i++;
 			}
 
 			$this->data['data_penumpang'] = $data_penumpang;
@@ -185,15 +185,20 @@ class Transaksi extends MY_Controller
 		$status = true;
 
 		$total_hrg = 0;
-		foreach ($detail_tiket as $t) {
-			$jml_penumpang = count($data_penumpang);
-			if ($t->jml_seat < $jml_penumpang) {
-				$status &= false;
-			}
+		// foreach ($detail_tiket as $t) {
+		// 	$jml_penumpang = count($data_penumpang);
+		// 	if ($t->jml_seat < $jml_penumpang) {
+		// 		$status &= false;
+		// 	}
 
-			$total_hrg += $t->harga;
+		// 	$total_hrg += $t->harga;
+		// }
+
+		foreach ($data_penumpang as $p) {
+			$total_hrg += $p->harga;
 		}
-		$total_hrg *= count($data_penumpang);
+
+		// $total_hrg *= count($data_penumpang);
 
 		$customer = array(
 			'nama_customer' => $pemesan->nama_pemesan,
@@ -216,50 +221,39 @@ class Transaksi extends MY_Controller
 			if ($status &= $this->db->insert('transaksi', $transaksi)) {
 				$id_transaksi = $this->db->insert_id();
 
-				foreach ($detail_tiket as $t) {
-					$detail_transaksi[] = array(
-						'id_tiket' => $t->id_tiket,
-						'id_transaksi' => $id_transaksi,
-						'hrg_tiket' => $t->harga
-					);
-				}
+				// update data tiket
+				// if ($status) {
+				// 	foreach ($detail_tiket as $t) {
+				// 		$buyer = $this->M_transaksi->getBuyer($t->id_tiket);
+				// 		$tiket = array('jml_seat' => $t->jml_seat - $jml_penumpang);
 
-				$status &= $this->db->insert_batch('detail_transaksi', $detail_transaksi);
+				// 		switch ($buyer) {
+				// 			case 10:
+				// 				$tiket['harga'] = $t->harga + 150000;
+				// 				break;
+				// 			case 30:
+				// 				$tiket['harga'] = $t->harga + 150000;
+				// 				break;
+				// 			case 50:
+				// 				$tiket['harga'] = $t->harga + 150000;
+				// 				break;
+				// 			case 90:
+				// 				$tiket['harga'] = $t->harga + 150000;
+				// 				break;
+				// 			case 120:
+				// 				$tiket['harga'] = $t->harga + 150000;
+				// 				break;
+				// 		}
 
-				if ($status) {
-					foreach ($detail_tiket as $t) {
-						$buyer = $this->M_transaksi->getBuyer($t->id_tiket);
-						$tiket = array('jml_seat' => $t->jml_seat - $jml_penumpang);
-
-						switch ($buyer) {
-							case 10:
-								$tiket['harga'] = $t->harga + 150000;
-								break;
-							case 30:
-								$tiket['harga'] = $t->harga + 150000;
-								break;
-							case 50:
-								$tiket['harga'] = $t->harga + 150000;
-								break;
-							case 90:
-								$tiket['harga'] = $t->harga + 150000;
-								break;
-							case 120:
-								$tiket['harga'] = $t->harga + 150000;
-								break;
-						}
-
-						$status &= $this->db->update('tiket', $tiket, array('id_tiket' => $t->id_tiket));
-					}
-				}
+				// 		$status &= $this->db->update('tiket', $tiket, array('id_tiket' => $t->id_tiket));
+				// 	}
+				// }
 
 				foreach ($data_penumpang as $p) {
 					$penumpang[] = array(
 						'id_transaksi' => $id_transaksi,
 						'nama_penumpang' => $p->nm_penumpang,
-						'tgl_lahir' => $p->tgl_lahir,
 						'jenis_penumpang' => $p->jenis_penumpang,
-						'nik' => $p->no_ktp,
 					);
 				}
 

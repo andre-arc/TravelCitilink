@@ -176,15 +176,44 @@ $(document).ready(function(){
     $table.find("select").on('change', function (e) {
         var id_tiket = <?= $detail_tiket[0]->id_tiket ?>;
         var jenis_penumpang = e.target.value;
+        var select = $(this);
         $.ajax({
             type: "POST",
             url: '<?= base_url('transaksi/getHarga') ?>',
             dataType: "json",
             data: {id:id_tiket, jenis:jenis_penumpang},
             success: function(data){
-               console.log($(e).closest('tr'));
+               select.closest('tr').find(".harga-tiket").val(data)
+               $("span.harga").text(getTotalHrg())
             }
         });
     });
 })
+
+function getTotalHrg(){
+    var total = 0;
+    $(".harga-tiket").map(function(){
+        total += parseInt($(this).val());
+    });
+
+    return formatRupiah(total.toString(), 'Rp. ');
+}
+
+/* Fungsi formatRupiah */
+function formatRupiah(angka, prefix){
+    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+    split   		= number_string.split(','),
+    sisa     		= split[0].length % 3,
+    rupiah     		= split[0].substr(0, sisa),
+    ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if(ribuan){
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
 </script>
