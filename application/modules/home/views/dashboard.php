@@ -29,7 +29,7 @@
 
             <div class="col-lg-3 col-md-6 hero-feature">
                   <div class="thumbnail">
-                        <img src="http://placehold.it/800x500" alt="">
+                        <img src="<?php echo base_url('/assets/image/paket1.jpg') ?>" alt="">
                         <div class="caption">
                               <h3>Feature Label</h3>
                               <p>This would be a great spot to feature some brand new products!</p>
@@ -41,7 +41,7 @@
 
             <div class="col-lg-3 col-md-6 hero-feature">
                   <div class="thumbnail">
-                        <img src="http://placehold.it/800x500" alt="">
+                        <img src="<?php echo base_url('/assets/image/paket2.jpg') ?>" alt="">
                         <div class="caption">
                               <h3>Feature Label</h3>
                               <p>This would be a great spot to feature some brand new products!</p>
@@ -53,7 +53,7 @@
 
             <div class="col-lg-3 col-md-6 hero-feature">
                   <div class="thumbnail">
-                        <img src="http://placehold.it/800x500" alt="">
+                        <img src="<?php echo base_url('/assets/image/paket3.jpg') ?>" alt="">
                         <div class="caption">
                               <h3>Feature Label</h3>
                               <p>This would be a great spot to feature some brand new products!</p>
@@ -65,7 +65,7 @@
 
             <div class="col-lg-3 col-md-6 hero-feature">
                   <div class="thumbnail">
-                        <img src="http://placehold.it/800x500" alt="">
+                        <img src="<?php echo base_url('/assets/image/paket4.jpg') ?>" alt="">
                         <div class="caption">
                               <h3>Feature Label</h3>
                               <p>This would be a great spot to feature some brand new products!</p>
@@ -80,7 +80,7 @@
 
 
 
-      <div class="col-md-6 col-md-offset-3">
+      <!-- <div class="col-md-6 col-md-offset-3">
             <div class="more-button">
                   <button class="btn btn-default btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Lihat Lainnya </button>
 
@@ -88,7 +88,7 @@
             </div>
       </div>
       <br>
-      <br><br>
+      <br><br> -->
 
 </div>
 <div class="row">

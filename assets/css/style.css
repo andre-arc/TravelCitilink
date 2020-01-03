@@ -2,6 +2,10 @@
 /* footer { background-color:#0c1a1e; min-height:350px; font-family: 'Open Sans', sans-serif; }
 .footerleft { margin-top:50px; padding:0 36px; }
 .logofooter { margin-bottom:10px; font-size:25px; color:#fff; font-weight:700;} */
+body,
+html {
+  font-family: OpenSans-Regular, Arial, Helvetica, Sans-serif !important;
+}
 .footerleft p {
   color: #fff;
   font-size: 12px !important;
@@ -35,6 +39,19 @@
 .footer-ul li a:hover {
   transition: color 0.2s linear 0s, background 0.2s linear 0s;
   color: #ff670f;
+}
+
+/* FOOTER */
+
+.py-3 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+footer {
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  border-top: 1px solid #dee2e6 !important;
 }
 
 .social:hover {
@@ -104,9 +121,12 @@
 }
 
 .harga {
-  font-size: 48px;
-  color: rgb(45, 251, 45);
-  text-align: center;
+  font-size: 25px;
+  font-family: OpenSans-SemiBold, Arial, Helvetica, Sans-serif;
+  color: #0064d2;
+  margin-bottom: 29px;
+  position: relative;
+  text-align: right;
 }
 
 .satuan {
@@ -133,9 +153,26 @@
   -ms-user-select: none;
   user-select: none;
 }
+/* NAVBAR */
 
-.navbar {
+ul li .menu-label {
+  position: relative;
+  opacity: 1;
+  color: #767676;
+}
+
+.skin-green .main-header .navbar .nav > li > a:hover {
+  color: #000;
   background-color: #fff;
+}
+
+.skin-green .main-header .navbar .nav > li > a {
+  position: relative;
+  opacity: 1;
+  color: #767676;
+}
+.navbar-toggle {
+  color: #000;
 }
 
 /* HOMEPAGE */
