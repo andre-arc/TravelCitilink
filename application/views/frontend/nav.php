@@ -44,7 +44,7 @@
 						<?php if ($this->ion_auth->logged_in()) : ?>
 							<a href="<?php echo site_url('dashboard/'); ?>"><i class="fa fa-cogs"></i>&nbsp;Dashboard</a>
 						<?php else : ?>
-							<a href="<?php echo site_url('acl/login/'); ?>"><i class="fa fa-power-off"></i>&nbsp;Login</a>
+							<a href="<?php echo site_url('acl/login/'); ?>">&nbsp;Login</a>
 						<?php endif; ?>
 					</li>
 				</ul>

@@ -129,6 +129,14 @@ footer {
   text-align: right;
 }
 
+.time {
+  font-size: 20px;
+  font-weight: bold;
+  color: #111;
+  padding: 10px !important;
+  text-align: center !important;
+}
+
 .satuan {
   font-size: 20px;
 }

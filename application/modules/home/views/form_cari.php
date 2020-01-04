@@ -1,15 +1,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="panel">
-      <div class="panel-heading bg-blue clearfix">
-        <span class="pull-left">
-          <i class="fa fa-plus-square"></i>&nbsp;SEARCH TICKET
-        </span>
-        <span class="pull-right">
-          <?php echo modules::run('acl/widget/group_org_user'); ?>
-        </span>
-      </div>
-
+      <h4>Search Tiket</h4>
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
@@ -60,21 +52,31 @@
   </div>
   <script>
     var tomorrow = new Date().getDate() + 1;
-    var options={format: 'dd-mm-yyyy',todayHighlight: false,autoclose: true, daysOfWeekDisabled: '0',daysOfWeekHighlighted: '0',language: 'id',locale: 'id',startDate:"+1d"};
+    var options = {
+      format: 'dd-mm-yyyy',
+      todayHighlight: false,
+      autoclose: true,
+      daysOfWeekDisabled: '0',
+      daysOfWeekHighlighted: '0',
+      language: 'id',
+      locale: 'id',
+      startDate: "+1d"
+    };
 
-    $(document).ready(function() { 
+    $(document).ready(function() {
       $("#tgl_kembali").attr('readonly', true);
-      $('#asal').select2();$('#tujuan').select2();
+      $('#asal').select2();
+      $('#tujuan').select2();
       $('#tgl_berangkat').datepicker(options);
-    }); 
+    });
 
     $('#checkout').hide();
 
     $('#pp').change(function() {
-      if($(this).is(":checked")) {
+      if ($(this).is(":checked")) {
         $("#tgl_kembali").attr('readonly', false);
         $('#tgl_kembali').datepicker(options);
-      }else{
+      } else {
         $("#tgl_kembali").attr('readonly', true);
         $('#tgl_kembali').datepicker('update', '');
         $('#tgl_kembali').datepicker('destroy');
