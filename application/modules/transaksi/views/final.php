@@ -30,15 +30,17 @@
                     <hr>
                     <?php
                          $total_hrg = 0;
-                foreach ($detail_tiket as $t) {
-                $total_hrg += $t->harga;
-                ?>
-                    Keberangkatan : <?= $t->kota_asal."(".$t->dari.")"." -> ".$t->kota_tujuan."(".$t->tujuan.")" ?> <br>
-                    Waktu         : <?= $t->tgl_berangkat.' '.$t->waktu  ?> <br>
-                    <hr>
-                <?php
-                }
-                ?>
+                         foreach ($data_penumpang as $p) {
+                            $total_hrg += $p->harga;
+                         }
+                        foreach ($detail_tiket as $t) {
+                        ?>
+                            Keberangkatan : <?= $t->kota_asal."(".$t->dari.")"." -> ".$t->kota_tujuan."(".$t->tujuan.")" ?> <br>
+                            Waktu         : <?= $t->tgl_berangkat.' '.$t->waktu  ?> <br>
+                            <hr>
+                        <?php
+                        }
+                        ?>
 
                     <br>
                     <div class="col-md-4">
@@ -48,6 +50,7 @@
                                 <th>No</th>
                                 <th>Nama Penumpang</th>
                                 <th>Jenis</th>
+                                <th>Harga</th>
                             </tr>
                         </thead>
 
@@ -60,6 +63,7 @@
                                 <td><?= $no ?></td>
                                 <td><?= $p->nm_penumpang ?></td>
                                 <td><?= $p->deskripsi_penumpang ?></td>
+                                <td><?= $p->harga ?></td>
                             </tr>
                             <?php
                             $no++;
@@ -70,7 +74,7 @@
                     </div>
                     <div class="col-md-12">
                     <hr>
-                    <span class="harga pull-right">IDR <?= convertToRupiah($total_hrg*count($data_penumpang)) ?></span>
+                    <span class="harga pull-right">IDR <?= convertToRupiah($total_hrg) ?></span>
                     </div>
                     
                 </div>
