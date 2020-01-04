@@ -177,6 +177,13 @@ class Transaksi extends MY_Controller
 		$detail_tiket = json_decode($this->input->post('detail_tiket'));
 		$data_penumpang = json_decode($this->input->post('data_penumpang'));
 		$pemesan = json_decode($this->input->post('pemesan'));
+
+		$data = array(
+			'tiket' => $detail_tiket,
+			'penumpang' =>  $data_penumpang,
+			'pemesan' => $pemesan
+		);
+
 		if ($this->ion_auth->logged_in()) {
 			$org_id = $this->session->userdata('user_org');
 		} else {
@@ -198,6 +205,8 @@ class Transaksi extends MY_Controller
 			$total_hrg += $p->harga;
 		}
 
+		$data['total_hrg'] = $total_hrg;
+
 		// $total_hrg *= count($data_penumpang);
 
 		$customer = array(
@@ -217,6 +226,7 @@ class Transaksi extends MY_Controller
 				'total_hrg' => $total_hrg,
 				'kode' => $token
 			);
+			$data['order_id'] = $token;
 
 			if ($status &= $this->db->insert('transaksi', $transaksi)) {
 				$id_transaksi = $this->db->insert_id();
@@ -276,9 +286,14 @@ class Transaksi extends MY_Controller
 					'total_hrg' => $total_hrg
 				);
 
-				if ($this->__kirimDetailTransaksi($pemesan->email, $detail_email)) {
-					redirect('home/konfirmasi');
-				}
+				// if ($this->__kirimDetailTransaksi($pemesan->email, $detail_email)) {
+					$url = $this->__generate_vtweb($data);			
+					$update_data = array('url_bayar'=> $vtweb_url);
+					$update = $this->db->update('transaksi', $update_data, array('id_transaksi' => $id_transaksi));
+					if(update){
+						redirect($url);
+					}
+				// }
 			}
 		}
 	}
@@ -341,6 +356,75 @@ class Transaksi extends MY_Controller
 
 		$this->data['content'] = $this->load->view('detail', $this->data, true);
 		$this->display($this->data);
+	}
+
+	function __generate_vtweb($data){
+		$params = array('server_key' => 'SB-Mid-server-sFpG2wSCF1POs-mwEr7qd3E-', 'production' => false);
+		$this->load->library('veritrans');
+		$this->veritrans->config($params);
+
+		$transaction_details = array(
+			'order_id' 			=> $data['order_id'],
+			'gross_amount' 	=> $data['total_hrg']
+		);
+
+		// Populate items
+		$items = array();
+
+		foreach($data['tiket'] as $t);
+		foreach($data['penumpang'] as $p){
+			$items[] = array(
+				'id' 			=> $t->id_tiket,
+				'price' 		=> $p->harga,
+				'quantity' 		=> 1,
+				'name' 			=> 'Tiket Kapal ('.$p->deskripsi_penumpang.')'
+			);
+		}
+
+		$nama_customer = explode(" ", $data['pemesan']->nama_pemesan);
+
+		// Populate customer's billing address
+		$billing_address = array(
+			'first_name' 		=> $nama_customer[0] ? $nama_customer[0] : '',
+			'last_name' 		=> $nama_customer[1] ? $nama_customer[1] : '',
+			'phone' 			=> $data['pemesan']->no_hp,
+			'country_code'		=> 'IDN'
+			);
+
+	
+
+		// Populate customer's Info
+		$customer_details = array(
+			'first_name' 		=> $nama_customer[0] ? $nama_customer[0] : '',
+			'last_name' 		=> $nama_customer[1] ? $nama_customer[1] : '',
+			'email' 			=> $data['pemesan']->email,
+			'phone' 			=> $data['pemesan']->no_hp,
+			'billing_address' 	=> $billing_address,
+			);
+
+		// Data yang akan dikirim untuk request redirect_url.
+		// Uncomment 'credit_card_3d_secure' => true jika transaksi ingin diproses dengan 3DSecure.
+		$transaction_data = array(
+			'payment_type' 			=> 'vtweb', 
+			'vtweb' 						=> array(
+				//'enabled_payments' 	=> ['credit_card'],
+				'credit_card_3d_secure' => true
+			),
+			'transaction_details'=> $transaction_details,
+			'item_details' 			 => $items,
+			'customer_details' 	 => $customer_details
+		);
+	
+		try
+		{
+			$vtweb_url = $this->veritrans->vtweb_charge($transaction_data);
+			return $vtweb_url;
+		} 
+		catch (Exception $e) 
+		{
+    		echo $e->getMessage();	
+		}
+
 	}
 
 	public function bayar($id_transaksi)
