@@ -23,15 +23,7 @@
                                     <div class="form-group">
                                         <label class="control-label">Nama Pemesan</label>
                                         <input class="form-control" type="text" name="nm_pemesan" required>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="control-label">No Telp</label>
-                                        <input class="form-control" type="text" name="no_hp" required>
+                                        <div class="info-list-autocomplete">Seperti di KTP/Paspor/SIM (tanpa tanda baca dan gelar).</div>
                                     </div>
                                 </div>
                             </div>
@@ -41,6 +33,15 @@
                                     <div class="form-group">
                                         <label class="control-label">Email</label>
                                         <input class="form-control" type="email" name="email" required>
+                                        <p class="info-list-autocomplete">Detail pemesanan akan kami kirim ke email ini.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Nomor Ponsel</label>
+                                        <input class="form-control" type="text" name="no_hp" required>
                                     </div>
                                 </div>
                             </div>
@@ -53,9 +54,6 @@
                         <div class="panel-heading clearfix">
                             <span class="pull-left labelkonsumen">
                                 &nbsp;Data Penumpang
-                            </span>
-                            <span class="pull-right">
-                                <button class="btn btn-info pull-right add-row">Tambah Penumpang</button>
                             </span>
 
                         </div>
@@ -74,10 +72,12 @@
                                                 <?= form_dropdown('penumpang[]', $jenis_penumpang, '0', 'class="form-control kewarganegaraan penumpang" require') ?>
                                             </div>
                                         </td>
-                                        <td><button type='button' class='btn btn-primary delete-row'><i class='fa fa-times'></i></button></td>
+                                        <td><button type='button' class='btn btn-info delete-row'><i class='fa fa-times'></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <button class="btn btn-block btn-sm btn-info add-row">Tambah Penumpang</button>
+
                         </div>
                     </div>
                 </div>
@@ -93,17 +93,34 @@
                                 <img src="<?= base_url("/assets/image/$t->logo"); ?>" alt="logo" height="100">
                                 <br>
 
-                                <?= $t->dari . " - " . $t->tujuan ?> <br>
+                                <strong><?= $t->dari . " - " . $t->tujuan ?> </strong><br>
                                 Waktu : <?= $t->tgl_berangkat . ' ' . $t->waktu  ?> <br>
                                 <hr>
                             <?php
                             }
                             ?>
-                            <br>
+
+
+                            <!-- <div class="box-body">
+                                <strong>Harga</strong>
+
+                                <p class="text-muted">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Dewasa (x1)
+                                        </div>
+                                        <div class="col-md-6">
+                                            IDR 200000
+                                        </div>
+                                    </div>
+
+                                </p>
+
+                            </div> -->
 
                             <span class="harga">IDR <?= convertToRupiah($total_hrg) ?></span> <span class="satuan">/pax</span>
                             <hr>
-                            <button type="submit" class="btn btn-block btn-lg btn-primary">LANJUTKAN</button>
+                            <button type="submit" class="btn btn-block btn-lg btn-info">LANJUTKAN</button>
                         </div>
                     </div>
                 </div>

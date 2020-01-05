@@ -269,3 +269,32 @@ ul li .menu-label {
   padding-bottom: 14px;
   padding-top: 14px;
 }
+
+.info-list-autocomplete {
+  font-family: OpenSans-Regular, Arial, Helvetica, Sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 18px;
+  letter-spacing: normal;
+  color: #8a93a7;
+}
+
+.nametext {
+  font-size: 13px;
+  color: gray;
+  padding-top: 4px;
+}
+
+.text-notice span {
+  color: #0064d2;
+  font-family: OpenSans-SemiBold, Arial, Helvetica, Sans-serif;
+  cursor: pointer;
+}
+
+.text-notice {
+  text-align: end;
+  padding-bottom: 10px;
+  color: #35405a;
+}
