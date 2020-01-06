@@ -54,8 +54,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-3" style="text-align: center;">
-                                            <img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="<?php echo base_url('/assets/image/expressbahari.png'); ?>" alt="logo">
-                                            <h4><?= $r->kapal; ?></h4>
+                                            <img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="<?php echo base_url('/assets/image/'.$r->logo_kapal); ?>" alt="<?= $r->nama_kapal; ?>">
+                                            <h4><?= $r->nama_kapal; ?></h4>
                                             <h5 class="text-center">Executive</h5>
                                         </div>
                                         <div class="col-md-2 time">

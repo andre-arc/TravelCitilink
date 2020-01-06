@@ -1,0 +1,22 @@
+runtime: php55
+api_version: 1
+threadsafe: false
+
+handlers:
+  - url: /user_guide/
+    static_files: user_guide/index.html
+    upload: user_guide/index.html
+
+  - url: /user_guide/(.*)
+    static_files: user_guide/\1
+    upload: user_guide/(.*)
+
+  - url: /static/(.*)
+    static_files: static/\1
+    upload: static/(.*)
+
+  - url: /
+    script: index.php
+
+  - url: /(.+)
+    script: index.php
