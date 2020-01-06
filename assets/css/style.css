@@ -298,3 +298,9 @@ ul li .menu-label {
   padding-bottom: 10px;
   color: #35405a;
 }
+
+/* search */
+
+.search {
+  height: 48px;
+}

@@ -27,57 +27,31 @@
 
       <div class="row text-center">
 
-            <div class="col-lg-3 col-md-6 hero-feature">
-                  <div class="thumbnail">
-                        <img src="<?php echo base_url('/assets/image/paket1.jpg') ?>" alt="">
-                        <div class="caption">
-                              <h3>Feature Label</h3>
-                              <p>This would be a great spot to feature some brand new products!</p>
-                              <p><a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                              </p>
-                        </div>
-                  </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 hero-feature">
+            <div class="col-lg-4 col-md-6 hero-feature">
                   <div class="thumbnail">
                         <img src="<?php echo base_url('/assets/image/paket2.jpg') ?>" alt="">
-                        <div class="caption">
-                              <h3>Feature Label</h3>
-                              <p>This would be a great spot to feature some brand new products!</p>
-                              <p><a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                              </p>
-                        </div>
+
                   </div>
+
             </div>
 
-            <div class="col-lg-3 col-md-6 hero-feature">
+            <div class="col-lg-4 col-md-6 hero-feature">
                   <div class="thumbnail">
                         <img src="<?php echo base_url('/assets/image/paket3.jpg') ?>" alt="">
-                        <div class="caption">
-                              <h3>Feature Label</h3>
-                              <p>This would be a great spot to feature some brand new products!</p>
-                              <p><a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                              </p>
-                        </div>
+
                   </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 hero-feature">
+            <div class="col-lg-4 col-md-6 hero-feature">
                   <div class="thumbnail">
                         <img src="<?php echo base_url('/assets/image/paket4.jpg') ?>" alt="">
-                        <div class="caption">
-                              <h3>Feature Label</h3>
-                              <p>This would be a great spot to feature some brand new products!</p>
-                              <p><a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                              </p>
-                        </div>
+
                   </div>
             </div>
 
 
       </div>
-
+      <br><br><br>
 
 
       <!-- <div class="col-md-6 col-md-offset-3">
