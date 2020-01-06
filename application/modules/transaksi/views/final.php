@@ -24,16 +24,18 @@
                             <div class="row invoice-info">
                                 <div class="col-sm-6 invoice-col">
 
-                                    <address>
-                                        <strong><?= $pemesan->nama_pemesan ?>.</strong><br>
-                                        Phone: <?= $pemesan->no_hp ?><br>
-                                        Email: <?= $pemesan->email ?>
-                                    </address>
+
+                                    <blockquote>
+                                        <strong style="letter-spacing: 3px;line-height: -2px;"><?= $pemesan->nama_pemesan ?></strong><br>
+                                        <p style="font-size: 14px;color: grey;letter-spacing: 1px;"> Phone: <?= $pemesan->no_hp ?><br>
+                                        </p>
+                                    </blockquote>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-6 invoice-col" style="text-align: end;">
                                     <br>
-                                    <b>Payment Due:</b> 2/22/2014<br>
+                                    <small> Email: <cite style="letter-spacing: 2px;" title="<?= $pemesan->email ?>"> <?= $pemesan->email ?></cite></small>
+
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -58,7 +60,7 @@
                                                 <td><?= $no ?></td>
                                                 <td><?= $p->nm_penumpang ?></td>
                                                 <td><?= $p->deskripsi_penumpang ?> (x1)</td>
-                                                <td><?= $p->harga ?></td>
+                                                <td><?= convertToRupiah($p->harga); ?></td>
                                             </tr>
                                         <?php
                                             $no++;
@@ -75,8 +77,6 @@
                 <div class="col-md-4">
                     <div class="panel">
                         <div class="panel-body text-center">
-
-
                             <?php
                             $total_hrg = 0;
                             foreach ($data_penumpang as $p) {
@@ -84,12 +84,12 @@
                             }
                             foreach ($detail_tiket as $t) {
                             ?>
-                                <img src="<?= base_url("/assets/image/".$t->logo_kapal); ?>" alt="logo" height="100">
+                                <img src="<?= base_url("/assets/image/" . $t->logo_kapal); ?>" alt="logo" height="100">
                                 <br>
 
                                 <strong><?= $t->dari . " - " . $t->tujuan ?> </strong><br>
                                 Waktu : <?= $t->tgl_berangkat . ' ' . $t->waktu  ?> <br>
-                                <hr>
+
                             <?php
                             }
                             ?>
@@ -98,28 +98,24 @@
 
 
 
-                            <!-- <div class="box-body">
-                                <strong>Harga</strong>
-
-                                <p class="text-muted">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            Dewasa (x1)
-                                        </div>
-                                        <div class="col-md-6">
-                                            IDR 200000
-                                        </div>
-                                    </div>
-
-                                </p>
-
-                            </div> -->
+                            <div class="tax-section">
+                                <div class="tax-title">Biaya lainnya</div>
+                                <div class="row text-tax">
+                                    <div class="pull-left">Pajak</div>
+                                    <div class="pull-right">Termasuk</div>
+                                </div>
+                                <div class="row text-tax">
+                                    <div class="pull-left"> Biaya layanan penumpang</div>
+                                    <div class="pull-right text-uppercase"> Gratis</div>
+                                </div>
+                            </div>
+                            <hr>
                             <div class="name">
-                                <span class="nametext pull-left">
-                                    Total Pembayaran
+                                <span class="tax-title pull-left">
+                                    Total
                                 </span>
 
-                                <span class="harga">IDR <?= convertToRupiah($total_hrg) ?></span> <span class="satuan"></span>
+                                <span class="harga pull-right"><?= convertToRupiah($total_hrg) ?></span> <span class="satuan"></span>
                             </div>
 
 
@@ -128,16 +124,70 @@
                 </div>
 
                 <div class="col-md-8">
-                    <div class="text-notice">Dengan menekan tombol, kamu menyetujui <span>Syarat &amp; Ketentuan</span> dari PT. KAI.</div>
-                    <button type="submit" class="btn btn-warning margin pull-right">Lanjutkan Ke Pembayaran</button>
-                    <a href="<?= base_url('dashboard') ?>" class="btn btn-default margin pull-right">Edit</a>
+                    <div class="text-notice">Dengan menekan tombol, kamu menyetujui <span><a style="color:#4141ac;font-weight: bold;" type="button" data-toggle="modal" data-target="#myModal">
+                                Syarat & Ketentuan
+                            </a></span> dari TourisTix.id</div>
+                    <button type="submit" class="btn btn-warning btn-lg margin pull-right ">Lanjutkan Ke Pembayaran</button>
                 </div>
             </form>
         </div>
 
     </section>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Syarat & Ketentuan</h4>
+            </div>
+            <div class="modal-body" style="color: grey;">
+                <!-- wp:list {"ordered":true} -->
+                <ol>
+                    <li>Permohonan pembatalan
+                        dapat dilakukan di laman touristix.id atau loket pelabuhan
+                        selambat-lambatnya 24 Jam sebelum jadwal keberangkatan Kapal sebagaimana
+                        tercantum dalam tiket yang telah dibeli dengan dikenakan bea pembatalan
+                        sebesar 25%.</li>
+                    <li>Permohonan pembatalan
+                        kurang dari 24 jam sebelum jadwal keberangkatan kapal maka tiket hangus,
+                        tidak ada pengembalian bea</li>
+                    <li>Pengembalian bea tiket
+                        yang dibatalkan dilakukan secara tunai di pelabuhan yang ditunjuk atau
+                        ditransfer ke rekening pemohon pembatalan dengan biaya transfer ditanggung
+                        TourisTix.id pada hari ke-30 sampai dengan hari ke-60 setelah permohonan
+                        pembatalan.</li>
+                    <li>Pembatalan yang
+                        diakibatkan tidak terselenggaranya angkutan karena alasan operasional,
+                        maka bea tiket di luar bea pesan dikembalikan penuh secara tunai.</li>
+                    <li>Permohonan perubahan
+                        jadwal dapat dilakukan di pelabuhan, selambat-lambatnya 24 jam sebelum
+                        jadwal keberangkatan kapal sebagaimana tercantum dalam tiket yang telah
+                        dibeli dengan dikenakan bea perubahan jadwal sebesar 25%.</li>
+                    <li>Perubahan jadwal dapat
+                        dilakukan terhadap kapal dengan tingkat tarif yang sama atau lebih tinggi,
+                        jika dilakukan terhadap kapal dengan tingkat tarif lebih rendah, maka
+                        tidak ada pengembalian bea.</li>
+                    <li>Larangan pengangkutan
+                        diperuntukkan bagi orang dalam keadaan mabuk dan orang yang dapat
+                        mengganggu atau membahayakan penumpang lain, orang yang dihinggapi
+                        penyakit menular, atau orang yang menurut undang-undang dapat dikenakan
+                        peraturan pengasingan untuk kesehatannya</li>
+                </ol>
+                <!-- /wp:list -->
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <script>
+    $('#myModal').on('shown.bs.modal', function() {
+        $('#myInput').focus()
+    })
     // $("select").select2();
 
     var no = 0;

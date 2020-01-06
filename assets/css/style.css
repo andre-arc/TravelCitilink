@@ -121,14 +121,13 @@ footer {
 }
 
 .harga {
+  font-weight: bold;
   font-size: 20px;
   font-family: OpenSans-SemiBold, Arial, Helvetica, Sans-serif;
   color: #0064d2;
   margin-bottom: 8px;
   position: relative;
-  text-align: right;
   letter-spacing: 2px;
-  margin-top: 18px;
 }
 
 .time {
@@ -295,12 +294,34 @@ ul li .menu-label {
 
 .text-notice {
   text-align: end;
-  padding-bottom: 10px;
-  color: #35405a;
+  padding-bottom: 4px;
+  padding-right: 12px;
+  font-size: 16px;
+  color: gray;
 }
 
 /* search */
 
 .search {
   height: 48px;
+}
+
+.tax-section {
+  margin-top: 20px;
+  padding-top: 18px;
+}
+
+.tax-title {
+  text-align: left;
+  font-size: 16px;
+  font-family: OpenSans-SemiBold, Arial, Helvetica, Sans-serif;
+  padding-bottom: 16px;
+  color: #35405a;
+}
+
+.text-tax {
+  font-size: 14px;
+  color: #58627a;
+  margin-bottom: 15px !important;
+  margin: 1px;
 }
