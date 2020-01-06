@@ -2,6 +2,10 @@
 /* footer { background-color:#0c1a1e; min-height:350px; font-family: 'Open Sans', sans-serif; }
 .footerleft { margin-top:50px; padding:0 36px; }
 .logofooter { margin-bottom:10px; font-size:25px; color:#fff; font-weight:700;} */
+body,
+html {
+  font-family: OpenSans-Regular, Arial, Helvetica, Sans-serif !important;
+}
 .footerleft p {
   color: #fff;
   font-size: 12px !important;
@@ -35,6 +39,19 @@
 .footer-ul li a:hover {
   transition: color 0.2s linear 0s, background 0.2s linear 0s;
   color: #ff670f;
+}
+
+/* FOOTER */
+
+.py-3 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+footer {
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  border-top: 1px solid #dee2e6 !important;
 }
 
 .social:hover {
@@ -104,9 +121,23 @@
 }
 
 .harga {
-  font-size: 48px;
-  color: rgb(45, 251, 45);
-  text-align: center;
+  font-size: 20px;
+  font-family: OpenSans-SemiBold, Arial, Helvetica, Sans-serif;
+  color: #0064d2;
+  margin-bottom: 8px;
+  position: relative;
+  text-align: right;
+  letter-spacing: 2px;
+  margin-top: 18px;
+}
+
+.time {
+  font-size: 20px;
+  font-weight: bold;
+  color: #111;
+  text-align: center !important ;
+
+  padding-top: 49px;
 }
 
 .satuan {
@@ -114,8 +145,11 @@
 }
 
 .detail-tiket {
-  font-size: 26px;
+  font-size: 17px;
   text-align: center;
+  font-weight: bold;
+  padding-top: 49px;
+  letter-spacing: 1px;
 }
 
 .waktu {
@@ -133,9 +167,26 @@
   -ms-user-select: none;
   user-select: none;
 }
+/* NAVBAR */
 
-.navbar {
+ul li .menu-label {
+  position: relative;
+  opacity: 1;
+  color: #767676;
+}
+
+.skin-green .main-header .navbar .nav > li > a:hover {
+  color: #000;
   background-color: #fff;
+}
+
+.skin-green .main-header .navbar .nav > li > a {
+  position: relative;
+  opacity: 1;
+  color: #767676;
+}
+.navbar-toggle {
+  color: #000;
 }
 
 /* HOMEPAGE */
@@ -166,6 +217,11 @@
   border-radius: 24px;
   font-size: 16px;
   color: #ff7200;
+}
+
+.tiket_btn {
+  border-radius: 18px;
+  padding: 7px 30px 7px 30px;
 }
 
 /* LANGGANAN */
@@ -207,3 +263,44 @@
 }
 
 /* CHECK TIKET PAGE */
+.labelkonsumen {
+  font-size: 20px;
+  color: #35405a;
+  padding-bottom: 14px;
+  padding-top: 14px;
+}
+
+.info-list-autocomplete {
+  font-family: OpenSans-Regular, Arial, Helvetica, Sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 18px;
+  letter-spacing: normal;
+  color: #8a93a7;
+}
+
+.nametext {
+  font-size: 13px;
+  color: gray;
+  padding-top: 4px;
+}
+
+.text-notice span {
+  color: #0064d2;
+  font-family: OpenSans-SemiBold, Arial, Helvetica, Sans-serif;
+  cursor: pointer;
+}
+
+.text-notice {
+  text-align: end;
+  padding-bottom: 10px;
+  color: #35405a;
+}
+
+/* search */
+
+.search {
+  height: 48px;
+}

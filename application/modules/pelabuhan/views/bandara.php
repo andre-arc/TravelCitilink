@@ -13,17 +13,17 @@
 				</div>
 				<div id="toolbar">
 					<?php if($auth_meta['add']):?>
-						<a id="btn-add" class="btn btn-primary btn-sm" href="<?php echo site_url('bandara/add/');?>" alt="ADD">
+						<a id="btn-add" class="btn btn-primary btn-sm" href="<?php echo site_url('pelabuhan/add/');?>" alt="ADD">
 							<i class="fa fa-plus-circle"></i>&nbsp;Add
 						</a>
 					<?php endif;?>
 					<?php if($auth_meta['edit']):?>
-						<a id="btn-edit" class="btn btn-info btn-sm" href="<?php echo site_url('bandara/edit/');?>" alt="Edit">
+						<a id="btn-edit" class="btn btn-info btn-sm" href="<?php echo site_url('pelabuhan/edit/');?>" alt="Edit">
 							<i class="fa fa-pencil"></i>&nbsp;Edit
 						</a>
 					<?php endif;?>
 					<?php if($auth_meta['del']):?>
-						<a id="btn-del" class="btn btn-danger btn-sm" href="<?php echo site_url('bandara/del/');?>" alt="Del">
+						<a id="btn-del" class="btn btn-danger btn-sm" href="<?php echo site_url('pelabuhan/del/');?>" alt="Del">
 							<i class="fa fa-trash-o"></i>&nbsp;Del
 						</a>
 					<?php endif;?>
@@ -96,13 +96,13 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">Nama Bandara</label>
-								<input type="text" id="nm_bandara" name="nm_bandara" class="form-control input-sm" value="" />
+								<label class="control-label">Nama Pelabuhan</label>
+								<input type="text" id="nm_pelabuhan" name="nm_pelabuhan" class="form-control input-sm" value="" />
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">Kode Bandara</label>
+								<label class="control-label">Kode Pelabuhan</label>
 								<input type="text" id="kode" name="kode" class="form-control input-sm" value="" placeholder="contoh : BTJ" />
 								<small class="form-text text-muted" id="cek-nama"></small>
 							</div>
@@ -146,7 +146,7 @@
 			pagination:true,
 			search:true,
 			pageSize:10,
-			url: SITE_URL+'/bandara/get_json/',
+			url: SITE_URL+'/pelabuhan/get_json/',
 			singleSelect:true,
 			columns: [
 			{
@@ -157,13 +157,13 @@
 			},
 			{
 				field: 'kode',
-				title: 'Kode Bandara',
+				title: 'Kode Pelabuhan',
 				halign:'center',
 				sortable:true
 			},
 			{
-				field: 'nm_bandara',
-				title: 'Nama Bandara',
+				field: 'nm_pelabuhan',
+				title: 'Nama Pelabuhan',
 				halign:'center',
 				sortable:true
 			},
@@ -227,7 +227,7 @@
 				//load row
 				$('#id').val(rowSel[0].id);
 				$('#kode').val(rowSel[0].kode);
-				$('#nm_bandara').val(rowSel[0].nm_bandara);
+				$('#nm_pelabuhan').val(rowSel[0].nm_pelabuhan);
 				$('#keterangan').val(rowSel[0].keterangan);
 				$('#id_negara').val(rowSel[0].id_negara).trigger('change');
 				$('#id_provinsi').val(rowSel[0].id_provinsi).trigger('change');
@@ -244,7 +244,7 @@
 		<?php if(($auth_meta['add'])||($auth_meta['edit'])):?>
 			$('#frm-wil-gp').submit(function(e){
 				var form_data=$("#frm-wil-gp").serialize();
-				var url_form = ($('#act').val()=='edit') ? SITE_URL+"/bandara/act_edit/" : SITE_URL+"/bandara/act_add/";
+				var url_form = ($('#act').val()=='edit') ? SITE_URL+"/pelabuhan/act_edit/" : SITE_URL+"/pelabuhan/act_add/";
 				$.ajax({
 					type: "POST",
 					url: url_form,
@@ -304,7 +304,7 @@
 				}).then(function () {
 					$.ajax({
 						type: "POST",
-						url: SITE_URL+"/bandara/act_del/",
+						url: SITE_URL+"/pelabuhan/act_del/",
 						dataType: "json",
 						data: {id:rowSel[0].id},
 						success: function(data){
@@ -331,7 +331,7 @@
 		$('#negara').change(function(){
 			var id=$(this).val();
 			$.ajax({
-				url : "<?php echo base_url();?>index.php/bandara/get_provinsi",
+				url : "<?php echo base_url();?>index.php/pelabuhan/get_provinsi",
 				method : "POST",
 				data : {id: id},
 				async : false,
@@ -354,7 +354,7 @@
 		$('#negara').change(function(){
 			var id=$(this).val();
 			$.ajax({
-				url : "<?php echo base_url();?>index.php/bandara/get_kota",
+				url : "<?php echo base_url();?>index.php/pelabuhan/get_kota",
 				method : "POST",
 				data : {id: id},
 				async : false,

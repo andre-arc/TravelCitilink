@@ -1,131 +1,184 @@
+<div class="container" style="padding:15px 15px;">
+    <section class="content">
+        <div class="row">
+            <!--  <?php //include_once('count.php'); 
+                    ?> -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <form role="form" id="form-detail" name="frm-wil-gp" method="POST" action="<?= base_url('transaksi/proses') ?>">
 
-<section class="content">
-      <div class="row">
-       <!--  <?php //include_once('count.php'); ?> -->
-      </div>
-      <!-- /.row -->
-	<div class="row">
-    <form role="form" id="form-detail" name="frm-wil-gp" method="POST" action="<?= base_url('transaksi/proses') ?>">
+                <input type="hidden" name="act" id="act" value="" />
+                <input type="hidden" name="detail_tiket" value='<?= json_encode($detail_tiket) ?>'>
+                <input type="hidden" name="data_penumpang" value='<?= json_encode($data_penumpang) ?>'>
+                <input type="hidden" name="pemesan" value='<?= json_encode($pemesan) ?>'>
 
-        <input type="hidden" name="act" id="act" value="" />
-        <input type="hidden" name="detail_tiket" value='<?= json_encode($detail_tiket) ?>'>
-        <input type="hidden" name="data_penumpang" value='<?= json_encode($data_penumpang) ?>'>
-        <input type="hidden" name="pemesan" value='<?= json_encode($pemesan) ?>'>
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-heading clearfix">
+                            <span class="pull-left labelkonsumen">
+                                &nbsp;Review Pesanan
+                            </span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row invoice-info">
+                                <div class="col-sm-6 invoice-col">
 
-		<div class="col-md-12">
-            <div class="panel">
-                <div class="panel-heading bg-blue clearfix">
-                    <span class="pull-left">
-                        <i class="fa fa-plus-square"></i>&nbsp;FINALISASI TRANSAKSI 
-                    </span>
-                    <span class="pull-right">
-                        <?php echo modules::run('acl/widget/group_org_user');?>
-                    </span>
-                 </div>
-                <div class="panel-body">
-                
-					
-                    Nama : <?= $pemesan->nama_pemesan ?>
+                                    <address>
+                                        <strong><?= $pemesan->nama_pemesan ?>.</strong><br>
+                                        Phone: <?= $pemesan->no_hp ?><br>
+                                        Email: <?= $pemesan->email ?>
+                                    </address>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-6 invoice-col" style="text-align: end;">
+                                    <br>
+                                    <b>Payment Due:</b> 2/22/2014<br>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <br>
+                            <hr>
+                            <div class="col-xs-12 table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Penumpang #</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        foreach ($data_penumpang as $p) {
+                                        ?>
+                                            <tr>
+                                                <td><?= $no ?></td>
+                                                <td><?= $p->nm_penumpang ?></td>
+                                                <td><?= $p->deskripsi_penumpang ?> (x1)</td>
+                                                <td><?= $p->harga ?></td>
+                                            </tr>
+                                        <?php
+                                            $no++;
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                    <hr>
-                    <?php
-                         $total_hrg = 0;
-                foreach ($detail_tiket as $t) {
-                $total_hrg += $t->harga;
-                ?>
-                    Keberangkatan : <?= $t->kota_asal."(".$t->dari.")"." -> ".$t->kota_tujuan."(".$t->tujuan.")" ?> <br>
-                    Waktu         : <?= $t->tgl_berangkat.' '.$t->waktu  ?> <br>
-                    <hr>
-                <?php
-                }
-                ?>
 
-                    <br>
-                    <div class="col-md-4">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Penumpang</th>
-                            </tr>
-                        </thead>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel">
+                        <div class="panel-body text-center">
 
-                        <tbody>
-                        <?php
-                        $no = 1;
-                        foreach ($data_penumpang as $p) {
-                        ?>
-                            <tr>
-                                <td><?= $no ?></td>
-                                <td><?= $p->nm_penumpang ?></td>
-                            </tr>
+
                             <?php
-                            $no++;
+                            $total_hrg = 0;
+                            foreach ($data_penumpang as $p) {
+                                $total_hrg += $p->harga;
+                            }
+                            foreach ($detail_tiket as $t) {
+                            ?>
+                                <img src="<?= base_url("/assets/image/".$t->logo_kapal); ?>" alt="logo" height="100">
+                                <br>
+
+                                <strong><?= $t->dari . " - " . $t->tujuan ?> </strong><br>
+                                Waktu : <?= $t->tgl_berangkat . ' ' . $t->waktu  ?> <br>
+                                <hr>
+                            <?php
                             }
                             ?>
-                        </tbody>
-                    </table>
+
+
+
+
+
+                            <!-- <div class="box-body">
+                                <strong>Harga</strong>
+
+                                <p class="text-muted">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Dewasa (x1)
+                                        </div>
+                                        <div class="col-md-6">
+                                            IDR 200000
+                                        </div>
+                                    </div>
+
+                                </p>
+
+                            </div> -->
+                            <div class="name">
+                                <span class="nametext pull-left">
+                                    Total Pembayaran
+                                </span>
+
+                                <span class="harga">IDR <?= convertToRupiah($total_hrg) ?></span> <span class="satuan"></span>
+                            </div>
+
+
+                        </div>
                     </div>
-                    <div class="col-md-12">
-                    <hr>
-                    <span class="harga pull-right">IDR <?= convertToRupiah($total_hrg*count($data_penumpang)) ?></span>
-                    </div>
-                    
                 </div>
-                <div class="modal-footer"> 
-                <button type="submit" class="btn btn-primary margin pull-right">Booking</button>
-                <a href="<?= base_url('dashboard')?>" class="btn btn-primary margin pull-right">Batal</a>
-               
+
+                <div class="col-md-8">
+                    <div class="text-notice">Dengan menekan tombol, kamu menyetujui <span>Syarat &amp; Ketentuan</span> dari PT. KAI.</div>
+                    <button type="submit" class="btn btn-warning margin pull-right">Lanjutkan Ke Pembayaran</button>
+                    <a href="<?= base_url('dashboard') ?>" class="btn btn-default margin pull-right">Edit</a>
                 </div>
-                	
-            </div>
-        
             </form>
         </div>
 
-</section>
+    </section>
+</div>
 <script>
-// $("select").select2();
+    // $("select").select2();
 
-    var no=0;
-
-
-
-$(document).on('click', '.add-row', function () {
-
-     ++no;           
-
-    var $table = $('#tabel-penumpang');
-
-    var $lastTr = $table.find('tr:last');    
-
-    $table.find("select").select2("destroy");
+    var no = 0;
 
 
 
-    var $clone = $lastTr.clone(true);
+    $(document).on('click', '.add-row', function() {
 
-    // $clone.find('input').not("input:disabled,input[type=hidden]").val("");
+        ++no;
 
-    
+        var $table = $('#tabel-penumpang');
 
-    $table.find('tbody').append($clone);
+        var $lastTr = $table.find('tr:last');
 
-    $table.find("select").select2();
+        $table.find("select").select2("destroy");
 
-    
 
-});
 
-$(document).on('click', '.delete-row', function () {
+        var $clone = $lastTr.clone(true);
 
-if (no>0){
+        // $clone.find('input').not("input:disabled,input[type=hidden]").val("");
 
-    console.log(--no);
 
-    $(this).closest('tr').remove();
 
-} 
+        $table.find('tbody').append($clone);
 
-});
+        $table.find("select").select2();
+
+
+
+    });
+
+    $(document).on('click', '.delete-row', function() {
+
+        if (no > 0) {
+
+            console.log(--no);
+
+            $(this).closest('tr').remove();
+
+        }
+
+    });
 </script>

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Transaksi extends MY_Admin
+class Transaksi extends MY_Controller
 {
 
 	function __construct()
@@ -86,8 +86,8 @@ class Transaksi extends MY_Admin
 
 	function checkout()
 	{
-		// $this->data['css'] = css_asset('style.css', '');
-		$this->data['css'] = css_asset('select2.min.css', 'select2');
+		$this->data['css'] = css_asset('style.css', '');
+		$this->data['css'] .= css_asset('select2.min.css', 'select2');
 		$this->data['css'] .= css_asset('bootstrap-datepicker.min.css', 'bootstrap-datepicker');
 
 		$this->data['js']  =  js_asset('bootstrap-table.min.js', 'bootstrap-table');
@@ -97,9 +97,10 @@ class Transaksi extends MY_Admin
 		$this->data['js'] .= "<script> var options={format: 'dd-mm-yyyy',todayHighlight: true,autoclose: true, daysOfWeekDisabled: '0',daysOfWeekHighlighted: '0',language: 'id',locale: 'id',};$('.kewarganegaraan').select2();$('.tgl-lahir').datepicker(options);</script>";
 
 
-		$tiket = $this->input->post('id_tiket');
+		$tiket = $this->input->get('choose');
 		$this->data['detail_tiket'] = $this->M_transaksi->getDetailTiket($tiket);
-		$this->data['kewarganegaraan'] = $this->M_transaksi->getCountry();
+		$this->data['jenis_penumpang'] = $this->M_transaksi->getJenisPenumpang();
+
 		$this->data['content'] = $this->load->view('checkout', $this->data, true);
 
 		if ($this->ion_auth->logged_in()) {
@@ -111,12 +112,20 @@ class Transaksi extends MY_Admin
 		$this->db->where('id', $org_id);
 		$org = $this->db->get('orgs')->row();
 
-		if ($this->data['detail_tiket'][0]->harga > $org->jml_kas && $this->ion_auth->logged_in()) {
-			echo "<script>alert('Kas Tidak Mencukupi');window.location = '" . base_url('dashboard') . "';</script>";
-		} else {
-			$this->display($this->data);
-		}
+		$this->display($this->data);
 		// 
+	}
+
+	function getHarga(){
+		$id_tiket = $this->input->post('id');
+		$jenis_penumpang = $this->input->post('jenis');
+
+		$select = $this->db->select('hrg_tiket')
+				 ->where('id_tiket', $id_tiket)
+				 ->where('jenis_penumpang', $jenis_penumpang)
+				 ->get('detail_tiket')->row();
+		
+		echo $select->hrg_tiket;
 	}
 
 	function final()
@@ -139,13 +148,15 @@ class Transaksi extends MY_Admin
 
 			$i = 0;
 			foreach ($this->input->post('nm_penumpang') as $p) {
+				$select_jenis = $this->db->where('id', $this->input->post('penumpang')[$i])->get('jenis_penumpang')->row();
+
 				$data_penumpang[] = (object) array(
 					'nm_penumpang' => $p,
-					'tgl_lahir' => $this->input->post('tgl_lahir')[$i],
-					'kewarganegaraan' => $this->input->post('kewarganegaraan')[$i],
-					'no_pass' => $this->input->post('no_pass')[$i],
-					'no_ktp' => $this->input->post('no_ktp')[$i]
+					'jenis_penumpang' => $this->input->post('penumpang')[$i],
+					'deskripsi_penumpang' => $select_jenis->nama,
+					'harga' => $this->input->post('hrg_tiket')[$i]
 				);
+				$i++;
 			}
 
 			$this->data['data_penumpang'] = $data_penumpang;
@@ -166,6 +177,13 @@ class Transaksi extends MY_Admin
 		$detail_tiket = json_decode($this->input->post('detail_tiket'));
 		$data_penumpang = json_decode($this->input->post('data_penumpang'));
 		$pemesan = json_decode($this->input->post('pemesan'));
+
+		$data = array(
+			'tiket' => $detail_tiket,
+			'penumpang' =>  $data_penumpang,
+			'pemesan' => $pemesan
+		);
+
 		if ($this->ion_auth->logged_in()) {
 			$org_id = $this->session->userdata('user_org');
 		} else {
@@ -174,15 +192,22 @@ class Transaksi extends MY_Admin
 		$status = true;
 
 		$total_hrg = 0;
-		foreach ($detail_tiket as $t) {
-			$jml_penumpang = count($data_penumpang);
-			if ($t->jml_seat < $jml_penumpang) {
-				$status &= false;
-			}
+		// foreach ($detail_tiket as $t) {
+		// 	$jml_penumpang = count($data_penumpang);
+		// 	if ($t->jml_seat < $jml_penumpang) {
+		// 		$status &= false;
+		// 	}
 
-			$total_hrg += $t->harga;
+		// 	$total_hrg += $t->harga;
+		// }
+
+		foreach ($data_penumpang as $p) {
+			$total_hrg += $p->harga;
 		}
-		$total_hrg *= count($data_penumpang);
+
+		$data['total_hrg'] = $total_hrg;
+
+		// $total_hrg *= count($data_penumpang);
 
 		$customer = array(
 			'nama_customer' => $pemesan->nama_pemesan,
@@ -201,55 +226,44 @@ class Transaksi extends MY_Admin
 				'total_hrg' => $total_hrg,
 				'kode' => $token
 			);
+			$data['order_id'] = $token;
 
 			if ($status &= $this->db->insert('transaksi', $transaksi)) {
 				$id_transaksi = $this->db->insert_id();
 
-				foreach ($detail_tiket as $t) {
-					$detail_transaksi[] = array(
-						'id_tiket' => $t->id_tiket,
-						'id_transaksi' => $id_transaksi,
-						'hrg_tiket' => $t->harga
-					);
-				}
+				// update data tiket
+				// if ($status) {
+				// 	foreach ($detail_tiket as $t) {
+				// 		$buyer = $this->M_transaksi->getBuyer($t->id_tiket);
+				// 		$tiket = array('jml_seat' => $t->jml_seat - $jml_penumpang);
 
-				$status &= $this->db->insert_batch('detail_transaksi', $detail_transaksi);
+				// 		switch ($buyer) {
+				// 			case 10:
+				// 				$tiket['harga'] = $t->harga + 150000;
+				// 				break;
+				// 			case 30:
+				// 				$tiket['harga'] = $t->harga + 150000;
+				// 				break;
+				// 			case 50:
+				// 				$tiket['harga'] = $t->harga + 150000;
+				// 				break;
+				// 			case 90:
+				// 				$tiket['harga'] = $t->harga + 150000;
+				// 				break;
+				// 			case 120:
+				// 				$tiket['harga'] = $t->harga + 150000;
+				// 				break;
+				// 		}
 
-				if ($status) {
-					foreach ($detail_tiket as $t) {
-						$buyer = $this->M_transaksi->getBuyer($t->id_tiket);
-						$tiket = array('jml_seat' => $t->jml_seat - $jml_penumpang);
-
-						switch ($buyer) {
-							case 10:
-								$tiket['harga'] = $t->harga + 150000;
-								break;
-							case 30:
-								$tiket['harga'] = $t->harga + 150000;
-								break;
-							case 50:
-								$tiket['harga'] = $t->harga + 150000;
-								break;
-							case 90:
-								$tiket['harga'] = $t->harga + 150000;
-								break;
-							case 120:
-								$tiket['harga'] = $t->harga + 150000;
-								break;
-						}
-
-						$status &= $this->db->update('tiket', $tiket, array('id_tiket' => $t->id_tiket));
-					}
-				}
+				// 		$status &= $this->db->update('tiket', $tiket, array('id_tiket' => $t->id_tiket));
+				// 	}
+				// }
 
 				foreach ($data_penumpang as $p) {
 					$penumpang[] = array(
 						'id_transaksi' => $id_transaksi,
 						'nama_penumpang' => $p->nm_penumpang,
-						'tgl_lahir' => $p->tgl_lahir,
-						'kewarganegaraan' => $p->kewarganegaraan,
-						'nik' => $p->no_ktp,
-						'no_passport' => $p->no_pass
+						'jenis_penumpang' => $p->jenis_penumpang,
 					);
 				}
 
@@ -272,11 +286,28 @@ class Transaksi extends MY_Admin
 					'total_hrg' => $total_hrg
 				);
 
-				if ($this->__kirimDetailTransaksi($pemesan->email, $detail_email)) {
-					redirect('home/konfirmasi');
-				}
+				// if ($this->__kirimDetailTransaksi($pemesan->email, $detail_email)) {
+					$url = $this->__generate_vtweb($data);			
+					$update_data = array('url_bayar'=> $vtweb_url);
+					$update = $this->db->update('transaksi', $update_data, array('id_transaksi' => $id_transaksi));
+					if(update){
+						redirect($url);
+					}
+				// }
 			}
 		}
+	}
+
+	function success(){
+
+	}
+
+	function pending(){
+		
+	}
+
+	function error(){
+		
 	}
 
 	function __kirimDetailTransaksi($email, $detail_email)
@@ -337,6 +368,75 @@ class Transaksi extends MY_Admin
 
 		$this->data['content'] = $this->load->view('detail', $this->data, true);
 		$this->display($this->data);
+	}
+
+	function __generate_vtweb($data){
+		$params = array('server_key' => 'SB-Mid-server-sFpG2wSCF1POs-mwEr7qd3E-', 'production' => false);
+		$this->load->library('veritrans');
+		$this->veritrans->config($params);
+
+		$transaction_details = array(
+			'order_id' 			=> $data['order_id'],
+			'gross_amount' 	=> $data['total_hrg']
+		);
+
+		// Populate items
+		$items = array();
+
+		foreach($data['tiket'] as $t);
+		foreach($data['penumpang'] as $p){
+			$items[] = array(
+				'id' 			=> $t->id_tiket,
+				'price' 		=> $p->harga,
+				'quantity' 		=> 1,
+				'name' 			=> 'Tiket Kapal ('.$p->deskripsi_penumpang.')'
+			);
+		}
+
+		$nama_customer = explode(" ", $data['pemesan']->nama_pemesan);
+
+		// Populate customer's billing address
+		$billing_address = array(
+			'first_name' 		=> $nama_customer[0] ? $nama_customer[0] : '',
+			'last_name' 		=> $nama_customer[1] ? $nama_customer[1] : '',
+			'phone' 			=> $data['pemesan']->no_hp,
+			'country_code'		=> 'IDN'
+			);
+
+	
+
+		// Populate customer's Info
+		$customer_details = array(
+			'first_name' 		=> $nama_customer[0] ? $nama_customer[0] : '',
+			'last_name' 		=> $nama_customer[1] ? $nama_customer[1] : '',
+			'email' 			=> $data['pemesan']->email,
+			'phone' 			=> $data['pemesan']->no_hp,
+			'billing_address' 	=> $billing_address,
+			);
+
+		// Data yang akan dikirim untuk request redirect_url.
+		// Uncomment 'credit_card_3d_secure' => true jika transaksi ingin diproses dengan 3DSecure.
+		$transaction_data = array(
+			'payment_type' 			=> 'vtweb', 
+			'vtweb' 						=> array(
+				//'enabled_payments' 	=> ['credit_card'],
+				'credit_card_3d_secure' => true
+			),
+			'transaction_details'=> $transaction_details,
+			'item_details' 			 => $items,
+			'customer_details' 	 => $customer_details
+		);
+	
+		try
+		{
+			$vtweb_url = $this->veritrans->vtweb_charge($transaction_data);
+			return $vtweb_url;
+		} 
+		catch (Exception $e) 
+		{
+    		echo $e->getMessage();	
+		}
+
 	}
 
 	public function bayar($id_transaksi)

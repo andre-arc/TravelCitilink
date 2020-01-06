@@ -10,24 +10,16 @@ class M_transaksi extends CI_Model {
 		
 	}
     
-    public function getDetailTiket($data)
+    public function getDetailTiket($id_ticket)
     {
        
-
-       if(is_array($data)){
-        $query = $this->db->query('select t.*,
-                             (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.dari) as kota_asal, 
-                              (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.tujuan) as kota_tujuan 
-                          from tiket as t where t.id_tiket in ("'.implode(',', $data).'")');
-       }else{
-        $query = $this->db->query('select t.*, dt.*,
-        (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.dari) as kota_asal, 
-         (select nm_kota from bandara as b join kota as k on b.id_kota=k.id where b.kode=t.tujuan) as kota_tujuan 
-            from transaksi as tr 
-            join detail_transaksi as dt on dt.id_transaksi=tr.id_transaksi
-            join tiket as t on dt.id_tiket=t.id_tiket
-            where tr.id_transaksi="'.$data.'"');
-       }
+        $query = $this->db->query('select t.*, k.nama as nama_kapal, k.logo as logo_kapal,
+        (select nm_kota from pelabuhan as b join kota as k on b.id_kota=k.id where b.kode=t.dari) as kota_asal, 
+         (select nm_kota from pelabuhan as b join kota as k on b.id_kota=k.id where b.kode=t.tujuan) as kota_tujuan, 
+         (select hrg_tiket from detail_tiket as dtiket join jenis_penumpang as jp on dtiket.jenis_penumpang=jp.id where dtiket.id_tiket=t.id_tiket and jp.nama="Dewasa") as hrg_tiket
+            from tiket as t 
+            join kapal as k on t.id_kapal=k.id
+            where t.id_tiket='.$id_ticket);
 
        $result = $query->result();
        return $result;
@@ -41,6 +33,18 @@ class M_transaksi extends CI_Model {
         
         $result = $this->db->get()->result();
         return $result;
+    }
+
+    public function getJenisPenumpang(){
+        
+        $result = $this->db->get('jenis_penumpang')->result();
+
+        $data[0] = " Pilih Jenis Penumpang ";
+        foreach($result as $r){
+            $data[$r->id] = $r->nama." (".$r->deskripsi.")";
+        }
+
+        return $data;
     }
 
     public function getBuyer($id_tiket){

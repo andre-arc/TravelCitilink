@@ -23,13 +23,7 @@ if(!empty($result)){
                          <br>
                          Tanggal Berangkat : <?= $r->tgl_berangkat ?>
                          </span>
-                       </div>
-                       <div class="col-md-4">
-                        <span class="harga">IDR <?= convertToRupiah($r->harga) ?></span> <span class="satuan">/pax</span>
-                       </div>
-                   
-
-                        
+                       </div>                       
                         </form>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class BandaraModel extends CI_Model {
+class PelabuhanModel extends CI_Model {
 
 	public $variable;
 
@@ -12,7 +12,7 @@ class BandaraModel extends CI_Model {
 
 
   public function get(){
-  	return $this->db->get('bandara');
+  	return $this->db->get('pelabuhan');
   }
 
 
