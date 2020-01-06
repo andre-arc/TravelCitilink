@@ -32,9 +32,7 @@
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-6 invoice-col" style="text-align: end;">
-                                    <b>Invoice #007612</b><br>
                                     <br>
-                                    <b>Order ID:</b> 4F3S8J<br>
                                     <b>Payment Due:</b> 2/22/2014<br>
                                 </div>
                                 <!-- /.col -->
@@ -86,7 +84,7 @@
                             }
                             foreach ($detail_tiket as $t) {
                             ?>
-                                <img src="<?= base_url("/assets/image/$t->logo"); ?>" alt="logo" height="100">
+                                <img src="<?= base_url("/assets/image/".$t->logo_kapal); ?>" alt="logo" height="100">
                                 <br>
 
                                 <strong><?= $t->dari . " - " . $t->tujuan ?> </strong><br>

@@ -90,7 +90,7 @@
                             foreach ($detail_tiket as $t) {
                                 $total_hrg += $t->hrg_tiket;
                             ?>
-                                <img src="<?= base_url("/assets/image/$t->logo"); ?>" alt="logo" height="100">
+                                <img src="<?= base_url("/assets/image/".$t->logo_kapal); ?>" alt="logo" height="100">
                                 <br>
 
                                 <strong><?= $t->dari . " - " . $t->tujuan ?> </strong><br>
