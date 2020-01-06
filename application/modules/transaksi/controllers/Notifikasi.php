@@ -13,7 +13,6 @@ class Notifikasi extends MY_Controller
 
 	function index()
 	{
-		echo 'test notification handler';
 		$json_result = file_get_contents('php://input');
 		$result = json_decode($json_result);
 
@@ -36,27 +35,53 @@ class Notifikasi extends MY_Controller
 		    if($fraud == 'challenge'){
 		      // TODO set payment status in merchant's database to 'Challenge by FDS'
 		      // TODO merchant should decide whether this transaction is authorized or not in MAP
-		      echo "Transaction order_id: " . $order_id ." is challenged by FDS";
+			  echo "Transaction order_id: " . $order_id ." is challenged by FDS";
+			  $this->__proses_notifikasi('challenge', $order_id, $type);
 		      } 
 		      else {
 		      // TODO set payment status in merchant's database to 'Success'
-		      echo "Transaction order_id: " . $order_id ." successfully captured using " . $type;
+			  echo "Transaction order_id: " . $order_id ." successfully captured using " . $type;
+			  $this->__proses_notifikasi('success', $order_id, $type);
 		      }
 		    }
 		  }
 		else if ($transaction == 'settlement'){
 		  // TODO set payment status in merchant's database to 'Settlement'
 		  echo "Transaction order_id: " . $order_id ." successfully transfered using " . $type;
+		  $this->__proses_notifikasi('settlement', $order_id, $type);
 		  } 
 		  else if($transaction == 'pending'){
 		  // TODO set payment status in merchant's database to 'Pending'
 		  echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
+		  $this->__proses_notifikasi('pending', $order_id, $type);
 		  } 
 		  else if ($transaction == 'deny') {
 		  // TODO set payment status in merchant's database to 'Denied'
 		  echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
+		  $this->__proses_notifikasi('denied', $order_id, $type);
+		} else if ($transaction == 'expire') {
+			// TODO set payment status in merchant's database to 'expire'
+			echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is expired.";
+			$this->__proses_notifikasi('expired', $order_id, $type);
+		} else if ($transaction == 'cancel') {
+			// TODO set payment status in merchant's database to 'Denied'
+			echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is canceled.";
+			$this->__proses_notifikasi('denied', $order_id, $type);
 		}
 
 	}
+
+	function __proses_notifikasi($status, $order_id, $payment_type){
+		$data = array(
+			"tipe_bayar" => $payment_type,
+			"status_bayar" => $status
+		);
+
+		// switch($status){
+		// 	case "success": 
+		// 		$data = array(); break;
+		// }
+
+		$update = $this->db->update('transaksi', $data, array('kode' => $order_id));
 	}
 }

@@ -298,6 +298,18 @@ class Transaksi extends MY_Controller
 		}
 	}
 
+	function success(){
+
+	}
+
+	function pending(){
+		
+	}
+
+	function error(){
+		
+	}
+
 	function __kirimDetailTransaksi($email, $detail_email)
 	{
 
