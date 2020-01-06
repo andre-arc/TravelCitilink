@@ -1,219 +1,224 @@
+<div class="container" style="padding:15px 15px;">
+    <section class="content">
+        <div class="row">
+            <!--  <?php //include_once('count.php'); 
+                    ?> -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <form role="form" id="form-detail" name="frm-wil-gp" method="POST" action="<?= base_url('transaksi/final') ?>">
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-heading clearfix">
+                            <span class="pull-left labelkonsumen">&nbsp;Detail Pemesan
+                            </span>
 
-<section class="content">
-      <div class="row">
-       <!--  <?php //include_once('count.php'); ?> -->
-      </div>
-      <!-- /.row -->
-	<div class="row">
-    <form role="form" id="form-detail" name="frm-wil-gp" method="POST" action="<?= base_url('transaksi/final') ?>">
-		<div class="col-md-8">
-            <div class="panel">
-                <div class="panel-heading bg-blue clearfix">
-                    <span class="pull-left">
-                        <i class="fa fa-plus-square"></i>&nbsp;DATA PEMESAN 
-                    </span>
-                    <span class="pull-right">
-                        <?php echo modules::run('acl/widget/group_org_user');?>
-                    </span>
-                 </div>
-                <div class="panel-body">
-                
-					<input type="hidden" name="act" id="act" value="" />
-                    <input type="hidden" name="detail_tiket" value='<?= json_encode($detail_tiket) ?>'>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label class="control-label">Nama Pemesan</label>
-								<input class="form-control" type="text" name="nm_pemesan" required>
-							</div>
-						</div>
-					</div>
-			
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label class="control-label">No Telp</label>
-								<input class="form-control" type="text" name="no_hp" required>
-							</div>
-						</div>
-					</div>
+                        </div>
+                        <div class="panel-body">
 
-                    <div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label class="control-label">Email</label>
-								<input class="form-control" type="email" name="email" required>
-							</div>
-						</div>
-					</div>
-			
-					
-                </div>
-            </div>
+                            <input type="hidden" name="act" id="act" value="" />
+                            <input type="hidden" name="detail_tiket" value='<?= json_encode($detail_tiket) ?>'>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Nama Pemesan</label>
+                                        <input class="form-control" type="text" name="nm_pemesan" required>
+                                        <div class="info-list-autocomplete">Seperti di KTP/Paspor/SIM (tanpa tanda baca dan gelar).</div>
+                                    </div>
+                                </div>
+                            </div>
 
-             <div class="panel">
-                <div class="panel-heading bg-blue clearfix">
-                    <span class="pull-left">
-                        <i class="fa fa-plus-square"></i>&nbsp;DATA PENUMPANG 
-                    </span>
-                    <span class="pull-right">
-                        <?php echo modules::run('acl/widget/group_org_user');?>
-                    </span>
-                 </div>
-                <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                    <button class="btn btn-primary pull-right add-row">Tambah Penumpang</button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input class="form-control" type="email" name="email" required>
+                                        <p class="info-list-autocomplete">Detail pemesanan akan kami kirim ke email ini.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Nomor Ponsel</label>
+                                        <input class="form-control" type="text" name="no_hp" required>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-heading clearfix">
+                            <span class="pull-left labelkonsumen">
+                                &nbsp;Data Penumpang
+                            </span>
+
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover" id="tabel-penumpang">
+                                <tbody>
+                                    <tr>
+                                        <input type="hidden" class="harga-tiket" name="hrg_tiket[]" value="">
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Nama Penumpang" name="nm_penumpang[]" class="form-control" type="text" require>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <?= form_dropdown('penumpang[]', $jenis_penumpang, '0', 'class="form-control kewarganegaraan penumpang" require') ?>
+                                            </div>
+                                        </td>
+                                        <td><button type='button' class='btn btn-info delete-row'><i class='fa fa-times'></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button class="btn btn-block btn-sm btn-info add-row">Tambah Penumpang</button>
+
+                        </div>
                     </div>
                 </div>
-                <br>
+
+                <div class="col-md-4">
+                    <div class="panel">
+                        <div class="panel-body text-center">
+                            <?php
+                            $total_hrg = 0;
+                            foreach ($detail_tiket as $t) {
+                                $total_hrg += $t->hrg_tiket;
+                            ?>
+                                <img src="<?= base_url("/assets/image/$t->logo"); ?>" alt="logo" height="100">
+                                <br>
+
+                                <strong><?= $t->dari . " - " . $t->tujuan ?> </strong><br>
+                                Waktu : <?= $t->tgl_berangkat . ' ' . $t->waktu  ?> <br>
+                                <hr>
+                            <?php
+                            }
+                            ?>
 
 
-                    <table class="table table-hover" id="tabel-penumpang">
-                        <tbody>
-                            <tr>
-                                <input type="hidden" class="harga-tiket" name="hrg_tiket[]" value="">
-                                <td>
-                                <div class="form-group">
-                                    <input placeholder="Nama Penumpang" name="nm_penumpang[]" class="form-control" type="text" require>
-                                </div>
-                                </td>
-                                <td>
-                                <div class="form-group">
-                                    <?= form_dropdown('penumpang[]', $jenis_penumpang, '0', 'class="form-control kewarganegaraan penumpang" require')?>
-                                </div>
-                                </td>
-                                <td><button type='button' class='btn btn-primary delete-row'><i class='fa fa-times'></i></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <!-- <div class="box-body">
+                                <strong>Harga</strong>
+
+                                <p class="text-muted">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            Dewasa (x1)
+                                        </div>
+                                        <div class="col-md-6">
+                                            IDR 200000
+                                        </div>
+                                    </div>
+
+                                </p>
+
+                            </div> -->
+
+                            <span class="harga">IDR <?= convertToRupiah($total_hrg) ?></span> <span class="satuan">/pax</span>
+                            <hr>
+                            <button type="submit" class="btn btn-block btn-lg btn-info">LANJUTKAN</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-        
-        <div class="col-md-4">
-            <div class="panel">
-                <div class="panel-heading bg-blue clearfix">
-                    <span class="pull-left">
-                        <i class="fa fa-plus-square"></i>&nbsp;DETAIL TICKET 
-                    </span>
-                    <span class="pull-right">
-                        <?php echo modules::run('acl/widget/group_org_user');?>
-                    </span>
-                 </div>
-                <div class="panel-body text-center">
-                <img style="" src="https://2.bp.blogspot.com/-kcAFN1pdt2g/VgjjMoip7wI/AAAAAAAAItU/XOkXvNtFe1c/s1600/logo%2Bmaskapai%2Bpenerbangan%2Bcitilink%2Bindonesia.JPG" alt="logo" height="100">
-                <br>
-                <?php
-                $total_hrg = 0;
-                foreach ($detail_tiket as $t) {
-                $total_hrg += $t->hrg_tiket;
-                ?>
-                    Keberangkatan : <?= $t->kota_asal."(".$t->dari.")"." -> ".$t->kota_tujuan."(".$t->tujuan.")" ?> <br>
-                    Waktu         : <?= $t->tgl_berangkat.' '.$t->waktu  ?> <br>
-                    <hr>
-                <?php
-                }
-                ?>
-                <br>
-
-               <span class="harga">IDR <?= convertToRupiah($total_hrg) ?></span> <span class="satuan">/pax</span>
-               <hr>
-               <button type="submit" class="btn btn-block btn-lg btn-primary">LANJUTKAN</button>
-                </div>
-            </div>
-		</div>
-        </form>
-	</div>
-</section>
+    </section>
+</div>
 <script>
-// $("select").select2();
+    // $("select").select2();
 
-    var no=0;
-$(document).on('click', '.add-row', function (e) {
+    var no = 0;
+    $(document).on('click', '.add-row', function(e) {
 
-     ++no;           
+        ++no;
 
-    var $table = $('#tabel-penumpang');
+        var $table = $('#tabel-penumpang');
 
-    var $lastTr = $table.find('tr:last');    
+        var $lastTr = $table.find('tr:last');
 
-    $table.find("select").select2("destroy");
-
-
-
-    var $clone = $lastTr.clone(true);
+        $table.find("select").select2("destroy");
 
 
-     $clone.find('input').not("input:disabled,input[type=hidden]").val("");
 
-    
+        var $clone = $lastTr.clone(true);
 
-    $table.find('tbody').append($clone);
 
-    $table.find("select").select2();
+        $clone.find('input').not("input:disabled,input[type=hidden]").val("");
 
-    
-    e.preventDefault();
 
-});
 
-$(document).on('click', '.delete-row', function () {
+        $table.find('tbody').append($clone);
 
-if (no>0){
+        $table.find("select").select2();
 
-    console.log(--no);
 
-    $(this).closest('tr').remove();
+        e.preventDefault();
 
-} 
+    });
 
-});
+    $(document).on('click', '.delete-row', function() {
 
-$(document).ready(function(){
-    var $table = $('#tabel-penumpang');
+        if (no > 0) {
 
-    $table.find("select").on('change', function (e) {
-        var id_tiket = <?= $detail_tiket[0]->id_tiket ?>;
-        var jenis_penumpang = e.target.value;
-        var select = $(this);
-        $.ajax({
-            type: "POST",
-            url: '<?= base_url('transaksi/getHarga') ?>',
-            dataType: "json",
-            data: {id:id_tiket, jenis:jenis_penumpang},
-            success: function(data){
-               select.closest('tr').find(".harga-tiket").val(data)
-               $("span.harga").text(getTotalHrg())
-            }
+            console.log(--no);
+
+            $(this).closest('tr').remove();
+
+        }
+
+    });
+
+    $(document).ready(function() {
+        var $table = $('#tabel-penumpang');
+
+        $table.find("select").on('change', function(e) {
+            var id_tiket = <?= $detail_tiket[0]->id_tiket ?>;
+            var jenis_penumpang = e.target.value;
+            var select = $(this);
+            $.ajax({
+                type: "POST",
+                url: '<?= base_url('transaksi/getHarga') ?>',
+                dataType: "json",
+                data: {
+                    id: id_tiket,
+                    jenis: jenis_penumpang
+                },
+                success: function(data) {
+                    select.closest('tr').find(".harga-tiket").val(data)
+                    $("span.harga").text(getTotalHrg())
+                }
+            });
         });
-    });
-})
+    })
 
-function getTotalHrg(){
-    var total = 0;
-    $(".harga-tiket").map(function(){
-        total += parseInt($(this).val());
-    });
+    function getTotalHrg() {
+        var total = 0;
+        $(".harga-tiket").map(function() {
+            total += parseInt($(this).val());
+        });
 
-    return formatRupiah(total.toString(), 'Rp. ');
-}
-
-/* Fungsi formatRupiah */
-function formatRupiah(angka, prefix){
-    var number_string = angka.replace(/[^,\d]/g, '').toString(),
-    split   		= number_string.split(','),
-    sisa     		= split[0].length % 3,
-    rupiah     		= split[0].substr(0, sisa),
-    ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
-
-    // tambahkan titik jika yang di input sudah menjadi angka ribuan
-    if(ribuan){
-        separator = sisa ? '.' : '';
-        rupiah += separator + ribuan.join('.');
+        return formatRupiah(total.toString(), 'Rp. ');
     }
 
-    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-}
+    /* Fungsi formatRupiah */
+    function formatRupiah(angka, prefix) {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
 </script>

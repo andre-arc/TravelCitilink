@@ -7,27 +7,28 @@
           <div class="col-md-12">
             <form role="form" id="form-search" method="GET" action="<?php echo base_url() . "home/search"; ?>">
               <div class="col-md-3">
+
                 <div class="form-group">
                   <label>Dari:</label>
-                  <?= form_dropdown('asal', $pelabuhan, '0', 'id="asal" class="form-control"') ?>
+                  <?= form_dropdown('asal', $pelabuhan, '0', ' class="form-control search"') ?>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label>Ke:</label>
-                  <?= form_dropdown('tujuan', $pelabuhan, '0', 'id="tujuan" class="form-control"') ?>
+                  <?= form_dropdown('tujuan', $pelabuhan, '0', ' class="form-control search"') ?>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label>Tanggal Berangkat</label>
-                  <input id="tgl_berangkat" class="form-control" type="text" name="tgl_berangkat">
+                  <input id="tgl_berangkat" class="form-control search" type="text" name="tgl_berangkat">
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label>Tanggal Kembali</label>
-                  <input id="tgl_kembali" class="form-control" type="text" name="tgl_kembali">
+                  <input id="tgl_kembali" class="form-control search" type="text" name="tgl_kembali">
                   <input type="checkbox" type="text" name="pp" id="pp"> Kembali
                 </div>
               </div>
