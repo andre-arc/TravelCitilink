@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://';
 $newurl = str_replace("index.php","", $_SERVER['SCRIPT_NAME']);
-$config['base_url']    = "$http" . $_SERVER['SERVER_NAME'] . "" . $newurl;
+$config['base_url']    = "$http" . $_SERVER['HTTP_HOST'] . "" . $newurl;
 
 
 
@@ -759,13 +759,13 @@ $config['encryption_key'] = 'gassubsidi2018';
 
 */
 
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = 'database';
 
-$config['sess_cookie_name'] = 'simkeu_sess';
+$config['sess_cookie_name'] = 'touristix_sess';
 
 $config['sess_expiration'] = 7200;
 
-$config['sess_save_path'] = APPPATH.'ci_sessions/'; //NULL;
+$config['sess_save_path'] = 'ci_sessions'; //NULL;
 
 $config['sess_match_ip'] = FALSE;
 

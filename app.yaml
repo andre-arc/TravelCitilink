@@ -2,6 +2,7 @@ runtime: php55
 api_version: 1
 threadsafe: false
 
+
 handlers:
   - url: /user_guide/
     static_files: user_guide/index.html
@@ -15,8 +16,16 @@ handlers:
     static_files: static/\1
     upload: static/(.*)
 
+  - url: /assets/(.*)
+    static_files: assets/\1
+    upload: assets/(.*)
+
   - url: /
     script: index.php
 
   - url: /(.+)
     script: index.php
+
+env_variables:
+  MYSQL_USER: touristix_web
+  MYSQL_PASSWORD: 4bandaaceh
