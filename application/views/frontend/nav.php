@@ -38,13 +38,15 @@
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
 					<li>
-						<a href="<?php echo site_url('home/konfirmasi/'); ?>">&nbsp;Cek Order</a>
+						<a href="<?php echo site_url('home/konfirmasi/'); ?>">&nbsp;CEK ORDER</a>
 					</li>
 					<li>
 						<?php if ($this->ion_auth->logged_in()) : ?>
 							<a href="<?php echo site_url('dashboard/'); ?>"><i class="fa fa-cogs"></i>&nbsp;Dashboard</a>
-						<?php else : ?>
-							<a href="<?php echo site_url('acl/login/'); ?>">&nbsp;Login</a>
+							<?php // else : 
+							?>
+							<!-- <a href="<?php // echo site_url('acl/login/'); 
+											?>">&nbsp;Login</a> -->
 						<?php endif; ?>
 					</li>
 				</ul>

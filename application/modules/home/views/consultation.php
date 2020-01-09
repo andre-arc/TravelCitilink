@@ -18,7 +18,7 @@
                     <div class="modal-body">
                         <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-                        <p class="text-muted">Jl. Tgk. Syech Mudawali, Kp. Baru, Kec. Baiturrahman, Kota Banda Aceh, Aceh 23116</p>
+                        <p class="text-muted">Jl. Tgk. Syech Mudawali, Kp. Baru, Kec. Baiturrahman, Kota Banda Aceh, Aceh 23116 </p>
 
                     </div>
                 </div>

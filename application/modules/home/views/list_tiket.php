@@ -54,7 +54,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-3" style="text-align: center;">
-                                            <img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="<?php echo base_url('/assets/image/'.$r->logo_kapal); ?>" alt="<?= $r->nama_kapal; ?>">
+                                            <img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="<?php echo base_url('/assets/image/' . $r->logo_kapal); ?>" alt="<?= $r->nama_kapal; ?>">
                                             <h4><?= $r->nama_kapal; ?></h4>
                                             <h5 class="text-center">Executive</h5>
                                         </div>
@@ -72,13 +72,21 @@
 
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="harga">
-                                                <span><?= convertToRupiah($r->hrg_tiket) ?></span>
+                                            <div class="row" style="padding-top: 45px;">
+                                                <div class="col-sm-6 col-xs-6">
+                                                    <div class="harga">
+                                                        <span><?= convertToRupiah($r->hrg_tiket) ?></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-6">
+                                                    <div class="hrgbutton">
+                                                        <button type="button" class="btn btn-info tiket_btn pull-right" btn-id="<?= $r->id_tiket ?>">Pilih</button>
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div class="hrgbutton">
-                                                <button type="button" class="btn btn-info tiket_btn pull-right" btn-id="<?= $r->id_tiket ?>">PILIH</button>
-                                            </div>
+
+
                                         </div>
 
 
