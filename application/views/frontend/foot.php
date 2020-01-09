@@ -7,8 +7,8 @@
                         <img src='<?php echo base_url('/assets/image/logo.png'); ?>' class='noscript noscript-img ' alt='' />
                     </noscript> </div>
                 <div class="col-sm-12 col-md-6 order-sm-2 order-md-1">
-                    <div class="row">
-                        <div class="col-sm-4">
+                    <div class="row" style="padding-top: 19px;">
+                        <div class="col-sm-4 col-xs-12">
                             <dl>
                                 <dt class="text-muted">PERUSAHAAN</dt>
                                 <dd><a href="http://touristix.id/about">Tentang Kami</a></dd>
@@ -16,7 +16,7 @@
 
                             </dl>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4 col-xs-12">
                             <dl>
                                 <dt class="text-muted">PROGRAM</dt>
                                 <dd><a href="http://touristix.id/#">Event</a></dd>
@@ -24,7 +24,7 @@
                                 <dd><a href="http://touristix.id/#">Rewards</a></dd>
                             </dl>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4 col-xs-12">
                             <dl>
                                 <dt class="text-muted">SUPPORT</dt>
                                 <dd><a href="https://help.touristix.id/">Bantuan</a></dd>

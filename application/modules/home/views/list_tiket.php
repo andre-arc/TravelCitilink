@@ -50,6 +50,26 @@
                     foreach ($result as $r) {
                 ?>
                         <div class="panel" style="margin-bottom: 7px;">
+                            <div class="modal-header">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h4 class="list-title">
+                                            <span id="title_act"></span> Jenis Kapal <i class="fa fa-angle-down"></i></h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4 class="list-title">
+                                            <span id="title_act"></span> Waktu Berangkat <i class="fa fa-angle-down"></i></h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4 class="list-title">
+                                            <span id="title_act"></span> Rute Keberangkatan <i class="fa fa-angle-down"></i></h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h4 class="list-title" style="text-align: left">
+                                            <span id="title_act"></span> Harga <i class="fa fa-angle-down"></i></h4>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-12">

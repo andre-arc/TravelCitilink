@@ -38,7 +38,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <button id="checkout" type="button" onclick="check()" class="btn btn-primary pull-right margin">CHECKOUT</button>
-                  <button type="submit" class="btn btn-primary pull-right margin">SEARCH</button>
+                  <button type="submit" class="btn btn-info pull-right margin search-b">Search</button>
                 </div>
               </div>
             </form>
