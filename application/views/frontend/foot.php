@@ -12,25 +12,22 @@
                             <dl>
                                 <dt class="text-muted">PERUSAHAAN</dt>
                                 <dd><a href="http://touristix.id/about">Tentang Kami</a></dd>
-                                <dd><a href="http://touristix.id/blog">Blog</a></dd>
-                                <dd><a href="http://touristix.id/feeds">Berita Terbaru</a></dd>
+                                <dd><a href="https://medium.com/@touristixid">Blog</a></dd>
 
                             </dl>
                         </div>
                         <div class="col-sm-4">
                             <dl>
                                 <dt class="text-muted">PROGRAM</dt>
-                                <dd><a href="http://touristix.id/academies">Academy</a></dd>
-                                <dd><a href="http://touristix.id/challenges">Challenge</a></dd>
-                                <dd><a href="http://touristix.id/events">Event</a></dd>
-                                <dd><a href="http://touristix.id/jobs">Job</a></dd>
-                                <dd><a href="http://touristix.id/rewards">Rewards</a></dd>
+                                <dd><a href="http://touristix.id/#">Event</a></dd>
+                                <dd><a href="http://touristix.id/#">Job</a></dd>
+                                <dd><a href="http://touristix.id/#">Rewards</a></dd>
                             </dl>
                         </div>
                         <div class="col-sm-4">
                             <dl>
                                 <dt class="text-muted">SUPPORT</dt>
-                                <dd><a href="https://help.dicoding.com/">Bantuan</a></dd>
+                                <dd><a href="https://help.touristix.id/">Bantuan</a></dd>
                                 <dd><a href="http://touristix.id/faq">FAQ</a></dd>
                                 <dd><a href="http://touristix.id/consultation">Hubungi Kami</a></dd>
                             </dl>
@@ -47,8 +44,8 @@
     <div class="container-fluid gray-bg border-top">
         <div class="container">
             <div class="row py-3">
-                <div class="col-sm-6"><small>copyright © 2019 - TourisTIX Group. All rights reserved.</small></div>
-                <div class="col-sm-6 text-right"><a href="http://touristix.id/termsofuse" class="mr-4">Terms</a> <a href="http://touristix.id/privacy">Privacy</a></div>
+                <div class="col-sm-6"><small>copyright © <?php echo date("Y"); ?> - TourisTIX Group. All rights reserved.</small></div>
+                <div class="col-sm-6 text-right"><a style="margin-right: 1.5rem !important;" href="http://touristix.id/termsofuse" class="mr-4">Terms</a> <a href="http://touristix.id/privacy">Privacy</a></div>
             </div>
         </div>
     </div>
