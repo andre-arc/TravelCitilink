@@ -40,6 +40,8 @@ class Home extends MY_Controller
 		$data['tgl_berangkat'] = $this->__validate_date($this->input->get('tgl_berangkat')) ? date('Y-m-d', strtotime($this->input->get('tgl_berangkat'))) : redirect(base_url());
 		$data['tgl_kembali'] = $this->input->get('pp') ?  $this->__validate_date($this->input->get('tgl_kembali')) ? date('Y-m-d', strtotime($this->input->get('tgl_kembali'))) : redirect(base_url()) : 'null';
 
+
+
 		//echo json_encode($data);
 		$this->data['result'] = $this->M_dashboard->getTicket($data);
 		$this->data['content'] = $this->load->view('list_tiket', $this->data, true);

@@ -7,30 +7,32 @@
                         <div class="row">
                             <div class="col-sm-3 col-xs-6">
                                 <div class="description-block border-right">
-                                    <h5 class="description-header">BANDA ACEH</h5>
-                                    <span class="description-text" style="text-transform: unset;">Ulee Lheue</span>
+                                    <span class="description-text" style="text-transform: unset;font-size: 12px;color:gray;">Asal</span>
+                                    <h5 class="description-header"><?= $this->input->get('asal'); ?> </h5>
+
                                 </div>
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-3 col-xs-6">
                                 <div class="description-block border-right">
-                                    <h5 class="description-header">SABANG</h5>
-                                    <span class="description-text" style="text-transform: unset;">Balohan</span>
+                                    <span class="description-text" style="text-transform: unset;font-size: 12px;color:gray; ">Tujuan</span>
+                                    <h5 class="description-header"><?= $this->input->get('tujuan'); ?></h5>
+
                                 </div>
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-3 col-xs-6">
                                 <div class="description-block border-right" style="font-size: 20px;padding-top: 6px;">
-                                    <h5 class="description-header">Sel, 02-08-2020</h5>
+                                    <h5 class="description-header"><?= $this->input->get('tgl_berangkat'); ?> <?= $this->input->get('tgl_kembali'); ?></h5>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-3 col-xs-6">
                                 <div class="description-block">
-                                    <button type="button" class="btn btn-block btn-warning">Ubah Pencarian</button>
+                                    <a href="<?= base_url(); ?>" type="button" class="btn btn-block btn-warning">Ubah Pencarian</a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -50,11 +52,31 @@
                     foreach ($result as $r) {
                 ?>
                         <div class="panel" style="margin-bottom: 7px;">
+                            <div class="modal-header">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h4 class="list-title">
+                                            <span id="title_act"></span> Jenis Kapal <i class="fa fa-angle-down"></i></h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4 class="list-title">
+                                            <span id="title_act"></span> Waktu Berangkat <i class="fa fa-angle-down"></i></h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4 class="list-title">
+                                            <span id="title_act"></span> Rute Keberangkatan <i class="fa fa-angle-down"></i></h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h4 class="list-title" style="text-align: left">
+                                            <span id="title_act"></span> Harga <i class="fa fa-angle-down"></i></h4>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="col-md-3" style="text-align: center;">
-                                            <img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="<?php echo base_url('/assets/image/'.$r->logo_kapal); ?>" alt="<?= $r->nama_kapal; ?>">
+                                            <img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="<?php echo base_url('/assets/image/' . $r->logo_kapal); ?>" alt="<?= $r->nama_kapal; ?>">
                                             <h4><?= $r->nama_kapal; ?></h4>
                                             <h5 class="text-center">Executive</h5>
                                         </div>
@@ -72,13 +94,21 @@
 
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="harga">
-                                                <span><?= convertToRupiah($r->hrg_tiket) ?></span>
+                                            <div class="row" style="padding-top: 45px;">
+                                                <div class="col-sm-6 col-xs-6">
+                                                    <div class="harga">
+                                                        <span><?= convertToRupiah($r->hrg_tiket) ?></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-6">
+                                                    <div class="hrgbutton">
+                                                        <button type="button" class="btn btn-info tiket_btn pull-right" btn-id="<?= $r->id_tiket ?>">Pilih</button>
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div class="hrgbutton">
-                                                <button type="button" class="btn btn-info tiket_btn pull-right" btn-id="<?= $r->id_tiket ?>">PILIH</button>
-                                            </div>
+
+
                                         </div>
 
 

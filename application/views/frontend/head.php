@@ -11,7 +11,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<title>
-		Tiket Kapal penyeberangan Banda Aceh - Sabang
+		Touristix.id - Travel with Local Guide
 	</title>
 
 	<title><?php echo $MYCFG['GENERAL']['APP_NAME']; ?> - <?php echo $MYCFG['GENERAL']['APP_NAME_LONG']; ?></title>
@@ -39,4 +39,20 @@
 	</script>
 
 	<?php echo (isset($css)) ? $css : ''; ?>
+
+	<!-- Google Analytics -->
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-156000942-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-156000942-1');
+	</script>
+
 </head>

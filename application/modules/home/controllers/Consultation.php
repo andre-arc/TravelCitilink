@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Daftartiket extends MY_Controller
+class Consultation extends MY_Controller
 {
 
     function __construct()
@@ -10,7 +10,7 @@ class Daftartiket extends MY_Controller
         $this->data['tpl'] = 'single';
         $this->data['icon'] = 'fa fa-cogs';
         $this->data['subicon'] = 'fa fa-university';
-        $this->data['title'] = 'Konfirmasi Pembayaran';
+        $this->data['title'] = 'Hubungi Kami';
         $this->data['table_name'] = 'users';
         $this->data['content'] = '';
         $this->data['css'] = css_asset('bootstrap-table.min.css', 'bootstrap-table');
@@ -28,7 +28,7 @@ class Daftartiket extends MY_Controller
         $mydata['tbl_icon'] = $this->data['subicon'];
         $mydata['tbl_title'] = $this->data['title'];
         $mydata['tbl'] = 'mytabel';
-        $this->data['content'] = $this->load->view('daftartiket', $mydata, true);
+        $this->data['content'] = $this->load->view('consultation', $mydata, true);
         $this->display();
     }
 }

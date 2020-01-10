@@ -19,7 +19,7 @@
 
 						</div>
 						<div class="modal-footer">
-							<button class="btn btn-primary" type="submit">Cek Pesanan</button>
+							<button class="btn btn-info" type="submit">Cek Pesanan</button>
 						</div>
 
 					</form>
@@ -32,8 +32,8 @@
 					<div class="box-body">
 						<div class="desktop-layout">
 							<div class="empty-state-background">
-								<div class="empty-state-wrapper">
-									<img src="<?php echo base_url('/assets/image/checktiket.jpg'); ?>" alt="" class="state-img">
+								<div class="empty-state-wrapper" style="text-align: -moz-center;">
+									<img src="<?php echo base_url('/assets/image/checktiket.jpg'); ?>" alt="" class="img-responsive" width="390px">
 									<p class="title">Cek pesanan dengan mudah</p>
 									<p class="caption noData">Masukkan alamat email dan order ID di form cek pesanan.</p>
 								</div>
