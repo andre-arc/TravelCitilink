@@ -7,30 +7,32 @@
                         <div class="row">
                             <div class="col-sm-3 col-xs-6">
                                 <div class="description-block border-right">
-                                    <h5 class="description-header">BANDA ACEH</h5>
-                                    <span class="description-text" style="text-transform: unset;">Ulee Lheue</span>
+                                    <span class="description-text" style="text-transform: unset;font-size: 12px;color:gray;">Asal</span>
+                                    <h5 class="description-header"><?= $this->input->get('asal'); ?> </h5>
+
                                 </div>
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-3 col-xs-6">
                                 <div class="description-block border-right">
-                                    <h5 class="description-header">SABANG</h5>
-                                    <span class="description-text" style="text-transform: unset;">Balohan</span>
+                                    <span class="description-text" style="text-transform: unset;font-size: 12px;color:gray; ">Tujuan</span>
+                                    <h5 class="description-header"><?= $this->input->get('tujuan'); ?></h5>
+
                                 </div>
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-3 col-xs-6">
                                 <div class="description-block border-right" style="font-size: 20px;padding-top: 6px;">
-                                    <h5 class="description-header">Sel, 02-08-2020</h5>
+                                    <h5 class="description-header"><?= $this->input->get('tgl_berangkat'); ?> <?= $this->input->get('tgl_kembali'); ?></h5>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-3 col-xs-6">
                                 <div class="description-block">
-                                    <button type="button" class="btn btn-block btn-warning">Ubah Pencarian</button>
+                                    <a href="<?= base_url(); ?>" type="button" class="btn btn-block btn-warning">Ubah Pencarian</a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
