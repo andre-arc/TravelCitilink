@@ -128,8 +128,7 @@ class Transaksi extends MY_Controller
 		echo $select->hrg_tiket;
 	}
 
-	function final()
-	{
+	public function finalisasi(){
 		$this->data['css'] = css_asset('style.css', '');
 		$this->data['css'] .= css_asset('select2.min.css', 'select2');
 		$this->data['css'] .= css_asset('bootstrap-datepicker.min.css', 'bootstrap-datepicker');
@@ -288,9 +287,9 @@ class Transaksi extends MY_Controller
 
 				// if ($this->__kirimDetailTransaksi($pemesan->email, $detail_email)) {
 					$url = $this->__generate_vtweb($data);			
-					$update_data = array('url_bayar'=> $vtweb_url);
+					$update_data = array('url_bayar'=> $url);
 					$update = $this->db->update('transaksi', $update_data, array('id_transaksi' => $id_transaksi));
-					if(update){
+					if($update){
 						redirect($url);
 					}
 				// }
@@ -298,17 +297,17 @@ class Transaksi extends MY_Controller
 		}
 	}
 
-	function success(){
+	// function success(){
 
-	}
+	// }
 
-	function pending(){
+	// function pending(){
 		
-	}
+	// }
 
-	function error(){
+	// function error(){
 		
-	}
+	// }
 
 	function __kirimDetailTransaksi($email, $detail_email)
 	{
@@ -393,12 +392,13 @@ class Transaksi extends MY_Controller
 			);
 		}
 
+		// echo json_encode($data);
 		$nama_customer = explode(" ", $data['pemesan']->nama_pemesan);
 
 		// Populate customer's billing address
 		$billing_address = array(
-			'first_name' 		=> $nama_customer[0] ? $nama_customer[0] : '',
-			'last_name' 		=> $nama_customer[1] ? $nama_customer[1] : '',
+			'first_name' 		=> count($nama_customer) > 0 ? $nama_customer[0]  : '',
+			'last_name' 		=> count($nama_customer) > 1 ? $nama_customer[1] : '',
 			'phone' 			=> $data['pemesan']->no_hp,
 			'country_code'		=> 'IDN'
 			);
@@ -407,8 +407,8 @@ class Transaksi extends MY_Controller
 
 		// Populate customer's Info
 		$customer_details = array(
-			'first_name' 		=> $nama_customer[0] ? $nama_customer[0] : '',
-			'last_name' 		=> $nama_customer[1] ? $nama_customer[1] : '',
+			'first_name' 		=> count($nama_customer) > 0 ? $nama_customer[0]  : '',
+			'last_name' 		=> count($nama_customer) > 1 ? $nama_customer[1] : '',
 			'email' 			=> $data['pemesan']->email,
 			'phone' 			=> $data['pemesan']->no_hp,
 			'billing_address' 	=> $billing_address,
@@ -449,8 +449,7 @@ class Transaksi extends MY_Controller
 		}
 	}
 
-	public function print($id_transaksi)
-	{
+	public function cetak($id_transaksi){
 		$detail_transaksi = $this->db->where('id_transaksi', $id_transaksi)->get('transaksi')->row();
 		$detail_tiket = $this->M_transaksi->getDetailTiket($id_transaksi);
 		// $pemesan = $this->M_transaksi->getCustomer($id_transaksi);

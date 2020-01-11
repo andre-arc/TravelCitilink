@@ -6,7 +6,7 @@
         </div>
         <!-- /.row -->
         <div class="row">
-            <form role="form" id="form-detail" name="frm-wil-gp" method="POST" action="<?= base_url('transaksi/final') ?>">
+            <form role="form" id="form-detail" name="frm-wil-gp" method="POST" action="<?= base_url('transaksi/finalisasi') ?>">
                 <div class="col-md-8">
                     <div class="panel">
                         <div class="panel-heading clearfix">
