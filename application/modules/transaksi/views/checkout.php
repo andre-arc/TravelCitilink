@@ -53,31 +53,34 @@
                     <div class="panel">
                         <div class="panel-heading clearfix">
                             <span class="pull-left labelkonsumen">
-                                &nbsp;Data Penumpang
+                                &nbsp;Detail Penumpang
                             </span>
-
                         </div>
                         <div class="panel-body">
-                            <table class="table table-hover" id="tabel-penumpang">
-                                <tbody>
-                                    <tr>
+                        <?php
+                            $count_penumpang = 0;
+
+                            foreach($jenis_penumpang as $jp){
+                                for ($i=0; $i < $jml_penumpang[$jp->nama] ; $i++) { 
+                                    $count_penumpang++;
+
+                                    ?>
+                                    <h4>Penumpang <?= $count_penumpang ?> : <?= $jp->nama?></h4>
                                         <input type="hidden" class="harga-tiket" name="hrg_tiket[]" value="">
-                                        <td>
+                                        <input type="hidden" class="harga-tiket" name="penumpang[]" value="<?= $jp->id ?>">
+                                        <div class="row">
+                                        <div class="col-md-12">
                                             <div class="form-group">
+                                                <label class="control-label">Nama Lengkap</label>
                                                 <input placeholder="Nama Penumpang" name="nm_penumpang[]" class="form-control" type="text" require>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                <?= form_dropdown('penumpang[]', $jenis_penumpang, '0', 'class="form-control kewarganegaraan penumpang" require') ?>
-                                            </div>
-                                        </td>
-                                        <td><button type='button' class='btn btn-info delete-row'><i class='fa fa-times'></i></button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button class="btn btn-block btn-sm btn-info add-row">Tambah Penumpang</button>
-
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            
+                        ?>
                         </div>
                     </div>
                 </div>

@@ -97,9 +97,14 @@ class Transaksi extends MY_Controller
 		$this->data['js'] .= "<script> var options={format: 'dd-mm-yyyy',todayHighlight: true,autoclose: true, daysOfWeekDisabled: '0',daysOfWeekHighlighted: '0',language: 'id',locale: 'id',};$('.kewarganegaraan').select2();$('.tgl-lahir').datepicker(options);</script>";
 
 
-		$tiket = $this->input->get('choose');
+		$tiket = $this->session->userdata('selected_tiket');
 		$this->data['detail_tiket'] = $this->M_transaksi->getDetailTiket($tiket);
 		$this->data['jenis_penumpang'] = $this->M_transaksi->getJenisPenumpang();
+		$this->data['jml_penumpang'] = array(
+											'Dewasa' => $this->input->post('adult'),
+											'Anak' => $this->input->post('child'),
+											'Bayi' => $this->input->post('infant'),
+										);
 
 		$this->data['content'] = $this->load->view('checkout', $this->data, true);
 

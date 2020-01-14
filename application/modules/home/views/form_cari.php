@@ -33,6 +33,36 @@
                 </div>
               </div>
 
+              <div class="col-md-2">
+                <div class="form-group">
+                <label>Dewasa</label>
+                    <div class="input-group">
+                      <input class="form-control" type="number" value="0" type="text" name="adult" >
+                      <span class="input-group-addon">Orang</span>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Anak</label>
+                  <div class="input-group">
+                      <input class="form-control" type="number" value="0" type="text" name="child" >
+                      <span class="input-group-addon">Orang</span>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Bayi</label>
+                  <div class="input-group">
+                      <input class="form-control" type="number" value="0" type="text" name="infant" >
+                      <span class="input-group-addon">Orang</span>
+                    </div>
+                </div>
+              </div>
+
 
 
               <div class="col-md-12">
@@ -54,7 +84,7 @@
   <script>
     var tomorrow = new Date().getDate() + 1;
     var options = {
-      format: 'dd-mm-yyyy',
+      format: 'yyyy-mm-dd',
       todayHighlight: false,
       autoclose: true,
       daysOfWeekDisabled: '0',

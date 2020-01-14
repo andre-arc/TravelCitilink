@@ -31,16 +31,12 @@ class M_dashboard extends CI_Model
             ->join('kapal as k', 't.id_kapal=k.id')
             ->join('detail_tiket as dtiket', 't.id_tiket=dtiket.id_tiket')
             ->join('jenis_penumpang as jp', 'dtiket.jenis_penumpang=jp.id')
+            ->group_start()
             ->where('t.tgl_berangkat', $data['tgl_berangkat'])
             ->where('t.dari', $data['asal'])
             ->where('t.tujuan', $data['tujuan'])
+            ->group_end()
             ->where('jp.nama', 'Dewasa');
-
-        if ($data['tgl_kembali'] != "null") {
-            $this->db->or_where('t.tgl_berangkat', $data['tgl_kembali'])
-                ->where('t.dari', $data['tujuan'])
-                ->where('t.tujuan', $data['asal']);
-        }
 
         $result = $this->db->get()->result();
         return $result;
