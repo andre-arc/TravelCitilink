@@ -10,6 +10,7 @@
 
                 <input type="hidden" name="act" id="act" value="" />
                 <input type="hidden" name="detail_tiket" value='<?= json_encode($detail_tiket) ?>'>
+                <input type="hidden" name="detail_harga" value='<?= json_encode($detail_harga) ?>'>
                 <input type="hidden" name="data_penumpang" value='<?= json_encode($data_penumpang) ?>'>
                 <input type="hidden" name="pemesan" value='<?= json_encode($pemesan) ?>'>
 
@@ -42,13 +43,15 @@
                             <br>
                             <hr>
                             <div class="col-xs-12 table-responsive">
+                                <span class="pull-left labelkonsumen">
+                                    &nbsp;Detail Penumpang
+                                </span>
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Penumpang #</th>
-                                            <th>Subtotal</th>
+                                            <th>Penumpang </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -59,8 +62,35 @@
                                             <tr>
                                                 <td><?= $no ?></td>
                                                 <td><?= $p->nm_penumpang ?></td>
-                                                <td><?= $p->deskripsi_penumpang ?> (x1)</td>
-                                                <td><?= convertToRupiah($p->harga); ?></td>
+                                                <td><?= $p->deskripsi_penumpang ?></td>
+                                            </tr>
+                                        <?php
+                                            $no++;
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+
+                                <span class="pull-left labelkonsumen">
+                                    &nbsp;Detail Harga Tiket
+                                </span>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tiket</th>
+                                            <th>Harga </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        foreach ($detail_harga as $d) {
+                                        ?>
+                                            <tr>
+                                                <td><?= $no ?></td>
+                                                <td><?= ucwords($d->jenis_penumpang)." (".$d->jml_penumpang."x)" ?></td>
+                                                <td><?= convertToRupiah($d->harga) ?></td>
                                             </tr>
                                         <?php
                                             $no++;
@@ -70,7 +100,6 @@
                                 </table>
                             </div>
 
-
                         </div>
                     </div>
                 </div>
@@ -79,8 +108,8 @@
                         <div class="panel-body text-center">
                             <?php
                             $total_hrg = 0;
-                            foreach ($data_penumpang as $p) {
-                                $total_hrg += $p->harga;
+                            foreach ($detail_harga as $d) {
+                                $total_hrg += $d->harga;
                             }
                             foreach ($detail_tiket as $t) {
                             ?>
