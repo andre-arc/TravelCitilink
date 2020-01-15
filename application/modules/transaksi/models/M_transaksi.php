@@ -76,7 +76,7 @@ class M_transaksi extends CI_Model {
         foreach($res as $r){
           $data[$r->id] = $r->name;
         }
-
+        
         return $data;
     }
 }
