@@ -69,7 +69,7 @@ class MY_Admin extends MY_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if (!$this->ion_auth->logged_in()) redirect('/acl/login/logout');
+		if (!$this->ion_auth->logged_in()) redirect('/usr/login/logout');
 		$this->__current_session_user();
 	}
 

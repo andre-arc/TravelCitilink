@@ -29,11 +29,10 @@
                     </div>
                     <div class="modal-body">
 
-                        <p class="text-muted"><i class="fa fa-phone"></i> Call Center <strong>085373967238</strong></p>
+                        <p class="text-muted"><i class="fa fa-phone"></i> Call Center /Whatsapp :<strong> 0895-2937-2104</strong></p>
                         <hr>
-                        <p class="text-muted"><i class="fa fa-whatsapp"></i> Whatsapp <strong>085373967238</strong></p>
-                        <hr>
-                        <p class="text-muted"><i class="fa fa-envelope"></i> Email <strong>iam@touristix.id</strong></p>
+
+                        <p class="text-muted"><i class="fa fa-envelope"></i> Email :<strong> touristixid@gmail.com</strong></p>
 
                     </div>
                 </div>

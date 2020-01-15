@@ -90,8 +90,6 @@
                                     <div class="col-sm-4 col-md-5">
                                           <button class="btn btn-warning pull-right btn-block" type="submit" name="subscribe_btn" value="1">Berlangganan</button>
                                     </div>
-
-
                               </div>
                         </div>
                   </div>
