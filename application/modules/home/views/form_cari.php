@@ -37,7 +37,7 @@
                 <div class="form-group">
                 <label>Dewasa</label>
                     <div class="input-group">
-                      <input class="form-control" type="number" value="0" type="text" name="adult" >
+                      <input class="form-control" type="number" value="0" type="text" name="adult" min="0">
                       <span class="input-group-addon">Orang</span>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="form-group">
                   <label>Anak</label>
                   <div class="input-group">
-                      <input class="form-control" type="number" value="0" type="text" name="child" >
+                      <input class="form-control" type="number" value="0" type="text" name="child" min="0">
                       <span class="input-group-addon">Orang</span>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="form-group">
                   <label>Bayi</label>
                   <div class="input-group">
-                      <input class="form-control" type="number" value="0" type="text" name="infant" >
+                      <input class="form-control" type="number" value="0" type="text" name="infant" min="0">
                       <span class="input-group-addon">Orang</span>
                     </div>
                 </div>

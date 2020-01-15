@@ -146,6 +146,7 @@ class Transaksi extends MY_Controller
 
 
 		$this->data['detail_tiket'] = json_decode($this->input->post('detail_tiket'));
+		$this->data['detail_harga'] = json_decode($this->input->post('detail_harga'));
 		if (count($this->input->post('nm_penumpang')) > 0) {
 
 			$data_penumpang = array();
@@ -179,8 +180,11 @@ class Transaksi extends MY_Controller
 	function proses()
 	{
 		$detail_tiket = json_decode($this->input->post('detail_tiket'));
+		$detail_harga = json_decode($this->input->post('detail_harga'));
 		$data_penumpang = json_decode($this->input->post('data_penumpang'));
 		$pemesan = json_decode($this->input->post('pemesan'));
+
+		$status = true;
 
 		$data = array(
 			'tiket' => $detail_tiket,
@@ -205,10 +209,11 @@ class Transaksi extends MY_Controller
 		// 	$total_hrg += $t->harga;
 		// }
 
-		foreach ($data_penumpang as $p) {
-			$total_hrg += $p->harga;
+		foreach ($detail_harga as $d) {
+			$total_hrg += $d->harga;
 		}
 
+		$data['detail_hrg'] = $detail_harga;
 		$data['total_hrg'] = $total_hrg;
 
 		// $total_hrg *= count($data_penumpang);
@@ -221,7 +226,8 @@ class Transaksi extends MY_Controller
 		);
 
 
-		if ($status &= $this->db->insert('customer', $customer)) {
+		if ($status &= $this->db->insert('customer', $customer) > 0 ? true : false) {
+
 			$id_customer = $this->db->insert_id();
 			$token = getToken(6);
 			$transaksi = array(
@@ -232,7 +238,7 @@ class Transaksi extends MY_Controller
 			);
 			$data['order_id'] = $token;
 
-			if ($status &= $this->db->insert('transaksi', $transaksi)) {
+			if ($status &= $this->db->insert('transaksi', $transaksi) > 0 ? true : false) {
 				$id_transaksi = $this->db->insert_id();
 
 				// update data tiket
@@ -263,6 +269,15 @@ class Transaksi extends MY_Controller
 				// 	}
 				// }
 
+				foreach ($detail_tiket as $t) {
+					$detail[] = array(
+						'id_transaksi' => $id_transaksi,
+						'id_tiket' => $t->id_tiket,
+					);
+				}
+
+				$status &= $this->db->insert_batch('detail_transaksi', $detail) > 0 ? true : false;
+
 				foreach ($data_penumpang as $p) {
 					$penumpang[] = array(
 						'id_transaksi' => $id_transaksi,
@@ -272,7 +287,7 @@ class Transaksi extends MY_Controller
 				}
 
 
-				$status = $this->db->insert_batch('penumpang', $penumpang);
+				$status &= $this->db->insert_batch('penumpang', $penumpang) > 0 ? true : false;
 
 				//echo $this->db->last_query();
 			}
@@ -299,6 +314,8 @@ class Transaksi extends MY_Controller
 					}
 				// }
 			}
+		}else{
+			var_dump($this->db->error());
 		}
 	}
 
@@ -387,13 +404,15 @@ class Transaksi extends MY_Controller
 		// Populate items
 		$items = array();
 
-		foreach($data['tiket'] as $t);
-		foreach($data['penumpang'] as $p){
+		foreach($data['detail_hrg'] as $d){
+			$total = 0;
+			foreach($data['tiket'] as $t){
+				$total += $t->{'hrg_'.$d->jenis_penumpang};
+			}
 			$items[] = array(
-				'id' 			=> $t->id_tiket,
-				'price' 		=> $p->harga,
-				'quantity' 		=> 1,
-				'name' 			=> 'Tiket Kapal ('.$p->deskripsi_penumpang.')'
+				'price' 		=> $total,
+				'quantity' 		=> $d->jml_penumpang,
+				'name' 			=> 'Tiket Kapal ('.ucwords($d->jenis_penumpang).')'
 			);
 		}
 

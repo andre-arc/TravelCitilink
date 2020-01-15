@@ -63,10 +63,8 @@
                             foreach($jenis_penumpang as $jp){
                                 for ($i=0; $i < $jml_penumpang[$jp->nama] ; $i++) { 
                                     $count_penumpang++;
-
                                     ?>
                                     <h4>Penumpang <?= $count_penumpang ?> : <?= $jp->nama?></h4>
-                                        <input type="hidden" class="harga-tiket" name="hrg_tiket[]" value="">
                                         <input type="hidden" class="harga-tiket" name="penumpang[]" value="<?= $jp->id ?>">
                                         <div class="row">
                                         <div class="col-md-12">
@@ -132,6 +130,12 @@
                                     <tbody>
                                     <?php
                                         foreach($jenis_penumpang as $jp){
+
+                                            $data_jml_penumpang[] = array(
+                                                'jenis_penumpang' => strtolower($jp->nama),
+                                                'jml_penumpang' => $jml_penumpang[$jp->nama],
+                                                'harga' => $total[strtolower($jp->nama)]
+                                            );
                                             ?>
                                             <tr>
                                                 <td width="30%"><?= $jp->nama." (".$jml_penumpang[$jp->nama]."x)" ?></td>
@@ -140,6 +144,8 @@
                                             </tr>
                                             <?php
                                         }
+
+                                        echo form_hidden('detail_harga', json_encode($data_jml_penumpang));
                                     ?>
                                     </tbody>
                                 </table>
