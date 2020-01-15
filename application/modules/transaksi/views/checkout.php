@@ -90,8 +90,14 @@
                         <div class="panel-body text-center">
                             <?php
                             $total_hrg = 0;
+                            $total = array('dewasa'=>0, 'anak'=>0, 'bayi'=>0);
+
                             foreach ($detail_tiket as $t) {
-                                $total_hrg += $t->hrg_tiket;
+                                foreach($jenis_penumpang as $jp){
+                                    $total[strtolower($jp->nama)] += $t->{'hrg_'.strtolower($jp->nama)} * $jml_penumpang[$jp->nama];
+                                    $total_hrg += $t->{'hrg_'.strtolower($jp->nama)} * $jml_penumpang[$jp->nama];
+                                }
+                                
                             ?>
                                 <img src="<?= base_url("/assets/image/".$t->logo_kapal); ?>" alt="logo" height="100">
                                 <br>
@@ -120,6 +126,25 @@
                                 </p>
 
                             </div> -->
+
+                            <div>
+                                <table border="0" width="100%" style="text-align:left">
+                                    <tbody>
+                                    <?php
+                                        foreach($jenis_penumpang as $jp){
+                                            ?>
+                                            <tr>
+                                                <td width="30%"><?= $jp->nama." (".$jml_penumpang[$jp->nama]."x)" ?></td>
+                                                <td>:</td>
+                                                <td><?= convertToRupiah($total[strtolower($jp->nama)]) ?></td>
+                                            </tr>
+                                            <?php
+                                        }
+                                    ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <hr>
 
                             <span class="harga">IDR <?= convertToRupiah($total_hrg) ?></span> <span class="satuan">/pax</span>
                             <hr>

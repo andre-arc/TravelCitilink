@@ -22,13 +22,13 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label>Tanggal Berangkat</label>
-                  <input id="tgl_berangkat" class="form-control search" type="text" name="tgl_berangkat">
+                  <input id="tgl_berangkat" class="form-control search" type="text" name="tgl_berangkat" autocomplete="off">
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label>Tanggal Kembali</label>
-                  <input id="tgl_kembali" class="form-control search" type="text" name="tgl_kembali">
+                  <input id="tgl_kembali" class="form-control search" type="text" name="tgl_kembali" autocomplete="off">
                   <input type="checkbox" type="text" name="pp" id="pp"> Kembali
                 </div>
               </div>

@@ -26,7 +26,7 @@ class M_dashboard extends CI_Model
 
     public function getTicket($data)
     {
-        $this->db->select('t.*, k.nama as nama_kapal, k.logo as logo_kapal, dtiket.hrg_tiket')
+        $this->db->select('t.*, k.nama as nama_kapal, k.logo as logo_kapal, dtiket.hrg_tiket as hrg_dewasa')
             ->from('tiket as t')
             ->join('kapal as k', 't.id_kapal=k.id')
             ->join('detail_tiket as dtiket', 't.id_tiket=dtiket.id_tiket')

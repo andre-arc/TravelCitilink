@@ -113,7 +113,7 @@ class Home extends MY_Controller
 												<div class="row" style="padding-top: 45px;">
 													<div class="col-sm-6 col-xs-6">
 														<div class="harga">
-															<span>'.convertToRupiah($r->hrg_tiket).'</span>
+															<span>'.convertToRupiah($r->hrg_dewasa).'</span>
 														</div>
 													</div>
 													<div class="col-sm-6 col-xs-6">
