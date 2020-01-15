@@ -28,8 +28,8 @@
                             <dl>
                                 <dt class="text-muted">SUPPORT</dt>
                                 <dd><a href="#">Bantuan</a></dd>
-                                <dd><a href="#">FAQ</a></dd>
-                                <dd><a href="<?= base_url('/home/consultation'); ?>">Hubungi Kami</a></dd>
+                                <dd><a href="<?= base_url('/help-center'); ?>">FAQ</a></dd>
+                                <dd><a href="<?= base_url('/consultation'); ?>">Hubungi Kami</a></dd>
                             </dl>
                         </div>
                     </div>
