@@ -22,14 +22,44 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label>Tanggal Berangkat</label>
-                  <input id="tgl_berangkat" class="form-control search" type="text" name="tgl_berangkat">
+                  <input id="tgl_berangkat" class="form-control search" type="text" name="tgl_berangkat" autocomplete="off">
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label>Tanggal Kembali</label>
-                  <input id="tgl_kembali" class="form-control search" type="text" name="tgl_kembali">
+                  <input id="tgl_kembali" class="form-control search" type="text" name="tgl_kembali" autocomplete="off">
                   <input type="checkbox" type="text" name="pp" id="pp"> Kembali
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                <label>Dewasa</label>
+                    <div class="input-group">
+                      <input class="form-control" type="number" value="0" type="text" name="adult" min="0">
+                      <span class="input-group-addon">Orang</span>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Anak</label>
+                  <div class="input-group">
+                      <input class="form-control" type="number" value="0" type="text" name="child" min="0">
+                      <span class="input-group-addon">Orang</span>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Bayi</label>
+                  <div class="input-group">
+                      <input class="form-control" type="number" value="0" type="text" name="infant" min="0">
+                      <span class="input-group-addon">Orang</span>
+                    </div>
                 </div>
               </div>
 
@@ -54,7 +84,7 @@
   <script>
     var tomorrow = new Date().getDate() + 1;
     var options = {
-      format: 'dd-mm-yyyy',
+      format: 'yyyy-mm-dd',
       todayHighlight: false,
       autoclose: true,
       daysOfWeekDisabled: '0',
