@@ -6,7 +6,7 @@ class Transaksi extends MY_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model("M_Transaksi");
+		$this->load->model("M_transaksi");
 	}
 
 	function index()
