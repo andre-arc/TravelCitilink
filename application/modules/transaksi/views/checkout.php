@@ -131,18 +131,21 @@
                                     <?php
                                         foreach($jenis_penumpang as $jp){
 
-                                            $data_jml_penumpang[] = array(
-                                                'jenis_penumpang' => strtolower($jp->nama),
-                                                'jml_penumpang' => $jml_penumpang[$jp->nama],
-                                                'harga' => $total[strtolower($jp->nama)]
-                                            );
-                                            ?>
-                                            <tr>
-                                                <td width="30%"><?= $jp->nama." (".$jml_penumpang[$jp->nama]."x)" ?></td>
-                                                <td>:</td>
-                                                <td><?= convertToRupiah($total[strtolower($jp->nama)]) ?></td>
-                                            </tr>
-                                            <?php
+                                            if($jml_penumpang[$jp->nama] > 0){
+                                                $data_jml_penumpang[] = array(
+                                                    'jenis_penumpang' => strtolower($jp->nama),
+                                                    'jml_penumpang' => $jml_penumpang[$jp->nama],
+                                                    'harga' => $total[strtolower($jp->nama)]
+                                                );
+                                                ?>
+                                                <tr>
+                                                    <td width="30%"><?= $jp->nama." (".$jml_penumpang[$jp->nama]."x)" ?></td>
+                                                    <td>:</td>
+                                                    <td><?= convertToRupiah($total[strtolower($jp->nama)]) ?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                         
                                         }
 
                                         echo form_hidden('detail_harga', json_encode($data_jml_penumpang));
