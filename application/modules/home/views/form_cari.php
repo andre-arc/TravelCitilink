@@ -1,75 +1,75 @@
 <div class="row">
   <div class="col-md-12">
     <div class="panel">
-      <h4>Search Tiket</h4>
+      <h4>Cari Tiket Kapal Express Penyeberangan Banda Aceh - Sabang</h4>
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
             <form role="form" id="form-search" method="GET" action="<?php echo base_url() . "home/search"; ?>">
-              <div class="col-md-3">
+              <div class="row">
+                <div class="col-md-3">
 
-                <div class="form-group">
-                  <label>Dari:</label>
-                  <?= form_dropdown('asal', $pelabuhan, '0', ' class="form-control search"') ?>
+                  <div class="form-group">
+                    <label>Dari:</label>
+                    <?= form_dropdown('asal', $pelabuhan, '0', ' class="form-control search"') ?>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Ke:</label>
+                    <?= form_dropdown('tujuan', $pelabuhan, '0', ' class="form-control search"') ?>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Tanggal Berangkat</label>
+                    <input id="tgl_berangkat" class="form-control search" type="text" name="tgl_berangkat" autocomplete="off">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Tanggal Kembali</label>
+                    <input id="tgl_kembali" class="form-control search" type="text" name="tgl_kembali" autocomplete="off">
+                    <input type="checkbox" type="text" name="pp" id="pp"> Kembali
+                  </div>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>Ke:</label>
-                  <?= form_dropdown('tujuan', $pelabuhan, '0', ' class="form-control search"') ?>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>Tanggal Berangkat</label>
-                  <input id="tgl_berangkat" class="form-control search" type="text" name="tgl_berangkat" autocomplete="off">
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>Tanggal Kembali</label>
-                  <input id="tgl_kembali" class="form-control search" type="text" name="tgl_kembali" autocomplete="off">
-                  <input type="checkbox" type="text" name="pp" id="pp"> Kembali
-                </div>
-              </div>
-
-              <div class="col-md-2">
-                <div class="form-group">
-                <label>Dewasa</label>
+              <div class="row pen">
+                <div class="col-md-1 col-xs-4 penumpang">
+                  <div class="form-group">
+                    <label>Dewasa</label>
                     <div class="input-group">
-                      <input class="form-control" type="number" value="0" type="text" name="adult" min="0">
-                      <span class="input-group-addon">Orang</span>
+                      <input class="form-control" type="number" value="1" type="text" name="adult" min="0">
                     </div>
+                  </div>
                 </div>
-              </div>
 
-              <div class="col-md-2">
-                <div class="form-group">
-                  <label>Anak</label>
-                  <div class="input-group">
+                <div class="col-md-1 col-xs-4 penumpang">
+                  <div class="form-group">
+                    <label>Anak</label>
+                    <div class="input-group">
                       <input class="form-control" type="number" value="0" type="text" name="child" min="0">
-                      <span class="input-group-addon">Orang</span>
                     </div>
+                  </div>
                 </div>
-              </div>
 
-              <div class="col-md-2">
-                <div class="form-group">
-                  <label>Bayi</label>
-                  <div class="input-group">
+                <div class="col-md-1 col-xs-4 penumpang">
+                  <div class="form-group">
+                    <label>Bayi</label>
+                    <div class="input-group">
                       <input class="form-control" type="number" value="0" type="text" name="infant" min="0">
-                      <span class="input-group-addon">Orang</span>
                     </div>
+                  </div>
                 </div>
+
               </div>
+              <p class="help-block" style="font-size: smaller;">* Bayi tidak memperoleh kursi.</p>
 
 
 
               <div class="col-md-12">
-                <div class="form-group">
-                  <button id="checkout" type="button" onclick="check()" class="btn btn-primary pull-right margin">CHECKOUT</button>
-                  <button type="submit" class="btn btn-info pull-right margin search-b">Search</button>
-                </div>
+                <button type="submit" class="btn btn-info pull-right margin search-b">Search</button>
+
               </div>
             </form>
           </div>
@@ -78,9 +78,6 @@
     </div>
   </div>
 
-  <div class="col-md-12" id="list-tiket">
-
-  </div>
   <script>
     var tomorrow = new Date().getDate() + 1;
     var options = {

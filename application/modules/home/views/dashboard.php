@@ -84,17 +84,54 @@
                   <div class="col-md-6">
                         <div class="input-button">
                               <div class="subscribe">
-                                    <div class="col-sm-8 col-md-7" style="margin-bottom: 10px;">
-                                          <input class="form-control" type=" text" name="email" placeholder="Masukkan email Anda" value="">
-                                    </div>
-                                    <div class="col-sm-4 col-md-5">
-                                          <button class="btn btn-warning pull-right btn-block" type="submit" name="subscribe_btn" value="1">Berlangganan</button>
-                                    </div>
+                                    <form role="form" id="frm-newsletter" name="frm-newsletter">
+                                          <div class="col-sm-8 col-md-7" style="margin-bottom: 10px;">
+                                                <input class="form-control" type=" text" name="email" placeholder="Masukkan email Anda" value="">
+                                          </div>
+                                          <div class="col-sm-4 col-md-5">
+                                                <button class="btn btn-warning pull-right btn-block" type="submit" name="subscribe_btn" value="1">Berlangganan</button>
+                                          </div>
+                                    </form>
                               </div>
                         </div>
                   </div>
             </div>
       </div>
 </div>
+<script>
+      $(document).ready(function() {
 
+            $('#frm-newsletter').submit(function(e) {
+                  var form_data = $("#frm-newsletter").serialize();
+                  console.log(form_data);
+
+                  $.ajax({
+                        type: "POST",
+                        url: SITE_URL + "home/newsletter/",
+                        dataType: "json",
+                        data: form_data,
+                        success: function(data) {
+                              if (data.success) {
+                                    swal({
+                                          title: "Selamat!",
+                                          text: "Terima kasih, Anda sudah berhasil Berlangganan !!",
+                                          type: "success"
+                                    }).then(function() {
+
+                                          location.reload(true);
+
+                                    });
+                              } else {
+                                    swal('Ada kesalahan.', data.msg, 'error');
+
+                                    location.reload();
+                              }
+                        }
+                  });
+
+                  e.preventDefault();
+            });
+
+      });
+</script>
 <!-- Page Features -->

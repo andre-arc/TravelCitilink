@@ -131,9 +131,9 @@ footer {
 }
 
 .time {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
-  color: #111;
+  color: #4b4444;
   text-align: center !important ;
 
   padding-top: 49px;
@@ -344,4 +344,39 @@ ul li .menu-label {
 select {
   -moz-appearance: none;
   -webkit-appearance: none;
+}
+
+.info-share {
+  margin: 20px 0 0;
+  padding: 20px 0 0;
+  text-align: center;
+}
+
+.info-share :hover {
+  color: #0064d2;
+}
+.info-share li a {
+  display: block;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  font-size: 16px;
+  color: #666;
+  background: transparent;
+  border: 1px solid #666;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.info-share li {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  margin: 0px 5px;
+}
+
+.penumpang {
+  margin-right: -25px;
+  font-weight: normal;
+  width: 9.8%;
 }
