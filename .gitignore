@@ -1,6 +1,6 @@
 
 application/ci_sessions/
-
+app.yaml
 .htaccess
 application/config/database.php
 php.ini
