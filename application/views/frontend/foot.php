@@ -2,10 +2,17 @@
     <div class="container-fluid">
         <div class="container footer-commons">
             <div class="row py-5">
-                <div class="col-sm-6 col-md-3 order-sm-0 order-md-0"> <img src="<?php echo base_url('/assets/image/logo.png'); ?>" width="196px" data-original="" class="lazy " alt="" style="display: inline;">
+                <div class="col-sm-6 col-md-3 order-sm-0 order-md-0" style="text-align: center;"> <img src="<?php echo base_url('/assets/image/logo.png'); ?>" width="196px" data-original="" class="lazy " alt="" style="display: inline;">
                     <noscript>
                         <img src='<?php echo base_url('/assets/image/logo.png'); ?>' class='noscript noscript-img ' alt='' />
-                    </noscript> </div>
+                    </noscript>
+                    <ul class="info-share">
+                        <li><a href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+
+                </div>
                 <div class="col-sm-12 col-md-6 order-sm-2 order-md-1">
                     <div class="row" style="padding-top: 19px;">
                         <div class="col-sm-4 col-xs-12">
