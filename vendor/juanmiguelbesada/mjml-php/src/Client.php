@@ -22,7 +22,7 @@ class Client
      * @param string $applicationId
      * @param string $secretKey
      */
-    public function __construct(string $applicationId, string $secretKey)
+    public function __construct($applicationId, $secretKey)
     {
         $this->applicationId = $applicationId;
         $this->secretKey = $secretKey;
@@ -37,7 +37,7 @@ class Client
      *
      * @throws Exception
      */
-    public function render(string $mjml): string
+    public function render($mjml)
     {
         $response = $this->request('/render', 'POST', json_encode(['mjml' => $mjml]));
 
@@ -56,7 +56,7 @@ class Client
      * @throws Exception
      * @throws \RuntimeException
      */
-    private function request(string $path, string $method, string $body, array $headers = null, array $curlOptions = []): array
+    private function request($path, $method, $body,  $headers = null, $curlOptions = [])
     {
         if (!$headers) {
             $headers = [
