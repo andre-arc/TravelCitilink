@@ -1,7 +1,7 @@
 <div class="container-fluid" style="padding: unset;">
       <?php echo modules::run('home/widget/slider'); ?>
 </div>
-<div class="container" style="padding:15px 15px; background-color:#FFF !important;">
+<div class="container" style="padding:24px 30px 0px 15px; background-color:#FFF !important;">
       <section class="content">
             <div class="row">
                   <div class="col-md-12">

@@ -228,13 +228,12 @@ ul li .menu-label {
   background-color: #f7f7f7;
 }
 .input-button button {
-  background-color: #fedd00;
+  background-color: #076fe3;
   text-transform: uppercase;
   outline: none;
   border: none;
   font-family: OpenSans-SemiBold, Arial, Helvetica, sans-serif !important;
   font-size: 16px;
-  color: #0064d2;
   padding: 12px 24px;
   border-radius: 25px;
   cursor: pointer;
@@ -379,4 +378,25 @@ select {
   margin-right: -25px;
   font-weight: normal;
   width: 9.8%;
+}
+
+.penumpang {
+  border-radius: 1px;
+  background: #fff;
+  border: 1px solid #d2d6de;
+  margin-bottom: 20px;
+  width: 100%;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  position: absolute;
+  z-index: 1;
+  padding-top: 4px;
+
+  padding-bottom: 4px;
+}
+
+.nmpnmg {
+  font-size: 12px;
+  font-weight: normal;
+  margin-top: 7px;
 }
