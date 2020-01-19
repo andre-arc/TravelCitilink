@@ -46,5 +46,46 @@
         ],
         "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
         "homepage": "https://github.com/firebase/php-jwt"
+    },
+    {
+        "name": "juanmiguelbesada/mjml-php",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/juanmiguelbesada/mjml-php.git",
+            "reference": "481dd20ef4b6c0d46db3767bd4aa1e1042b444f9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/juanmiguelbesada/mjml-php/zipball/481dd20ef4b6c0d46db3767bd4aa1e1042b444f9",
+            "reference": "481dd20ef4b6c0d46db3767bd4aa1e1042b444f9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.1"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "^2.12"
+        },
+        "time": "2018-09-13T15:47:17+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Mjml\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Juan Miguel Besada",
+                "email": "juanmiguelbesada@gmail.com"
+            }
+        ],
+        "description": "A simple php library to consume use MJML rest API"
     }
 ]
