@@ -131,9 +131,9 @@ footer {
 }
 
 .time {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
-  color: #111;
+  color: #4b4444;
   text-align: center !important ;
 
   padding-top: 49px;
@@ -228,13 +228,12 @@ ul li .menu-label {
   background-color: #f7f7f7;
 }
 .input-button button {
-  background-color: #fedd00;
+  background-color: #076fe3;
   text-transform: uppercase;
   outline: none;
   border: none;
   font-family: OpenSans-SemiBold, Arial, Helvetica, sans-serif !important;
   font-size: 16px;
-  color: #0064d2;
   padding: 12px 24px;
   border-radius: 25px;
   cursor: pointer;
@@ -344,4 +343,60 @@ ul li .menu-label {
 select {
   -moz-appearance: none;
   -webkit-appearance: none;
+}
+
+.info-share {
+  margin: 20px 0 0;
+  padding: 20px 0 0;
+  text-align: center;
+}
+
+.info-share :hover {
+  color: #0064d2;
+}
+.info-share li a {
+  display: block;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  font-size: 16px;
+  color: #666;
+  background: transparent;
+  border: 1px solid #666;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.info-share li {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  margin: 0px 5px;
+}
+
+.penumpang {
+  margin-right: -25px;
+  font-weight: normal;
+  width: 9.8%;
+}
+
+.penumpang {
+  border-radius: 1px;
+  background: #fff;
+  border: 1px solid #d2d6de;
+  margin-bottom: 20px;
+  width: 100%;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  position: absolute;
+  z-index: 1;
+  padding-top: 4px;
+
+  padding-bottom: 4px;
+}
+
+.nmpnmg {
+  font-size: 12px;
+  font-weight: normal;
+  margin-top: 7px;
 }

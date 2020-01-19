@@ -47,7 +47,7 @@ class Home extends MY_Controller
 		$data['tgl_kembali'] = $this->input->get('pp') ?  $this->__validate_date($this->input->get('tgl_kembali')) ? date('Y-m-d', strtotime($this->input->get('tgl_kembali'))) : redirect(base_url()) : 'null';
 
 		//echo json_encode($data);
-		
+
 		$this->data['content'] = $this->load->view('list_tiket', $this->data, true);
 
 		$this->display($this->data);
@@ -55,7 +55,8 @@ class Home extends MY_Controller
 		//echo $this->db->last_query();
 	}
 
-	function getJsonTiket(){
+	function getJsonTiket()
+	{
 		$html = '';
 		$data['asal'] = $this->input->post('asal');
 		$data['tujuan'] = $this->input->post('tujuan');
@@ -64,13 +65,13 @@ class Home extends MY_Controller
 		$result = $this->M_dashboard->getTicket($data);
 
 		if (!empty($result)) {
-			$html .= "<form action='".base_url('transaksi/checkout')."' method='POST' id='form-checkout'>";
+			$html .= "<form action='" . base_url('transaksi/checkout') . "' method='POST' id='form-checkout'>";
 
 			$html .= form_hidden('adult', $this->input->post('adult'));
 			$html .= form_hidden('child', $this->input->post('child'));
 			$html .= form_hidden('infant', $this->input->post('infant'));
 
-			foreach ($result as $r){
+			foreach ($result as $r) {
 				$html .= '<div class="panel" style="margin-bottom: 7px;">
 								<div class="modal-header">
 									<div class="row">
@@ -102,14 +103,14 @@ class Home extends MY_Controller
 											</div>
 											<div class="col-md-2 time">
 												<span>
-													'.$r->tgl_berangkat." | ".$r->waktu.'
+													' . $r->tgl_berangkat . " | " . $r->waktu . '
 													<br>
 
 												</span>
 											</div>
 											<div class="col-md-4 detail-tiket">
 
-												'. $r->dari . " <i class='fa  fa-angle-right'></i> " . $r->tujuan .'
+												' . $r->dari . " <i class='fa  fa-angle-right'></i> " . $r->tujuan . '
 												<br>
 
 											</div>
@@ -117,12 +118,12 @@ class Home extends MY_Controller
 												<div class="row" style="padding-top: 45px;">
 													<div class="col-sm-6 col-xs-6">
 														<div class="harga">
-															<span>'.convertToRupiah($r->hrg_dewasa).'</span>
+															<span>' . convertToRupiah($r->hrg_dewasa) . '</span>
 														</div>
 													</div>
 													<div class="col-sm-6 col-xs-6">
 														<div class="hrgbutton">
-															<button type="button" class="btn btn-info tiket_btn pull-right" btn-id="'.$r->id_tiket.'">Pilih</button>
+															<button type="button" class="btn btn-info tiket_btn pull-right" btn-id="' . $r->id_tiket . '">Pilih</button>
 														</div>
 													</div>
 												</div>
@@ -138,11 +139,10 @@ class Home extends MY_Controller
 									</div>
 								</div>
 							</div>';
-						$html .= form_close();
-					}
-
-			}else{
-				$html .= ' <div class="panel">
+				$html .= form_close();
+			}
+		} else {
+			$html .= ' <div class="panel">
 								<div class="panel-body">
 									<div class="row">
 										<div class="col-md-12 text-center">
@@ -151,16 +151,17 @@ class Home extends MY_Controller
 									</div>
 								</div>
 							</div>';
-			}
-
-			echo $html;
 		}
-	
-	function selectTiket(){
+
+		echo $html;
+	}
+
+	function selectTiket()
+	{
 		$id = $this->input->post('id_tiket');
-		if(!$this->session->userdata('selected_tiket')){
+		if (!$this->session->userdata('selected_tiket')) {
 			$this->session->set_userdata('selected_tiket', array($id));
-		}else{
+		} else {
 			$data = $this->session->userdata('selected_tiket');
 			$data[] = $id;
 			$this->session->set_userdata('selected_tiket', $data);
@@ -170,48 +171,25 @@ class Home extends MY_Controller
 	}
 
 
-	function change_profile()
+	function newsletter()
 	{
-		$result = array(
-			'resp' => false,
-			'message' => 'Ada yang salah pada saat mengedit profil anda.'
+		$ret = array(
+			'success' => false,
+			'msg' => 'Gagal Menambah Data'
 		);
-		if (isset($_POST['profile_id'])) {
-			$id_user = $_POST['profile_id'];
-			//ion auth edit user
-			$data = array(
-				'first_name' => $_POST['profile_first_name'],
-				'last_name' => $_POST['profile_last_name'],
-				'email' => $_POST['profile_email'],
-				'phone' => $_POST['profile_phone']
-			);
 
-			//ion auth edit password user
-			if (isset($_POST['profile_rst_pass'])) {
-				$data['password'] = $_POST['profile_password'];
-				$msg_passwd = "Edit Password berhasil.\n\rSilahkan logout untuk menguji data anda.";
-			} else {
-				$msg_passwd = '';
-			}
-			$res = $this->ion_auth->update($id_user, $data);
-			if ($res) {
-				$result = array(
-					'resp' => TRUE,
-					'message' => "Edit profil berhasil.\n\r" . $msg_passwd
-				);
-			} else {
-				$result = array(
-					'resp' => FALSE,
-					'message' => "Edit profil gagal.\n\rSilahkan ulangi."
-				);
-			}
-		} else {
-			$result = array(
-				'resp' => false,
-				'message' => "Ada yang salah pada saat mengedit profil anda."
+		$data['email'] = $_POST['email'];
+		$this->db->insert('newsletter', $data);
+
+		$last_insert_id = $this->db->insert_id();
+
+		if ($last_insert_id) {
+			$ret = array(
+				'success' => true,
+				'msg' => 'Berhasil Menambah Data'
 			);
 		}
-		echo json_encode($result);
+		echo json_encode($ret);
 	}
 
 	function __validate_date($date)
