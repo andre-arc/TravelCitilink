@@ -75,8 +75,8 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '/cloudsql/touristix:asia-east1:touristixdb',
-	// 'hostname' => '127.0.0.1',
+	// 'hostname' => '/cloudsql/touristix:asia-east1:touristixdb',
+	'hostname' => '127.0.0.1',
 	'username' => getenv('MYSQL_USER'),
 	'password' => getenv('MYSQL_PASSWORD'),
 	'database' => 'touristixdb',
