@@ -26,10 +26,13 @@ class Home extends MY_Controller
 		$this->data['js'] .= js_asset('bootstrap-datepicker.id.min.js', 'bootstrap-datepicker');
 
 
-		$this->data['pelabuhan'] = $this->M_dashboard->getPelabuhan();
+		// $this->data['pelabuhan'] = $this->M_dashboard->getPelabuhan();
 
-		$this->data['content'] = $this->load->view('dashboard', $this->data, true);
-		$this->display($this->data);
+		// $this->data['content'] = $this->load->view('dashboard', $this->data, true);
+		// $this->display($this->data);
+		$this->load->helper('directory');
+		$map = directory_map('./assets/image/slider/', 1);
+		var_dump($map);
 	}
 
 	function search()
