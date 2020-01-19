@@ -26,13 +26,10 @@ class Home extends MY_Controller
 		$this->data['js'] .= js_asset('bootstrap-datepicker.id.min.js', 'bootstrap-datepicker');
 
 
-		// $this->data['pelabuhan'] = $this->M_dashboard->getPelabuhan();
+		$this->data['pelabuhan'] = $this->M_dashboard->getPelabuhan();
 
-		// $this->data['content'] = $this->load->view('dashboard', $this->data, true);
-		// $this->display($this->data);
-		$this->load->helper('directory');
-		$map = directory_map('./assets/image/slider/', 1);
-		var_dump($map);
+		$this->data['content'] = $this->load->view('dashboard', $this->data, true);
+		$this->display($this->data);
 	}
 
 	function search()
@@ -95,7 +92,7 @@ class Home extends MY_Controller
 									<div class="row">
 										<div class="col-md-12">
 											<div class="col-md-3" style="text-align: center;">
-												<img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="'.base_url('/assets/image/' . $r->logo_kapal).'" alt="'.$r->nama_kapal.'">
+												<img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="'.$this->config->item('asset_url').'assets/image/'. $r->logo_kapal.'" alt="'.$r->nama_kapal.'">
 												<h4>'.$r->nama_kapal.'</h4>
 												<h5 class="text-center">Executive</h5>
 											</div>

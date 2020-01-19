@@ -8,7 +8,7 @@ class Widget extends MY_Controller {
 	
 	function slider(){
 		$this->load->helper('directory');
-		$map = directory_map('./assets/image/slider/', 1);
+		$map = directory_map('gs://touristix.appspot.com/assets/image/slider/', 1);
 		$arr_img_ext = array('png','jpg','gif');
 		$arr_img = array();
 		foreach($map as $k=>$v){

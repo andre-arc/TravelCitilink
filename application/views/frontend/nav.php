@@ -3,7 +3,7 @@
 		<div class="container" style="margin-bottom: 10px;margin-top: 10px;">
 			<div class="navbar-header">
 				<a href="<?php echo site_url(); ?>" class="navbar-brand" data-html="true">
-					<img src="<?php echo base_url('/assets/image/logo.png') ?>" width="120px" style="margin-top: -6px;" alt="">
+					<img src="<?php echo $this->config->item('asset_url').'assets/image/logo.png' ?>" width="120px" style="margin-top: -6px;" alt="">
 				</a>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
 					<i class="fa fa-bars"></i>

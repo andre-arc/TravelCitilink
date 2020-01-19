@@ -97,7 +97,7 @@
                                 }
                                 
                             ?>
-                                <img src="<?= base_url("/assets/image/".$t->logo_kapal); ?>" alt="logo" height="100">
+                                <img src="<?= $this->config->item('asset_url').'assets/image/'.$t->logo_kapal; ?>" alt="logo" height="100">
                                 <br>
 
                                 <strong><?= $t->dari . " - " . $t->tujuan ?> </strong><br>
