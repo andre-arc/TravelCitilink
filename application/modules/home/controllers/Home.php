@@ -11,25 +11,29 @@ class Home extends MY_Controller
 
 	function index()
 	{
-		$this->session->unset_userdata('selected_tiket');
+		// $this->session->unset_userdata('selected_tiket');
 
-		$this->data['css'] = css_asset('style.css', '');
-		$this->data['css'] .=  css_asset('bootstrap-table.min.css', 'bootstrap-table');
-		$this->data['css'] .= css_asset('sweetalert2.min.css', 'limonte-sweetalert2');
-		$this->data['css'] .= css_asset('select2.min.css', 'select2');
-		$this->data['css'] .= css_asset('bootstrap-datepicker.min.css', 'bootstrap-datepicker');
+		// $this->data['css'] = css_asset('style.css', '');
+		// $this->data['css'] .=  css_asset('bootstrap-table.min.css', 'bootstrap-table');
+		// $this->data['css'] .= css_asset('sweetalert2.min.css', 'limonte-sweetalert2');
+		// $this->data['css'] .= css_asset('select2.min.css', 'select2');
+		// $this->data['css'] .= css_asset('bootstrap-datepicker.min.css', 'bootstrap-datepicker');
 
-		$this->data['js']  =  js_asset('bootstrap-table.min.js', 'bootstrap-table');
-		$this->data['js']  .= js_asset('sweetalert2.min.js', 'limonte-sweetalert2');
-		$this->data['js']  .= js_asset('select2.full.min.js', 'select2');
-		$this->data['js'] .= js_asset('bootstrap-datepicker.min.js', 'bootstrap-datepicker');
-		$this->data['js'] .= js_asset('bootstrap-datepicker.id.min.js', 'bootstrap-datepicker');
+		// $this->data['js']  =  js_asset('bootstrap-table.min.js', 'bootstrap-table');
+		// $this->data['js']  .= js_asset('sweetalert2.min.js', 'limonte-sweetalert2');
+		// $this->data['js']  .= js_asset('select2.full.min.js', 'select2');
+		// $this->data['js'] .= js_asset('bootstrap-datepicker.min.js', 'bootstrap-datepicker');
+		// $this->data['js'] .= js_asset('bootstrap-datepicker.id.min.js', 'bootstrap-datepicker');
 
 
-		$this->data['pelabuhan'] = $this->M_dashboard->getPelabuhan();
+		// $this->data['pelabuhan'] = $this->M_dashboard->getPelabuhan();
 
-		$this->data['content'] = $this->load->view('dashboard', $this->data, true);
-		$this->display($this->data);
+		// $this->data['content'] = $this->load->view('dashboard', $this->data, true);
+		// $this->display($this->data);
+
+		$this->load->library('mjml');
+
+		echo $this->mjml->render('<mjml><mj-body><mj-section><mj-column><mj-image width="100px" src="/assets/img/logo-small.png"></mj-image><mj-divider border-color="#F45E43"></mj-divider><mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hahaha</mj-text></mj-column></mj-section></mj-body></mjml>');
 	}
 
 	function search()

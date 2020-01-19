@@ -1,0 +1,5 @@
+{
+    "require": {
+        "juanmiguelbesada/mjml-php": "^1.0"
+    }
+}
