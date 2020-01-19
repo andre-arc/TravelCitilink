@@ -29,8 +29,8 @@ handlers:
 env_variables:
   MYSQL_USER: touristix_web
   MYSQL_PASSWORD: 4bandaaceh
-  CI_ENV: development
+  CI_ENV: production
 
 skip_files:
   - ^(.git/.*)
-  # - ^(assets/.*)
+  - ^(assets/.*)
