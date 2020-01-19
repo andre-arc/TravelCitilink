@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="container footer-commons">
             <div class="row py-5">
-                <div class="col-sm-6 col-md-3 order-sm-0 order-md-0" style="text-align: center;"> <img src="<?php echo $this->config->item('asset_url').'/assets/image/logo.png'; ?>" width="196px" data-original="" class="lazy " alt="" style="display: inline;">
+                <div class="col-sm-6 col-md-3 order-sm-0 order-md-0" style="text-align: center;"> <img src="<?php echo $this->config->item('asset_url').'assets/image/logo.png'; ?>" width="196px" data-original="" class="lazy " alt="" style="display: inline;">
                     <noscript>
                         <img src='<?php echo $this->config->item('asset_url').'assets/image/logo.png'; ?>' class='noscript noscript-img ' alt='' />
                     </noscript>
