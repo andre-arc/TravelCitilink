@@ -29,7 +29,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.min.js"></script>
 
 
-	<script type="text/javascript" src="<?php echo base_url('assets/js/myloader.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo $this->config->item('asset_url').'assets/js/myloader.js'; ?>"></script>
 	<script type="text/javascript">
 		var BASE_URL = '<?php echo base_url() ?>';
 		var SITE_URL = '<?php echo site_url() ?>';
