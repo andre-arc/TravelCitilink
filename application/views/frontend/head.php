@@ -32,6 +32,7 @@
 	<script type="text/javascript" src="<?php echo $this->config->item('asset_url').'assets/js/myloader.js'; ?>"></script>
 	<script type="text/javascript">
 		var BASE_URL = '<?php echo base_url() ?>';
+		var ASSET_URL = '<?php echo $this->config->item('asset_url') ?>';
 		var SITE_URL = '<?php echo site_url() ?>';
 		$(document).ready(function() {
 			$('[data-toggle="tooltip"]').tooltip();
