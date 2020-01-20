@@ -48,7 +48,7 @@ class Notifikasi extends MY_Controller
 		else if ($transaction == 'settlement'){
 		  // TODO set payment status in merchant's database to 'Settlement'
 		  echo "Transaction order_id: " . $order_id ." successfully transfered using " . $type;
-		  $this->__proses_notifikasi('settlement', $order_id, $type);
+		  $this->__proses_notifikasi('success', $order_id, $type);
 		  } 
 		  else if($transaction == 'pending'){
 		  // TODO set payment status in merchant's database to 'Pending'
@@ -82,6 +82,37 @@ class Notifikasi extends MY_Controller
 		// 		$data = array(); break;
 		// }
 
+		if($status == 'success'){
+			$this->__kirimEmailTiket($order_id);
+		}
+
 		$update = $this->db->update('transaksi', $data, array('kode' => $order_id));
+	}
+
+	function __kirimEmailTiket($order_id){
+		$this->load->library('mjml');
+		$this->load->library('email');
+		$data = array();
+
+		$select = $this->db->select('t.*, c.*')
+						   ->from('transaksi as t')
+						   ->join('customer as c', 't.id_customer=c.id_customer')
+						   ->where('t.kode', $order_id)->row();
+
+		$data = array(
+			'nama_customer' => $select->nama_customer,
+			'email' => $select->email,
+			'total_hrg' => $select->total_hrg,
+			'tgl_transaksi' => $select->tgl_transaksi
+		);
+
+		$mjml = $this->load->view('email_success_order', $data, true);
+		$html = $this->mjml->render($mjml);
+
+		$result = $this->email->from('rizwansaputra77@gmail.com')   
+							 ->to($data['email'])
+							 ->subject('Tiket Kapal Touristix')
+							 ->message($html)
+							 ->send();
 	}
 }
