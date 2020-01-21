@@ -33,7 +33,8 @@
 						<div class="desktop-layout">
 							<div class="empty-state-background">
 								<div class="empty-state-wrapper" style="text-align: -moz-center;">
-									<img src="<?php echo base_url('/assets/image/checktiket.jpg'); ?>" alt="" class="img-responsive" width="390px">
+									<img src="<?php echo $this->config->item('asset_url') . '/assets/image/checktiket.jpg' ?>
+									" alt="" class="img-responsive" width="390px">
 									<p class="title">Cek pesanan dengan mudah</p>
 									<p class="caption noData">Masukkan alamat email dan order ID di form cek pesanan.</p>
 								</div>
