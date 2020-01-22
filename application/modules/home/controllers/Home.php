@@ -95,7 +95,7 @@ class Home extends MY_Controller
 											<div class="col-md-3" style="text-align: center;">
 												<img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="'.$this->config->item('asset_url').'assets/image/'. $r->logo_kapal.'" alt="'.$r->nama_kapal.'">
 												<h4>'.$r->nama_kapal.'</h4>
-												<h5 class="text-center">Executive</h5>
+												<strong class="text-center">'.$r->jenis_tiket.'</strong>
 											</div>
 											<div class="col-md-2 time">
 												<span>

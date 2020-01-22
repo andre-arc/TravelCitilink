@@ -9,7 +9,7 @@
               <div class="row">
                 <div class="col-md-3">
 
-                  <div class="form-group" style="margin-left: -15px;">
+                  <div class="form-group">
                     <label>Dari:</label>
                     <?= form_dropdown('asal', $pelabuhan, '0', ' class="form-control search"') ?>
                   </div>
@@ -21,13 +21,13 @@
                   </div>
                 </div>
                 <div class="col-md-2">
-                  <div class="form-group" style="margin-right: -19px;">
+                  <div class="form-group">
                     <label>Tanggal Berangkat</label>
                     <input id="tgl_berangkat" class="form-control search" type="text" name="tgl_berangkat" autocomplete="off">
                   </div>
                 </div>
                 <div class="col-md-2">
-                  <div class="form-group" style="margin-right: -19px;">
+                  <div class="form-group">
                     <label>Tanggal Kembali</label>
                     <input id="tgl_kembali" class="form-control search" type="text" name="tgl_kembali" autocomplete="off">
                     <input type="checkbox" type="text" name="pp" id="pp"> Kembali

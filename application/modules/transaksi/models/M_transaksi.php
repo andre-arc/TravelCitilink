@@ -13,7 +13,7 @@ class M_transaksi extends CI_Model {
     public function getDetailTiket($id_ticket)
     {
         if(is_array($id_ticket)){
-            $query = $this->db->query('select t.*, k.nama as nama_kapal, k.logo as logo_kapal,
+            $query = $this->db->query('select t.*, k.nama as nama_kapal, k.logo as logo_kapal, jt.deskripsi as jenis_tiket,
             (select nm_kota from pelabuhan as b join kota as k on b.id_kota=k.id where b.kode=t.dari) as kota_asal, 
              (select nm_kota from pelabuhan as b join kota as k on b.id_kota=k.id where b.kode=t.tujuan) as kota_tujuan, 
              (select hrg_tiket from detail_tiket as dtiket join jenis_penumpang as jp on dtiket.jenis_penumpang=jp.id where dtiket.id_tiket=t.id_tiket and jp.nama="Dewasa") as hrg_dewasa,
@@ -21,6 +21,7 @@ class M_transaksi extends CI_Model {
              (select hrg_tiket from detail_tiket as dtiket join jenis_penumpang as jp on dtiket.jenis_penumpang=jp.id where dtiket.id_tiket=t.id_tiket and jp.nama="Bayi") as hrg_bayi
                 from tiket as t 
                 join kapal as k on t.id_kapal=k.id
+                join jenis_tiket as jt on t.id_jenis=jt.id
                 where t.id_tiket in ('.implode(',', $id_ticket).')');
     
            $result = $query->result();
