@@ -331,42 +331,43 @@ class Transaksi extends MY_Controller
 		
 	// }
 
-	function __kirimDetailTransaksi($email, $detail_email)
+	function __kirimDetailTransaksi($order_id)
 	{
 
+		$this->load->library('mjml');
 		$this->load->library('email');
+		$data = array();
 
+		$select = $this->db->select('t.*, c.*')
+						   ->from('transaksi as t')
+						   ->join('customer as c', 't.id_customer=c.id_customer')
+						   ->where('t.kode', $order_id)->row();
 
-		$result = $this->email
-			->from('rizwansaputra77@gmail.com')
-			->to($email)
-			->subject('Konfirmasi Pembayaran Ubudiyah Travel')
-			->message('
-				<table border="1">
-					<caption>Segera Pembayaran Tagihan Anda</caption>
-					<thead>
-						<tr>
-							<th>Kode Transaksi</th>
-							<th>Tanggal Transaksi</th>
-							<th>Total Harga</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>' . $detail_email['token'] . '</td>
-							<td>' . date('d-M-Y') . '</td>
-							<td>' . $detail_email['total_hrg'] . '</td>
-						</tr>
-					</tbody>
-				</table>
-				<br>
-				Silakan Konfirmasi Pembayaran <a href="' . base_url('home/konfirmasi') . '">disini</a>')
-			->send();
+		$data = array(
+			'order_id' => $order_id,
+			'nama_customer' => $select->nama_customer,
+			'email' => $select->email,
+			'total_hrg' => $select->total_hrg,
+			'tgl_transaksi' => $select->tgl_transaksi,
+			"subject" => "Konfirmasi Pembayaran Order ".$order_id." Tiket Kapal Touristix.ID"
+		);
 
-		if ($result) {
+		$mjml = $this->load->view('email_konfirmasi_order', $data, true);
+		$html = $this->mjml->render($mjml);
+		
+
+		try {
+			$message = new Message();
+			$message->setSender('touristixid@gmail.com');
+			$message->addTo($data['email']);
+			$message->setSubject($data['subject']);
+			$message->setTextBody($html);
+			$message->send();
+			echo 'Mail Sent';
 			return true;
-		} else {
-			echo $this->email->print_debugger();
+		} catch (InvalidArgumentException $e) {
+			echo 'There was an error';
+			return false;
 		}
 	}
 

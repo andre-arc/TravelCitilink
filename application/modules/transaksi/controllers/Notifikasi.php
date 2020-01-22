@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
+use google\appengine\api\mail\Message;
 
 class Notifikasi extends MY_Controller
 {
@@ -82,14 +83,14 @@ class Notifikasi extends MY_Controller
 		// 		$data = array(); break;
 		// }
 
-		if($status == 'success'){
-			$this->__kirimEmailTiket($order_id);
+		if($status == 'success' || $status == 'expired'){
+			$this->__kirimEmailTiket($order_id, $status);
 		}
 
 		$update = $this->db->update('transaksi', $data, array('kode' => $order_id));
 	}
 
-	function __kirimEmailTiket($order_id){
+	function __kirimEmailTiket($order_id, $status){
 		$this->load->library('mjml');
 		$this->load->library('email');
 		$data = array();
@@ -100,19 +101,35 @@ class Notifikasi extends MY_Controller
 						   ->where('t.kode', $order_id)->row();
 
 		$data = array(
+			'order_id' => $order_id,
 			'nama_customer' => $select->nama_customer,
 			'email' => $select->email,
 			'total_hrg' => $select->total_hrg,
 			'tgl_transaksi' => $select->tgl_transaksi
 		);
 
-		$mjml = $this->load->view('email_success_order', $data, true);
-		$html = $this->mjml->render($mjml);
+		if($status == 'success' ){
+			$data['subject'] = "Transaksi Order ".$order_id." Tiket Kapal Touristix.ID telah Berhasil";
+			$mjml = $this->load->view('email_success_order', $data, true);
+			$html = $this->mjml->render($mjml);
+		}elseif($status == 'expired'){
+			$data['subject'] = "Transaksi Order ".$order_id." Tiket Kapal Touristix.ID telah Kadarluasa";
+			$html = $this->load->view('email_success_order', $data, true);
+		}
+		
 
-		$result = $this->email->from('rizwansaputra77@gmail.com')   
-							 ->to($data['email'])
-							 ->subject('Tiket Kapal Touristix')
-							 ->message($html)
-							 ->send();
+		try {
+			$message = new Message();
+			$message->setSender('touristixid@gmail.com');
+			$message->addTo($data['email']);
+			$message->setSubject($data['subject']);
+			$message->setTextBody($html);
+			$message->send();
+			echo 'Mail Sent';
+			return true;
+		} catch (InvalidArgumentException $e) {
+			echo 'There was an error';
+			return false;
+		}
 	}
 }
