@@ -33,4 +33,4 @@ env_variables:
 
 skip_files:
   - ^(.git/.*)
-  # - ^(assets/.*)
+  - ^(assets/.*)
