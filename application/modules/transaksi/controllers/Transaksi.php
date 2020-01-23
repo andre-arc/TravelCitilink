@@ -520,7 +520,7 @@ class Transaksi extends MY_Controller
 
 				$pdf->AddPage();
 				// setting jenis font yang akan digunakan
-				$pdf->Image('https://cdn.pixabay.com/photo/2015/07/09/13/05/citilink-837863_960_720.png', 10, 6, 30, 0, 'PNG');
+				$pdf->Image('https://storage.googleapis.com/touristix.appspot.com/assets/image/logo.png', 10, 6, 30, 0, 'PNG');
 				$pdf->SetFont('Arial', 'B', 14);
 				// mencetak string 
 				$pdf->Cell(150, 7, 'Touristix', 0, 1, 'C');
