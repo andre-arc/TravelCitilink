@@ -321,6 +321,20 @@ class Transaksi extends MY_Controller
 		}
 	}
 
+	function tes_mail(){
+		try {
+			$message = new Message();
+			$message->setSender('touristixid@gmail.com');
+			$message->addTo('andridarnius@gmail.com');
+			$message->setSubject('test');
+			$message->setTextBody('<h1>tes</h1>');
+			$message->send();
+			echo 'Mail Sent';
+		} catch (InvalidArgumentException $e) {
+			echo 'There was an error: '.$e;
+		}
+	}
+
 	// function success(){
 
 	// }
