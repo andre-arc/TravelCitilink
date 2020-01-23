@@ -125,10 +125,10 @@ class Notifikasi extends MY_Controller
 			$message->setSubject($data['subject']);
 			$message->setHtmlBody($html);
 			$message->send();
-			echo 'Mail Sent';
+			// echo 'Mail Sent';
 			return true;
 		} catch (InvalidArgumentException $e) {
-			$error = "Unable to send mail. $e";
+			// $error = "Unable to send mail. $e";
 			error_log($error);
 			return false;
 		}

@@ -321,19 +321,19 @@ class Transaksi extends MY_Controller
 		}
 	}
 
-	function tes_mail(){
-		try {
-			$message = new Message();
-			$message->setSender('touristixid@gmail.com');
-			$message->addTo('andridarnius@gmail.com');
-			$message->setSubject('test');
-			$message->setHtmlBody('<h1>tes</h1>');
-			$message->send();
-			echo 'Mail Sent';
-		} catch (InvalidArgumentException $e) {
-			echo 'There was an error: '.$e;
-		}
-	}
+	// function tes_mail(){
+	// 	try {
+	// 		$message = new Message();
+	// 		$message->setSender('touristixid@gmail.com');
+	// 		$message->addTo('andridarnius@gmail.com');
+	// 		$message->setSubject('test');
+	// 		$message->setHtmlBody('<h1>tes</h1>');
+	// 		$message->send();
+	// 		echo 'Mail Sent';
+	// 	} catch (InvalidArgumentException $e) {
+	// 		echo 'There was an error: '.$e;
+	// 	}
+	// }
 
 	// function success(){
 
@@ -363,6 +363,7 @@ class Transaksi extends MY_Controller
 			'order_id' => $order_id,
 			'nama_customer' => $select->nama_customer,
 			'email' => $select->email,
+			'url_bayar' => $select->url_bayar,
 			'total_hrg' => $select->total_hrg,
 			'tgl_transaksi' => $select->tgl_transaksi,
 			"subject" => "Konfirmasi Pembayaran Order ".$order_id." Tiket Kapal Touristix.ID"
@@ -379,10 +380,10 @@ class Transaksi extends MY_Controller
 			$message->setSubject($data['subject']);
 			$message->setHtmlBody($html);
 			$message->send();
-			echo 'Mail Sent';
+			// echo 'Mail Sent';
 			return true;
 		} catch (InvalidArgumentException $e) {
-			echo 'There was an error';
+			// echo 'There was an error';
 			return false;
 		}
 	}
