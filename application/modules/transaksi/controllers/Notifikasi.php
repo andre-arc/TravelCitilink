@@ -123,7 +123,7 @@ class Notifikasi extends MY_Controller
 			$message->setSender('touristixid@gmail.com');
 			$message->addTo($data['email']);
 			$message->setSubject($data['subject']);
-			$message->setTextBody($html);
+			$message->setHtmlBody($html);
 			$message->send();
 			echo 'Mail Sent';
 			return true;
