@@ -327,7 +327,7 @@ class Transaksi extends MY_Controller
 			$message->setSender('touristixid@gmail.com');
 			$message->addTo('andridarnius@gmail.com');
 			$message->setSubject('test');
-			$message->setTextBody('<h1>tes</h1>');
+			$message->setHtmlBody('<h1>tes</h1>');
 			$message->send();
 			echo 'Mail Sent';
 		} catch (InvalidArgumentException $e) {
@@ -377,7 +377,7 @@ class Transaksi extends MY_Controller
 			$message->setSender('touristixid@gmail.com');
 			$message->addTo($data['email']);
 			$message->setSubject($data['subject']);
-			$message->setTextBody($html);
+			$message->setHtmlBody($html);
 			$message->send();
 			echo 'Mail Sent';
 			return true;
