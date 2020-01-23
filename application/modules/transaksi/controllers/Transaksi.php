@@ -307,14 +307,13 @@ class Transaksi extends MY_Controller
 					'total_hrg' => $total_hrg
 				);
 
-				if ($this->__kirimDetailTransaksi($token)) {
 					$url = $this->__generate_vtweb($data);			
 					$update_data = array('url_bayar'=> $url);
 					$update = $this->db->update('transaksi', $update_data, array('id_transaksi' => $id_transaksi));
 					if($update){
+						$this->__kirimDetailTransaksi($token);
 						redirect($url);
 					}
-				}
 			}
 		}else{
 			var_dump($this->db->error());
