@@ -98,7 +98,7 @@ class Notifikasi extends MY_Controller
 		$select = $this->db->select('t.*, c.*')
 						   ->from('transaksi as t')
 						   ->join('customer as c', 't.id_customer=c.id_customer')
-						   ->where('t.kode', $order_id)->row();
+						   ->where('t.kode', $order_id)->get()->row();
 
 		$data = array(
 			'order_id' => $order_id,
@@ -128,8 +128,20 @@ class Notifikasi extends MY_Controller
 			echo 'Mail Sent';
 			return true;
 		} catch (InvalidArgumentException $e) {
-			echo 'There was an error';
+			$error = "Unable to send mail. $e";
+			error_log($error);
 			return false;
 		}
+
+		// $result = $this->email->from('touristixid@gmail.com')   
+		// 					 ->to($data['email'])
+		// 					 ->subject($data['subject'])
+		// 					 ->message($html)
+		// 					 ->send();
+		// if ($result) {
+		// 	return true;
+		// } else {
+		// 	echo $this->email->print_debugger();
+		// }
 	}
 }
