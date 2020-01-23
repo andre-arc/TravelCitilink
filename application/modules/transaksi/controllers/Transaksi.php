@@ -1,5 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
+use google\appengine\api\mail\Message;
+
 class Transaksi extends MY_Controller
 {
 
@@ -305,17 +307,31 @@ class Transaksi extends MY_Controller
 					'total_hrg' => $total_hrg
 				);
 
-				// if ($this->__kirimDetailTransaksi($pemesan->email, $detail_email)) {
+				if ($this->__kirimDetailTransaksi($token)) {
 					$url = $this->__generate_vtweb($data);			
 					$update_data = array('url_bayar'=> $url);
 					$update = $this->db->update('transaksi', $update_data, array('id_transaksi' => $id_transaksi));
 					if($update){
 						redirect($url);
 					}
-				// }
+				}
 			}
 		}else{
 			var_dump($this->db->error());
+		}
+	}
+
+	function tes_mail(){
+		try {
+			$message = new Message();
+			$message->setSender('touristixid@gmail.com');
+			$message->addTo('andridarnius@gmail.com');
+			$message->setSubject('test');
+			$message->setTextBody('<h1>tes</h1>');
+			$message->send();
+			echo 'Mail Sent';
+		} catch (InvalidArgumentException $e) {
+			echo 'There was an error: '.$e;
 		}
 	}
 
@@ -341,7 +357,7 @@ class Transaksi extends MY_Controller
 		$select = $this->db->select('t.*, c.*')
 						   ->from('transaksi as t')
 						   ->join('customer as c', 't.id_customer=c.id_customer')
-						   ->where('t.kode', $order_id)->row();
+						   ->where('t.kode', $order_id)->get()->row();
 
 		$data = array(
 			'order_id' => $order_id,
