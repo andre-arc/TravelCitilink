@@ -495,9 +495,14 @@ class Transaksi extends MY_Controller
 		$order_id = $this->input->get('orderId');
 		if ($order_id) {
 			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
-			if (count($detail_transaksi) > 0) {
-				$detail_tiket = $this->M_transaksi->getDetailTiket($detail_transaksi->id_transaksi);
-				// $pemesan = $this->M_transaksi->getCustomer($id_transaksi);
+			if(count($detail_transaksi) > 0){
+
+				$select_tiket = $this->db->select('id_tiket')->where('id_transaksi', $detail_transaksi->id_transaksi)->get('detail_transaksi')->result();
+				foreach ($select_tiket as $dt) {
+					$r[] = $dt->id_tiket;
+				}
+
+				$detail_tiket = $this->M_transaksi->getDetailTiket($r);
 				$data_penumpang = $this->M_transaksi->getDetailPenumpang($detail_transaksi->id_transaksi);
 
 				//load mPDF library
@@ -517,11 +522,11 @@ class Transaksi extends MY_Controller
 				// $pdf->WriteHTML($html);
 				// //offer it to user via browser download! (The PDF won't be saved on your server HDD)
 				// $pdf->Output($pdfFilePath, "D");
-				$pdf = new FPDF('p', 'mm', 'A5');
+				$pdf = new FPDF('p', 'mm', 'A4');
 
 				$pdf->AddPage();
 				// setting jenis font yang akan digunakan
-				$pdf->Image('https://cdn.pixabay.com/photo/2015/07/09/13/05/citilink-837863_960_720.png', 10, 6, 30, 0, 'PNG');
+				$pdf->Image('https://storage.googleapis.com/touristix.appspot.com/assets/image/logo.png', 10, 6, 30, 0, 'PNG');
 				$pdf->SetFont('Arial', 'B', 14);
 				// mencetak string 
 				$pdf->Cell(150, 7, 'Touristix', 0, 1, 'C');
@@ -534,47 +539,61 @@ class Transaksi extends MY_Controller
 
 				$pdf->Cell(10, 6, 'Detail Pemesanan ', 0, 1);
 				$pdf->SetFont('Arial', '', 10);
-				$pdf->Cell(10, 6, 'Kode : UB-BTJ00 ' . $detail_transaksi->id_transaksi, 0, 1);
+				$pdf->Cell(10, 6, 'Kode : ' . $detail_transaksi->kode, 0, 1);
 				$pdf->SetFont('Arial', '', 10);
 				$pdf->Cell(10, 6, 'Tanggal Pemesanan: ' . $detail_transaksi->tgl_transaksi, 0, 1);
-				$pdf->Cell(10, 6, 'Status: Konfirm', 0, 1);
+				$pdf->Cell(10, 6, 'Status: '. $detail_transaksi->status_bayar, 0, 1);
 
-				$pdf->Cell(10, 5, '', 0, 1); // space
-
-				$pdf->SetFont('Arial', 'B', 10);
-				$pdf->Cell(10, 6, 'Detail Penumpang ', 0, 1);
-
-				$pdf->SetFont('Arial', 'B', 10);
-				$pdf->Cell(30, 6, 'Nama', 1, 0);
-				$pdf->Cell(30, 6, 'Jenis Kelamin', 1, 0);
-				$pdf->Cell(20, 6, 'Kategori', 1, 1);
-
-				$pdf->SetFont('Arial', '', 10);
-				foreach ($data_penumpang as $p) {
-					$pdf->Cell(30, 6, $p->nama_penumpang, 1, 0);
-					$pdf->Cell(30, 6, 'Jenis Kelamin', 1, 0);
-					$pdf->Cell(20, 6, 'Dewasa', 1, 1);
-				}
-
-				$pdf->Cell(10, 7, '', 0, 1);
-
-
-				$pdf->SetFont('Arial', 'B', 10);
-				$pdf->Cell(10, 6, 'Keberangkatan ', 0, 1);
-
-				$pdf->SetFont('Arial', 'B', 10);
-				$pdf->Cell(42, 6, 'Tanggal Keberangkatan', 1, 0);
-				$pdf->Cell(55, 6, 'Rute', 1, 0);
-				$pdf->Cell(20, 6, 'Maskapai', 1, 0);
-				$pdf->Cell(15, 6, 'Harga', 1, 1);
-
-				$pdf->SetFont('Arial', '', 10);
 				foreach ($detail_tiket as $t) {
-					$pdf->Cell(42, 6, $t->tgl_berangkat . " " . $t->waktu, 1, 0);
-					$pdf->Cell(55, 6, $t->kota_asal . "(" . $t->dari . ") - " . $t->kota_tujuan . "(" . $t->tujuan . ")", 1, 0);
-					$pdf->Cell(20, 6, 'Citilink', 1, 0);
-					$pdf->Cell(15, 6, $t->hrg_tiket, 1, 1);
+					$pdf->Cell(10, 7, '', 0, 1);
+					$pdf->SetFont('Arial', 'B', 10);
+					$pdf->Cell(10, 6, 'Keberangkatan ', 0, 1);
+
+					$pdf->SetFont('Arial', 'B', 10);
+					$pdf->Cell(42, 6, 'Tanggal Keberangkatan', 1, 0);
+					$pdf->Cell(80, 6, 'Rute', 1, 0);
+					$pdf->Cell(40, 6, 'Kapal', 1, 1);
+
+				
+
+					$pdf->SetFont('Arial', '', 10);
+					$x = $pdf->GetX();
+					$y = $pdf->GetY();
+					
+					$pdf->MultiCell(42, 6, $t->tgl_berangkat." ".$t->waktu, 1, 'L');
+					$pdf->setXY($x+=42, $y);
+
+					$pdf->MultiCell(80, 6, $t->kota_asal . "(" . $t->dari . ") - " . $t->kota_tujuan . "(" . $t->tujuan . ")", 1, 'L');
+					$pdf->setXY($x+=80, $y);
+
+					$pdf->MultiCell(40, 6, $t->nama_kapal, 1, 'L');
+					$pdf->Ln(0);
+
+					$pdf->Cell(10, 5, '', 0, 1); // space
+
+					$pdf->SetFont('Arial', 'B', 10);
+					$pdf->Cell(10, 6, 'Detail Penumpang ', 0, 1);
+
+					$pdf->SetFont('Arial', 'B', 10);
+					$pdf->Cell(30, 6, 'Nama', 1, 0);
+					$pdf->Cell(20, 6, 'Kategori', 1, 0);
+					$pdf->Cell(20, 6, 'Harga', 1, 1);
+
+					$pdf->SetFont('Arial', '', 10);
+					foreach ($data_penumpang as $p) {
+						$pdf->Cell(30, 6, $p->nama_penumpang, 1, 0);
+						$pdf->Cell(20, 6, $p->jenis_penumpang, 1, 0);
+
+						$select_harga = $this->db->select('dt.hrg_tiket')
+												 ->join('jenis_penumpang as jp', 'jp.id=dt.jenis_penumpang')
+												 ->where('dt.id_tiket', $t->id_tiket)
+												 ->where('jp.nama', $p->jenis_penumpang)
+												 ->get('detail_tiket as dt')->row();
+						$pdf->Cell(20, 6, convertToRupiah($select_harga->hrg_tiket), 1, 1);
+					}
 				}
+
+				
 
 				$pdf->Cell(10, 7, '', 0, 1);
 				$pdf->Line(10, $pdf->GetY(), 140, $pdf->GetY());
@@ -583,7 +602,7 @@ class Transaksi extends MY_Controller
 				$pdf->Cell(10, 7, '', 0, 1);
 
 				$pdf->SetFont('Arial', 'B', 10);
-				$pdf->Cell(15, 6, "Total Harga : Rp." . $detail_transaksi->total_hrg, 0, 1);
+				$pdf->Cell(15, 6, "Total Harga : " . convertToRupiah($detail_transaksi->total_hrg), 0, 1);
 
 				// $pdf->SetFont('Arial','B',10);
 				// $pdf->Cell(10,6,'NO',1,0);
@@ -619,7 +638,7 @@ class Transaksi extends MY_Controller
 				//     $pdf->Cell(35,6,$row->tgl_berangkat,1,0);   
 				// }
 
-				$pdf->Output();
+				$pdf->Output('D', 'Bukti Pembayaran Tiket Kapal - '.$order_id.'.pdf');
 			}
 		}
 	}
