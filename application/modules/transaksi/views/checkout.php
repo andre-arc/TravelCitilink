@@ -98,12 +98,12 @@
                                 }
 
                             ?>
-                                <img src="<?= $this->config->item('asset_url').'assets/image/'.$t->logo_kapal; ?>" alt="logo" height="100">
+                                <img src="<?= $this->config->item('asset_url') . 'assets/image/' . $t->logo_kapal; ?>" alt="logo" height="100">
                                 <br>
                                 <strong><?= $t->jenis_tiket ?></strong>
                                 <br>
                                 <strong><?= $t->dari . " - " . $t->tujuan ?> </strong><br>
-                                Waktu : <?= $t->tgl_berangkat . ' ' . $t->waktu  ?> <br>
+                                <?= longdate_indo($t->tgl_berangkat) . '-' . $t->waktu  ?> <br>
                                 <hr>
                             <?php
                             }

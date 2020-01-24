@@ -131,11 +131,10 @@ footer {
 }
 
 .time {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
-  color: #4b4444;
-  text-align: center !important ;
-
+  color: #4d4343;
+  text-align: center !important;
   padding-top: 49px;
 }
 
