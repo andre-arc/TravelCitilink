@@ -29,7 +29,7 @@
 </mj-column>
 <mj-column>
 <mj-text align="center" color="#FFF" font-size="15px" font-family="Ubuntu, Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px" padding-bottom="0px"><strong>Total Price</strong></mj-text>
-<mj-text align="center" color="#FFF" font-size="13px" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="20px" padding-top="10px"><?= $total_hrg ?></mj-text>
+<mj-text align="center" color="#FFF" font-size="13px" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="20px" padding-top="10px"><?= convertToRupiah($total_hrg) ?></mj-text>
 </mj-column>
 </mj-section>
 <mj-section background-color="#356CC7" padding-bottom="20px" padding-top="20px">

@@ -18,10 +18,9 @@
 <mj-section background-color="#356cc7" padding-bottom="5px" padding-top="0">
 <mj-column width="100%">
 <mj-divider border-color="#ffffff" border-width="2px" border-style="solid" padding-left="20px" padding-right="20px" padding-bottom="0px" padding-top="0"></mj-divider>
-<mj-text align="center" color="#FFF" font-size="13px" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="28px" padding-top="28px"><span style="font-size:20px; font-weight:bold">Mohon segera selesaikan
-pembayaran Anda.</span>
+<mj-text align="center" color="#FFF" font-size="13px" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="28px" padding-top="28px"><span style="font-size:20px; font-weight:bold">Selamat, pembayaran tagihan tiket kapal anda telah berhasil.</span>
 <br/>
-<span style="font-size:15px" padding-top="18px">Checkout berhasil pada tanggal <?= $tgl_transaksi ?> </span></mj-text>
+<span style="font-size:15px" padding-top="18px">Silakan unduh bukti pembayaran dan tukarkan dengan tiket asli di loket </span></mj-text>
 </mj-column>
 </mj-section>
 <mj-section background-color="#568feb" padding-bottom="15px">

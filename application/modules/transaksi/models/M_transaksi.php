@@ -32,9 +32,10 @@ class M_transaksi extends CI_Model {
     }
 
     public function getDetailPenumpang($id_transaksi){
-        $this->db->select('p.*')
+        $this->db->select('p.*, jp.nama as jenis_penumpang')
                  ->from('penumpang as p')
                  ->join('transaksi as t', 'p.id_transaksi=t.id_transaksi', 'left')
+                 ->join('jenis_penumpang as jp', 'jp.id=p.jenis_penumpang', 'left')
                  ->where('t.id_transaksi', $id_transaksi);
         
         $result = $this->db->get()->result();
