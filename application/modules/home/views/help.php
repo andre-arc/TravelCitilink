@@ -1,18 +1,18 @@
 <section class="content">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-xs-12">
                 <div class="box box-solid">
                     <div class="box-header" style="text-align: center;padding-top: 30px;padding-bottom: 30px;">
                         <h3>Pertanyaan Umum</h3><br>
                         <p>Berikut ini pertanyaan umum yang sering ditanyakan kepada kami, <br> mungkin salah satunya adalah pertanyaan yang ingin kamu tanyakan.</p>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body" style="padding-left: 80px;padding-right: 80px;">
+                    <div class="box-body" style="padding-left: 20px;padding-right: 20px;">
                         <div class="box-group" id="accordion">
                             <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                             <div class="panel">
-                                <div class="box-header">
+                                <div class="box-header box box-warning box-solid">
                                     <h4 class="box-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                                             Apakah touristix.id menerima pembayaran dengan mata uang asing?
@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                             <div class="panel">
-                                <div class="box-header ">
+                                <div class="box-header box box-warning box-solid ">
                                     <h4 class="box-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                                             Apakah metode pembayaran dapat diganti ?
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="panel">
-                                <div class="box-header">
+                                <div class="box-header box box-warning box-solid">
                                     <h4 class="box-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                                             Apakah saya perlu melakukan konfirmasi ke touristix.id apabila telah melakukan pembayaran?
@@ -59,7 +59,7 @@
                     <section class="text-center space--sm bg--dark">
                         <div class="container">
                             <h3>Apakah kamu masih punya pertanyaan lain?</h3>
-                            <a href="https://api.whatsapp.com/send?phone=6289529372104&text=Hallo%20TourisTix.id" target="_blank"><img alt="Tombol WhatsApp" src="<?= base_url('/assets/image/button-wa.png') ?>"></a>
+                            <a href="https://api.whatsapp.com/send?phone=6285292789158&text=Hallo%20TourisTix.id" target="_blank"><img alt="Tombol WhatsApp" src="<?php echo $this->config->item('asset_url') . 'assets/image/button-wa.png' ?>"></a>
                         </div>
                         <br><br>
                     </section>

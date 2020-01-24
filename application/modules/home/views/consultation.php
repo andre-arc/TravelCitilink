@@ -29,7 +29,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <p class="text-muted"><i class="fa fa-phone"></i> Call Center /Whatsapp :<strong> 0895-2937-2104</strong></p>
+                        <p class="text-muted"><i class="fa fa-phone"></i> Call Center /Whatsapp :<strong> +62-852-9278-9158</strong></p>
                         <hr>
 
                         <p class="text-muted"><i class="fa fa-envelope"></i> Email :<strong> touristixid@gmail.com</strong></p>
