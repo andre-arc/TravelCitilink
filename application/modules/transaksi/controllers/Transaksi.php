@@ -637,7 +637,7 @@ class Transaksi extends MY_Controller
 				//     $pdf->Cell(35,6,$row->tgl_berangkat,1,0);   
 				// }
 
-				$pdf->Output();
+				$pdf->Output('D', 'Bukti Pembayaran Tiket Kapal - '.$order_id.'.pdf');
 			}
 		}
 	}
