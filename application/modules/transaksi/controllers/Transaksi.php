@@ -301,22 +301,18 @@ class Transaksi extends MY_Controller
 		//echo $status;
 		if ($status) {
 
-			if ($org_id != '777') {
-				redirect('transaksi/detail/' . $id_transaksi);
-			} else {
-				$detail_email = array(
-					'id_transaksi' => $id_transaksi,
-					'token' => $token,
-					'total_hrg' => $total_hrg
-				);
+			$detail_email = array(
+				'id_transaksi' => $id_transaksi,
+				'token' => $token,
+				'total_hrg' => $total_hrg
+			);
 
-				$url = $this->__generate_vtweb($data);
-				$update_data = array('url_bayar' => $url);
-				$update = $this->db->update('transaksi', $update_data, array('id_transaksi' => $id_transaksi));
-				if ($update) {
-					$this->__kirimDetailTransaksi($token);
-					redirect($url);
-				}
+			$url = $this->__generate_vtweb($data);
+			$update_data = array('url_bayar' => $url);
+			$update = $this->db->update('transaksi', $update_data, array('id_transaksi' => $id_transaksi));
+			if ($update) {
+				$this->__kirimDetailTransaksi($token);
+				redirect($url);
 			}
 		} else {
 			var_dump($this->db->error());
@@ -337,17 +333,52 @@ class Transaksi extends MY_Controller
 	// 	}
 	// }
 
-	// function success(){
+	function selesai(){
+		$data = array(
+			'order_id' => $this->input->get('order_id'),
+			'status' => $this->input->get('transaction_status')
+		);
 
-	// }
+		if($data['order_id']){
+			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
+			$select_customer = $this->M_transaksi->getCustomer($detail_transaksi->id_transaksi);
+			if($data['status'] == 'pending'){
+				redirect('konfirmasi/?email='.$select_customer->email.'&orderId='.$data['order_id']);
+			}
+			$this->data['css'] = css_asset('style.css', '');
+			$this->data['content'] = $this->load->view('selesai_bayar', $data, true);
+			$this->display();
+		}
+	}
 
-	// function pending(){
+	function pending(){
+		$data = array(
+			'order_id' => $this->input->get('order_id'),
+			'status' => $this->input->get('transaction_status')
+		);
 
-	// }
+		if($data['order_id']){
+			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
+			$select_customer = $this->M_transaksi->getCustomer($detail_transaksi->id_transaksi);
+			redirect('konfirmasi/?email='.$select_customer->email.'&orderId='.$data['order_id']);
+		}
+	}
 
-	// function error(){
+	function error(){
+		$data = array(
+			'order_id' => $this->input->get('order_id'),
+			'status' => $this->input->get('transaction_status')
+		);
 
-	// }
+		if($data['order_id']){
+			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
+			$select_customer = $this->M_transaksi->getCustomer($detail_transaksi->id_transaksi);
+		
+			$this->data['css'] = css_asset('style.css', '');
+			$this->data['content'] = $this->load->view('error_bayar', $data, true);
+			$this->display();
+		}
+	}
 
 	function __kirimDetailTransaksi($order_id)
 	{
