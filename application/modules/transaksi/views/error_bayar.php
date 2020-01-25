@@ -12,7 +12,7 @@
 									if($status == 'settlement'){
 										?>
 										<img src="<?php echo $this->config->item('asset_url') . 'assets/image/error_image.jpg' ?>
-											" alt="" class="img-responsive" width="390px">
+											" alt="" class="img-responsive" width="390px" style="display:block;margin:auto;">
 											<p class="title">Gagal melakukan pembayaran</p>
 											<p class="caption noData">Telah terjadi kesalahan pada proses pembayaran.</p>
 										</div>
