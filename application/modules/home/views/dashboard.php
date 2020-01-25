@@ -11,69 +11,137 @@
       </section>
 </div>
 
-<div class="container">
+<div class="container" style="padding-bottom: 60px;">
       <div class="row">
-            <div class="col-lg-12 text-center">
-                  <h3 class="j3">AKTIVITAS POPULER</h3>
-                  <h4 class="j4">Aktivitas yang disukai para traveler</h4>
+            <div class="col-lg-12 text-center" style="padding-bottom: 18px;">
+                  <h3 class="j3">Cara Transaksi di touristix.id</h3>
+                  <h4 class="j4">Rute Lengkap untuk Semua Jenis Kelas</h4>
+            </div>
+
+      </div>
+
+      <div class="row text-center">
+
+            <div class="col-md-12">
+                  <div class="col-md-3 col-xs-6">
+                        <div class="box-body box-profile">
+                              <img class="profile-user-img img-responsive" src="<?php echo $this->config->item('asset_url') . 'assets/image/pesan.png' ?>" alt="User profile picture">
+
+                              <h3 class="profile-username text-center">Pesan</h3>
+
+                              <p class="text-muted text-center">Anda dapat memesan Tiket Kapal Express di touristix.id maksimal 24 jam sebelum keberangkatan</p>
+
+
+                        </div>
+                        <!-- /.box-body -->
+
+
+
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                        <div class="box-body box-profile">
+                              <img class="profile-user-img img-responsive" src="<?php echo $this->config->item('asset_url') . 'assets/image/tiket.png' ?>" alt="User profile picture">
+
+                              <h3 class="profile-username text-center">Tukar E-Ticket</h3>
+
+                              <p class="text-muted text-center">Tukar E-tiket dengan Tiket Resmi di Counter Touristix.id di Ruang Tunggu Kapal Express</p>
+
+
+                        </div>
+                        <!-- /.box-body -->
+
+
+
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                        <div class="box-body box-profile">
+                              <img class="profile-user-img img-responsive" src="<?php echo $this->config->item('asset_url') . 'assets/image/checkin.png' ?>" alt="User profile picture">
+
+                              <h3 class="profile-username text-center">Check-in</h3>
+
+                              <p class="text-muted text-center">Pastikan Anda menaiki Kapal sesuai Tiket untuk perjalanan yang lebih nyaman, dan jagalah barang-barang Anda selama perjalanan</p>
+
+
+                        </div>
+                        <!-- /.box-body -->
+
+
+
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                        <div class="box-body box-profile">
+                              <img class="profile-user-img img-responsive" src="<?php echo $this->config->item('asset_url') . 'assets/image/berangkat.png' ?>" alt="User profile picture">
+
+                              <h3 class="profile-username text-center">Berangkat</h3>
+
+                              <p class="text-muted text-center">Jika semua proses sudah dilalui, saatnya Anda menikmati perjalanan. Selamat Jalan!</p>
+
+
+                        </div>
+                        <!-- /.box-body -->
+
+
+
+                  </div>
             </div>
       </div>
       <!-- /.row -->
 
-      <div class="row text-center">
+      <!-- <div class="row text-center">
             <div class="col-lg-4 col-md-6 hero-feature">
                   <div class="thumbnail">
-                        <img src="<?php echo $this->config->item('asset_url').'assets/image/paket2.jpg' ?>" alt="">
+                        <img src="<?php echo $this->config->item('asset_url') . 'assets/image/paket2.jpg' ?>" alt="">
                   </div>
             </div>
             <div class="col-lg-4 col-md-6 hero-feature">
                   <div class="thumbnail">
-                        <img src="<?php echo $this->config->item('asset_url').'assets/image/paket3.jpg' ?>" alt="">
+                        <img src="<?php echo $this->config->item('asset_url') . 'assets/image/paket3.jpg' ?>" alt="">
                   </div>
             </div>
             <div class="col-lg-4 col-md-6 hero-feature">
                   <div class="thumbnail">
-                        <img src="<?php echo $this->config->item('asset_url').'assets/image/paket4.jpg' ?>" alt="">
+                        <img src="<?php echo $this->config->item('asset_url') . 'assets/image/paket4.jpg' ?>" alt="">
                   </div>
             </div>
-      </div>
+      </div> -->
 </div>
+</hr>
 
-<div class="container">
-      <div class="row">
-            <div class="col-lg-12 text-center">
-                  <h3 class="j3">Metode Pembayaran</h3>
-                  <h4 class="j4">Kami menerima pembayaran melalui ATM, Transfer Bank, Perbankan Online, dan Kartu Kredit. </h4>
-            </div>
-      </div>
-      <div class="row">
-            <div class="logo-partner" style="text-align: center">
-
-                  <img style="width: 70px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url').'assets/image/payment/02+Visa+logo+trans.png' ?>" alt="">
-
-                  <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url').'assets/image/payment/03+mastercard-vector-logo.png' ?>" alt="">
-
-                  <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url').'assets/image/payment/04+JCB_logo+small.png' ?>" alt="">
-
-                  <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url').'assets/image/payment/ATM-BCA.png' ?>" alt="">
-
-                  <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url').'assets/image/payment/ATM_Bersama_2016.png' ?>" alt="">
-
-                  <img style="width: 90px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url').'assets/image/payment/mandiri.png' ?>" alt="">
-
-                  <img style="width:100px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url').'assets/image/payment/05+Gopay+logo+trans+side.png' ?>" alt="">
-
-                  <img style="width: 100px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url').'assets/image/payment/06+Akulaku+logo+trans+side.png' ?>" alt="">
-
-                  <img style="width:100px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url').'assets/image/payment/alfamart-logo-png-8.png' ?>" alt="">
-
-                  <img style="width: 90px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url').'assets/image/payment/indomaret.png' ?>" alt="">
-
-            </div>
-      </div>
-</div>
 <!-- /.row -->
-<div class="row">
+<div class="row" style="background-color: #fff;">
+      <div class="container">
+            <div class="row">
+                  <div class="col-lg-12 text-center">
+                        <h3 class="j3">Metode Pembayaran</h3>
+                        <h4 class="j4">Kami menerima pembayaran melalui ATM, Transfer Bank, Perbankan Online, dan Kartu Kredit. </h4>
+                  </div>
+            </div>
+            <div class="row">
+                  <div class="logo-partner" style="text-align: center">
+
+                        <img style="width: 70px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/02+Visa+logo+trans.png' ?>" alt="">
+
+                        <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/03+mastercard-vector-logo.png' ?>" alt="">
+
+                        <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/04+JCB_logo+small.png' ?>" alt="">
+
+                        <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/ATM-BCA.png' ?>" alt="">
+
+                        <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/ATM_Bersama_2016.png' ?>" alt="">
+
+                        <img style="width: 90px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/mandiri.png' ?>" alt="">
+
+                        <img style="width:100px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/05+Gopay+logo+trans+side.png' ?>" alt="">
+
+                        <img style="width: 100px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/06+Akulaku+logo+trans+side.png' ?>" alt="">
+
+                        <img style="width:100px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/alfamart-logo-png-8.png' ?>" alt="">
+
+                        <img style="width: 90px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/indomaret.png' ?>" alt="">
+
+                  </div>
+            </div>
+      </div>
       <div class="footer-subscribe">
             <div class="container flex">
                   <div class="col-md-6">
