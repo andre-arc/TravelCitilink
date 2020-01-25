@@ -11,7 +11,7 @@
 								<?php
 									if($status == 'settlement'){
 										?>
-										<img src="<?php echo $this->config->item('asset_url') . 'assets/image/success_image.jpg' ?>
+										<img src="<?php echo $this->config->item('asset_url') . 'assets/image/success_image.png' ?>
 											" alt="" class="img-responsive" width="390px">
 											<p class="title">Selamat, transaksi telah berhasil</p>
 											<p class="caption noData">Bukti Pembayaran telah dikirim ke email anda.</p>
