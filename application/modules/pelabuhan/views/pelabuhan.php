@@ -13,17 +13,17 @@
 				</div>
 				<div id="toolbar">
 					<?php if ($auth_meta['add']) : ?>
-						<a id="btn-add" class="btn btn-primary btn-sm" href="<?php echo site_url('tiket/add/'); ?>" alt="ADD">
+						<a id="btn-add" class="btn btn-primary btn-sm" href="<?php echo site_url('pelabuhan/add/'); ?>" alt="ADD">
 							<i class="fa fa-plus-circle"></i>&nbsp;Add
 						</a>
 					<?php endif; ?>
 					<?php if ($auth_meta['edit']) : ?>
-						<a id="btn-edit" class="btn btn-info btn-sm" href="<?php echo site_url('tiket/edit/'); ?>" alt="Edit">
+						<a id="btn-edit" class="btn btn-info btn-sm" href="<?php echo site_url('pelabuhan/edit/'); ?>" alt="Edit">
 							<i class="fa fa-pencil"></i>&nbsp;Edit
 						</a>
 					<?php endif; ?>
 					<?php if ($auth_meta['del']) : ?>
-						<a id="btn-del" class="btn btn-danger btn-sm" href="<?php echo site_url('tiket/del/'); ?>" alt="Del">
+						<a id="btn-del" class="btn btn-danger btn-sm" href="<?php echo site_url('pelabuhan/del/'); ?>" alt="Del">
 							<i class="fa fa-trash-o"></i>&nbsp;Del
 						</a>
 					<?php endif; ?>
@@ -48,28 +48,15 @@
 					<input type="hidden" name="act" id="act" value="" />
 					<input type="hidden" id="id" name="id" value="" />
 					<input type="hidden" id="nama" name="nama" value="" />
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label class="control-label">Dari</label>
-								<select name="dari" class="form-control select" style="width:100%;" id="dari" required>
-									<option value="0">-- Pilih Bandara --</option>
-									<?php foreach ($pelabuhan->result() as $row) : ?>
-										<option value="<?php echo $row->kode; ?>"><?php echo $row->nm_bandara; ?> (<?php echo $row->kode; ?>)</option>
-									<?php endforeach; ?>
-								</select>
-							</div>
-						</div>
-					</div>
 
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="control-label">Tujuan</label>
-								<select name="tujuan" class="form-control select" style="width:100%;" id="tujuan" required>
-									<option value="0">-- Pilih Bandara --</option>
-									<?php foreach ($pelabuhan->result() as $row) : ?>
-										<option value="<?php echo $row->kode; ?>"><?php echo $row->nm_bandara; ?> (<?php echo $row->kode; ?>)</option>
+								<label class="control-label">Negara</label>
+								<select name="id_negara" class="form-control select" style="width:100%;" id="negara" required>
+									<option value="0">-- Pilih Negara --</option>
+									<?php foreach ($negara->result() as $row) : ?>
+										<option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>
 									<?php endforeach; ?>
 								</select>
 							</div>
@@ -79,71 +66,50 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">bandara asal</label>
-								<input type="text" id="nm_asal" name="nm_asal" class="form-control input-sm" value="" readonly />
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="control-label">bandara tujuan</label>
-								<input type="text" id="nm_tujuan" name="nm_tujuan" class="form-control input-sm" value="" readonly />
-							</div>
-						</div>
-					</div>
-
-
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="control-label">Kode PNR</label>
-								<input type="text" id="kode_pnr" name="kode_pnr" placeholder="UB13203" class="form-control input-sm" value="" />
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="control-label">Tanggal Berangkat</label>
-								<input type="date" id="tgl_berangkat" name="tgl_berangkat" class="form-control input-sm" value="" />
-								<small class="form-text text-muted" id="cek-nama"></small>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="control-label">Maskapai</label>
-								<select name="maskapai" class="form-control select" style="width:100%;" id="maskapai" required>
-									<option value="0">-- Pilih Maskapai --</option>
-									<option value="Citilink[QNK]">Citilink[QNK]</option>
-									<option value="Citilink[QGK]">Citilink[QGK]</option>
+								<label class="control-label">Provinsi</label>
+								<select name="id_provinsi" class="provinsi form-control select" style="width:100%;">
+									<option value="0">-- Pilih Provinsi--</option>
 
 								</select>
 							</div>
 						</div>
+
+
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">Jam</label>
-								<input type="time" id="waktu" name="waktu" class="form-control input-sm" value="" />
-								<small class="form-text text-muted" id="cek-nama"></small>
+								<label class="control-label">Kabupaten/Kota</label>
+								<select name="id_kota" class="kota form-control select" style="width:100%;">
+									<option value="0">-- Pilih Kota/Kab --</option>
+								</select>
 							</div>
 						</div>
+
 					</div>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">Jumlah Seat</label>
-								<input type="text" id="jml_seat" name="jml_seat" class="form-control input-sm" value="" />
+								<label class="control-label">Nama Pelabuhan</label>
+								<input type="text" id="nm_pelabuhan" name="nm_pelabuhan" class="form-control input-sm" value="" />
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">Harga</label>
-								<input type="text" id="harga" name="harga" class="form-control input-sm" value="" />
+								<label class="control-label">Kode Pelabuhan</label>
+								<input type="text" id="kode" name="kode" class="form-control input-sm" value="" placeholder="contoh : BTJ" />
 								<small class="form-text text-muted" id="cek-nama"></small>
 							</div>
 						</div>
 					</div>
 
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Keterangan</label>
+								<input type="text" id="keterangan" name="keterangan" class="form-control input-sm" value="" />
+							</div>
+						</div>
 
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -172,7 +138,7 @@
 			pagination: true,
 			search: true,
 			pageSize: 10,
-			url: SITE_URL + '/tiket/get_json/',
+			url: SITE_URL + '/pelabuhan/get_json/',
 			singleSelect: true,
 			columns: [{
 					field: 'state',
@@ -182,54 +148,44 @@
 				},
 				{
 					field: 'kode',
-					title: 'Kode PNR',
+					title: 'Kode Pelabuhan',
 					halign: 'center',
 					sortable: true
 				},
 				{
-					field: 'tgl_berangkat',
-					title: 'Tanggal Berangkat',
+					field: 'nm_bandara',
+					title: 'Nama Pelabuhan',
+					halign: 'center',
+					sortable: true
+				},
+
+				{
+					field: 'keterangan',
+					title: 'Keterangan',
 					halign: 'center',
 					sortable: true
 				},
 				{
-					field: 'waktu',
-					title: 'Waktu',
+					field: 'name',
+					title: 'Negara',
 					halign: 'center',
 					sortable: true
 				},
 				{
-					field: 'maskapai',
-					title: 'Maskapai',
+					field: 'nm_provinsi',
+					title: 'Provinsi',
 					halign: 'center',
 					sortable: true
 				},
 				{
-					field: 'dari',
-					title: 'Dari',
-					halign: 'center',
-					sortable: true
-				},
-				{
-					field: 'tujuan',
-					title: 'Tujuan',
-					halign: 'center',
-					sortable: true
-				},
-				{
-					field: 'jml_seat',
-					title: 'Sisa dari 178 Seat',
-					halign: 'center',
-					sortable: true
-				},
-				{
-					field: 'harga',
-					title: 'Harga Saat Ini',
+					field: 'nm_kota',
+					title: 'Kota/Kab',
 					halign: 'center',
 					sortable: true
 				}
 			],
 			onLoadSuccess: function(e) {
+				// alert(JSON.stringify($('#grid_kec').bootstrapTable('getData')));
 				$('#total_record').html(e.total);
 				$('.fixed-table-pagination').addClass('panel-footer clearfix bg-gray-active');
 			}
@@ -238,7 +194,7 @@
 		<?php if ($auth_meta['add']) : ?>
 			$('#btn-add').click(function(e) {
 				$('#frm-wil-gp').trigger("reset");
-				$('#id_tiket').val('').trigger("change");
+				$('#no_kk').val('').trigger("change");
 				$('.modal-header').removeClass().addClass("modal-header").addClass("mybg-primary");
 				$('#title_act').html('<i class="fa fa-plus-circle"></i>&nbsp;Form Add');
 				$('#act').val('add');
@@ -260,18 +216,13 @@
 					$('#act').val('edit');
 					//alert(rowSel[0].jenis_unit);
 					//load row
-					$('#id').val(rowSel[0].id_tiket);
-					$('#kode_pnr').val(rowSel[0].kode_pnr);
-					$('#tgl_berangkat').val(rowSel[0].tgl_berangkat);
-					$('#waktu').val(rowSel[0].waktu);
-					$('#dari').val(rowSel[0].dari).trigger('change');
-					$('#tujuan').val(rowSel[0].tujuan).trigger('change');
-					$('#maskapai').val(rowSel[0].maskapai).trigger('change');
-					$('#jml_seat').val(rowSel[0].jml_seat);
-					$('#harga').val(rowSel[0].harga);
-
-
-
+					$('#id').val(rowSel[0].id);
+					$('#kode').val(rowSel[0].kode);
+					$('#nm_pelabuhan').val(rowSel[0].nm_pelabuhan);
+					$('#keterangan').val(rowSel[0].keterangan);
+					$('#id_negara').val(rowSel[0].id_negara).trigger('change');
+					$('#id_provinsi').val(rowSel[0].id_provinsi).trigger('change');
+					$('#id_kota').val(rowSel[0].id_kota).trigger('change');
 
 					$('#myModal').modal('show');
 				} else {
@@ -284,7 +235,7 @@
 		<?php if (($auth_meta['add']) || ($auth_meta['edit'])) : ?>
 			$('#frm-wil-gp').submit(function(e) {
 				var form_data = $("#frm-wil-gp").serialize();
-				var url_form = ($('#act').val() == 'edit') ? SITE_URL + "/tiket/act_edit/" : SITE_URL + "/tiket/act_add/";
+				var url_form = ($('#act').val() == 'edit') ? SITE_URL + "/pelabuhan/act_edit/" : SITE_URL + "/pelabuhan/act_add/";
 				$.ajax({
 					type: "POST",
 					url: url_form,
@@ -323,38 +274,6 @@
 					$("#cek-nama").html("");
 				}
 			});
-
-			$('#dari').change(function() {
-				var kd_bandara = $('#dari').val() || null;
-				var url = SITE_URL + "/tiket/cek_bandara/" + kd_bandara;
-
-				$.ajax({
-					type: "GET",
-					url: url,
-					dataType: "json",
-					success: function(data) {
-						$("#nm_asal").val(data.nm_bandara);
-					}
-				});
-			});
-
-
-
-			$('#tujuan').change(function() {
-				var kd_bandara = $('#tujuan').val() || null;
-				var url = SITE_URL + "/tiket/cek_bandara/" + kd_bandara;
-
-				$.ajax({
-					type: "GET",
-					url: url,
-					dataType: "json",
-					success: function(data) {
-						$("#nm_tujuan").val(data.nm_bandara);
-					}
-				});
-			});
-
-
 		<?php endif; ?>
 
 		<?php if ($auth_meta['del']) : ?>
@@ -375,10 +294,10 @@
 					}).then(function() {
 							$.ajax({
 								type: "POST",
-								url: SITE_URL + "/tiket/act_del/",
+								url: SITE_URL + "/pelabuhan/act_del/",
 								dataType: "json",
 								data: {
-									id_tiket: rowSel[0].id_tiket
+									id: rowSel[0].id
 								},
 								success: function(data) {
 									if (data.success) {
@@ -397,5 +316,55 @@
 				e.preventDefault();
 			});
 		<?php endif; ?>
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#negara').change(function() {
+			var id = $(this).val();
+			$.ajax({
+				url: "<?php echo base_url(); ?>index.php/pelabuhan/get_provinsi",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: false,
+				dataType: 'json',
+				success: function(data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i].nm_provinsi + '</option>';
+					}
+					$('.provinsi').html(html);
+
+				}
+			});
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#negara').change(function() {
+			var id = $(this).val();
+			$.ajax({
+				url: "<?php echo base_url(); ?>index.php/pelabuhan/get_kota",
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: false,
+				dataType: 'json',
+				success: function(data) {
+					var html = '';
+					var i;
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id + '>' + data[i].nm_kota + '</option>';
+					}
+					$('.kota').html(html);
+
+				}
+			});
+		});
 	});
 </script>

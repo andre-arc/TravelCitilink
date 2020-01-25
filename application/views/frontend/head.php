@@ -15,7 +15,8 @@
 	</title>
 
 	<title><?php echo $MYCFG['GENERAL']['APP_NAME']; ?> - <?php echo $MYCFG['GENERAL']['APP_NAME_LONG']; ?></title>
-	<link rel="icon" href="<?php echo image_asset_url($MYCFG['GENERAL']['APP_NAME_LOGO']); ?>">
+	<!-- <link rel="icon" href="<?php // echo image_asset_url($MYCFG['GENERAL']['APP_NAME_LOGO']); 
+								?>"> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -29,7 +30,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.min.js"></script>
 
 
-	<script type="text/javascript" src="<?php echo $this->config->item('asset_url').'assets/js/myloader.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo $this->config->item('asset_url') . 'assets/js/myloader.js'; ?>"></script>
 	<script type="text/javascript">
 		var BASE_URL = '<?php echo base_url() ?>';
 		var ASSET_URL = '<?php echo $this->config->item('asset_url') ?>';

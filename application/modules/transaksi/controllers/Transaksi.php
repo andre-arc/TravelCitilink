@@ -9,6 +9,7 @@ class Transaksi extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model("M_transaksi");
+		$this->load->helper("tanggal_indo_helper");
 	}
 
 	function index()
@@ -103,10 +104,10 @@ class Transaksi extends MY_Controller
 		$this->data['detail_tiket'] = $this->M_transaksi->getDetailTiket($tiket);
 		$this->data['jenis_penumpang'] = $this->M_transaksi->getJenisPenumpang();
 		$this->data['jml_penumpang'] = array(
-											'Dewasa' => $this->input->post('adult'),
-											'Anak' => $this->input->post('child'),
-											'Bayi' => $this->input->post('infant'),
-										);
+			'Dewasa' => $this->input->post('adult'),
+			'Anak' => $this->input->post('child'),
+			'Bayi' => $this->input->post('infant'),
+		);
 
 		$this->data['content'] = $this->load->view('checkout', $this->data, true);
 
@@ -123,19 +124,21 @@ class Transaksi extends MY_Controller
 		// 
 	}
 
-	function getHarga(){
+	function getHarga()
+	{
 		$id_tiket = $this->input->post('id');
 		$jenis_penumpang = $this->input->post('jenis');
 
 		$select = $this->db->select('hrg_tiket')
-				 ->where('id_tiket', $id_tiket)
-				 ->where('jenis_penumpang', $jenis_penumpang)
-				 ->get('detail_tiket')->row();
-		
+			->where('id_tiket', $id_tiket)
+			->where('jenis_penumpang', $jenis_penumpang)
+			->get('detail_tiket')->row();
+
 		echo $select->hrg_tiket;
 	}
 
-	public function finalisasi(){
+	public function finalisasi()
+	{
 		$this->data['css'] = css_asset('style.css', '');
 		$this->data['css'] .= css_asset('select2.min.css', 'select2');
 		$this->data['css'] .= css_asset('bootstrap-datepicker.min.css', 'bootstrap-datepicker');
@@ -298,24 +301,20 @@ class Transaksi extends MY_Controller
 		//echo $status;
 		if ($status) {
 
-			if ($org_id != '777') {
-				redirect('transaksi/detail/' . $id_transaksi);
-			} else {
-				$detail_email = array(
-					'id_transaksi' => $id_transaksi,
-					'token' => $token,
-					'total_hrg' => $total_hrg
-				);
+			$detail_email = array(
+				'id_transaksi' => $id_transaksi,
+				'token' => $token,
+				'total_hrg' => $total_hrg
+			);
 
-					$url = $this->__generate_vtweb($data);			
-					$update_data = array('url_bayar'=> $url);
-					$update = $this->db->update('transaksi', $update_data, array('id_transaksi' => $id_transaksi));
-					if($update){
-						$this->__kirimDetailTransaksi($token);
-						redirect($url);
-					}
+			$url = $this->__generate_vtweb($data);
+			$update_data = array('url_bayar' => $url);
+			$update = $this->db->update('transaksi', $update_data, array('id_transaksi' => $id_transaksi));
+			if ($update) {
+				$this->__kirimDetailTransaksi($token);
+				redirect($url);
 			}
-		}else{
+		} else {
 			var_dump($this->db->error());
 		}
 	}
@@ -334,17 +333,52 @@ class Transaksi extends MY_Controller
 	// 	}
 	// }
 
-	// function success(){
+	function selesai(){
+		$data = array(
+			'order_id' => $this->input->get('order_id'),
+			'status' => $this->input->get('transaction_status')
+		);
 
-	// }
+		if($data['order_id']){
+			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
+			$select_customer = $this->M_transaksi->getCustomer($detail_transaksi->id_transaksi);
+			if($data['status'] == 'pending'){
+				redirect('konfirmasi/?email='.$select_customer->email.'&orderId='.$data['order_id']);
+			}
+			$this->data['css'] = css_asset('style.css', '');
+			$this->data['content'] = $this->load->view('selesai_bayar', $data, true);
+			$this->display();
+		}
+	}
 
-	// function pending(){
+	function pending(){
+		$data = array(
+			'order_id' => $this->input->get('order_id'),
+			'status' => $this->input->get('transaction_status')
+		);
+
+		if($data['order_id']){
+			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
+			$select_customer = $this->M_transaksi->getCustomer($detail_transaksi->id_transaksi);
+			redirect('konfirmasi/?email='.$select_customer->email.'&orderId='.$data['order_id']);
+		}
+	}
+
+	function error(){
+		$data = array(
+			'order_id' => $this->input->get('order_id'),
+			'status' => $this->input->get('transaction_status')
+		);
+
+		if($data['order_id']){
+			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
+			$select_customer = $this->M_transaksi->getCustomer($detail_transaksi->id_transaksi);
 		
-	// }
-
-	// function error(){
-		
-	// }
+			$this->data['css'] = css_asset('style.css', '');
+			$this->data['content'] = $this->load->view('error_bayar', $data, true);
+			$this->display();
+		}
+	}
 
 	function __kirimDetailTransaksi($order_id)
 	{
@@ -354,9 +388,9 @@ class Transaksi extends MY_Controller
 		$data = array();
 
 		$select = $this->db->select('t.*, c.*')
-						   ->from('transaksi as t')
-						   ->join('customer as c', 't.id_customer=c.id_customer')
-						   ->where('t.kode', $order_id)->get()->row();
+			->from('transaksi as t')
+			->join('customer as c', 't.id_customer=c.id_customer')
+			->where('t.kode', $order_id)->get()->row();
 
 		$data = array(
 			'order_id' => $order_id,
@@ -365,12 +399,12 @@ class Transaksi extends MY_Controller
 			'url_bayar' => $select->url_bayar,
 			'total_hrg' => $select->total_hrg,
 			'tgl_transaksi' => $select->tgl_transaksi,
-			"subject" => "Konfirmasi Pembayaran Order ".$order_id." Tiket Kapal Touristix.ID"
+			"subject" => "Konfirmasi Pembayaran Order " . $order_id . " Tiket Kapal Touristix.ID"
 		);
 
 		$mjml = $this->load->view('email_konfirmasi_order', $data, true);
 		$html = $this->mjml->render($mjml);
-		
+
 
 		try {
 			$message = new Message();
@@ -408,7 +442,8 @@ class Transaksi extends MY_Controller
 		$this->display($this->data);
 	}
 
-	function __generate_vtweb($data){
+	function __generate_vtweb($data)
+	{
 		$params = array('server_key' => 'SB-Mid-server-sFpG2wSCF1POs-mwEr7qd3E-', 'production' => false);
 		$this->load->library('veritrans');
 		$this->veritrans->config($params);
@@ -421,15 +456,15 @@ class Transaksi extends MY_Controller
 		// Populate items
 		$items = array();
 
-		foreach($data['detail_hrg'] as $d){
+		foreach ($data['detail_hrg'] as $d) {
 			$total = 0;
-			foreach($data['tiket'] as $t){
-				$total += $t->{'hrg_'.$d->jenis_penumpang};
+			foreach ($data['tiket'] as $t) {
+				$total += $t->{'hrg_' . $d->jenis_penumpang};
 			}
 			$items[] = array(
 				'price' 		=> $total,
 				'quantity' 		=> $d->jml_penumpang,
-				'name' 			=> 'Tiket Kapal ('.ucwords($d->jenis_penumpang).')'
+				'name' 			=> 'Tiket Kapal (' . ucwords($d->jenis_penumpang) . ')'
 			);
 		}
 
@@ -442,9 +477,9 @@ class Transaksi extends MY_Controller
 			'last_name' 		=> count($nama_customer) > 1 ? $nama_customer[1] : '',
 			'phone' 			=> $data['pemesan']->no_hp,
 			'country_code'		=> 'IDN'
-			);
+		);
 
-	
+
 
 		// Populate customer's Info
 		$customer_details = array(
@@ -453,31 +488,27 @@ class Transaksi extends MY_Controller
 			'email' 			=> $data['pemesan']->email,
 			'phone' 			=> $data['pemesan']->no_hp,
 			'billing_address' 	=> $billing_address,
-			);
+		);
 
 		// Data yang akan dikirim untuk request redirect_url.
 		// Uncomment 'credit_card_3d_secure' => true jika transaksi ingin diproses dengan 3DSecure.
 		$transaction_data = array(
-			'payment_type' 			=> 'vtweb', 
+			'payment_type' 			=> 'vtweb',
 			'vtweb' 						=> array(
 				//'enabled_payments' 	=> ['credit_card'],
 				'credit_card_3d_secure' => true
 			),
-			'transaction_details'=> $transaction_details,
+			'transaction_details' => $transaction_details,
 			'item_details' 			 => $items,
 			'customer_details' 	 => $customer_details
 		);
-	
-		try
-		{
+
+		try {
 			$vtweb_url = $this->veritrans->vtweb_charge($transaction_data);
 			return $vtweb_url;
-		} 
-		catch (Exception $e) 
-		{
-    		echo $e->getMessage();	
+		} catch (Exception $e) {
+			echo $e->getMessage();
 		}
-
 	}
 
 	public function bayar($id_transaksi)
@@ -490,11 +521,12 @@ class Transaksi extends MY_Controller
 		}
 	}
 
-	function cetakTiket(){
+	function cetakTiket()
+	{
 		$order_id = $this->input->get('orderId');
-		if($order_id){
+		if ($order_id) {
 			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
-			if(count($detail_transaksi) > 0){
+			if (count($detail_transaksi) > 0) {
 
 				$select_tiket = $this->db->select('id_tiket')->where('id_transaksi', $detail_transaksi->id_transaksi)->get('detail_transaksi')->result();
 				foreach ($select_tiket as $dt) {
@@ -541,7 +573,7 @@ class Transaksi extends MY_Controller
 				$pdf->Cell(10, 6, 'Kode : ' . $detail_transaksi->kode, 0, 1);
 				$pdf->SetFont('Arial', '', 10);
 				$pdf->Cell(10, 6, 'Tanggal Pemesanan: ' . $detail_transaksi->tgl_transaksi, 0, 1);
-				$pdf->Cell(10, 6, 'Status: '. $detail_transaksi->status_bayar, 0, 1);
+				$pdf->Cell(10, 6, 'Status: ' . $detail_transaksi->status_bayar, 0, 1);
 
 				foreach ($detail_tiket as $t) {
 					$pdf->Cell(10, 7, '', 0, 1);
@@ -553,17 +585,17 @@ class Transaksi extends MY_Controller
 					$pdf->Cell(80, 6, 'Rute', 1, 0);
 					$pdf->Cell(40, 6, 'Kapal', 1, 1);
 
-				
+
 
 					$pdf->SetFont('Arial', '', 10);
 					$x = $pdf->GetX();
 					$y = $pdf->GetY();
-					
-					$pdf->MultiCell(42, 6, $t->tgl_berangkat." ".$t->waktu, 1, 'L');
-					$pdf->setXY($x+=42, $y);
+
+					$pdf->MultiCell(42, 6, $t->tgl_berangkat . " " . $t->waktu, 1, 'L');
+					$pdf->setXY($x += 42, $y);
 
 					$pdf->MultiCell(80, 6, $t->kota_asal . "(" . $t->dari . ") - " . $t->kota_tujuan . "(" . $t->tujuan . ")", 1, 'L');
-					$pdf->setXY($x+=80, $y);
+					$pdf->setXY($x += 80, $y);
 
 					$pdf->MultiCell(40, 6, $t->nama_kapal, 1, 'L');
 					$pdf->Ln(0);
@@ -584,15 +616,15 @@ class Transaksi extends MY_Controller
 						$pdf->Cell(20, 6, $p->jenis_penumpang, 1, 0);
 
 						$select_harga = $this->db->select('dt.hrg_tiket')
-												 ->join('jenis_penumpang as jp', 'jp.id=dt.jenis_penumpang')
-												 ->where('dt.id_tiket', $t->id_tiket)
-												 ->where('jp.nama', $p->jenis_penumpang)
-												 ->get('detail_tiket as dt')->row();
+							->join('jenis_penumpang as jp', 'jp.id=dt.jenis_penumpang')
+							->where('dt.id_tiket', $t->id_tiket)
+							->where('jp.nama', $p->jenis_penumpang)
+							->get('detail_tiket as dt')->row();
 						$pdf->Cell(20, 6, convertToRupiah($select_harga->hrg_tiket), 1, 1);
 					}
 				}
 
-				
+
 
 				$pdf->Cell(10, 7, '', 0, 1);
 				$pdf->Line(10, $pdf->GetY(), 140, $pdf->GetY());
@@ -637,9 +669,8 @@ class Transaksi extends MY_Controller
 				//     $pdf->Cell(35,6,$row->tgl_berangkat,1,0);   
 				// }
 
-				$pdf->Output('D', 'Bukti Pembayaran Tiket Kapal - '.$order_id.'.pdf');
+				$pdf->Output('D', 'Bukti Pembayaran Tiket Kapal - ' . $order_id . '.pdf');
 			}
 		}
 	}
-		
 }

@@ -30,7 +30,17 @@
                   <div class="form-group">
                     <label>Tanggal Kembali</label>
                     <input id="tgl_kembali" class="form-control search" type="text" name="tgl_kembali" autocomplete="off">
-                    <input type="checkbox" type="text" name="pp" id="pp"> Kembali
+
+                    <label class="checkbox-label">
+                      <input type="checkbox" type="text" name="pp" id="pp">
+                      <div style="color: grey;letter-spacing: 1px;">Pulang</div>
+                      <span class="checkbox-custom rectangular"></span>
+
+                    </label>
+
+
+
+
                   </div>
                 </div>
                 <div class="col-md-2">

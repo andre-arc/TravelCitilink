@@ -1,6 +1,6 @@
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo site_url(); ?>"><b>Travel Ubudiyah</b>&nbsp;</a>
+    <a href="<?php echo site_url(); ?>"><b>Touristix.id </b>&nbsp;</a>
   </div>
   <div class="login-box-body">
     <p class="login-box-msg">Daftar Sebagai Member</p>

@@ -24,8 +24,11 @@
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-3 col-xs-6">
-                                <div class="description-block border-right" style="font-size: 20px;padding-top: 6px;">
-                                    <h5 class="description-header"><?= $this->input->get('tgl_berangkat'); ?> <?= $this->input->get('tgl_kembali'); ?></h5>
+                                <div class="description-block border-right" style="font-size: 20px;">
+                                    <span class="description-text" style="text-transform: unset;font-size: 12px;color:gray; ">Tanggal Keberangkatan</span>
+                                    <h5 class="description-header">
+                                        <?= longdate_indo($this->input->get('tgl_berangkat')); ?>
+                                        <?= $this->input->get('tgl_kembali') ? longdate_indo($this->input->get('tgl_kembali')) : ''; ?></h5>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -52,8 +55,8 @@
 
 
 <script>
-    var asal = getUrlParameter('asal').replace("+"," ");
-    var tujuan = getUrlParameter('tujuan').replace("+"," ");
+    var asal = getUrlParameter('asal').replace("+", " ");
+    var tujuan = getUrlParameter('tujuan').replace("+", " ");
     var tgl_berangkat = getUrlParameter('tgl_berangkat');
     var tgl_kembali = getUrlParameter('pp') ? getUrlParameter('tgl_kembali') : "";
     var jmlTiket = 0;
@@ -73,7 +76,7 @@
     }
 
     $(document).ready(function() {
-        
+
         getDataTiket(asal, tujuan, tgl_berangkat);
 
         $('input.check').on('click', function() {
@@ -85,14 +88,14 @@
     function getUrlParameter(name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
 
-        if(results){
+        if (results) {
             return results[1]
-        }else{
+        } else {
             return 0;
         }
     };
 
-    function getDataTiket(asal, tujuan, berangkat){
+    function getDataTiket(asal, tujuan, berangkat) {
         $.ajax({
             type: "POST",
             url: '<?= base_url('home/getJsonTiket') ?>',
@@ -120,15 +123,15 @@
                             id_tiket: id,
                         },
                         success: function(data) {
-                            if(getUrlParameter('pp')){
-                                if(jmlTiket >= 1){
+                            if (getUrlParameter('pp')) {
+                                if (jmlTiket >= 1) {
                                     $('#form-checkout').submit();
-                                }else{
+                                } else {
                                     jmlTiket++;
                                     getDataTiket(tujuan, asal, tgl_kembali);
                                 }
-                            }else{
-                                if(jmlTiket == 0){
+                            } else {
+                                if (jmlTiket == 0) {
                                     $('#form-checkout').submit();
                                 }
                             }

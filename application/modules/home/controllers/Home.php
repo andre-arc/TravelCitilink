@@ -7,6 +7,7 @@ class Home extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_dashboard');
+		$this->load->helper('tanggal_indo_helper');
 	}
 
 	function index()
@@ -93,13 +94,13 @@ class Home extends MY_Controller
 									<div class="row">
 										<div class="col-md-12">
 											<div class="col-md-3" style="text-align: center;">
-												<img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="'.$this->config->item('asset_url').'assets/image/'. $r->logo_kapal.'" alt="'.$r->nama_kapal.'">
-												<h4>'.$r->nama_kapal.'</h4>
-												<strong class="text-center">'.$r->jenis_tiket.'</strong>
+												<img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="' . $this->config->item('asset_url') . 'assets/image/' . $r->logo_kapal . '" alt="' . $r->nama_kapal . '">
+												<h4>' . $r->nama_kapal . '</h4>
+												<strong class="text-center">' . $r->jenis_tiket . '</strong>
 											</div>
 											<div class="col-md-2 time">
 												<span>
-													' . $r->tgl_berangkat . " | " . $r->waktu . '
+													' . longdate_indo($r->tgl_berangkat) . "  " . $r->waktu . '
 													<br>
 
 												</span>
