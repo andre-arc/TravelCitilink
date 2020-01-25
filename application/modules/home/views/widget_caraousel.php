@@ -21,7 +21,7 @@
 
         <div class="item <?php echo ($k == 0) ? 'active' : ''; ?>">
 
-          <img class="img-fluid" src="<?php echo base_url('assets/image/slider/'); ?><?php echo $v; ?>" style="width: 100%;" />
+          <img class="img-fluid" src="<?php echo $this->config->item('asset_url').'assets/image/slider/' ; ?><?php echo $v; ?>" style="width: 100%;" />
 
         </div>
 

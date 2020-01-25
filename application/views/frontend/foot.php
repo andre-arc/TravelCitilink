@@ -2,10 +2,17 @@
     <div class="container-fluid">
         <div class="container footer-commons">
             <div class="row py-5">
-                <div class="col-sm-6 col-md-3 order-sm-0 order-md-0"> <img src="<?php echo base_url('/assets/image/logo.png'); ?>" width="196px" data-original="" class="lazy " alt="" style="display: inline;">
+                <div class="col-sm-6 col-md-3 order-sm-0 order-md-0" style="text-align: center;"> <img src="<?php echo $this->config->item('asset_url') . 'assets/image/logo.png'; ?>" width="196px" data-original="" class="lazy " alt="" style="display: inline;">
                     <noscript>
-                        <img src='<?php echo base_url('/assets/image/logo.png'); ?>' class='noscript noscript-img ' alt='' />
-                    </noscript> </div>
+                        <img src='<?php echo $this->config->item('asset_url') . 'assets/image/logo.png'; ?>' class='noscript noscript-img ' alt='' />
+                    </noscript>
+                    <ul class="info-share">
+                        <li><a href="https://www.instagram.com/touristixid/"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.facebook.com/touris.tixid.1"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.linkedin.com/company/touristix-id/about/"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+
+                </div>
                 <div class="col-sm-12 col-md-6 order-sm-2 order-md-1">
                     <div class="row" style="padding-top: 19px;">
                         <div class="col-sm-4 col-xs-12">
@@ -28,8 +35,8 @@
                             <dl>
                                 <dt class="text-muted">SUPPORT</dt>
                                 <dd><a href="#">Bantuan</a></dd>
-                                <dd><a href="#">FAQ</a></dd>
-                                <dd><a href="<?= base_url('/home/consultation'); ?>">Hubungi Kami</a></dd>
+                                <dd><a href="<?= base_url('/help-center'); ?>">FAQ</a></dd>
+                                <dd><a href="<?= base_url('/consultation'); ?>">Hubungi Kami</a></dd>
                             </dl>
                         </div>
                     </div>
@@ -45,7 +52,7 @@
         <div class="container">
             <div class="row py-3">
                 <div class="col-sm-6"><small>copyright © <?php echo date("Y"); ?> - TourisTIX Group. All rights reserved.</small></div>
-                <div class="col-sm-6 text-right"><a style="margin-right: 1.5rem !important;" href="#" class="mr-4">Terms</a> <a href="#">Privacy</a></div>
+                <div class="col-sm-6 text-right"><a style="margin-right: 1.5rem !important;color:gray;font-weight: bold;" href="#" class="mr-4">Terms</a> <a href="#" style="color:gray;font-weight: bold;">Privacy</a></div>
             </div>
         </div>
     </div>

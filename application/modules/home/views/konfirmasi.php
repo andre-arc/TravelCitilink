@@ -6,7 +6,7 @@
 					<div class="modal-header">
 						<h4 class="modal-title"><span id="title_act"></span> Check Tiket</h4>
 					</div>
-					<form role="form" id="frm-confirm" name="frm-org-mdl" method="POST">
+					<form role="form" id="frm-confirm" name="frm-org-mdl" action="" method="GET">
 						<div class="modal-body">
 
 
@@ -14,7 +14,7 @@
 								<input type="text" placeholder="Alamat Email" name="email" id="email" class="form-control" />
 							</div>
 							<div class="form-group">
-								<input type="text" placeholder="Order ID" name="atas_nama" id="orderid" class="form-control" />
+								<input type="text" placeholder="Order ID" name="orderId" id="orderid" class="form-control" />
 							</div>
 
 						</div>
@@ -33,10 +33,99 @@
 						<div class="desktop-layout">
 							<div class="empty-state-background">
 								<div class="empty-state-wrapper" style="text-align: -moz-center;">
-									<img src="<?php echo base_url('/assets/image/checktiket.jpg'); ?>" alt="" class="img-responsive" width="390px">
-									<p class="title">Cek pesanan dengan mudah</p>
-									<p class="caption noData">Masukkan alamat email dan order ID di form cek pesanan.</p>
-								</div>
+								<?php
+									if(!$detail_transaksi){
+										?>
+										<img src="<?php echo $this->config->item('asset_url') . 'assets/image/checktiket.jpg' ?>
+											" alt="" class="img-responsive" width="390px" style="display:block;margin:auto;">
+											<p class="title">Cek pesanan dengan mudah</p>
+											<p class="caption noData">Masukkan alamat email dan order ID di form cek pesanan.</p>
+										</div>
+										<?php
+									}else{
+										?>
+										  <div class="row invoice-info">
+										  <div class="col-sm-6 invoice-col">
+												Customer:
+												<address>
+													<strong><?= $pemesan->nama_customer ?></strong><br>
+													Phone: <?= $pemesan->hp ?><br>
+													Email: <?= $pemesan->email ?>
+												</address>
+										   </div>
+										   <div class="col-sm-6 invoice-col">
+												<b>Order ID:</b> <?= $detail_transaksi->kode ?><br>
+												<b>Tanggal Pemesanan:</b> <?= $detail_transaksi->tgl_transaksi ?><br>
+												<b>Status:</b> <?= $detail_transaksi->status_bayar ?>
+											</div>
+										</div>
+										<hr>
+										<div class="col-xs-12 table-responsive">
+											<span class="pull-left labelkonsumen">
+												&nbsp;Detail Penumpang
+											</span>
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>No</th>
+														<th>Nama</th>
+														<th>Penumpang </th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+													$no = 1;
+													foreach ($data_penumpang as $p) {
+													?>
+														<tr>
+															<td><?= $no ?></td>
+															<td><?= $p->nama_penumpang ?></td>
+															<td><?= $p->jenis_penumpang ?></td>
+														</tr>
+													<?php
+														$no++;
+													}
+													?>
+												</tbody>
+											</table>
+
+											<span class="pull-left labelkonsumen">
+												&nbsp;Detail Harga Tiket
+											</span>
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>No</th>
+														<th>Tiket</th>
+														<th>Harga </th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+													$no = 1;
+													foreach ($detail_harga as $d) {
+													?>
+														<tr>
+															<td><?= $no ?></td>
+															<td><?= ucwords($d->jenis_penumpang)." (".$d->jml_penumpang."x)" ?></td>
+															<td><?= convertToRupiah($d->total_hrg) ?></td>
+														</tr>
+													<?php
+														$no++;
+													}
+													?>
+												</tbody>
+											</table>
+										</div>
+										
+										<div class="col-sm-12 invoice-col">
+										<hr>
+											<strong class="pull-right">Total Pembayaran : <?= convertToRupiah($total_harga) ?></strong>
+										</div>
+										
+										<?php
+									}
+								?>
 							</div>
 						</div>
 
@@ -44,6 +133,7 @@
 					<!-- /.box-body -->
 				</div>
 			</div>
+			
 		</div>
 	</div>
 
