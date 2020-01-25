@@ -59,7 +59,7 @@
 
                               <h3 class="profile-username text-center">Check-in</h3>
 
-                              <p class="text-muted text-center">Pastikan Anda menaiki Kapal sesuai Tiket untuk perjalanan yang lebih nyaman, dan jagalah barang-barang Anda selama perjalanan</p>
+                              <p class="text-muted text-center">Pastikan Jadwal Kapal Anda sesuai Tiket dan jagalah barang-barang Anda selama perjalanan</p>
 
 
                         </div>
