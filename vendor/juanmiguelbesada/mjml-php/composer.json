@@ -1,0 +1,23 @@
+{
+    "name": "juanmiguelbesada/mjml-php",
+    "description": "A simple php library to consume use MJML rest API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Juan Miguel Besada",
+            "email": "juanmiguelbesada@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mjml\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.1"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.12"
+    }
+}

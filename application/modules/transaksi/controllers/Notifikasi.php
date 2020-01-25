@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
+use google\appengine\api\mail\Message;
 
 class Notifikasi extends MY_Controller
 {
@@ -48,7 +49,7 @@ class Notifikasi extends MY_Controller
 		else if ($transaction == 'settlement'){
 		  // TODO set payment status in merchant's database to 'Settlement'
 		  echo "Transaction order_id: " . $order_id ." successfully transfered using " . $type;
-		  $this->__proses_notifikasi('settlement', $order_id, $type);
+		  $this->__proses_notifikasi('success', $order_id, $type);
 		  } 
 		  else if($transaction == 'pending'){
 		  // TODO set payment status in merchant's database to 'Pending'
@@ -82,6 +83,65 @@ class Notifikasi extends MY_Controller
 		// 		$data = array(); break;
 		// }
 
+		if($status == 'success' || $status == 'expired'){
+			$this->__kirimEmailTiket($order_id, $status);
+		}
+
 		$update = $this->db->update('transaksi', $data, array('kode' => $order_id));
+	}
+
+	function __kirimEmailTiket($order_id, $status){
+		$this->load->library('mjml');
+		$this->load->library('email');
+		$data = array();
+
+		$select = $this->db->select('t.*, c.*')
+						   ->from('transaksi as t')
+						   ->join('customer as c', 't.id_customer=c.id_customer')
+						   ->where('t.kode', $order_id)->get()->row();
+
+		$data = array(
+			'order_id' => $order_id,
+			'nama_customer' => $select->nama_customer,
+			'email' => $select->email,
+			'total_hrg' => $select->total_hrg,
+			'tgl_transaksi' => $select->tgl_transaksi
+		);
+
+		if($status == 'success' ){
+			$data['subject'] = "Transaksi Order ".$order_id." Tiket Kapal Touristix.ID telah Berhasil";
+			$mjml = $this->load->view('email_success_order', $data, true);
+			$html = $this->mjml->render($mjml);
+		}elseif($status == 'expired'){
+			$data['subject'] = "Transaksi Order ".$order_id." Tiket Kapal Touristix.ID telah Kadarluasa";
+			$html = $this->load->view('email_success_order', $data, true);
+		}
+		
+
+		try {
+			$message = new Message();
+			$message->setSender('touristixid@gmail.com');
+			$message->addTo($data['email']);
+			$message->setSubject($data['subject']);
+			$message->setHtmlBody($html);
+			$message->send();
+			// echo 'Mail Sent';
+			return true;
+		} catch (InvalidArgumentException $e) {
+			// $error = "Unable to send mail. $e";
+			error_log($error);
+			return false;
+		}
+
+		// $result = $this->email->from('touristixid@gmail.com')   
+		// 					 ->to($data['email'])
+		// 					 ->subject($data['subject'])
+		// 					 ->message($html)
+		// 					 ->send();
+		// if ($result) {
+		// 	return true;
+		// } else {
+		// 	echo $this->email->print_debugger();
+		// }
 	}
 }

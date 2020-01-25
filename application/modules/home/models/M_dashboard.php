@@ -26,21 +26,18 @@ class M_dashboard extends CI_Model
 
     public function getTicket($data)
     {
-        $this->db->select('t.*, k.nama as nama_kapal, k.logo as logo_kapal, dtiket.hrg_tiket')
+        $this->db->select('t.*, k.nama as nama_kapal, k.logo as logo_kapal, dtiket.hrg_tiket as hrg_dewasa, jt.deskripsi as jenis_tiket')
             ->from('tiket as t')
             ->join('kapal as k', 't.id_kapal=k.id')
             ->join('detail_tiket as dtiket', 't.id_tiket=dtiket.id_tiket')
             ->join('jenis_penumpang as jp', 'dtiket.jenis_penumpang=jp.id')
+            ->join('jenis_tiket as jt', 't.id_jenis=jt.id')
+            ->group_start()
             ->where('t.tgl_berangkat', $data['tgl_berangkat'])
             ->where('t.dari', $data['asal'])
             ->where('t.tujuan', $data['tujuan'])
+            ->group_end()
             ->where('jp.nama', 'Dewasa');
-
-        if ($data['tgl_kembali'] != "null") {
-            $this->db->or_where('t.tgl_berangkat', $data['tgl_kembali'])
-                ->where('t.dari', $data['tujuan'])
-                ->where('t.tujuan', $data['asal']);
-        }
 
         $result = $this->db->get()->result();
         return $result;

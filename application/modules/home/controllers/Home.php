@@ -7,10 +7,12 @@ class Home extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_dashboard');
+		$this->load->helper('tanggal_indo_helper');
 	}
 
 	function index()
 	{
+		$this->session->unset_userdata('selected_tiket');
 
 		$this->data['css'] = css_asset('style.css', '');
 		$this->data['css'] .=  css_asset('bootstrap-table.min.css', 'bootstrap-table');
@@ -33,17 +35,16 @@ class Home extends MY_Controller
 
 	function search()
 	{
-		$this->data['css'] = css_asset('style.css', '');
+		$this->session->unset_userdata('selected_tiket');
 
+		$this->data['css'] = css_asset('style.css', '');
 		$data['asal'] = $this->input->get('asal');
 		$data['tujuan'] = $this->input->get('tujuan');
 		$data['tgl_berangkat'] = $this->__validate_date($this->input->get('tgl_berangkat')) ? date('Y-m-d', strtotime($this->input->get('tgl_berangkat'))) : redirect(base_url());
 		$data['tgl_kembali'] = $this->input->get('pp') ?  $this->__validate_date($this->input->get('tgl_kembali')) ? date('Y-m-d', strtotime($this->input->get('tgl_kembali'))) : redirect(base_url()) : 'null';
 
-
-
 		//echo json_encode($data);
-		$this->data['result'] = $this->M_dashboard->getTicket($data);
+
 		$this->data['content'] = $this->load->view('list_tiket', $this->data, true);
 
 		$this->display($this->data);
@@ -51,49 +52,141 @@ class Home extends MY_Controller
 		//echo $this->db->last_query();
 	}
 
-
-	function change_profile()
+	function getJsonTiket()
 	{
-		$result = array(
-			'resp' => false,
-			'message' => 'Ada yang salah pada saat mengedit profil anda.'
-		);
-		if (isset($_POST['profile_id'])) {
-			$id_user = $_POST['profile_id'];
-			//ion auth edit user
-			$data = array(
-				'first_name' => $_POST['profile_first_name'],
-				'last_name' => $_POST['profile_last_name'],
-				'email' => $_POST['profile_email'],
-				'phone' => $_POST['profile_phone']
-			);
+		$html = '';
+		$data['asal'] = $this->input->post('asal');
+		$data['tujuan'] = $this->input->post('tujuan');
+		$data['tgl_berangkat'] = $this->input->post('tgl_berangkat');
 
-			//ion auth edit password user
-			if (isset($_POST['profile_rst_pass'])) {
-				$data['password'] = $_POST['profile_password'];
-				$msg_passwd = "Edit Password berhasil.\n\rSilahkan logout untuk menguji data anda.";
-			} else {
-				$msg_passwd = '';
-			}
-			$res = $this->ion_auth->update($id_user, $data);
-			if ($res) {
-				$result = array(
-					'resp' => TRUE,
-					'message' => "Edit profil berhasil.\n\r" . $msg_passwd
-				);
-			} else {
-				$result = array(
-					'resp' => FALSE,
-					'message' => "Edit profil gagal.\n\rSilahkan ulangi."
-				);
+		$result = $this->M_dashboard->getTicket($data);
+
+		if (!empty($result)) {
+			$html .= "<form action='" . base_url('transaksi/checkout') . "' method='POST' id='form-checkout'>";
+
+			$html .= form_hidden('adult', $this->input->post('adult'));
+			$html .= form_hidden('child', $this->input->post('child'));
+			$html .= form_hidden('infant', $this->input->post('infant'));
+
+			foreach ($result as $r) {
+				$html .= '<div class="panel" style="margin-bottom: 7px;">
+								<div class="modal-header">
+									<div class="row">
+										<div class="col-md-3">
+											<h4 class="list-title">
+												<span id="title_act"></span> Jenis Kapal <i class="fa fa-angle-down"></i></h4>
+										</div>
+										<div class="col-md-2">
+											<h4 class="list-title">
+												<span id="title_act"></span> Waktu Berangkat <i class="fa fa-angle-down"></i></h4>
+										</div>
+										<div class="col-md-4">
+											<h4 class="list-title">
+												<span id="title_act"></span> Rute Keberangkatan <i class="fa fa-angle-down"></i></h4>
+										</div>
+										<div class="col-md-3">
+											<h4 class="list-title" style="text-align: left">
+												<span id="title_act"></span> Harga <i class="fa fa-angle-down"></i></h4>
+										</div>
+									</div>
+								</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-md-3" style="text-align: center;">
+												<img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="' . $this->config->item('asset_url') . 'assets/image/' . $r->logo_kapal . '" alt="' . $r->nama_kapal . '">
+												<h4>' . $r->nama_kapal . '</h4>
+												<strong class="text-center">' . $r->jenis_tiket . '</strong>
+											</div>
+											<div class="col-md-2 time">
+												<span>
+													' . longdate_indo($r->tgl_berangkat) . "  " . $r->waktu . '
+													<br>
+
+												</span>
+											</div>
+											<div class="col-md-4 detail-tiket">
+
+												' . $r->dari . " <i class='fa  fa-angle-right'></i> " . $r->tujuan . '
+												<br>
+
+											</div>
+											<div class="col-md-3">
+												<div class="row" style="padding-top: 45px;">
+													<div class="col-sm-6 col-xs-6">
+														<div class="harga">
+															<span>' . convertToRupiah($r->hrg_dewasa) . '</span>
+														</div>
+													</div>
+													<div class="col-sm-6 col-xs-6">
+														<div class="hrgbutton">
+															<button type="button" class="btn btn-info tiket_btn pull-right" btn-id="' . $r->id_tiket . '">Pilih</button>
+														</div>
+													</div>
+												</div>
+
+
+
+											</div>
+
+
+
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>';
+				$html .= form_close();
 			}
 		} else {
-			$result = array(
-				'resp' => false,
-				'message' => "Ada yang salah pada saat mengedit profil anda."
+			$html .= ' <div class="panel">
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-12 text-center">
+											Tidak ada Data
+										</div>
+									</div>
+								</div>
+							</div>';
+		}
+
+		echo $html;
+	}
+
+	function selectTiket()
+	{
+		$id = $this->input->post('id_tiket');
+		if (!$this->session->userdata('selected_tiket')) {
+			$this->session->set_userdata('selected_tiket', array($id));
+		} else {
+			$data = $this->session->userdata('selected_tiket');
+			$data[] = $id;
+			$this->session->set_userdata('selected_tiket', $data);
+		}
+
+		echo true;
+	}
+
+
+	function newsletter()
+	{
+		$ret = array(
+			'success' => false,
+			'msg' => 'Gagal Menambah Data'
+		);
+
+		$data['email'] = $_POST['email'];
+		$this->db->insert('newsletter', $data);
+
+		$last_insert_id = $this->db->insert_id();
+
+		if ($last_insert_id) {
+			$ret = array(
+				'success' => true,
+				'msg' => 'Berhasil Menambah Data'
 			);
 		}
-		echo json_encode($result);
+		echo json_encode($ret);
 	}
 
 	function __validate_date($date)
