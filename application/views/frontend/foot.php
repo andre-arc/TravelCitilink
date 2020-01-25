@@ -52,7 +52,7 @@
         <div class="container">
             <div class="row py-3">
                 <div class="col-sm-6"><small>copyright © <?php echo date("Y"); ?> - TourisTIX Group. All rights reserved.</small></div>
-                <div class="col-sm-6 text-right"><a style="margin-right: 1.5rem !important;" href="#" class="mr-4">Terms</a> <a href="#">Privacy</a></div>
+                <div class="col-sm-6 text-right"><a style="margin-right: 1.5rem !important;color:gray;font-weight: bold;" href="#" class="mr-4">Terms</a> <a href="#" style="color:gray;font-weight: bold;">Privacy</a></div>
             </div>
         </div>
     </div>

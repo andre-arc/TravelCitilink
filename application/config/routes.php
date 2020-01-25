@@ -55,7 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['help-center']   = 'home/Help/index';
 $route['consultation']  = 'home/Consultation/index';
-
+$route['admin/(:any)']  = '$1/admin/index';
 /*
 | -------------------------------------------------------------------------
 | REST API Routes

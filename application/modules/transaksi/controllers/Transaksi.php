@@ -495,7 +495,7 @@ class Transaksi extends MY_Controller
 		$order_id = $this->input->get('orderId');
 		if ($order_id) {
 			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
-			if(count($detail_transaksi) > 0){
+			if (count($detail_transaksi) > 0) {
 
 				$select_tiket = $this->db->select('id_tiket')->where('id_transaksi', $detail_transaksi->id_transaksi)->get('detail_transaksi')->result();
 				foreach ($select_tiket as $dt) {
@@ -542,7 +542,7 @@ class Transaksi extends MY_Controller
 				$pdf->Cell(10, 6, 'Kode : ' . $detail_transaksi->kode, 0, 1);
 				$pdf->SetFont('Arial', '', 10);
 				$pdf->Cell(10, 6, 'Tanggal Pemesanan: ' . $detail_transaksi->tgl_transaksi, 0, 1);
-				$pdf->Cell(10, 6, 'Status: '. $detail_transaksi->status_bayar, 0, 1);
+				$pdf->Cell(10, 6, 'Status: ' . $detail_transaksi->status_bayar, 0, 1);
 
 				foreach ($detail_tiket as $t) {
 					$pdf->Cell(10, 7, '', 0, 1);
@@ -554,17 +554,17 @@ class Transaksi extends MY_Controller
 					$pdf->Cell(80, 6, 'Rute', 1, 0);
 					$pdf->Cell(40, 6, 'Kapal', 1, 1);
 
-				
+
 
 					$pdf->SetFont('Arial', '', 10);
 					$x = $pdf->GetX();
 					$y = $pdf->GetY();
-					
-					$pdf->MultiCell(42, 6, $t->tgl_berangkat." ".$t->waktu, 1, 'L');
-					$pdf->setXY($x+=42, $y);
+
+					$pdf->MultiCell(42, 6, $t->tgl_berangkat . " " . $t->waktu, 1, 'L');
+					$pdf->setXY($x += 42, $y);
 
 					$pdf->MultiCell(80, 6, $t->kota_asal . "(" . $t->dari . ") - " . $t->kota_tujuan . "(" . $t->tujuan . ")", 1, 'L');
-					$pdf->setXY($x+=80, $y);
+					$pdf->setXY($x += 80, $y);
 
 					$pdf->MultiCell(40, 6, $t->nama_kapal, 1, 'L');
 					$pdf->Ln(0);
@@ -585,15 +585,15 @@ class Transaksi extends MY_Controller
 						$pdf->Cell(20, 6, $p->jenis_penumpang, 1, 0);
 
 						$select_harga = $this->db->select('dt.hrg_tiket')
-												 ->join('jenis_penumpang as jp', 'jp.id=dt.jenis_penumpang')
-												 ->where('dt.id_tiket', $t->id_tiket)
-												 ->where('jp.nama', $p->jenis_penumpang)
-												 ->get('detail_tiket as dt')->row();
+							->join('jenis_penumpang as jp', 'jp.id=dt.jenis_penumpang')
+							->where('dt.id_tiket', $t->id_tiket)
+							->where('jp.nama', $p->jenis_penumpang)
+							->get('detail_tiket as dt')->row();
 						$pdf->Cell(20, 6, convertToRupiah($select_harga->hrg_tiket), 1, 1);
 					}
 				}
 
-				
+
 
 				$pdf->Cell(10, 7, '', 0, 1);
 				$pdf->Line(10, $pdf->GetY(), 140, $pdf->GetY());
@@ -638,7 +638,7 @@ class Transaksi extends MY_Controller
 				//     $pdf->Cell(35,6,$row->tgl_berangkat,1,0);   
 				// }
 
-				$pdf->Output('D', 'Bukti Pembayaran Tiket Kapal - '.$order_id.'.pdf');
+				$pdf->Output('D', 'Bukti Pembayaran Tiket Kapal - ' . $order_id . '.pdf');
 			}
 		}
 	}
