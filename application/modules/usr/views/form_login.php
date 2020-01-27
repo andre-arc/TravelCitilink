@@ -1,8 +1,8 @@
-<div class="login-box">
+<div class="login-box" style="box-shadow: 0 10px 20px 0 rgba(53,64,90,.2);padding-top: 10px;">
   <div class="login-logo">
     <a href="<?php echo site_url(); ?>">
       <h3>
-        <font color="white"><b>TourisTIX - Access</b></font>
+        <font color="#798687"><b>TourisTIX - Access</b></font>
       </h3>
     </a>
   </div>
@@ -20,14 +20,11 @@
       <div class="row">
         <div class="col-xs-8">
 
-          <a href="<?php echo site_url('usr/register/'); ?>" class="btn btn-success btn-flat" tabindex="4">
-            <i class="fa fa-question-circle"></i>&nbsp;Register
-          </a>
         </div>
         <div class="col-xs-4">
 
           <button type="submit" class="btn btn-success btn-block btn-flat" tabindex="3">
-            <i class="fa fa-power-off"></i>&nbsp;Login
+            &nbsp;Login
           </button>
         </div>
       </div>
