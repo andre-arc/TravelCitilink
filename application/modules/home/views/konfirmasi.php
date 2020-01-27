@@ -37,7 +37,7 @@
 									if(!$detail_transaksi){
 										?>
 										<img src="<?php echo $this->config->item('asset_url') . 'assets/image/checktiket.jpg' ?>
-											" alt="" class="img-responsive" width="390px">
+											" alt="" class="img-responsive" width="390px" style="display:block;margin:auto;">
 											<p class="title">Cek pesanan dengan mudah</p>
 											<p class="caption noData">Masukkan alamat email dan order ID di form cek pesanan.</p>
 										</div>
