@@ -4,7 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title><?php echo $MYCFG['GENERAL']['APP_NAME']; ?> - <?php echo $MYCFG['GENERAL']['APP_NAME_LONG']; ?></title>
+	<title>Touristix: Situs Tiket Online Kapal Cepat Sabang-Banda Aceh</title>
+	<meta name="description" content="Touristix.id memberikan layanan pemesanan tiket Kapal express penyeberangan Banda Aceh Sabang dan paket travelling lainnya, Jelajahi dan pesan pengalaman travel yang menyenangkan bersama Touristix!">
+	
 	<link rel="icon" href="<?php echo image_asset_url($MYCFG['GENERAL']['APP_NAME_LOGO']); ?>">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
