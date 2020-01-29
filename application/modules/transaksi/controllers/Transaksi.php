@@ -444,7 +444,7 @@ class Transaksi extends MY_Controller
 
 	function __generate_vtweb($data)
 	{
-		$params = array('server_key' => 'SB-Mid-server-sFpG2wSCF1POs-mwEr7qd3E-', 'production' => false);
+		$params = array('server_key' => getenv('MIDTRANS_SERVER_KEY'), 'production' => getenv('MIDTRANS_PRODUCTION'));
 		$this->load->library('veritrans');
 		$this->veritrans->config($params);
 
