@@ -31,7 +31,7 @@ env_variables:
   MYSQL_PASSWORD: 4bandaaceh
   CI_ENV: development
   MIDTRANS_SERVER_KEY: SB-Mid-server-sFpG2wSCF1POs-mwEr7qd3E-
-  MIDTRANS_PRODUCTION: true
+  MIDTRANS_PRODUCTION: false
 
 skip_files:
   - ^(.git/.*)
