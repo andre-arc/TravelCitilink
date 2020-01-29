@@ -30,7 +30,7 @@ env_variables:
   MYSQL_USER: touristix_web
   MYSQL_PASSWORD: 4bandaaceh
   CI_ENV: production
-  MIDTRANS_SERVER_KEY: SB-Mid-server-U1JOPy64wQFjCV67_vA_p8nu
+  MIDTRANS_SERVER_KEY: Mid-server-F3v5lpN2uKO6NN2DFTf4U5eT
   MIDTRANS_PRODUCTION: true
 
 skip_files:
