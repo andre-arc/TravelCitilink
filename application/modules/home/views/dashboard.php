@@ -119,25 +119,38 @@
             <div class="row">
                   <div class="logo-partner" style="text-align: center">
 
-                        <img style="width: 70px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/02+Visa+logo+trans.png' ?>" alt="">
+                        <img style="width: 70px;padding-bottom: 36px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/02+Visa+logo+trans.png' ?>" alt="">
 
-                        <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/03+mastercard-vector-logo.png' ?>" alt="">
+                        <img style="width: 50px;padding-bottom: 36px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/03+mastercard-vector-logo.png' ?>" alt="">
 
-                        <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/04+JCB_logo+small.png' ?>" alt="">
+                        <img style="width: 50px;padding-bottom: 36px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/04+JCB_logo+small.png' ?>" alt="">
 
-                        <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/ATM-BCA.png' ?>" alt="">
+                        <img style="width: 50px;padding-bottom: 36px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/ATM-BCA.png' ?>" alt="">
 
-                        <img style="width: 50px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/ATM_Bersama_2016.png' ?>" alt="">
+                        <img style="width: 50px;padding-bottom: 36px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/ATM_Bersama_2016.png' ?>" alt="">
 
-                        <img style="width: 90px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/mandiri.png' ?>" alt="">
+                        <img style="width: 90px;padding-bottom: 36px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/mandiri.png' ?>" alt="">
 
-                        <img style="width:100px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/05+Gopay+logo+trans+side.png' ?>" alt="">
+                        <img style="width:100px;padding-bottom: 36px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/05+Gopay+logo+trans+side.png' ?>" alt="">
 
-                        <img style="width: 100px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/06+Akulaku+logo+trans+side.png' ?>" alt="">
+                        <img style="width: 100px;padding-bottom: 36px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/06+Akulaku+logo+trans+side.png' ?>" alt="">
 
-                        <img style="width:100px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/alfamart-logo-png-8.png' ?>" alt="">
+                        <img style="width:100px;padding-bottom: 36px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/alfamart-logo-png-8.png' ?>" alt="">
 
-                        <img style="width: 90px;padding-bottom: 41px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/indomaret.png' ?>" alt="">
+                        <img style="width: 90px;padding-bottom: 36px;margin-left:15px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/payment/indomaret.png' ?>" alt="">
+
+                  </div>
+            </div>
+      </div>
+      <div class="container">
+            <div class="row">
+                  <div class="col-lg-12 text-center">
+                        <h4 class="j4">Partner Resmi</h4>
+                  </div>
+            </div>
+            <div class="row">
+                  <div class="logo-partner" style="text-align: center;padding-bottom: 25px;">
+                        <img style="width: 220px;margin-left:15px;border: 1px solid;color:#e3dfdf;padding: 10px;border-radius: 5px;" src="<?php echo $this->config->item('asset_url') . 'assets/image/travelnanggroe.png' ?>" alt="">
 
                   </div>
             </div>
