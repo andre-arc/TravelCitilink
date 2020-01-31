@@ -59,7 +59,6 @@
 				{
 					field: 'kode',
 					title: 'Kode Transaksi',
-					halign: 'center',
 					sortable: true
 				},
 				{
@@ -70,14 +69,20 @@
 					sortable: true
 				},
 				{
-					field: 'name',
-					title: 'Mitra',
+					field: 'total_hrg',
+					title: 'Total Harga',
 					halign: 'center',
 					sortable: true
 				},
 				{
-					field: 'total_hrg',
-					title: 'Total Harga',
+					field: 'tipe_bayar',
+					title: 'Payment',
+					halign: 'center',
+					sortable: true
+				},
+				{
+					field: 'status_bayar',
+					title: 'Status',
 					halign: 'center',
 					sortable: true
 				},
@@ -87,7 +92,7 @@
 					halign: 'center',
 					sortable: true,
 					formatter: function(value) {
-						return "<div class='text-center'><a href='" + SITE_URL + "/transaksi/detail/" + value + "' class='btn btn-primary margin'>Bayar</a></div>";
+						return "<div class='text-center'><a href='" + SITE_URL + "/transaksi/detail/" + value + "' class='btn btn-primary margin'>Detail</a></div>";
 					}
 				}
 			],
