@@ -48,8 +48,9 @@
 			pagination: true,
 			search: true,
 			pageSize: 10,
-			url: SITE_URL + '/transaksi/get_json/',
+			url: SITE_URL + 'admin/transaksi/get_json/',
 			singleSelect: true,
+			sortOrder: "desc",
 			columns: [{
 					field: 'state',
 					checkbox: true,
@@ -84,7 +85,26 @@
 					field: 'status_bayar',
 					title: 'Status',
 					halign: 'center',
-					sortable: true
+					sortable: true,
+
+					formatter: function(value) {
+						switch (value) {
+							case 'expired':
+								color = 'bg-red';
+								break;
+							case 'success':
+								color = 'bg-yellow';
+								break;
+							case 'pending':
+								color = 'bg-green';
+								break;
+							default:
+								color = 'bg-white';
+								break;
+						}
+						return '<span class="label ' + color + '">' + value.toUpperCase(); + '</span>';
+					}
+
 				},
 				{
 					field: 'id_transaksi',

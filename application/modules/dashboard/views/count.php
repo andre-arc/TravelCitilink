@@ -1,87 +1,75 @@
+<div class="col-md-12">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <h3 class="box-title">
+        Catatan Penjualan Februari 2020
+      </h3>
+    </div>
+    <!-- /.box-header -->
+
+  </div>
+</div>
 <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h4><?= $mobil['0']->jmlMobil ?> Unit</h4>
+  <!-- small box -->
+  <div class="small-box bg-aqua">
+    <div class="inner">
+      <h3>Rp 80.000</h3>
 
-              <p>Total Mobil</p>
-            </div>
-            <div class="icon">
-              <i class="ion-android-car"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        
-        <?php
-        if($this->session->userdata('user_group_name') == 'operator cabang'){
-            ?>
-         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h4><?= empty($kas['0']->jml_kas) ? 'Rp. 0' : 'Rp. '. number_format($kas['0']->jml_kas, 0, ',', '.') ?></h4>
+      <p>Total Penjualan Kotor</p>
+    </div>
+    <div class="icon">
+      <i class="ion ion-ios-cart-outline"></i>
+    </div>
+    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
 
-              <p><?= $kas['0']->name ?></p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-money"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-            <?php
-        }
-        else{
-            ?>
-         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h4><?= empty($kas['0']->jml_kas) ? 'Rp. 0' : 'Rp. '. number_format($kas['0']->jml_kas, 0, ',', '.') ?></h4>
 
-              <p><?= $kas['0']->name ?></p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-money"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h4><?= empty($kas['1']->jml_kas) ? 'Rp. 0' : 'Rp. '. number_format($kas['1']->jml_kas, 0, ',', '.') ?></h4>
+<!-- ./col -->
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-aqua">
+    <div class="inner">
+      <h3>Rp 80.000</h3>
 
-              <p><?= $kas['1']->name ?></p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-money"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h4><?= empty($kas['2']->jml_kas) ? 'Rp. 0' : 'Rp. '. number_format($kas['2']->jml_kas, 0, ',', '.') ?></h4>
+      <p>Total Profit
+      </p>
+    </div>
+    <div class="icon">
+      <i class="fa fa-money"></i>
+    </div>
+    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
 
-              <p><?= $kas['2']->name ?></p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-money"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-            <?php
-        }
-        ?>
-       
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-aqua">
+    <div class="inner">
+      <h3>18</h3>
+
+      <p>Jumlah Transaksi</p>
+    </div>
+    <div class="icon">
+      <i class="ion ion-stats-bars"></i>
+    </div>
+    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+<!-- ./col -->
+<div class="col-lg-3 col-xs-6">
+  <!-- small box -->
+  <div class="small-box bg-aqua">
+    <div class="inner">
+      <h3>42%</h3>
+
+      <p>Rata-rata Transaksi
+      </p>
+    </div>
+    <div class="icon">
+      <i class="ion ion-pie-graph"></i>
+    </div>
+    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+<!-- ./col -->
