@@ -34,7 +34,7 @@
 							<div class="empty-state-background">
 								<div class="empty-state-wrapper" style="text-align: -moz-center;">
 								<?php
-									if(!$detail_transaksi){
+									if(empty($detail_transaksi)){
 										?>
 										<img src="<?php echo $this->config->item('asset_url') . 'assets/image/checktiket.jpg' ?>
 											" alt="" class="img-responsive" width="390px" style="display:block;margin:auto;">
@@ -61,6 +61,35 @@
 										</div>
 										<hr>
 										<div class="col-xs-12 table-responsive">
+											<span class="pull-left labelkonsumen">
+												&nbsp;Detail Keberangkatan
+											</span>
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>No</th>
+														<th>Tiket </th>
+														<th>Rute </th>
+														<th>Tanggal </th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+													$no = 1;
+													foreach ($detail_tiket as $t) {
+													?>
+														<tr>
+															<td><?= $no ?></td>
+															<td><?= 'Tiket Kapal '.$t->nama_kapal.' '.$t->jenis_tiket ?></td>
+															<td><?= $t->dari.' <i class="fa fa-fw fa-arrow-right"></i> '.$t->tujuan ?></td>
+															<td><?= date_indo($t->tgl_berangkat).' '.$t->waktu ?></td>
+														</tr>
+													<?php
+														$no++;
+													}
+													?>
+												</tbody>
+											</table>
 											<span class="pull-left labelkonsumen">
 												&nbsp;Detail Penumpang
 											</span>
