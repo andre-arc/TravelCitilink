@@ -48,8 +48,9 @@
 			pagination: true,
 			search: true,
 			pageSize: 10,
-			url: SITE_URL + '/transaksi/get_json/',
+			url: SITE_URL + 'admin/transaksi/get_json/',
 			singleSelect: true,
+			sortOrder: "desc",
 			columns: [{
 					field: 'state',
 					checkbox: true,
@@ -59,7 +60,6 @@
 				{
 					field: 'kode',
 					title: 'Kode Transaksi',
-					halign: 'center',
 					sortable: true
 				},
 				{
@@ -70,16 +70,41 @@
 					sortable: true
 				},
 				{
-					field: 'name',
-					title: 'Mitra',
-					halign: 'center',
-					sortable: true
-				},
-				{
 					field: 'total_hrg',
 					title: 'Total Harga',
 					halign: 'center',
 					sortable: true
+				},
+				{
+					field: 'tipe_bayar',
+					title: 'Payment',
+					halign: 'center',
+					sortable: true
+				},
+				{
+					field: 'status_bayar',
+					title: 'Status',
+					halign: 'center',
+					sortable: true,
+
+					formatter: function(value) {
+						switch (value) {
+							case 'expired':
+								color = 'bg-red';
+								break;
+							case 'success':
+								color = 'bg-yellow';
+								break;
+							case 'pending':
+								color = 'bg-green';
+								break;
+							default:
+								color = 'bg-white';
+								break;
+						}
+						return '<span class="label ' + color + '">' + value.toUpperCase(); + '</span>';
+					}
+
 				},
 				{
 					field: 'id_transaksi',
@@ -87,7 +112,7 @@
 					halign: 'center',
 					sortable: true,
 					formatter: function(value) {
-						return "<div class='text-center'><a href='" + SITE_URL + "/transaksi/detail/" + value + "' class='btn btn-primary margin'>Bayar</a></div>";
+						return "<div class='text-center'><a href='" + SITE_URL + "/transaksi/detail/" + value + "' class='btn btn-primary margin'>Detail</a></div>";
 					}
 				}
 			],

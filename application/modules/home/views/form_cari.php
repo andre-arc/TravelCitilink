@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-md-7">
                               <div class="input-group">
-                                <input class="form-control" type="number" value="1" type="text" name="adult" min="0">
+                                <input class="form-control" type="number" value="1" type="text" name="adult" min="1">
                               </div>
                             </div>
                           </div>

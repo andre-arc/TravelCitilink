@@ -27,7 +27,7 @@
                             <dl>
                                 <dt class="text-muted">PROGRAM</dt>
                                 <dd><a href="http://touristix.id/#">Event</a></dd>
-                                <dd><a href="http://touristix.id/#">Job</a></dd>
+                                <dd><a href="http://bit.ly/howtorefund" target="_blank">Refund Policy</a></dd>
                                 <dd><a href="http://touristix.id/#">Rewards</a></dd>
                             </dl>
                         </div>

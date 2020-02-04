@@ -22,7 +22,7 @@ class Admin extends MY_Admin
 		$this->data['js']  .= js_asset('sweetalert2.min.js', 'limonte-sweetalert2');
 		$this->data['js']  .= js_asset('select2.full.min.js', 'select2');
 
-		$meta = $this->meta('transaksi/', true);
+		$meta = $this->meta('admin/transaksi/', true);
 		$this->data['auth_meta'] = $meta['act'];
 		$this->data['icon']      = $meta['icon'];
 		$this->data['title']     = $meta['title'];
@@ -76,6 +76,8 @@ class Admin extends MY_Admin
 			$SQL = ($sort) ? $SQL_BASE . ' ORDER BY ' . $sort . ' ' . $order : $SQL_BASE;
 			$SQL .= ' LIMIT ' . $offset . ',' . $limit;
 			$ls_data_limit = $this->db->query($SQL)->result_array();
+
+			// echo $this->db->last_query();
 			$ret['rows'] = $ls_data_limit;
 		}
 
