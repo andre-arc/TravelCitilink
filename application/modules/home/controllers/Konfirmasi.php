@@ -20,6 +20,8 @@ class Konfirmasi extends MY_Controller
 
 		$this->load->model('KonfirmasiModel');
 		$this->load->model('transaksi/M_transaksi');
+
+		$this->load->helper('tanggal_indo');
 	}
 
 
@@ -90,7 +92,7 @@ class Konfirmasi extends MY_Controller
 									'jml_penumpang' => $count,
 									'total_hrg' => $total
 							);
-							$total_harga += $total;
+							$total_harga += $total * $count;
 						}
 					}
 					
