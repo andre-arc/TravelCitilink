@@ -114,7 +114,7 @@ class Notifikasi extends MY_Controller
 			$html = $this->mjml->render($mjml);
 		}elseif($status == 'expired'){
 			$data['subject'] = "Transaksi Order ".$order_id." Tiket Kapal Touristix.ID telah Kadarluasa";
-			$html = $this->load->view('email_success_order', $data, true);
+			$html = $this->load->view('email_expired_order', $data, true);
 		}
 		
 
