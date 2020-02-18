@@ -68,6 +68,9 @@ class Home extends MY_Controller
 			$html .= form_hidden('child', $this->input->post('child'));
 			$html .= form_hidden('infant', $this->input->post('infant'));
 
+			$tipe .= $this->input->post('pp') ? 'pp' : 'pergi';
+			$html .= form_hidden('tipe_transaksi', $tipe);
+
 			foreach ($result as $r) {
 				$html .= '<div class="panel" style="margin-bottom: 7px;">
 								<div class="modal-header">
