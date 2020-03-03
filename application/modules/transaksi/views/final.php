@@ -13,6 +13,7 @@
                 <input type="hidden" name="detail_harga" value='<?= json_encode($detail_harga) ?>'>
                 <input type="hidden" name="data_penumpang" value='<?= json_encode($data_penumpang) ?>'>
                 <input type="hidden" name="pemesan" value='<?= json_encode($pemesan) ?>'>
+                <input type="hidden" name="tipe_transaksi" value='<?= $tipe_transaksi ?>'>
 
                 <div class="col-md-8">
                     <div class="panel">
