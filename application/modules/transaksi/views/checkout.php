@@ -18,6 +18,7 @@
 
                             <input type="hidden" name="act" id="act" value="" />
                             <input type="hidden" name="detail_tiket" value='<?= json_encode($detail_tiket) ?>'>
+                            <input type="hidden" name="tipe_transaksi" value='<?= $tipe_transaksi ?>'>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">

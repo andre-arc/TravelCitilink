@@ -121,7 +121,7 @@
       format: 'yyyy-mm-dd',
       todayHighlight: false,
       autoclose: true,
-      daysOfWeekDisabled: '0',
+      // daysOfWeekDisabled: '0',
       daysOfWeekHighlighted: '0',
       language: 'id',
       locale: 'id',

@@ -36,6 +36,7 @@ class Transaksi extends MY_Controller
 			'Anak' => $this->input->post('child'),
 			'Bayi' => $this->input->post('infant'),
 		);
+		$this->data['tipe_transaksi'] = $this->input->post('tipe_transaksi');
 
 		$this->data['content'] = $this->load->view('checkout', $this->data, true);
 
@@ -80,6 +81,7 @@ class Transaksi extends MY_Controller
 
 		$this->data['detail_tiket'] = json_decode($this->input->post('detail_tiket'));
 		$this->data['detail_harga'] = json_decode($this->input->post('detail_harga'));
+		$this->data['tipe_transaksi'] = $this->input->post('tipe_transaksi');
 		if (count($this->input->post('nm_penumpang')) > 0) {
 
 			$data_penumpang = array();
@@ -116,6 +118,7 @@ class Transaksi extends MY_Controller
 		$detail_harga = json_decode($this->input->post('detail_harga'));
 		$data_penumpang = json_decode($this->input->post('data_penumpang'));
 		$pemesan = json_decode($this->input->post('pemesan'));
+		$tipe_transaksi = $this->input->post('tipe_transaksi');
 
 		$status = true;
 
@@ -167,6 +170,7 @@ class Transaksi extends MY_Controller
 				'id_mitra' => $org_id,
 				'id_customer' => $id_customer,
 				'total_hrg' => $total_hrg,
+				'tipe_transaksi' => $tipe_transaksi,
 				'kode' => $token
 			);
 			$data['order_id'] = $token;
