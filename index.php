@@ -108,8 +108,8 @@
 
  */
 
-	// define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	// define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 
 
 
@@ -634,4 +634,17 @@ require FCPATH . 'vendor/autoload.php';
 
 
 require_once BASEPATH.'core/CodeIgniter.php';
+
+/*
+	 * --------------------------------------------------------------------
+	 * LOAD PHP DOT ENV FILE
+	 * --------------------------------------------------------------------
+	 *
+	 * And away we go...
+	 *
+	 */
+	require_once BASEPATH . 'dotenv/autoloader.php';
+	
+	$dotenv = new Dotenv\Dotenv(__DIR__);
+	$dotenv->load();
 
