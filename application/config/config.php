@@ -766,7 +766,7 @@ $config['sess_cookie_name'] = 'touristix_sess';
 
 $config['sess_expiration'] = 7200;
 
-$config['sess_save_path'] = 'ci_sessions'; //NULL;
+$config['sess_save_path'] = APPPATH.'ci_sessions'; //NULL;
 
 $config['sess_match_ip'] = FALSE;
 
