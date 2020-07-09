@@ -759,7 +759,8 @@ $config['encryption_key'] = 'gassubsidi2018';
 
 */
 
-$config['sess_driver'] = 'database';
+$config['sess_driver'] = 'files';
+// $config['sess_driver'] = 'database';
 
 $config['sess_cookie_name'] = 'touristix_sess';
 
