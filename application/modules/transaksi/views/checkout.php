@@ -108,6 +108,9 @@
                                 <hr>
                             <?php
                             }
+
+                            // tambah biaya admin
+                            $total_hrg += 8000;
                             ?>
 
 
@@ -152,6 +155,12 @@
 
                                         echo form_hidden('detail_harga', json_encode($data_jml_penumpang));
                                         ?>
+                                        <!-- biaya Admin -->
+                                         <tr>
+                                            <td width="30%">Biaya Admin</td>
+                                            <td>:</td>
+                                            <td><?= convertToRupiah(8000) ?></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

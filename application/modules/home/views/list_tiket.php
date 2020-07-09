@@ -96,18 +96,24 @@
     };
 
     function getDataTiket(asal, tujuan, berangkat) {
-        $.ajax({
-            type: "POST",
-            url: '<?= base_url('home/getJsonTiket') ?>',
-            dataType: "html",
-            data: {
+        var formData = {
                 asal: asal,
                 tujuan: tujuan,
                 tgl_berangkat: berangkat,
                 adult: adult,
                 child: child,
                 infant: infant,
-            },
+            }
+
+        if(getUrlParameter('pp')){
+            formData.pp = getUrlParameter('pp');
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: '<?= base_url('home/getJsonTiket') ?>',
+            dataType: "html",
+            data: formData,
             success: function(data) {
                 $("#list-tiket").html(data)
 

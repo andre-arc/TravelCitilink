@@ -122,6 +122,9 @@
 
                             <?php
                             }
+
+                            //biaya admin
+                            $total_hrg += 8000;
                             ?>
 
 
@@ -136,7 +139,7 @@
                                 </div>
                                 <div class="row text-tax">
                                     <div class="pull-left"> Biaya layanan penumpang</div>
-                                    <div class="pull-right text-uppercase"> Gratis</div>
+                                    <div class="pull-right text-uppercase"> <?= convertToRupiah(8000) ?></div>
                                 </div>
                             </div>
                             <hr>
