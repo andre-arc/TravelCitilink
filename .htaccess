@@ -1,13 +1,13 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-RewriteBase /touristix-web-tiket-kapal
+RewriteBase /touristix
 RewriteCond %{REQUEST_URI} ^system.^
 RewriteRule ^(.*)$ /index.php?/$1 [L]
 
 
-RewriteCond %{HTTPS} off
-RewriteRule ^.*$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#RewriteCond %{HTTPS} off
+#RewriteRule ^.*$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteCond %{REQUEST_URI} ^application.^
 RewriteRule ^(.*)$ /index.php?/$1 [L]
