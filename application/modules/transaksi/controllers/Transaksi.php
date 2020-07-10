@@ -403,6 +403,14 @@ class Transaksi extends MY_Controller
 			);
 		}
 
+		//biaya admin
+		$total += 8000;
+		$items[] = array(
+			'price' 		=> 8000,
+			'quantity' 		=> 1,
+			'name' 			=> 'Biaya Layanan'
+		);
+
 		// echo json_encode($data);
 		$nama_customer = explode(" ", $data['pemesan']->nama_pemesan);
 
