@@ -170,7 +170,7 @@
                                                 <input class="form-control" type=" text" name="email" placeholder="Masukkan email Anda" value="">
                                           </div>
                                           <div class="col-sm-4 col-md-5">
-                                                <button class="btn btn-warning pull-right btn-block" type="submit" name="subscribe_btn" value="1">Berlangganan</button>
+                                                <button style="background-color:#f7941e;" class="btn btn-warning pull-right btn-block" type="submit" name="subscribe_btn" value="1">Berlangganan</button>
                                           </div>
                                     </form>
                               </div>

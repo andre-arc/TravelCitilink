@@ -119,10 +119,13 @@ footer {
   color: #fff;
   font-size: 12px;
 }
+.checkout td{
+  text-align: right;
+}
 
 .harga {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
   font-family: OpenSans-SemiBold, Arial, Helvetica, Sans-serif;
   color: #0064d2;
   margin-bottom: 8px;

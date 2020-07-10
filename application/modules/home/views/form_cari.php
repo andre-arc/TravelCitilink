@@ -105,7 +105,7 @@
               </div>
 
               <div class="col-md-12">
-                <button type="submit" class="btn btn-info pull-right margin search-b">Cari Tiket</button>
+                <button type="submit" class="btn btn-warning pull-right margin search-b">Cari Tiket</button>
 
               </div>
             </form>

@@ -131,8 +131,9 @@
 
                             </div> -->
 
-                            <div>
-                                <table border="0" width="100%" style="text-align:left">
+
+                            <div class="table-responsive">
+                                <table class="table checkout">
                                     <tbody>
                                         <?php
                                         foreach ($jenis_penumpang as $jp) {
@@ -145,8 +146,7 @@
                                                 );
                                         ?>
                                                 <tr>
-                                                    <td width="30%"><?= $jp->nama . " (" . $jml_penumpang[$jp->nama] . "x)" ?></td>
-                                                    <td>:</td>
+                                                    <th style="width:50%"><?= $jp->nama . " (" . $jml_penumpang[$jp->nama] . "x)" ?>:</th>
                                                     <td><?= convertToRupiah($total[strtolower($jp->nama)]) ?></td>
                                                 </tr>
                                         <?php
@@ -155,19 +155,20 @@
 
                                         echo form_hidden('detail_harga', json_encode($data_jml_penumpang));
                                         ?>
-                                        <!-- biaya Admin -->
-                                         <tr>
-                                            <td width="30%">Biaya Admin</td>
-                                            <td>:</td>
+                                        <tr>
+                                            <th>Biaya Admin:</th>
                                             <td><?= convertToRupiah(8000) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total:</th>
+                                            <td class="harga"><?= convertToRupiah($total_hrg) ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <hr>
 
-                            <span class="harga">IDR <?= convertToRupiah($total_hrg) ?></span> <span class="satuan">/pax</span>
-                            <hr>
+
+
                             <button type="submit" class="btn btn-block btn-lg btn-info">LANJUTKAN</button>
                         </div>
                     </div>
