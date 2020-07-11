@@ -10,6 +10,7 @@ class ComposerStaticInit89bd790ee485ba42436e107daaa30301
         'M' => 
         array (
             'Mjml\\' => 5,
+            'Midtrans\\' => 9,
         ),
         'F' => 
         array (
@@ -21,6 +22,10 @@ class ComposerStaticInit89bd790ee485ba42436e107daaa30301
         'Mjml\\' => 
         array (
             0 => __DIR__ . '/..' . '/juanmiguelbesada/mjml-php/src',
+        ),
+        'Midtrans\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/midtrans/midtrans-php/Midtrans',
         ),
         'Firebase\\JWT\\' => 
         array (

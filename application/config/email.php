@@ -5,8 +5,8 @@ $config['protocol']         = 'mail';                   // 'mail', 'sendmail', o
 $config['mailpath']         = '/usr/sbin/sendmail';
 $config['smtp_host']        = 'localhost';
 $config['smtp_auth']        = null;                     // Whether to use SMTP authentication, boolean TRUE/FALSE. If this option is omited or if it is NULL, then SMTP authentication is used when both $config['smtp_user'] and $config['smtp_pass'] are non-empty strings.
-$config['smtp_user']        = 'rizwansaputra77@gmail.com';
-$config['smtp_pass']        = 'rizwansaputra';
+$config['smtp_user']        = 'cs@kapal.touristix.id';
+$config['smtp_pass']        = 'Dp2n.s=W!s^4';
 $config['smtp_port']        = 25;
 $config['smtp_timeout']     = 30;                       // (in seconds)
 $config['smtp_crypto']      = '';                       // '' or 'tls' or 'ssl'
