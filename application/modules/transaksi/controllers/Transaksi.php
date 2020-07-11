@@ -365,6 +365,17 @@ class Transaksi extends MY_Controller
 		// 	// echo 'There was an error';
 		// 	return false;
 		// }
+
+		$result = $this->email
+						->to($data['email'])
+						->subject($data['email'])
+						->message($html)->send();
+
+	   if($result){
+		   return true;
+	   }else{
+		   echo $this->email->print_debugger();
+	   }
 	}
 
 	function detail($id_transaksi)
