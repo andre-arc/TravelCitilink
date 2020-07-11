@@ -6,7 +6,7 @@ $dotenv->load();
 require_once __DIR__ . '../../../vendor/autoload.php';
 
 
-class MidtransPayment {
+class Midtrans {
 
     function __construct(){
         \Midtrans\Config::$serverKey = getenv('MIDTRANS_SERVER_KEY');
