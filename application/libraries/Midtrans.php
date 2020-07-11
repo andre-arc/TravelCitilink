@@ -15,6 +15,10 @@ class Midtrans {
 
     public function vt_web($params) {
         return \Midtrans\Snap::createTransaction($params)->redirect_url;
-    }
+	}
+	
+	public function get_notif(){
+		return new \Midtrans\Notification();
+	}
 
 }

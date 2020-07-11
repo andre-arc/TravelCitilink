@@ -14,15 +14,10 @@ class Notifikasi extends MY_Controller
 
 	function index()
 	{
-		$json_result = file_get_contents('php://input');
-		$result = json_decode($json_result);
+		$this->load->library("midtrans");
 
-		if($result){
-			$notif = $this->veritrans->status($result->order_id);
-		}
-
-		error_log(print_r($result,TRUE));
-
+		$notif = $this->midtrans->get_notif();
+		
 		//notification handler sample
 
 		$transaction = $notif->transaction_status;
