@@ -1,5 +1,6 @@
 {
     "require": {
-        "juanmiguelbesada/mjml-php": "^1.0"
+        "juanmiguelbesada/mjml-php": "^1.0",
+        "midtrans/midtrans-php": "^2.3"
     }
 }

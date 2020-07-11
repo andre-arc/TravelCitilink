@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Mjml\\' => array($vendorDir . '/juanmiguelbesada/mjml-php/src'),
+    'Midtrans\\' => array($vendorDir . '/midtrans/midtrans-php/Midtrans'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
 );
