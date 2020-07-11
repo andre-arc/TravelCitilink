@@ -118,30 +118,29 @@ class Notifikasi extends MY_Controller
 		}
 		
 
-		try {
-			$message = new Message();
-			$message->setSender('touristixid@gmail.com');
-			$message->addTo($data['email']);
-			$message->setSubject($data['subject']);
-			$message->setHtmlBody($html);
-			$message->send();
-			// echo 'Mail Sent';
-			return true;
-		} catch (InvalidArgumentException $e) {
-			// $error = "Unable to send mail. $e";
-			error_log($error);
-			return false;
-		}
-
-		// $result = $this->email->from('touristixid@gmail.com')   
-		// 					 ->to($data['email'])
-		// 					 ->subject($data['subject'])
-		// 					 ->message($html)
-		// 					 ->send();
-		// if ($result) {
+		// try {
+		// 	$message = new Message();
+		// 	$message->setSender('touristixid@gmail.com');
+		// 	$message->addTo($data['email']);
+		// 	$message->setSubject($data['subject']);
+		// 	$message->setHtmlBody($html);
+		// 	$message->send();
+		// 	// echo 'Mail Sent';
 		// 	return true;
-		// } else {
-		// 	echo $this->email->print_debugger();
+		// } catch (InvalidArgumentException $e) {
+		// 	// $error = "Unable to send mail. $e";
+		// 	error_log($error);
+		// 	return false;
 		// }
+
+		$result = $this->email->to($data['email'])
+							 ->subject($data['subject'])
+							 ->message($html)
+							 ->send();
+		if ($result) {
+			return true;
+		} else {
+			echo $this->email->print_debugger();
+		}
 	}
 }
