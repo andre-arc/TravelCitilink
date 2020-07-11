@@ -466,10 +466,10 @@ class Transaksi extends MY_Controller
 			'customer_details' 	 => $customer_details
 		);
 
-		$this->load->library('midtranspayment');
+		$this->load->library('midtrans');
 
 		try {
-			$vtweb_url = $this->midtranspayment->vt_web($transaction_data);
+			$vtweb_url = $this->midtrans->vt_web($transaction_data);
 			return $vtweb_url;
 		} catch (Exception $e) {
 			echo $e->getMessage();
