@@ -522,7 +522,7 @@ class Transaksi extends MY_Controller
 
 				$pdf->AddPage();
 				// setting jenis font yang akan digunakan
-				$pdf->Image( $this->config->item('asset_url').'assets/image/logo.png', 10, 6, 30, 0, 'PNG');
+				$pdf->Image($_SERVER["DOCUMENT_ROOT"].'/assets/image/logo.png', 10, 6, 30, 0, 'PNG');
 				$pdf->SetFont('Arial', 'B', 14);
 				// mencetak string 
 				$pdf->Cell(150, 7, 'Touristix', 0, 1, 'C');
@@ -598,7 +598,17 @@ class Transaksi extends MY_Controller
 				$pdf->Cell(10, 7, '', 0, 1);
 
 				$pdf->SetFont('Arial', 'B', 10);
-				$pdf->Cell(15, 6, "Total Harga : " . convertToRupiah($detail_transaksi->total_hrg), 0, 1);
+				$pdf->Cell(30, 6, "Subtotal", 0, 0);
+				$pdf->Cell(15, 6, ": " . convertToRupiah($detail_transaksi->total_hrg), 0, 1);
+				$pdf->Cell(30, 6, "Biaya Layanan", 0, 0);
+				$pdf->Cell(15, 6, ": " . convertToRupiah(8000), 0, 1);
+				
+
+				$pdf->Cell(10, 7, '', 0, 1);
+				$pdf->Line(10, $pdf->GetY(), 140, $pdf->GetY());
+
+				$pdf->Cell(30, 6, "Total Harga", 0, 0);
+				$pdf->Cell(15, 6, ": " . convertToRupiah($detail_transaksi->total_hrg+8000), 0, 1);
 
 				// $pdf->SetFont('Arial','B',10);
 				// $pdf->Cell(10,6,'NO',1,0);
