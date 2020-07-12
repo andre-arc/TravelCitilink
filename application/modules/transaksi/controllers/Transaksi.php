@@ -343,7 +343,7 @@ class Transaksi extends MY_Controller
 			'nama_customer' => $select->nama_customer,
 			'email' => $select->email,
 			'url_bayar' => $select->url_bayar,
-			'total_hrg' => $select->total_hrg,
+			'total_hrg' => $select->total_hrg+8000,
 			'tgl_transaksi' => $select->tgl_transaksi,
 			"subject" => "Konfirmasi Pembayaran Order " . $order_id . " Tiket Kapal Touristix.ID"
 		);
