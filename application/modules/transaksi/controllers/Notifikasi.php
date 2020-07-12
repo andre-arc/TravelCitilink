@@ -128,7 +128,8 @@ class Notifikasi extends MY_Controller
 		// 	return false;
 		// }
 
-		$result = $this->email->to($data['email'])
+		$result = $this->email->from('cs@kapal.touristix.id')
+							 ->to($data['email'])
 							 ->subject($data['subject'])
 							 ->message($html)
 							 ->send();
