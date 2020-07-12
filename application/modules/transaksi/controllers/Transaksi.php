@@ -366,9 +366,9 @@ class Transaksi extends MY_Controller
 		// 	return false;
 		// }
 
-		$result = $this->email
+		$result = $this->email->from('cs@kapal.touristix.id')
 						->to($data['email'])
-						->subject($data['email'])
+						->subject($data['subject'])
 						->message($html)->send();
 
 	   if($result){
@@ -522,7 +522,7 @@ class Transaksi extends MY_Controller
 
 				$pdf->AddPage();
 				// setting jenis font yang akan digunakan
-				$pdf->Image('https://storage.googleapis.com/touristix.appspot.com/assets/image/logo.png', 10, 6, 30, 0, 'PNG');
+				$pdf->Image( $this->config->item('asset_url').'assets/image/logo.png', 10, 6, 30, 0, 'PNG');
 				$pdf->SetFont('Arial', 'B', 14);
 				// mencetak string 
 				$pdf->Cell(150, 7, 'Touristix', 0, 1, 'C');
