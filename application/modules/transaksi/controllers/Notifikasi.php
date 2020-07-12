@@ -99,7 +99,7 @@ class Notifikasi extends MY_Controller
 			'order_id' => $order_id,
 			'nama_customer' => $select->nama_customer,
 			'email' => $select->email,
-			'total_hrg' => $select->total_hrg,
+			'total_hrg' => $select->total_hrg+8000,
 			'tgl_transaksi' => $select->tgl_transaksi
 		);
 
