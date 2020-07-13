@@ -72,31 +72,11 @@ class Home extends MY_Controller
 			$html .= form_hidden('tipe_transaksi', $tipe);
 
 			foreach ($result as $r) {
-				$html .= '<div class="panel" style="margin-bottom: 7px;">
-								<div class="modal-header">
-									<div class="row">
-										<div class="col-md-3">
-											<h4 class="list-title">
-												<span id="title_act"></span> Jenis Kapal <i class="fa fa-angle-down"></i></h4>
-										</div>
-										<div class="col-md-2">
-											<h4 class="list-title">
-												<span id="title_act"></span> Waktu Berangkat <i class="fa fa-angle-down"></i></h4>
-										</div>
-										<div class="col-md-4">
-											<h4 class="list-title">
-												<span id="title_act"></span> Rute Keberangkatan <i class="fa fa-angle-down"></i></h4>
-										</div>
-										<div class="col-md-3">
-											<h4 class="list-title" style="text-align: left">
-												<span id="title_act"></span> Harga <i class="fa fa-angle-down"></i></h4>
-										</div>
-									</div>
-								</div>
+				$html .= ' <div class="panel" style="margin-bottom: 7px;">
 								<div class="panel-body">
 									<div class="row">
 										<div class="col-md-12">
-											<div class="col-md-3" style="text-align: center;">
+											<div class="col-md-3 " style="text-align: center;">
 												<img style="margin-left: 10%;margin-top: -22px;margin-bottom: -18px;" src="' . $this->config->item('asset_url') . 'assets/image/' . $r->logo_kapal . '" alt="' . $r->nama_kapal . '">
 												<h4>' . $r->nama_kapal . '</h4>
 												<strong class="text-center">' . $r->jenis_tiket . '</strong>

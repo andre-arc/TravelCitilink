@@ -23,7 +23,7 @@
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-3 col-xs-6">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="description-block border-right" style="font-size: 20px;">
                                     <span class="description-text" style="text-transform: unset;font-size: 12px;color:gray; ">Tanggal Keberangkatan</span>
                                     <h5 class="description-header">
@@ -33,7 +33,7 @@
                                 <!-- /.description-block -->
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-3 col-xs-6">
+                            <div class="col-sm-3 col-xs-12">
                                 <div class="description-block">
                                     <a href="<?= base_url(); ?>" type="button" class="btn btn-block btn-warning">Ubah Pencarian</a>
                                 </div>
@@ -45,10 +45,43 @@
                     <!-- /.box-footer -->
                 </div>
             </div>
+            <div class="modal-header classname">
+                <style>
+                    @media screen and (max-width: 768px) {
+                        .classname {
+                            display: none
+                        }
+                    }
+                </style>
+                <div class="row ">
+
+                    <div class="col-md-3">
+                        <h4 class="list-title">
+                            <span id="title_act"></span> Jenis Kapal <i class="fa fa-angle-down"></i></h4>
+                    </div>
+                    <div class="col-md-2">
+                        <h4 class="list-title">
+                            <span id="title_act"></span> Waktu Berangkat <i class="fa fa-angle-down"></i></h4>
+                    </div>
+                    <div class="col-md-3">
+                        <h4 class="list-title">
+                            <span id="title_act"></span> Rute Keberangkatan <i class="fa fa-angle-down"></i></h4>
+                    </div>
+                    <div class="col-md-2">
+                        <h4 class="list-title">
+                            <span id="title_act"></span> Harga <i class="fa fa-angle-down"></i></h4>
+                    </div>
+                    <div class="col-md-2">
+                        <h4 class="list-title">
+                        </h4>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-md-12" id="list-tiket">
 
             </div>
+
     </section>
 
 </div>
@@ -97,18 +130,18 @@
 
     function getDataTiket(asal, tujuan, berangkat) {
         var formData = {
-                asal: asal,
-                tujuan: tujuan,
-                tgl_berangkat: berangkat,
-                adult: adult,
-                child: child,
-                infant: infant,
-            }
+            asal: asal,
+            tujuan: tujuan,
+            tgl_berangkat: berangkat,
+            adult: adult,
+            child: child,
+            infant: infant,
+        }
 
-        if(getUrlParameter('pp')){
+        if (getUrlParameter('pp')) {
             formData.pp = getUrlParameter('pp');
         }
-        
+
         $.ajax({
             type: "POST",
             url: '<?= base_url('home/getJsonTiket') ?>',
