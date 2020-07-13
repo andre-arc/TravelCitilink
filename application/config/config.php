@@ -53,7 +53,8 @@ $newurl = str_replace("index.php","", $_SERVER['SCRIPT_NAME']);
 $config['base_url']    = "$http" . $_SERVER['HTTP_HOST'] . "" . $newurl;
 
 
-$config['asset_url'] = isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] == 'production' ? 'https://storage.googleapis.com/touristix.appspot.com/' : $config['base_url'];
+// $config['asset_url'] = isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] == 'production' ? 'https://storage.googleapis.com/touristix.appspot.com/' : $config['base_url'];
+$config['asset_url'] = $config['base_url'];
 
 /*
 

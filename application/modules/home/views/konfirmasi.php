@@ -149,7 +149,10 @@
 										
 										<div class="col-sm-12 invoice-col">
 										<hr>
-											<strong class="pull-right">Total Pembayaran : <?= convertToRupiah($total_harga) ?></strong>
+											<strong class="pull-right">Subtotal : <?= convertToRupiah($total_harga) ?></strong><br>
+											<strong class="pull-right">Biaya Layanan : <?= convertToRupiah(8000) ?></strong><br>
+										<hr>
+											<strong class="pull-right">Total Pembayaran : <?= convertToRupiah($total_harga+8000) ?></strong>
 										</div>
 										
 										<?php

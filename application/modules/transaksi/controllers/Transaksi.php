@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-use google\appengine\api\mail\Message;
+// use google\appengine\api\mail\Message;
 
 class Transaksi extends MY_Controller
 {
@@ -251,19 +251,30 @@ class Transaksi extends MY_Controller
 		}
 	}
 
-	// function tes_mail(){
-	// 	try {
-	// 		$message = new Message();
-	// 		$message->setSender('touristixid@gmail.com');
-	// 		$message->addTo('andridarnius@gmail.com');
-	// 		$message->setSubject('test');
-	// 		$message->setHtmlBody('<h1>tes</h1>');
-	// 		$message->send();
-	// 		echo 'Mail Sent';
-	// 	} catch (InvalidArgumentException $e) {
-	// 		echo 'There was an error: '.$e;
-	// 	}
-	// }
+	function tes_mail(){
+		// try {
+		// 	$message = new Message();
+		// 	$message->setSender('touristixid@gmail.com');
+		// 	$message->addTo('andridarnius@gmail.com');
+		// 	$message->setSubject('test');
+		// 	$message->setHtmlBody('<h1>tes</h1>');
+		// 	$message->send();
+		// 	echo 'Mail Sent';
+		// } catch (InvalidArgumentException $e) {
+		// 	echo 'There was an error: '.$e;
+		// }
+
+		$result = $this->email
+						->to('andridarnius@gmail.com')
+						->subject('Tiket Ubudiyah Travel')
+						->message('<h1>disini detail tiket<h1><br>')->send();
+
+	   if($result){
+		   return true;
+	   }else{
+		   echo $this->email->print_debugger();
+	   }
+	}
 
 	function selesai()
 	{
@@ -273,7 +284,7 @@ class Transaksi extends MY_Controller
 		);
 
 		if ($data['order_id']) {
-			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
+			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $data['order_id'])->get('transaksi')->row();
 			$select_customer = $this->M_transaksi->getCustomer($detail_transaksi->id_transaksi);
 			if ($data['status'] == 'pending') {
 				redirect('konfirmasi/?email=' . $select_customer->email . '&orderId=' . $data['order_id']);
@@ -292,7 +303,7 @@ class Transaksi extends MY_Controller
 		);
 
 		if ($data['order_id']) {
-			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
+			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $data['order_id'])->get('transaksi')->row();
 			$select_customer = $this->M_transaksi->getCustomer($detail_transaksi->id_transaksi);
 			redirect('konfirmasi/?email=' . $select_customer->email . '&orderId=' . $data['order_id']);
 		}
@@ -306,7 +317,7 @@ class Transaksi extends MY_Controller
 		);
 
 		if ($data['order_id']) {
-			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $order_id)->get('transaksi')->row();
+			$detail_transaksi = $this->db->where('status_bayar', 'success')->where('kode', $data['order_id'])->get('transaksi')->row();
 			$select_customer = $this->M_transaksi->getCustomer($detail_transaksi->id_transaksi);
 
 			$this->data['css'] = css_asset('style.css', '');
@@ -332,7 +343,7 @@ class Transaksi extends MY_Controller
 			'nama_customer' => $select->nama_customer,
 			'email' => $select->email,
 			'url_bayar' => $select->url_bayar,
-			'total_hrg' => $select->total_hrg,
+			'total_hrg' => $select->total_hrg+8000,
 			'tgl_transaksi' => $select->tgl_transaksi,
 			"subject" => "Konfirmasi Pembayaran Order " . $order_id . " Tiket Kapal Touristix.ID"
 		);
@@ -341,19 +352,30 @@ class Transaksi extends MY_Controller
 		$html = $this->mjml->render($mjml);
 
 
-		try {
-			$message = new Message();
-			$message->setSender('touristixid@gmail.com');
-			$message->addTo($data['email']);
-			$message->setSubject($data['subject']);
-			$message->setHtmlBody($html);
-			$message->send();
-			// echo 'Mail Sent';
-			return true;
-		} catch (InvalidArgumentException $e) {
-			// echo 'There was an error';
-			return false;
-		}
+		// try {
+		// 	$message = new Message();
+		// 	$message->setSender('touristixid@gmail.com');
+		// 	$message->addTo($data['email']);
+		// 	$message->setSubject($data['subject']);
+		// 	$message->setHtmlBody($html);
+		// 	$message->send();
+		// 	// echo 'Mail Sent';
+		// 	return true;
+		// } catch (InvalidArgumentException $e) {
+		// 	// echo 'There was an error';
+		// 	return false;
+		// }
+
+		$result = $this->email->from('cs@kapal.touristix.id')
+						->to($data['email'])
+						->subject($data['subject'])
+						->message($html)->send();
+
+	   if($result){
+		   return true;
+	   }else{
+		   echo $this->email->print_debugger();
+	   }
 	}
 
 	function detail($id_transaksi)
@@ -379,9 +401,7 @@ class Transaksi extends MY_Controller
 
 	function __generate_vtweb($data)
 	{
-		$params = array('server_key' => getenv('MIDTRANS_SERVER_KEY'), 'production' => getenv('MIDTRANS_PRODUCTION'));
-		$this->load->library('veritrans');
-		$this->veritrans->config($params);
+	
 
 		$transaction_details = array(
 			'order_id' 			=> $data['order_id'],
@@ -446,8 +466,10 @@ class Transaksi extends MY_Controller
 			'customer_details' 	 => $customer_details
 		);
 
+		$this->load->library('midtrans');
+
 		try {
-			$vtweb_url = $this->veritrans->vtweb_charge($transaction_data);
+			$vtweb_url = $this->midtrans->vt_web($transaction_data);
 			return $vtweb_url;
 		} catch (Exception $e) {
 			echo $e->getMessage();
@@ -500,7 +522,7 @@ class Transaksi extends MY_Controller
 
 				$pdf->AddPage();
 				// setting jenis font yang akan digunakan
-				$pdf->Image('https://storage.googleapis.com/touristix.appspot.com/assets/image/logo.png', 10, 6, 30, 0, 'PNG');
+				$pdf->Image($_SERVER["DOCUMENT_ROOT"].'/assets/image/logo.png', 10, 6, 30, 0, 'PNG');
 				$pdf->SetFont('Arial', 'B', 14);
 				// mencetak string 
 				$pdf->Cell(150, 7, 'Touristix', 0, 1, 'C');
@@ -576,7 +598,17 @@ class Transaksi extends MY_Controller
 				$pdf->Cell(10, 7, '', 0, 1);
 
 				$pdf->SetFont('Arial', 'B', 10);
-				$pdf->Cell(15, 6, "Total Harga : " . convertToRupiah($detail_transaksi->total_hrg), 0, 1);
+				$pdf->Cell(30, 6, "Subtotal", 0, 0);
+				$pdf->Cell(15, 6, ": " . convertToRupiah($detail_transaksi->total_hrg), 0, 1);
+				$pdf->Cell(30, 6, "Biaya Layanan", 0, 0);
+				$pdf->Cell(15, 6, ": " . convertToRupiah(8000), 0, 1);
+				
+
+				$pdf->Cell(10, 7, '', 0, 1);
+				$pdf->Line(10, $pdf->GetY(), 140, $pdf->GetY());
+
+				$pdf->Cell(30, 6, "Total Harga", 0, 0);
+				$pdf->Cell(15, 6, ": " . convertToRupiah($detail_transaksi->total_hrg+8000), 0, 1);
 
 				// $pdf->SetFont('Arial','B',10);
 				// $pdf->Cell(10,6,'NO',1,0);

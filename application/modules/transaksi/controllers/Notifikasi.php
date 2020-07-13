@@ -14,15 +14,10 @@ class Notifikasi extends MY_Controller
 
 	function index()
 	{
-		$json_result = file_get_contents('php://input');
-		$result = json_decode($json_result);
+		$this->load->library("midtrans");
 
-		if($result){
-			$notif = $this->veritrans->status($result->order_id);
-		}
-
-		error_log(print_r($result,TRUE));
-
+		$notif = $this->midtrans->get_notif();
+		
 		//notification handler sample
 
 		$transaction = $notif->transaction_status;
@@ -104,7 +99,7 @@ class Notifikasi extends MY_Controller
 			'order_id' => $order_id,
 			'nama_customer' => $select->nama_customer,
 			'email' => $select->email,
-			'total_hrg' => $select->total_hrg,
+			'total_hrg' => $select->total_hrg+8000,
 			'tgl_transaksi' => $select->tgl_transaksi
 		);
 
@@ -118,30 +113,30 @@ class Notifikasi extends MY_Controller
 		}
 		
 
-		try {
-			$message = new Message();
-			$message->setSender('touristixid@gmail.com');
-			$message->addTo($data['email']);
-			$message->setSubject($data['subject']);
-			$message->setHtmlBody($html);
-			$message->send();
-			// echo 'Mail Sent';
-			return true;
-		} catch (InvalidArgumentException $e) {
-			// $error = "Unable to send mail. $e";
-			error_log($error);
-			return false;
-		}
-
-		// $result = $this->email->from('touristixid@gmail.com')   
-		// 					 ->to($data['email'])
-		// 					 ->subject($data['subject'])
-		// 					 ->message($html)
-		// 					 ->send();
-		// if ($result) {
+		// try {
+		// 	$message = new Message();
+		// 	$message->setSender('touristixid@gmail.com');
+		// 	$message->addTo($data['email']);
+		// 	$message->setSubject($data['subject']);
+		// 	$message->setHtmlBody($html);
+		// 	$message->send();
+		// 	// echo 'Mail Sent';
 		// 	return true;
-		// } else {
-		// 	echo $this->email->print_debugger();
+		// } catch (InvalidArgumentException $e) {
+		// 	// $error = "Unable to send mail. $e";
+		// 	error_log($error);
+		// 	return false;
 		// }
+
+		$result = $this->email->from('cs@kapal.touristix.id')
+							 ->to($data['email'])
+							 ->subject($data['subject'])
+							 ->message($html)
+							 ->send();
+		if ($result) {
+			return true;
+		} else {
+			echo $this->email->print_debugger();
+		}
 	}
 }

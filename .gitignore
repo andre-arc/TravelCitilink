@@ -1,7 +1,9 @@
 
 application/ci_sessions/
 app.yaml
-application/config/database.php
 php.ini
-
 .htaccess
+
+.env.development
+
+.env.production
