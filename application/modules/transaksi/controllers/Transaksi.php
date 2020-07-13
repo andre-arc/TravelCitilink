@@ -366,7 +366,7 @@ class Transaksi extends MY_Controller
 		// 	return false;
 		// }
 
-		$result = $this->email->from('cs@kapal.touristix.id')
+		$result = $this->email->from('cs@kapal.touristix.id', 'Touristix Kapal')
 						->to($data['email'])
 						->subject($data['subject'])
 						->message($html)->send();
