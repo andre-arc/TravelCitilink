@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit89bd790ee485ba42436e107daaa30301
 {
     public static $prefixLengthsPsr4 = array (
+        'c' => 
+        array (
+            'chriskacerguis\\RestServer\\' => 26,
+        ),
         'M' => 
         array (
             'Mjml\\' => 5,
@@ -19,6 +23,10 @@ class ComposerStaticInit89bd790ee485ba42436e107daaa30301
     );
 
     public static $prefixDirsPsr4 = array (
+        'chriskacerguis\\RestServer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chriskacerguis/codeigniter-restserver/src',
+        ),
         'Mjml\\' => 
         array (
             0 => __DIR__ . '/..' . '/juanmiguelbesada/mjml-php/src',

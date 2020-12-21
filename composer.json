@@ -1,6 +1,7 @@
 {
     "require": {
         "juanmiguelbesada/mjml-php": "^1.0",
-        "midtrans/midtrans-php": "^2.3"
+        "midtrans/midtrans-php": "^2.3",
+        "chriskacerguis/codeigniter-restserver": "^3.1"
     }
 }

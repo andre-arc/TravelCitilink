@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'chriskacerguis\\RestServer\\' => array($vendorDir . '/chriskacerguis/codeigniter-restserver/src'),
     'Mjml\\' => array($vendorDir . '/juanmiguelbesada/mjml-php/src'),
     'Midtrans\\' => array($vendorDir . '/midtrans/midtrans-php/Midtrans'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
