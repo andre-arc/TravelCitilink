@@ -15,13 +15,18 @@
         return $min + $rnd;
 	}
 	
-	function getToken($length=5){
-    $token = "";
-    $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    //$codeAlphabet.= "abcdefghijklmnopqrstuvwxyz";
-    $codeAlphabet.= "0123456789";
-    for($i=0;$i<$length;$i++){
-        $token .= $codeAlphabet[crypto_rand_secure(0,strlen($codeAlphabet))];
-    }
-    return $token;
+	function getToken($length=5, $prefix=''){
+        $token = "";
+        $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        //$codeAlphabet.= "abcdefghijklmnopqrstuvwxyz";
+        $codeAlphabet.= "0123456789";
+        for($i=0;$i<$length;$i++){
+            $token .= $codeAlphabet[crypto_rand_secure(0,strlen($codeAlphabet))];
+        }
+
+        if($prefix != ''){
+            $prefix .= '-';
+        }
+
+        return $prefix.$token;
 	}		
